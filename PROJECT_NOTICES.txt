@@ -1,0 +1,38 @@
+Last Vehicle — A GingrSnaps Project
+
+This package supplies the original game source, story, interface, and procedural
+level geometry for your use and modification. Choose your own distribution
+license if you later release the original source publicly. This package does
+not impose a public open-source license on your original game or branding.
+
+Third-party files retain their own terms:
+- Babylon.js and its loader: Apache License 2.0, notices in dist/vendor/.
+- The listed Kenney models and public audio: CC0 1.0, records in dist/assets/.
+
+Keep those notices and source credits with the distributed game. The public
+asset licenses do not imply ownership of the creators' names or trademarks.
+
+Original asset exception: The Attendant model, rig, textures and authored
+clips are dedicated under CC0 as documented in dist/assets/licenses/Original-Attendant.txt.
+Its editable source is included under source-assets/attendant/. This does not
+change the distribution terms for the game code, story, or GingrSnaps branding.
+
+1.10 additions: five distinct shoe splashes from Joseph Sardin / BigSoundBank, Shoes in the Water (0690), CC0. Three new metal contact excerpts from rubberduck, 100 CC0 metal and wood SFX. See assets/licenses and assets-manifest.json for original URLs, trims and hashes. Seven original Attendant animation clips are CC0 with editable Blender source.
+
+1.11 additions: Meridian Industrial Details (24 original models) and six new
+Attendant clips are CC0 with editable sources. New recorded music/contact audio
+has CC0 provenance in dist/assets/licenses and assets-manifest.json. Optional
+source-assets/navigation-evaluation contains Recast/Detour 1.6.4 WASM and its
+Zlib license. Recast is research tooling, not a browser runtime dependency.
+
+1.13 additions: twelve original Meridian worn-detail models and original audio
+composition/synthesis portions are dedicated under CC0. Derivative audio retains
+its CC0 source authors and chain in dist/assets/licenses/Audio-v113-provenance.json.
+Editable model and audio generators are included. These exceptions do not place
+the GingrSnaps name, story, interface or game code under CC0.
+
+1.14 additions: original maintenance-key geometry and four wall-paint SVGs are
+CC0. Six weather/contact/exertion audio outputs have original/derivative CC0
+provenance in the supplied Audio-v114 notices. Full source chains and editable
+authoring files are included. These asset dedications do not change the terms
+of unrelated code, story, interface, branding or dependencies.

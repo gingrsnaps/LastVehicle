@@ -1,0 +1,63 @@
+THE ATTENDANT 3.0 — LAST VEHICLE 1.11
+
+New runtime GLB: attendant.glb, 2,108,740 bytes.
+SHA256: 1724e1c32e76554f21e83ecec7cb330699699b2e0cd9a33d59b1cc6f5a2f06e6
+Original low-poly geometry/materials preserved: 1,868 triangles, 38 skeleton
+joints, eight embedded images. No external texture requests. CC0 dedication
+in LICENSE.txt. Editable packed Blender source and a standalone generator are
+included. Generate with Blender 4.3: blender --background --python build_attendant.py
+No input files besides the script are needed to regenerate the character.
+
+All prior 15 clips were numerically compared to the v1.10 GLB. Maximum
+absolute channel delta: zero. There are now 21 clips. The additional actions:
+
+Stalk          2.2 s loop     Slow crouched gait with planted stance/swing.
+PeekLeft       1.8 s one-shot Head leads the torso; feet stay planted.
+PeekRight      1.8 s one-shot Mirrored peek without root displacement.
+DoorPush       1.8 s one-shot Reach, contact, weighted push, release.
+CrouchSearch   4.0 s loop     Lower, deliberate low scan, return upright.
+StartRun       0.6 s one-shot Attention, lean, accelerating first step.
+
+Controller owns position and yaw. All animation roots remain constant.
+Stalk reference speed is 0.53475936 m/s. Scale playback to real movement speed;
+its contacts occur at normalized phases 0 and .5. If movement is faster than
+0.88 m/s, a global playback-rate cap of 1.65 will introduce visible foot slip.
+The Stalk source loop lasts 2.2 s. Hands retain restrained asymmetric motion.
+
+Peek body follow begins at .12 after head anticipation; the readable hold is
+roughly .38-.68. No new sideways root excursion is authored. Midpoint head X
+is approximately +/-0.068 m. The full sleeve width is the existing silhouette;
+these clips are not permission to make body collision narrower.
+
+DoorPush right Hand.R bone head (wrist reference) meets local glTF
+(-.20, 1.30, +1.00) metres over .35-.68. The hand points downward on that same
+contact plane. Rotate/translate this point into the intended prop's surface.
+Do not force the target through a wall to obtain a pose. Fire one contact cue.
+CrouchSearch lowers over .02-.26, stays low through .76 and rises by .98.
+StartRun is .6 s and its endpoint matches Run phase zero. Smoothly increase
+physical speed instead of adding a second animation root displacement.
+
+VALIDATION
+validate_glb.py: structure, skin weights, clip names/durations, loop closure.
+validate_preservation.py previous.glb: exact previous-channel comparison.
+check_poses.py: sampled floor/reach checks using the evaluated skinned mesh.
+make_contact_sheet.py: combines actual Blender renders for inspection.
+
+The contact sheet was visually inspected. New planted Peek, DoorPush and
+CrouchSearch feet drift less than 0.3 mm across the measured samples. Stalk
+and StartRun feet intentionally move. These results do not establish browser
+animation blending, runtime contact alignment, or subjective scare quality.
+StartRun joins Run phase zero with matrix error zero. CrouchSearch fingertips
+were lifted after a full-mesh floor audit; only submillimetre interpolated sole
+penetration remains in the sampled new clips. Browser results need an actual
+game playtest. No runtime IK/physics dependency is added.
+
+DELIVERY FILES
+Runtime: attendant.glb
+Editable: attendant.blend, build_attendant.py, LICENSE.txt
+Integration: integration-v3.json, manifest.json, INTEGRATION.txt
+Checks: validate_glb.py, validate_preservation.py, check_poses.py,
+        validation.json, legacy-clip-validation.json, pose-validation.json
+Visual review: attendant-contact-sheet.png, make_contact_sheet.py
+The legacy-attendant.glb file and build logs are comparison intermediates;
+they do not need to be bundled into the next game release.

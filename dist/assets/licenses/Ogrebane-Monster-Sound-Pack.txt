@@ -1,0 +1,18 @@
+Monster Sound Pack, Volume 1
+Author: Ogrebane
+License: CC0 1.0 Universal (CC0-1.0)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Source page: https://opengameart.org/content/monster-sound-pack-volume-1
+Download URL: https://opengameart.org/sites/default/files/monster-sounds-volume-2.zip
+Verified on: 2026-11-02
+
+The live source page explicitly identifies the author and lists CC0 under License(s).
+The source-page HTML snapshot is retained at proof/monster.html.
+Source-page SHA-256: 6fb7b7e64ce786c87ac794d61d7d055619bc2a4e28ac82c3feb4618a1e87491c
+Source bytes: 2024392
+Source SHA-256: f23b5691ac502cf03b58a353cb31f53e3cb93aeb65e654efc8482fd1829d7ef6
+
+Source describes monster growls, grunts, and death sounds made for Summoning Wars. Despite the page title Volume 1, the attached archive and member directory are named Volume 2; this is the exact archive linked by that page, not a substituted pack.
+
+Credits are retained as courtesy. The CC0 declaration applies to these source audio files; unrelated website content and logos are not included in this assertion.
+Full CC0 legal code: CC0-1.0.txt

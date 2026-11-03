@@ -1,0 +1,3403 @@
+{
+  "title": "Meridian Industrial Detail Pack",
+  "version": "1.0",
+  "game_release": "Last Vehicle 1.11",
+  "license": "CC0-1.0",
+  "source_type": "Original numeric geometry and materials; no third-party inputs",
+  "source_file": "build_props.py",
+  "editable_source": "Meridian_Industrial_Props.blend",
+  "coordinate_system": {
+    "up": "+Y",
+    "forward": "+Z",
+    "units": "metres"
+  },
+  "palette_srgb": {
+    "teal": "#2e514e",
+    "steel": "#63706b",
+    "dark": "#1a292b",
+    "rubber": "#152024",
+    "ochre": "#b09a61",
+    "paper": "#b9b7a3",
+    "rust": "#76503a",
+    "red": "#8d4034",
+    "glass": "#425b58",
+    "concrete": "#737d75",
+    "cloth": "#657266",
+    "dust": "#85816c"
+  },
+  "assets": [
+    {
+      "id": "wheel-stop",
+      "file": "models/wheel-stop.glb",
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.86,
+        0.0,
+        -0.125
+      ],
+      "bounds_max": [
+        0.86,
+        0.2044999897480011,
+        0.131
+      ],
+      "dimensions": [
+        1.72,
+        0.2044999897480011,
+        0.256
+      ],
+      "triangles": 204,
+      "vertices_authored": 120,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "wheel-stop__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.6,
+          0.0,
+          0
+        ],
+        [
+          0.6,
+          0.0,
+          0
+        ]
+      ],
+      "notes": "Align long X axis across a parking bay. Two underside contact pads.",
+      "bytes": 13560,
+      "sha256": "23c4293e6e46e25a60712da885a71b1897c032aa87ca509666604a36440671ca",
+      "parts": [
+        {
+          "name": "foundation",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tapered body",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "anchor washer",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "bolt head",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "anchor washer",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "bolt head",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "worn reflector",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "worn reflector",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "worn reflector",
+          "vertices": 8,
+          "faces": 6
+        }
+      ]
+    },
+    {
+      "id": "ticket-dispenser",
+      "file": "models/ticket-dispenser.glb",
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.215,
+        0.0,
+        -0.19
+      ],
+      "bounds_max": [
+        0.215,
+        1.3399999999999999,
+        0.2455
+      ],
+      "dimensions": [
+        0.43,
+        1.3399999999999999,
+        0.4355
+      ],
+      "triangles": 273,
+      "vertices_authored": 175,
+      "anchors": {
+        "ticket_slot": {
+          "position": [
+            0,
+            1.08,
+            0.23
+          ],
+          "node": "ticket-dispenser__ticket_slot"
+        },
+        "button": {
+          "position": [
+            0.135,
+            1.075,
+            0.235
+          ],
+          "node": "ticket-dispenser__button"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "ticket-dispenser__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Front +Z faces the approaching lane; keep interaction clear.",
+      "bytes": 19816,
+      "sha256": "0ff4801fdf863aff4393a1b8c09ea3bf7159fa53649c422681eff60fe7bc778d",
+      "parts": [
+        {
+          "name": "mounting base",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "lower steel column",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "sloped head",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "screen recess",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dim display",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "ticket mouth",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "ticket lip",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "request button",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "door seam",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "service door",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        }
+      ]
+    },
+    {
+      "id": "pipe-bracket",
+      "file": "models/pipe-bracket.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.09399999678134918,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.1125,
+        0.3,
+        0.2939999997615814
+      ],
+      "dimensions": [
+        0.20649999678134917,
+        0.3,
+        0.2939999997615814
+      ],
+      "triangles": 236,
+      "vertices_authored": 128,
+      "anchors": {
+        "pipe_centre": {
+          "position": [
+            0,
+            0.15,
+            0.2
+          ],
+          "node": "pipe-bracket__pipe_centre"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "pipe-bracket__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.15,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "pipe-bracket__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 14124,
+      "sha256": "c4562c7c3a6848ca6abc3523281f89feb01595324f8022ecd875a1f9db932ca2",
+      "parts": [
+        {
+          "name": "rear mounting plate",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "standoff",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "split clamp",
+          "vertices": 80,
+          "faces": 80
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "clamp ear",
+          "vertices": 8,
+          "faces": 6
+        }
+      ]
+    },
+    {
+      "id": "conduit-junction",
+      "file": "models/conduit-junction.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.17249999940395355,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.17249999940395355,
+        0.3449999988079071,
+        0.1224999949336052
+      ],
+      "dimensions": [
+        0.3449999988079071,
+        0.3449999988079071,
+        0.1224999949336052
+      ],
+      "triangles": 424,
+      "vertices_authored": 240,
+      "anchors": {
+        "conduit_left": {
+          "position": [
+            -0.1725,
+            0.17249999880790712,
+            0.053
+          ],
+          "node": "conduit-junction__conduit_left"
+        },
+        "conduit_right": {
+          "position": [
+            0.1725,
+            0.17249999880790712,
+            0.053
+          ],
+          "node": "conduit-junction__conduit_right"
+        },
+        "conduit_top": {
+          "position": [
+            0,
+            0.3449999988079071,
+            0.053
+          ],
+          "node": "conduit-junction__conduit_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "conduit-junction__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.17249999940395355,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "conduit-junction__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 23368,
+      "sha256": "d0b003a9dbfc0ba68a77da2480437531ea4ff0405d3902f2cd7f819589f62aa8",
+      "parts": [
+        {
+          "name": "cast enclosure",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "removable cover",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "conduit gland",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "collar",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "conduit gland",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "collar",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "conduit gland",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "collar",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "conduit gland",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "collar",
+          "vertices": 16,
+          "faces": 10
+        }
+      ]
+    },
+    {
+      "id": "cable-tray",
+      "file": "models/cable-tray.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.6,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.6,
+        0.09,
+        0.33
+      ],
+      "dimensions": [
+        1.2,
+        0.09,
+        0.33
+      ],
+      "triangles": 136,
+      "vertices_authored": 88,
+      "anchors": {
+        "join_left": {
+          "position": [
+            -0.6,
+            0.045,
+            0.17
+          ],
+          "node": "cable-tray__join_left"
+        },
+        "join_right": {
+          "position": [
+            0.6,
+            0.045,
+            0.17
+          ],
+          "node": "cable-tray__join_right"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cable-tray__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.045,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "cable-tray__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Repeat along X; rear wall plane at Z=0. Use supports every second segment.",
+      "bytes": 9664,
+      "sha256": "bba37e6eaa397a24a9be2c5d73424da9e10333b14b169d0507eb9a502643b912",
+      "parts": [
+        {
+          "name": "rear rail",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "front rail",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "perforated rung",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "perforated rung",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "perforated rung",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "perforated rung",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "perforated rung",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "perforated rung",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "contained cable",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "contained cable",
+          "vertices": 12,
+          "faces": 8
+        }
+      ]
+    },
+    {
+      "id": "pressure-gauge",
+      "file": "models/pressure-gauge.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.12800000607967377,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.12800000607967377,
+        0.2740000020712614,
+        0.10400000214576721
+      ],
+      "dimensions": [
+        0.25600001215934753,
+        0.2740000020712614,
+        0.10400000214576721
+      ],
+      "triangles": 440,
+      "vertices_authored": 254,
+      "anchors": {
+        "connection": {
+          "position": [
+            0,
+            0.0010000001639127731,
+            0.037
+          ],
+          "node": "pressure-gauge__connection"
+        },
+        "dial_centre": {
+          "position": [
+            0,
+            0.14600000016391276,
+            0.1
+          ],
+          "node": "pressure-gauge__dial_centre"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "pressure-gauge__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.1370000010356307,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "pressure-gauge__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 25076,
+      "sha256": "128af0a6b28122a451117a3c5576eea78c22c4d598a869a10b9d73d32f818563",
+      "parts": [
+        {
+          "name": "mount back",
+          "vertices": 40,
+          "faces": 22
+        },
+        {
+          "name": "bezel",
+          "vertices": 40,
+          "faces": 22
+        },
+        {
+          "name": "dial",
+          "vertices": 40,
+          "faces": 22
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dial tick",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "needle",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "needle hub",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "threaded stem",
+          "vertices": 16,
+          "faces": 10
+        }
+      ]
+    },
+    {
+      "id": "fire-extinguisher",
+      "file": "models/fire-extinguisher.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.11699999868869781,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.18399040400981903,
+        0.6675,
+        0.2619999945163727
+      ],
+      "dimensions": [
+        0.30099040269851685,
+        0.6675,
+        0.2619999945163727
+      ],
+      "triangles": 452,
+      "vertices_authored": 248,
+      "anchors": {
+        "handle": {
+          "position": [
+            0,
+            0.65,
+            0.145
+          ],
+          "node": "fire-extinguisher__handle"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "fire-extinguisher__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.33375,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "fire-extinguisher__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 27292,
+      "sha256": "a43c6b98fd43f24b53d7da62ed21181aea93334c7211e501d0888c647b9498bb",
+      "parts": [
+        {
+          "name": "wall holder",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "lower cradle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tank",
+          "vertices": 32,
+          "faces": 18
+        },
+        {
+          "name": "shoulder",
+          "vertices": 32,
+          "faces": 18
+        },
+        {
+          "name": "valve neck",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "lever",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "label",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "retaining band",
+          "vertices": 80,
+          "faces": 80
+        },
+        {
+          "name": "hose",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hose",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hose",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "nozzle",
+          "vertices": 16,
+          "faces": 10
+        }
+      ]
+    },
+    {
+      "id": "battery-charger",
+      "file": "models/battery-charger.glb",
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.30900001525878906,
+        0.0,
+        -0.155
+      ],
+      "bounds_max": [
+        0.30900001525878906,
+        0.37558847665786743,
+        0.25218429930508135
+      ],
+      "dimensions": [
+        0.6180000305175781,
+        0.37558847665786743,
+        0.4071842993050814
+      ],
+      "triangles": 449,
+      "vertices_authored": 279,
+      "anchors": {
+        "carry_handle": {
+          "position": [
+            0,
+            0.36,
+            0
+          ],
+          "node": "battery-charger__carry_handle"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "battery-charger__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 28384,
+      "sha256": "b564be4ba1454a10e75307d4317280ce741d851312e77a25c411baf8373a7bae",
+      "parts": [
+        {
+          "name": "steel case",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "feet",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "ammeter bezel",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "ammeter face",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "meter needle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "switch",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "vent slot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "vent slot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "vent slot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "vent slot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "vent slot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "carry handle",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "carry handle",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "carry handle",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "positive lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "positive lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "positive lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "ground lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "ground lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "ground lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "positive clamp",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "ground clamp",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        }
+      ]
+    },
+    {
+      "id": "tool-tray",
+      "file": "models/tool-tray.glb",
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.23750000000000002,
+        0.0,
+        -0.14
+      ],
+      "bounds_max": [
+        0.23750000000000002,
+        0.07250000000000001,
+        0.14
+      ],
+      "dimensions": [
+        0.47500000000000003,
+        0.07250000000000001,
+        0.28
+      ],
+      "triangles": 252,
+      "vertices_authored": 148,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "tool-tray__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 16088,
+      "sha256": "d9cceb2dabf6a8d38eba72ced08e87111cdd075fd89f58b737e65186c773ae52",
+      "parts": [
+        {
+          "name": "tray base",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folded rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folded rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folded rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folded rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wrench shank",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wrench eye",
+          "vertices": 40,
+          "faces": 40
+        },
+        {
+          "name": "socket",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "loose screw",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "loose screw",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "loose screw",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "loose screw",
+          "vertices": 10,
+          "faces": 7
+        }
+      ]
+    },
+    {
+      "id": "tool-board",
+      "file": "models/tool-board.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.46,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.46,
+        0.76,
+        0.1325
+      ],
+      "dimensions": [
+        0.92,
+        0.76,
+        0.1325
+      ],
+      "triangles": 728,
+      "vertices_authored": 432,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "tool-board__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.38,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "tool-board__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 40080,
+      "sha256": "179ceee444fc83d68481e642b0ac3ff88cf6215e0faf7ba4a401b4263d83df56",
+      "parts": [
+        {
+          "name": "back frame",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "peg panel",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "peg hole",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "tool hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "tool hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "tool hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "spanner handle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "spanner eye",
+          "vertices": 40,
+          "faces": 40
+        },
+        {
+          "name": "screwdriver grip",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "screwdriver shaft",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "hammer handle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hammer head",
+          "vertices": 8,
+          "faces": 6
+        }
+      ]
+    },
+    {
+      "id": "desk-lamp",
+      "file": "models/desk-lamp.glb",
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.22222834825515747,
+        0.0,
+        -0.19557085633277893
+      ],
+      "bounds_max": [
+        0.245,
+        0.52,
+        0.1599999964237213
+      ],
+      "dimensions": [
+        0.46722834825515747,
+        0.52,
+        0.35557085275650024
+      ],
+      "triangles": 248,
+      "vertices_authored": 140,
+      "anchors": {
+        "light_emitter": {
+          "position": [
+            0.12,
+            0.39,
+            0.06
+          ],
+          "normal": [
+            0,
+            -1,
+            0
+          ],
+          "node": "desk-lamp__light_emitter"
+        },
+        "switch": {
+          "position": [
+            0.1,
+            0.05,
+            0.0
+          ],
+          "node": "desk-lamp__switch"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "desk-lamp__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 16388,
+      "sha256": "06ea16836067c612d3e2b6491200ce5671060535ccd3888bd09a5e6f6bc3ad17",
+      "parts": [
+        {
+          "name": "weighted base",
+          "vertices": 32,
+          "faces": 18
+        },
+        {
+          "name": "lower arm",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "upper arm",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "elbow pin",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "lamp shade",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "diffuser",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "power cord",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "power cord",
+          "vertices": 12,
+          "faces": 8
+        }
+      ]
+    },
+    {
+      "id": "wall-fan",
+      "file": "models/wall-fan.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.31,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.31,
+        0.6,
+        0.1957063376903534
+      ],
+      "dimensions": [
+        0.62,
+        0.6,
+        0.1957063376903534
+      ],
+      "triangles": 368,
+      "vertices_authored": 218,
+      "anchors": {
+        "fan_axis": {
+          "position": [
+            0,
+            0.3,
+            0.15
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-fan__fan_axis"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "wall-fan__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.3,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-fan__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 21044,
+      "sha256": "69ce2b1155de5ed4f2deaa426219dc4e01c11c8f0baa9194a130542acf88ece5",
+      "parts": [
+        {
+          "name": "housing",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "dark opening",
+          "vertices": 40,
+          "faces": 22
+        },
+        {
+          "name": "fan hub",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "static blade",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "static blade",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "static blade",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "static blade",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "static blade",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "protective grille",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "protective grille",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "protective grille",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "protective grille",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "protective grille",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        }
+      ]
+    },
+    {
+      "id": "folded-rag",
+      "file": "models/folded-rag.glb",
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.15398465843534337,
+        0.0,
+        -0.11282666702200597
+      ],
+      "bounds_max": [
+        0.1535948323832465,
+        0.030465607212509387,
+        0.11260819247104947
+      ],
+      "dimensions": [
+        0.3075794908185899,
+        0.030465607212509387,
+        0.22543485949305545
+      ],
+      "triangles": 298,
+      "vertices_authored": 172,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "folded-rag__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 18972,
+      "sha256": "bbfaef85347ec0e6b8b5e481639b1f692518fbf793b2f172cad6a48020ee3d4d",
+      "parts": [
+        {
+          "name": "soft folded cloth layer",
+          "vertices": 60,
+          "faces": 58
+        },
+        {
+          "name": "soft folded cloth layer",
+          "vertices": 60,
+          "faces": 58
+        },
+        {
+          "name": "irregular oil stain",
+          "vertices": 4,
+          "faces": 1
+        },
+        {
+          "name": "irregular oil stain",
+          "vertices": 4,
+          "faces": 1
+        },
+        {
+          "name": "irregular oil stain",
+          "vertices": 4,
+          "faces": 1
+        },
+        {
+          "name": "stitched cloth edge",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "stitched cloth edge",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "stitched cloth edge",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "stitched cloth edge",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "stitched cloth edge",
+          "vertices": 8,
+          "faces": 6
+        }
+      ]
+    },
+    {
+      "id": "hose-reel",
+      "file": "models/hose-reel.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.2774170935153961,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.24799999594688416,
+        0.5709999576210976,
+        0.4399999976158142
+      ],
+      "dimensions": [
+        0.5254170894622803,
+        0.5709999576210976,
+        0.4399999976158142
+      ],
+      "triangles": 1520,
+      "vertices_authored": 788,
+      "anchors": {
+        "handle": {
+          "position": [
+            0.09,
+            0.3929999986290932,
+            0.44
+          ],
+          "node": "hose-reel__handle"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "hose-reel__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.2854999788105488,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "hose-reel__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 75600,
+      "sha256": "116ef1796d08de5ca6672c9e031a908fd25281973aa884838630091f75eff421",
+      "parts": [
+        {
+          "name": "wall bracket",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "spindle mount",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "rear cheek",
+          "vertices": 32,
+          "faces": 18
+        },
+        {
+          "name": "spool",
+          "vertices": 32,
+          "faces": 18
+        },
+        {
+          "name": "wound hose",
+          "vertices": 120,
+          "faces": 120
+        },
+        {
+          "name": "wound hose",
+          "vertices": 120,
+          "faces": 120
+        },
+        {
+          "name": "wound hose",
+          "vertices": 120,
+          "faces": 120
+        },
+        {
+          "name": "wound hose",
+          "vertices": 120,
+          "faces": 120
+        },
+        {
+          "name": "front reel rim",
+          "vertices": 80,
+          "faces": 80
+        },
+        {
+          "name": "front spoke",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "front spoke",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "front spoke",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "crank spindle",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "crank arm",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "crank grip",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "hanging tail",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hanging tail",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hanging tail",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hose nozzle",
+          "vertices": 16,
+          "faces": 10
+        }
+      ]
+    },
+    {
+      "id": "maintenance-trolley",
+      "file": "models/maintenance-trolley.glb",
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.3725,
+        0.0,
+        -0.375
+      ],
+      "bounds_max": [
+        0.3725,
+        0.9037764072418213,
+        0.2849999964237213
+      ],
+      "dimensions": [
+        0.745,
+        0.9037764072418213,
+        0.6599999964237213
+      ],
+      "triangles": 729,
+      "vertices_authored": 435,
+      "anchors": {
+        "push_handle": {
+          "position": [
+            0,
+            0.88,
+            -0.35
+          ],
+          "node": "maintenance-trolley__push_handle"
+        },
+        "top_support": {
+          "position": [
+            0,
+            0.6975,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "maintenance-trolley__top_support"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "maintenance-trolley__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.32,
+          0.0,
+          -0.22
+        ],
+        [
+          -0.32,
+          0.0,
+          0.22
+        ],
+        [
+          0.32,
+          0.0,
+          -0.22
+        ],
+        [
+          0.32,
+          0.0,
+          0.22
+        ]
+      ],
+      "notes": "",
+      "bytes": 39008,
+      "sha256": "9ec886728e5d9d9a512c233e2733551a0432e886bcb1765ada0ca565dbaf86a3",
+      "parts": [
+        {
+          "name": "caster tyre",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "caster hub",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "caster fork",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "caster tyre",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "caster hub",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "caster fork",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "caster tyre",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "caster hub",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "caster fork",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "caster tyre",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "caster hub",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "caster fork",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray bottom",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray bottom",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "tray rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "corner upright",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "corner upright",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "corner upright",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "corner upright",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "push bar",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "push bar",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "push bar",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "rubber grip",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        }
+      ]
+    },
+    {
+      "id": "electrical-box",
+      "file": "models/electrical-box.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.25,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.25,
+        0.71,
+        0.22779422998428345
+      ],
+      "dimensions": [
+        0.5,
+        0.71,
+        0.22779422998428345
+      ],
+      "triangles": 273,
+      "vertices_authored": 171,
+      "anchors": {
+        "handle": {
+          "position": [
+            0.145,
+            0.35,
+            0.22
+          ],
+          "node": "electrical-box__handle"
+        },
+        "door_hinge": {
+          "position": [
+            -0.221,
+            0.36,
+            0.18
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "electrical-box__door_hinge"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "electrical-box__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.355,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "electrical-box__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 18192,
+      "sha256": "b4ace6b456c135aae3939a08543e35ad16a45835496ccb745e519d58ece2c68b",
+      "parts": [
+        {
+          "name": "steel case",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "door gasket",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "front door",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "inspection label",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "label symbol",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "pull handle",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "pull handle",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "pull handle",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hinge barrel",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "hinge barrel",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "lower cable gland",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "lower cable gland",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        }
+      ]
+    },
+    {
+      "id": "drain-grate",
+      "file": "models/drain-grate.glb",
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.26,
+        0.0,
+        -0.35000000000000003
+      ],
+      "bounds_max": [
+        0.26,
+        0.04749999940395355,
+        0.35000000000000003
+      ],
+      "dimensions": [
+        0.52,
+        0.04749999940395355,
+        0.7000000000000001
+      ],
+      "triangles": 172,
+      "vertices_authored": 112,
+      "anchors": {
+        "surface_top": {
+          "position": [
+            0,
+            0.04,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drain-grate__surface_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drain-grate__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Support bottom at Y=0; recess into the floor by 0.04m for a flush bar/rim top; bolt heads rise to 0.0475m.",
+      "bytes": 10548,
+      "sha256": "06df1c80580aaf4c8d7a54f29713937dcf8f3474002bb550b634e2ce9163dbd5",
+      "parts": [
+        {
+          "name": "side rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "side rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "end rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "end rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grate bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grate bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grate bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grate bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grate bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grate bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grate bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        }
+      ]
+    },
+    {
+      "id": "safety-bollard",
+      "file": "models/safety-bollard.glb",
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.145,
+        0.0,
+        -0.145
+      ],
+      "bounds_max": [
+        0.145,
+        0.9399999976158142,
+        0.145
+      ],
+      "dimensions": [
+        0.29,
+        0.9399999976158142,
+        0.29
+      ],
+      "triangles": 268,
+      "vertices_authored": 152,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "safety-bollard__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          0,
+          0.0,
+          0
+        ]
+      ],
+      "notes": "",
+      "bytes": 15532,
+      "sha256": "a3d136d44f9cd2a6c25642a356f11d8832a9de9be42c80f8e62be71fb47b28c1",
+      "parts": [
+        {
+          "name": "base plate",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "post",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "top cap",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "warning band",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "warning band",
+          "vertices": 24,
+          "faces": 14
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        }
+      ]
+    },
+    {
+      "id": "service-bucket",
+      "file": "models/service-bucket.glb",
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.15599460899829865,
+        0,
+        -0.14800000190734863
+      ],
+      "bounds_max": [
+        0.15599460899829865,
+        0.4949999749660492,
+        0.14800000190734863
+      ],
+      "dimensions": [
+        0.3119892179965973,
+        0.4949999749660492,
+        0.29600000381469727
+      ],
+      "triangles": 412,
+      "vertices_authored": 220,
+      "anchors": {
+        "handle": {
+          "position": [
+            0,
+            0.48,
+            0
+          ],
+          "node": "service-bucket__handle"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "service-bucket__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 23308,
+      "sha256": "75efc9ad70d16127b49b9957d09eb919998d6831744ef9e9a30b3e0378f01543",
+      "parts": [
+        {
+          "name": "open bucket shell",
+          "vertices": 64,
+          "faces": 50
+        },
+        {
+          "name": "rolled lip",
+          "vertices": 80,
+          "faces": 80
+        },
+        {
+          "name": "wire bail",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "wire bail",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "wire bail",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "wire bail",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "wire bail",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "bail grip",
+          "vertices": 16,
+          "faces": 10
+        }
+      ]
+    },
+    {
+      "id": "wall-clock",
+      "file": "models/wall-clock.glb",
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.16599999368190765,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.16599999368190765,
+        0.3319999873638153,
+        0.09300000220537186
+      ],
+      "dimensions": [
+        0.3319999873638153,
+        0.3319999873638153,
+        0.09300000220537186
+      ],
+      "triangles": 472,
+      "vertices_authored": 272,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "wall-clock__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.16599999368190765,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-clock__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 25580,
+      "sha256": "4c6cc3202deb7d26b85d6016b2ec90db49f841dac219eca1e4479f962d6d7175",
+      "parts": [
+        {
+          "name": "back case",
+          "vertices": 48,
+          "faces": 26
+        },
+        {
+          "name": "rim",
+          "vertices": 48,
+          "faces": 26
+        },
+        {
+          "name": "dial",
+          "vertices": 48,
+          "faces": 26
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour mark",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "minute hand",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hour hand",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hand pin",
+          "vertices": 16,
+          "faces": 10
+        }
+      ]
+    },
+    {
+      "id": "ticket-stack",
+      "file": "models/ticket-stack.glb",
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.0635948540629149,
+        0.0,
+        -0.03784618721741853
+      ],
+      "bounds_max": [
+        0.09465870198607444,
+        0.035302013325504956,
+        0.0444999988079071
+      ],
+      "dimensions": [
+        0.15825355604898933,
+        0.035302013325504956,
+        0.08234618602532563
+      ],
+      "triangles": 132,
+      "vertices_authored": 88,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "ticket-stack__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 9260,
+      "sha256": "73b69f4dc8eae0bdabfbe20d346e34c6004fa3c545af7992e011637a7d67b0a2",
+      "parts": [
+        {
+          "name": "paper slip",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "paper slip",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "paper slip",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "paper slip",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "paper slip",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "paper slip",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "printed line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "printed line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "printed line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "printed line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folded receipt",
+          "vertices": 8,
+          "faces": 6
+        }
+      ]
+    },
+    {
+      "id": "warning-stand",
+      "file": "models/warning-stand.glb",
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.21,
+        0.0,
+        -0.2075
+      ],
+      "bounds_max": [
+        0.21,
+        0.7471243739128113,
+        0.2075
+      ],
+      "dimensions": [
+        0.42,
+        0.7471243739128113,
+        0.415
+      ],
+      "triangles": 280,
+      "vertices_authored": 172,
+      "anchors": {
+        "carry_handle": {
+          "position": [
+            0,
+            0.735,
+            0
+          ],
+          "node": "warning-stand__carry_handle"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "warning-stand__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.18,
+          0.0,
+          -0.18
+        ],
+        [
+          0.18,
+          0.0,
+          -0.18
+        ],
+        [
+          -0.18,
+          0.0,
+          0.18
+        ],
+        [
+          0.18,
+          0.0,
+          0.18
+        ]
+      ],
+      "notes": "",
+      "bytes": 17952,
+      "sha256": "30a0f0e2c2d232137a193ead3f0c8bfbc9d50fce904771512afaf95df6e0401d",
+      "parts": [
+        {
+          "name": "folding leg",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folding leg",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folding leg",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folding leg",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "warning face",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "dark symbol stem",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "dark symbol dot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "top handle",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "top handle",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "top handle",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hinge",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "scuffed corner",
+          "vertices": 8,
+          "faces": 6
+        }
+      ]
+    },
+    {
+      "id": "cable-coil",
+      "file": "models/cable-coil.glb",
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.17900000512599945,
+        0.0,
+        -0.1771780401468277
+      ],
+      "bounds_max": [
+        0.315,
+        0.054794225841760635,
+        0.22100000083446503
+      ],
+      "dimensions": [
+        0.49400000512599945,
+        0.054794225841760635,
+        0.3981780409812927
+      ],
+      "triangles": 876,
+      "vertices_authored": 448,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cable-coil__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "",
+      "bytes": 43620,
+      "sha256": "f1d71daca5134728427b49e14cb90675fd9651a85534fd74ee9dd58b9293066b",
+      "parts": [
+        {
+          "name": "coiled cable",
+          "vertices": 132,
+          "faces": 132
+        },
+        {
+          "name": "coiled cable",
+          "vertices": 132,
+          "faces": 132
+        },
+        {
+          "name": "coiled cable",
+          "vertices": 132,
+          "faces": 132
+        },
+        {
+          "name": "loose cable end",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "loose cable end",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "plug",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "plug pin",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "plug pin",
+          "vertices": 10,
+          "faces": 7
+        }
+      ]
+    },
+    {
+      "id": "parts-cabinet",
+      "file": "models/parts-cabinet.glb",
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.295,
+        0.0,
+        -0.24000000000000002
+      ],
+      "bounds_max": [
+        0.295,
+        0.81,
+        0.29899999499320984
+      ],
+      "dimensions": [
+        0.59,
+        0.81,
+        0.5389999949932098
+      ],
+      "triangles": 385,
+      "vertices_authored": 243,
+      "anchors": {
+        "top_support": {
+          "position": [
+            0,
+            0.7645,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "parts-cabinet__top_support"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "parts-cabinet__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.235,
+          0.0,
+          -0.18
+        ],
+        [
+          -0.235,
+          0.0,
+          0.18
+        ],
+        [
+          0.235,
+          0.0,
+          -0.18
+        ],
+        [
+          0.235,
+          0.0,
+          0.18
+        ]
+      ],
+      "notes": "",
+      "bytes": 23752,
+      "sha256": "6bf4cd2d0eeafc2f35aca049dbae517233b85eb0b6f8646b148aed62982c8d7e",
+      "parts": [
+        {
+          "name": "rubber foot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "cabinet shell",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "drawer recess",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "drawer front",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "drawer pull",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "drawer pull",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "drawer pull",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "drawer front",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "drawer pull",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "drawer pull",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "drawer pull",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "drawer front",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "drawer pull",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "drawer pull",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "drawer pull",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "top work surface",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "rear rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        },
+        {
+          "name": "chipped exposed edge",
+          "vertices": 5,
+          "faces": 1
+        }
+      ]
+    }
+  ],
+  "total_bytes": 576208,
+  "total_triangles": 10027,
+  "source_files": {
+    "build_props.py": {
+      "bytes": 25475,
+      "sha256": "0a112daf59cc07dc51113a921f2930b3232bf4bbe2434bd6f8cee0a1c73a08e6"
+    },
+    "Meridian_Industrial_Props.blend": {
+      "bytes": 1283080,
+      "sha256": "782955cd16b777b366ef142aa46df8c5d98131b49cf735561d8262c36ffac1c5"
+    }
+  }
+}

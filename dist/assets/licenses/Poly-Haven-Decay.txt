@@ -1,0 +1,9 @@
+Poly Haven material additions
+Concrete Moss — Rob Tuytel
+Rusty Metal Sheet — Amal Kumar
+Peeling Painted Wall — Dimitrios Savva
+License: CC0 1.0 Universal
+https://polyhaven.com/license
+https://creativecommons.org/publicdomain/zero/1.0/
+Verified from official asset pages/API, 2026-11-02.
+See assets-manifest.json for exact map URLs, hashes and processing.

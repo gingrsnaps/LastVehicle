@@ -1,0 +1,8 @@
+Dream 2 Ambience
+Creator: TokyoGeisha (the creator identifies himself as Marcus Davies in the source-page comments).
+Source: https://opengameart.org/content/dream-2-ambience
+Original download: https://opengameart.org/sites/default/files/Dream%202%20%28Ambience%29.wav
+License: CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/
+Verified on 2026-11-02: the author's OpenGameArt submission lists CC0. The source-page license link resolves to the CC0 public-domain dedication. Attribution is retained voluntarily.
+The delivered game version is a 60-second edited loop. See assets-manifest.json for source/output hashes, window, overlap, filters, sample format and level adjustments.
+This notice describes this particular source file, not all works by the creator or all files on OpenGameArt.

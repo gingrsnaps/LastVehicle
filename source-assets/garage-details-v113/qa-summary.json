@@ -1,0 +1,18 @@
+{
+  "models": 12,
+  "actual_glbs_validated": true,
+  "blender_contact_sheet_visually_inspected": true,
+  "browser_visual_qa": false,
+  "licence": "CC0-1.0",
+  "total_triangles": 4115,
+  "total_glb_bytes": 264280,
+  "all_types_visible_draw_calls_max": 56,
+  "world_support_dimensions_read_from": [
+    "dist/js/world.js desk() and roomSteps()",
+    "dist/js/staging.js buildCar() dashboard and roof geometry"
+  ],
+  "write_scope": [
+    "source-assets/garage-details-v113",
+    "dist/assets/models/details-v113"
+  ]
+}

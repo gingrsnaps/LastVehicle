@@ -1,0 +1,22 @@
+[
+  {
+    "file": "footstep-wet",
+    "sample_rate": "32000",
+    "channels": 1,
+    "duration": "0.282938",
+    "source_peak_dBFS": -15.4,
+    "gain_dB": 6.4,
+    "decode": "pass",
+    "subjective_listening": "not performed"
+  },
+  {
+    "file": "creature-footstep",
+    "sample_rate": "32000",
+    "channels": 1,
+    "duration": "0.127844",
+    "source_peak_dBFS": -4.6,
+    "gain_dB": -4.4,
+    "decode": "pass",
+    "subjective_listening": "not performed"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "file": "textures/v114-graffiti-low-tide.svg",
+    "bytes": 1638,
+    "sha256": "6d0b07bb7345f6d0b860dd4d1431e6aae01b46dc9df4a3321b2436ac7effb312",
+    "width": 512,
+    "height": 256,
+    "license": "CC0-1.0",
+    "external_dependencies": 0
+  },
+  {
+    "file": "textures/v114-graffiti-night.svg",
+    "bytes": 1218,
+    "sha256": "c32d398794ff295e693e7940c02686a8c0184b7c135910fb099650cddf36cbac",
+    "width": 512,
+    "height": 256,
+    "license": "CC0-1.0",
+    "external_dependencies": 0
+  },
+  {
+    "file": "textures/v114-inspection-surface.svg",
+    "bytes": 2942,
+    "sha256": "8e80b9f048c6776f23452d078c56a2bf625f23eb8bfd0c1b8cd01b437958b3b9",
+    "width": 512,
+    "height": 256,
+    "license": "CC0-1.0",
+    "external_dependencies": 0
+  },
+  {
+    "file": "textures/v114-inspection-meridian.svg",
+    "bytes": 3066,
+    "sha256": "ca3c6f325b65895b31be428fab096fe70ecf197c8c439ac5ae2a4a7d07c92aee",
+    "width": 512,
+    "height": 256,
+    "license": "CC0-1.0",
+    "external_dependencies": 0
+  }
+]

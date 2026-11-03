@@ -1,0 +1,18 @@
+A lurking evil (horror ambience)
+Author: congusbongus
+License: CC0 1.0 Universal (CC0-1.0)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Source page: https://opengameart.org/content/a-lurking-evil-horror-ambience
+Download URL: https://opengameart.org/sites/default/files/evil_0.ogg
+Verified on: 2026-11-02
+
+The live source page explicitly identifies the author and lists CC0 under License(s).
+The source-page HTML snapshot is retained at proof/evil.html.
+Source-page SHA-256: 0b9ba39c8a82a809b8353a5bb708b5c7c03d6a52826289d5181c3654157d7785
+Source bytes: 687306
+Source SHA-256: 00a1dbb05c6d122f1909d2c7c20666b4367b14a4c13469dce86983ad51579c1b
+
+Source author describes heartbeats and subtle background piano. Published filename evil.ogg is served as evil_0.ogg.
+
+Credits are retained as courtesy. The CC0 declaration applies to these source audio files; unrelated website content and logos are not included in this assertion.
+Full CC0 legal code: CC0-1.0.txt

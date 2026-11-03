@@ -1,0 +1,26 @@
+THE ATTENDANT — ORIGINAL ASSET PROVENANCE AND LICENSE
+
+Title: The Attendant (Last Vehicle v1.8)
+Created: 2026-11-02
+
+This character, mesh geometry, skeleton, UVs, procedural grime texture,
+and eight animation clips were created specifically for this task from
+numerical geometry and authored bone transforms in build_attendant.py.
+No downloaded geometry, motion capture, character rig, image, or audio
+was incorporated. The existing contractor.glb was not incorporated.
+
+All original asset and script content in this folder is dedicated to the
+public domain under CC0 1.0 Universal, to the extent legally possible.
+License deed: https://creativecommons.org/publicdomain/zero/1.0/
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+This statement is provenance for the delivered asset only. It does not
+purport to license Blender itself or any unrelated game source/assets.
+
+Reproduce:
+  blender --background --threads 8 --python build_attendant.py
+
+Blender 4.3.2 was used. The script builds a single weighted skinned mesh,
+a bone hierarchy, eight separately authored skeletal actions, embedded
+image textures, an editable .blend source, and actual-pose renders.
+See manifest.json for bounds, animation timing, rig counts, and hashes.

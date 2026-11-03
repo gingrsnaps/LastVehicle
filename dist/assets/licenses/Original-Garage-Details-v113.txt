@@ -1,0 +1,20 @@
+MERIDIAN WORN GARAGE DETAILS — ORIGINAL ASSETS, LAST VEHICLE 1.13
+
+These twelve models, palette definitions, authoring scripts and original
+inspection renders were created for Last Vehicle / A GingrSnaps Project
+from numerical geometry. They contain no downloaded models, photographs,
+texture art, music, logos or third-party character designs.
+
+The original asset contribution is dedicated under CC0 1.0 Universal:
+https://creativecommons.org/publicdomain/zero/1.0/
+https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+To the extent copyright and related rights exist in this contribution, they
+are waived under that dedication. These assets may be edited, redistributed
+and used commercially. No attribution is required. Retaining this provenance
+notice is appreciated.
+
+The generator's mesh construction helpers and palette are adapted from the
+project's original CC0 Meridian Industrial Detail Pack. Blender and Babylon.js
+remain separate software under their own licenses. Inspection labels do not
+embed font data in the game models. No program is relicensed by this notice.

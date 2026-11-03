@@ -1,0 +1,325 @@
+{
+  "start_run_to_run_matrix_max_delta": 0.0,
+  "clips": {
+    "Idle": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.0,
+      "sole_min_z_metres": -0.0,
+      "max_sole_anchor_drift_metres": 0,
+      "maximum_height_metres": 2.09302,
+      "maximum_horizontal_reach_metres": 0.4698
+    },
+    "Walk": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.002829,
+      "sole_min_z_metres": -0.002829,
+      "max_sole_anchor_drift_metres": 0.599749,
+      "maximum_height_metres": 2.09298,
+      "maximum_horizontal_reach_metres": 0.68165
+    },
+    "Run": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.013634,
+      "sole_min_z_metres": -0.013634,
+      "max_sole_anchor_drift_metres": 0.949959,
+      "maximum_height_metres": 1.98724,
+      "maximum_horizontal_reach_metres": 0.87143
+    },
+    "Listen": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.0,
+      "sole_min_z_metres": -0.0,
+      "max_sole_anchor_drift_metres": 0,
+      "maximum_height_metres": 2.09784,
+      "maximum_horizontal_reach_metres": 1.24445
+    },
+    "Search": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.0,
+      "sole_min_z_metres": -0.0,
+      "max_sole_anchor_drift_metres": 0.0,
+      "maximum_height_metres": 2.09503,
+      "maximum_horizontal_reach_metres": 0.73465
+    },
+    "Attack": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.01974,
+      "sole_min_z_metres": -0.000138,
+      "max_sole_anchor_drift_metres": 0.169587,
+      "maximum_height_metres": 2.82245,
+      "maximum_horizontal_reach_metres": 1.49451
+    },
+    "Recover": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.0,
+      "sole_min_z_metres": -0.0,
+      "max_sole_anchor_drift_metres": 0.0,
+      "maximum_height_metres": 2.08019,
+      "maximum_horizontal_reach_metres": 1.05655
+    },
+    "Inspect": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -5.8e-05,
+      "sole_min_z_metres": -5.8e-05,
+      "max_sole_anchor_drift_metres": 0.106357,
+      "maximum_height_metres": 2.09503,
+      "maximum_horizontal_reach_metres": 0.83318
+    },
+    "TurnLeft": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -2.4e-05,
+      "sole_min_z_metres": -2.4e-05,
+      "max_sole_anchor_drift_metres": 0.167304,
+      "maximum_height_metres": 2.07183,
+      "maximum_horizontal_reach_metres": 0.53714
+    },
+    "TurnRight": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -2.4e-05,
+      "sole_min_z_metres": -2.4e-05,
+      "max_sole_anchor_drift_metres": 0.167479,
+      "maximum_height_metres": 2.07276,
+      "maximum_horizontal_reach_metres": 0.52592
+    },
+    "Brake": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.000162,
+      "sole_min_z_metres": -0.000162,
+      "max_sole_anchor_drift_metres": 0.150835,
+      "maximum_height_metres": 2.08359,
+      "maximum_horizontal_reach_metres": 0.87595
+    },
+    "Backstep": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.001636,
+      "sole_min_z_metres": -0.001636,
+      "max_sole_anchor_drift_metres": 0.571476,
+      "maximum_height_metres": 2.12027,
+      "maximum_horizontal_reach_metres": 1.0335
+    },
+    "Brace": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -6e-06,
+      "sole_min_z_metres": -6e-06,
+      "max_sole_anchor_drift_metres": 6e-06,
+      "maximum_height_metres": 2.06944,
+      "maximum_horizontal_reach_metres": 1.29408
+    },
+    "Strike": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.0,
+      "sole_min_z_metres": -0.0,
+      "max_sole_anchor_drift_metres": 1e-06,
+      "maximum_height_metres": 2.75045,
+      "maximum_horizontal_reach_metres": 1.3097
+    },
+    "InspectClose": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.00019,
+      "sole_min_z_metres": -0.00019,
+      "max_sole_anchor_drift_metres": 0.000189,
+      "maximum_height_metres": 2.0953,
+      "maximum_horizontal_reach_metres": 1.03468
+    },
+    "Stalk": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -8e-05,
+      "sole_min_z_metres": -8e-05,
+      "max_sole_anchor_drift_metres": 0.799279,
+      "maximum_height_metres": 1.80976,
+      "maximum_horizontal_reach_metres": 0.69421
+    },
+    "PeekLeft": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -7e-06,
+      "sole_min_z_metres": -7e-06,
+      "max_sole_anchor_drift_metres": 7e-06,
+      "maximum_height_metres": 2.05965,
+      "maximum_horizontal_reach_metres": 0.62239
+    },
+    "PeekRight": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -7e-06,
+      "sole_min_z_metres": -7e-06,
+      "max_sole_anchor_drift_metres": 7e-06,
+      "maximum_height_metres": 2.05965,
+      "maximum_horizontal_reach_metres": 0.62449
+    },
+    "DoorPush": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -2.9e-05,
+      "sole_min_z_metres": -2.9e-05,
+      "max_sole_anchor_drift_metres": 2.9e-05,
+      "maximum_height_metres": 2.06265,
+      "maximum_horizontal_reach_metres": 1.20687
+    },
+    "CrouchSearch": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.000275,
+      "sole_min_z_metres": -0.000275,
+      "max_sole_anchor_drift_metres": 0.000273,
+      "maximum_height_metres": 2.06313,
+      "maximum_horizontal_reach_metres": 0.84395
+    },
+    "StartRun": {
+      "sample_count": 61,
+      "mesh_min_z_metres": -0.000801,
+      "sole_min_z_metres": -0.000801,
+      "max_sole_anchor_drift_metres": 0.609873,
+      "maximum_height_metres": 2.07884,
+      "maximum_horizontal_reach_metres": 0.69234
+    }
+  },
+  "contacts": {
+    "Brace": {
+      "phase": 0.5,
+      "bone_points_gltf": {
+        "Hand.L": [
+          0.28,
+          1.45,
+          1.0
+        ],
+        "Hand.R": [
+          -0.28,
+          1.49,
+          1.0
+        ],
+        "Head": [
+          -0.00565,
+          1.65243,
+          0.4702
+        ]
+      }
+    },
+    "Strike": {
+      "phase": 0.5,
+      "bone_points_gltf": {
+        "Hand.L": [
+          0.50817,
+          0.69376,
+          0.44109
+        ],
+        "Hand.R": [
+          -0.2,
+          1.44,
+          1.1
+        ],
+        "Head": [
+          -0.10702,
+          1.65154,
+          0.46159
+        ]
+      }
+    },
+    "InspectClose": {
+      "phase": 0.5,
+      "bone_points_gltf": {
+        "Hand.L": [
+          0.3,
+          1.1,
+          0.91
+        ],
+        "Hand.R": [
+          -0.47049,
+          0.51086,
+          0.02573
+        ],
+        "Head": [
+          -0.01215,
+          1.46893,
+          0.5105
+        ]
+      }
+    },
+    "DoorPush": {
+      "phase": 0.5,
+      "bone_points_gltf": {
+        "Hand.L": [
+          0.41637,
+          0.58229,
+          0.20939
+        ],
+        "Hand.R": [
+          -0.2,
+          1.3,
+          1.0
+        ],
+        "Head": [
+          -0.04276,
+          1.63791,
+          0.46386
+        ]
+      }
+    },
+    "PeekLeft": {
+      "phase": 0.5,
+      "bone_points_gltf": {
+        "Hand.L": [
+          0.37903,
+          0.6143,
+          0.1511
+        ],
+        "Hand.R": [
+          -0.4681,
+          0.68808,
+          0.21105
+        ],
+        "Head": [
+          0.06815,
+          1.82853,
+          0.27596
+        ]
+      }
+    },
+    "PeekRight": {
+      "phase": 0.5,
+      "bone_points_gltf": {
+        "Hand.L": [
+          0.46146,
+          0.68849,
+          0.22791
+        ],
+        "Hand.R": [
+          -0.38236,
+          0.61301,
+          0.13333
+        ],
+        "Head": [
+          -0.06815,
+          1.82853,
+          0.27596
+        ]
+      }
+    },
+    "CrouchSearch": {
+      "phase": 0.5,
+      "bone_points_gltf": {
+        "Hand.L": [
+          0.28,
+          0.64,
+          0.72
+        ],
+        "Hand.R": [
+          -0.25,
+          0.52,
+          0.56
+        ],
+        "Head": [
+          0.00977,
+          1.34599,
+          0.51661
+        ]
+      }
+    }
+  },
+  "browser_playback_verified": false,
+  "feet_anchored_for": [
+    "Brace",
+    "Strike",
+    "InspectClose",
+    "PeekLeft",
+    "PeekRight",
+    "DoorPush",
+    "CrouchSearch"
+  ]
+}

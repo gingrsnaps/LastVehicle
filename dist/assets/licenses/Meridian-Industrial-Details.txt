@@ -1,0 +1,18 @@
+MERIDIAN INDUSTRIAL DETAIL PACK — ORIGINAL ASSETS
+
+These 24 models, material definitions, authoring scripts and original inspection
+renders were created for Last Vehicle / A GingrSnaps Project from numerical
+geometry. They incorporate no downloaded models, photographs or textures.
+
+The original asset contribution is offered under CC0 1.0 Universal:
+https://creativecommons.org/publicdomain/zero/1.0/
+https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+To the extent copyright and related rights exist in this contribution, they are
+waived under that dedication. You may edit and redistribute these assets,
+including in commercial projects. No attribution is required; retaining this
+provenance notice is appreciated.
+
+Blender and Babylon.js are separate software with their own licenses. No part
+of those programs is relicensed by this notice. The contact-sheet typography is
+an inspection label, not embedded font data inside the game models.

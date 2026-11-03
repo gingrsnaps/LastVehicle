@@ -1,0 +1,27 @@
+{
+  "method": "Weighted sole-height sampling from the actual Blender rig at 120 samples per cycle. Main planted-foot transitions chosen; small toe-rock transitions are not extra steps. Browser audible synchronization remains unverified. Stalk contacts follow the exact authored ankle stance intervals, with a lifted swing that returns to ground at 0/.5.",
+  "Walk": [
+    0.175,
+    0.675
+  ],
+  "Run": [
+    0.083,
+    0.583
+  ],
+  "Stalk": [
+    0,
+    0.5
+  ],
+  "planted_one_shots": {
+    "Backstep": 0.72,
+    "TurnLeft": 0.76,
+    "TurnRight": 0.76,
+    "Brake": 0.32
+  },
+  "silent_planted_actions": [
+    "PeekLeft",
+    "PeekRight",
+    "DoorPush",
+    "CrouchSearch"
+  ]
+}

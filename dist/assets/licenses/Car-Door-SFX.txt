@@ -1,0 +1,9 @@
+Car_door_SFX
+Author: looneybits
+Source: https://opengameart.org/content/cardoorsfx
+Original file: door_closing.wav
+License(s) on original source page: CC0
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Verified: 2026-11-02
+Source identifies this as a car door sound effect; two files are supplied (opening and closing). This project uses the closing recording. No required attribution notice is listed.
+Full fetched source HTML snapshot: downloads/car-door-sfx.html

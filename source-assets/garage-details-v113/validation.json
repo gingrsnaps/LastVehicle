@@ -1,0 +1,356 @@
+{
+  "passed": true,
+  "models": 12,
+  "engine": "Babylon.js 9.33.1 NullEngine glTF and default left-handed validation",
+  "browser_visual_qa": false,
+  "results": [
+    {
+      "id": "damaged-intercom",
+      "meshes": 7,
+      "draw_calls_max": 7,
+      "triangles": 418,
+      "materials": 7,
+      "minimum": [
+        -0.16998755931854248,
+        0,
+        0
+      ],
+      "maximum": [
+        0.1550000011920929,
+        0.556763231754303,
+        0.12859031558036804
+      ],
+      "left_handed_minimum": [
+        -0.1550000011920929,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.16998755931854248,
+        0.556763231754303,
+        0.12859031558036804
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 5
+    },
+    {
+      "id": "cigarette-tray",
+      "meshes": 5,
+      "draw_calls_max": 5,
+      "triangles": 316,
+      "materials": 5,
+      "minimum": [
+        -0.11599999666213989,
+        0,
+        -0.08500000089406967
+      ],
+      "maximum": [
+        0.11599999666213989,
+        0.0430000014603138,
+        0.08500000089406967
+      ],
+      "left_handed_minimum": [
+        -0.11599999666213989,
+        0,
+        -0.08500000089406967
+      ],
+      "left_handed_maximum": [
+        0.11599999666213989,
+        0.0430000014603138,
+        0.08500000089406967
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "key-hook-board",
+      "meshes": 5,
+      "draw_calls_max": 5,
+      "triangles": 914,
+      "materials": 5,
+      "minimum": [
+        -0.2849999964237213,
+        0,
+        0
+      ],
+      "maximum": [
+        0.2849999964237213,
+        0.44999998807907104,
+        0.1016591414809227
+      ],
+      "left_handed_minimum": [
+        -0.2849999964237213,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.2849999964237213,
+        0.44999998807907104,
+        0.1016591414809227
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 4
+    },
+    {
+      "id": "cable-offcuts",
+      "meshes": 5,
+      "draw_calls_max": 5,
+      "triangles": 300,
+      "materials": 5,
+      "minimum": [
+        -0.19150835275650024,
+        0,
+        -0.10325757414102554
+      ],
+      "maximum": [
+        0.19226279854774475,
+        0.02199999988079071,
+        0.11798043549060822
+      ],
+      "left_handed_minimum": [
+        -0.19226279854774475,
+        0,
+        -0.10325757414102554
+      ],
+      "left_handed_maximum": [
+        0.19150835275650024,
+        0.02199999988079071,
+        0.11798043549060822
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "terminal-brush",
+      "meshes": 3,
+      "draw_calls_max": 3,
+      "triangles": 340,
+      "materials": 3,
+      "minimum": [
+        -0.1509999930858612,
+        0,
+        -0.026000000536441803
+      ],
+      "maximum": [
+        0.12170000374317169,
+        0.048500001430511475,
+        0.026000000536441803
+      ],
+      "left_handed_minimum": [
+        -0.12170000374317169,
+        0,
+        -0.026000000536441803
+      ],
+      "left_handed_maximum": [
+        0.1509999930858612,
+        0.048500001430511475,
+        0.026000000536441803
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "split-insulation-elbow",
+      "meshes": 4,
+      "draw_calls_max": 4,
+      "triangles": 416,
+      "materials": 4,
+      "minimum": [
+        -0.07100000232458115,
+        0,
+        0
+      ],
+      "maximum": [
+        0.25999999046325684,
+        0.3460000157356262,
+        0.21899999678134918
+      ],
+      "left_handed_minimum": [
+        -0.25999999046325684,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.07100000232458115,
+        0.3460000157356262,
+        0.21899999678134918
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 4
+    },
+    {
+      "id": "pump-seal-kit",
+      "meshes": 3,
+      "draw_calls_max": 3,
+      "triangles": 472,
+      "materials": 3,
+      "minimum": [
+        -0.09800000488758087,
+        0,
+        -0.06652750074863434
+      ],
+      "maximum": [
+        0.12300000339746475,
+        0.019167961552739143,
+        0.07599999755620956
+      ],
+      "left_handed_minimum": [
+        -0.12300000339746475,
+        0,
+        -0.06652750074863434
+      ],
+      "left_handed_maximum": [
+        0.09800000488758087,
+        0.019167961552739143,
+        0.07599999755620956
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "parking-permit",
+      "meshes": 5,
+      "draw_calls_max": 5,
+      "triangles": 96,
+      "materials": 5,
+      "minimum": [
+        -0.07150000333786011,
+        0,
+        -0.039500001817941666
+      ],
+      "maximum": [
+        0.07150000333786011,
+        0.018699999898672104,
+        0.039500001817941666
+      ],
+      "left_handed_minimum": [
+        -0.07150000333786011,
+        0,
+        -0.039500001817941666
+      ],
+      "left_handed_maximum": [
+        0.07150000333786011,
+        0.018699999898672104,
+        0.039500001817941666
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "sagging-sun-visor",
+      "meshes": 7,
+      "draw_calls_max": 7,
+      "triangles": 130,
+      "materials": 7,
+      "minimum": [
+        -0.17000000178813934,
+        0,
+        -0.03200000151991844
+      ],
+      "maximum": [
+        0.17000000178813934,
+        0.24050000309944153,
+        0.030500000342726707
+      ],
+      "left_handed_minimum": [
+        -0.17000000178813934,
+        0,
+        -0.03200000151991844
+      ],
+      "left_handed_maximum": [
+        0.17000000178813934,
+        0.24050000309944153,
+        0.030500000342726707
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "emergency-diagram",
+      "meshes": 6,
+      "draw_calls_max": 6,
+      "triangles": 376,
+      "materials": 6,
+      "minimum": [
+        -0.3199999928474426,
+        0,
+        0
+      ],
+      "maximum": [
+        0.3199999928474426,
+        0.5799999833106995,
+        0.04500000178813934
+      ],
+      "left_handed_minimum": [
+        -0.3199999928474426,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.3199999928474426,
+        0.5799999833106995,
+        0.04500000178813934
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "torn-weather-strip",
+      "meshes": 3,
+      "draw_calls_max": 3,
+      "triangles": 186,
+      "materials": 3,
+      "minimum": [
+        -0.017000000923871994,
+        0,
+        0
+      ],
+      "maximum": [
+        0.10205784440040588,
+        0.6800000071525574,
+        0.0914294421672821
+      ],
+      "left_handed_minimum": [
+        -0.10205784440040588,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.017000000923871994,
+        0.6800000071525574,
+        0.0914294421672821
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 4
+    },
+    {
+      "id": "discarded-work-glove",
+      "meshes": 3,
+      "draw_calls_max": 3,
+      "triangles": 151,
+      "materials": 3,
+      "minimum": [
+        -0.09873108565807343,
+        0,
+        -0.09099999815225601
+      ],
+      "maximum": [
+        0.050999999046325684,
+        0.03400000184774399,
+        0.14510804414749146
+      ],
+      "left_handed_minimum": [
+        -0.050999999046325684,
+        0,
+        -0.09099999815225601
+      ],
+      "left_handed_maximum": [
+        0.09873108565807343,
+        0.03400000184774399,
+        0.14510804414749146
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    }
+  ]
+}

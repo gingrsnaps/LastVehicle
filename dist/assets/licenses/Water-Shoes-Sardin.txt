@@ -1,0 +1,10 @@
+Shoes in the Water (sound 0690)
+Author: Joseph Sardin / BigSoundBank (LaSonotheque)
+Source: https://bigsoundbank.com/shoes-in-the-water-s0690.html
+Download: https://bigsoundbank.com/UPLOAD/bwf-en/0690.wav
+License: CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/
+Author licensing page: https://bigsoundbank.com/licenses.html
+Verified 2026-11-02: the individual recording page explicitly states CC0 and
+permits copying, editing, redistributing, and commercial game use. Credit is
+retained voluntarily. Five separate recorded steps were extracted; see
+assets-manifest.json for exact source windows, hashes and processing.

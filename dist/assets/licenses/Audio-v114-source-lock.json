@@ -1,0 +1,114 @@
+{
+  "sources": [
+    {
+      "id": "ambience",
+      "immediate_file": "dist/assets/audio/ambience.ogg",
+      "immediate_sha256": "5703a7f7bc3749312ba35694bdec44ade83dcf6bae81a9d01f8bb0bfd560f718",
+      "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+      "original_provenance": {
+        "file": "audio/ambience.ogg",
+        "bytes": 24470,
+        "sha256": "5703a7f7bc3749312ba35694bdec44ade83dcf6bae81a9d01f8bb0bfd560f718",
+        "author": "qubodup",
+        "title": "(defect) motor loop",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source_page": "https://opengameart.org/content/defect-motor-loop",
+        "download_url": "https://opengameart.org/sites/default/files/fan_interval.wav",
+        "original_file": "fan_interval.wav",
+        "processing": "Mono 48 kHz PCM16 source edit; high/low-pass filtering; 120 ms seam crossfade; peak target -12 dBFS; then Ogg Vorbis quality 4.",
+        "original_sha256": "4c0287ffdad82a7001403c82ab77e2a04475fb30c9919938b311f644f429c531",
+        "prepared_wav_sha256": "f0f4728a4247c83d1670b2db57e11273c1dff684112ec8473d0ce030abfcad1c",
+        "loop": true,
+        "audio": {
+          "duration_seconds": 2.89075,
+          "codec_name": "vorbis",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      }
+    },
+    {
+      "id": "drip",
+      "immediate_file": "dist/assets/audio/drip.ogg",
+      "immediate_sha256": "43effd7ac2b9f28e5bc9ed650224c362a8b485996793532986f13bf03036de97",
+      "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+      "original_provenance": {
+        "file": "audio/drip.ogg",
+        "bytes": 168606,
+        "sha256": "43effd7ac2b9f28e5bc9ed650224c362a8b485996793532986f13bf03036de97",
+        "title": "Dripping water loop",
+        "author": "Independent.nu",
+        "uploader": "qubodup",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source_page": "https://opengameart.org/content/dripping-water-loop",
+        "download_url": "https://opengameart.org/sites/default/files/atmosbasement.mp3_.flac",
+        "original_file": "atmosbasement.mp3_.flac",
+        "source_file_sha256": "247c0ef181c8ba8d190a6194f6ea02d9defb23b70194c52c7f9187b5b7b1cc61",
+        "source_page_sha256": "d9a5c6f8bc3dfb19daca0916b0ae360326cd20552ef89c0aacecd46960c2a2f5",
+        "license_proof": "licenses/Dripping-Water-Loop.txt",
+        "processing": "FFmpeg 7.1.5: downmixed source stereo FLAC to mono 44100Hz Vorbis quality 4 for positional ambience. Original duration retained.",
+        "duration_seconds": 20.063107,
+        "channels": 1,
+        "sample_rate": 44100,
+        "loop": true
+      }
+    },
+    {
+      "id": "metal",
+      "immediate_file": "dist/assets/audio/metal.ogg",
+      "immediate_sha256": "b9d7ea28288628583bf1e679537a4b5297adbea54eeb2344df51dd2b970a4960",
+      "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+      "original_provenance": {
+        "file": "audio/metal.ogg",
+        "bytes": 9246,
+        "sha256": "b9d7ea28288628583bf1e679537a4b5297adbea54eeb2344df51dd2b970a4960",
+        "author": "Brian MacIntosh / BMacZero",
+        "title": "Mechanical Sounds",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source_page": "https://opengameart.org/content/mechanical-sounds",
+        "download_url": "https://opengameart.org/sites/default/files/clank1.wav",
+        "original_file": "clank1.wav",
+        "processing": "Band limiting; short edge fades; peak target -7 dBFS; then Ogg Vorbis quality 4.",
+        "original_sha256": "899a46a8423fa0ca349b3c70a07a422d1eaa3a58695ce6facfbae074dd70226f",
+        "prepared_wav_sha256": "60db5fa7790ad8060668687493771dd39ef1cebf107f4e3e5460470c4407be0b",
+        "loop": false,
+        "audio": {
+          "duration_seconds": 0.673396,
+          "codec_name": "vorbis",
+          "sample_rate": "48000",
+          "channels": 1
+        }
+      }
+    },
+    {
+      "id": "switch",
+      "immediate_file": "dist/assets/audio/switch.ogg",
+      "immediate_sha256": "6fc395be2ad1f99ce318a5d28f98fb76dbeb676d83a0b28239d8c1fb90736180",
+      "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+      "original_provenance": {
+        "file": "audio/switch.ogg",
+        "bytes": 7097,
+        "sha256": "6fc395be2ad1f99ce318a5d28f98fb76dbeb676d83a0b28239d8c1fb90736180",
+        "title": "Interface Sounds 1.0",
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source_page": "https://opengameart.org/content/interface-sounds",
+        "author_page": "https://kenney.nl/assets/interface-sounds",
+        "download_url": "https://opengameart.org/sites/default/files/kenney_interfaceSounds.zip",
+        "original_file": "Audio/switch_002.ogg",
+        "source_archive_sha256": "f2193d072726d6758a5f7871b2dcc54dcce0d5c35c6f0a62f92549b327c81232",
+        "source_page_sha256": "e863b328713e4a26086d5e002d524227c28fccd3df63013637b85ce7812e7e57",
+        "license_proof": "licenses/Kenney-Interface-Sounds.txt",
+        "processing": "Original OGG copied without transcoding; renamed for the game.",
+        "duration_seconds": 0.610952,
+        "channels": 2,
+        "sample_rate": 44100,
+        "loop": false
+      }
+    }
+  ]
+}

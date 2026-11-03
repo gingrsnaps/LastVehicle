@@ -1,0 +1,9 @@
+100 CC0 metal and wood SFX
+Author: rubberduck
+Source: https://opengameart.org/content/100-cc0-metal-and-wood-sfx
+Download: https://opengameart.org/sites/default/files/100-CC0-wood-metal-SFX.zip
+License: CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/
+Source declaration verified 2026-11-02. Courtesy attribution retained.
+Additional source members: metal_sheet_04.ogg, metal_spring_02.ogg,
+metal_slam_01.ogg. Downmixed, filtered, faded and level adjusted for game use.
+See assets-manifest.json for each source/output hash and processing.

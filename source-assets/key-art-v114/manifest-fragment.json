@@ -1,0 +1,146 @@
+{
+  "game_release": "Last Vehicle 1.14",
+  "assets": [
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Key-Art-v114.txt",
+      "source_type": "Original numeric geometry / vector paths; no external asset inputs",
+      "source": "source-assets/key-art-v114/",
+      "verified": "2026-11-03",
+      "file": "models/maintenance-key-v114.glb",
+      "dimensions": [
+        0.41500000000000004,
+        0.0121,
+        0.086
+      ],
+      "bounds_min": [
+        -0.166,
+        0.0,
+        -0.038
+      ],
+      "bounds_max": [
+        0.249,
+        0.0121,
+        0.048
+      ],
+      "anchors": {
+        "support_bottom": [
+          0,
+          0,
+          0
+        ],
+        "table_support": [
+          -0.105,
+          0,
+          0.005
+        ],
+        "grip": [
+          0,
+          0.008,
+          0
+        ],
+        "ring": [
+          0,
+          0.008,
+          0
+        ],
+        "tag_center": [
+          0.145,
+          0.01,
+          0.005
+        ]
+      },
+      "triangles": 882,
+      "material_count": 5,
+      "texture_count": 0,
+      "bytes": 51828,
+      "sha256": "c9a0b280334c7397f7ba1c935261d7e5b42d5d0937fe6de0a26ce3440f3db853",
+      "id": "maintenance-key-v114",
+      "type": "model",
+      "draw_calls_max": 5,
+      "source_file": "source-assets/key-art-v114/build_key.py",
+      "editable_source": "source-assets/key-art-v114/Maintenance_Key_v114.blend",
+      "support_type": "desk",
+      "origin": "Ring-centered XZ; mesh bottom Y=0",
+      "notes": "Recognizable ring, blade and readable MAINTENANCE tag; retain authored scale during pickup."
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Key-Art-v114.txt",
+      "source_type": "Original numeric geometry / vector paths; no external asset inputs",
+      "source": "source-assets/key-art-v114/",
+      "verified": "2026-11-03",
+      "file": "textures/v114-graffiti-low-tide.svg",
+      "bytes": 1638,
+      "sha256": "6d0b07bb7345f6d0b860dd4d1431e6aae01b46dc9df4a3321b2436ac7effb312",
+      "width": 512,
+      "height": 256,
+      "external_dependencies": 0,
+      "id": "v114-graffiti-low-tide",
+      "type": "texture",
+      "source_file": "source-assets/key-art-v114/build_decals.py",
+      "notes": "Transparent SVG, original vector paths only; static cosmetic wall plane, no interaction."
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Key-Art-v114.txt",
+      "source_type": "Original numeric geometry / vector paths; no external asset inputs",
+      "source": "source-assets/key-art-v114/",
+      "verified": "2026-11-03",
+      "file": "textures/v114-graffiti-night.svg",
+      "bytes": 1218,
+      "sha256": "c32d398794ff295e693e7940c02686a8c0184b7c135910fb099650cddf36cbac",
+      "width": 512,
+      "height": 256,
+      "external_dependencies": 0,
+      "id": "v114-graffiti-night",
+      "type": "texture",
+      "source_file": "source-assets/key-art-v114/build_decals.py",
+      "notes": "Transparent SVG, original vector paths only; static cosmetic wall plane, no interaction."
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Key-Art-v114.txt",
+      "source_type": "Original numeric geometry / vector paths; no external asset inputs",
+      "source": "source-assets/key-art-v114/",
+      "verified": "2026-11-03",
+      "file": "textures/v114-inspection-surface.svg",
+      "bytes": 2942,
+      "sha256": "8e80b9f048c6776f23452d078c56a2bf625f23eb8bfd0c1b8cd01b437958b3b9",
+      "width": 512,
+      "height": 256,
+      "external_dependencies": 0,
+      "id": "v114-inspection-surface",
+      "type": "texture",
+      "source_file": "source-assets/key-art-v114/build_decals.py",
+      "notes": "Transparent SVG, original vector paths only; static cosmetic wall plane, no interaction."
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Key-Art-v114.txt",
+      "source_type": "Original numeric geometry / vector paths; no external asset inputs",
+      "source": "source-assets/key-art-v114/",
+      "verified": "2026-11-03",
+      "file": "textures/v114-inspection-meridian.svg",
+      "bytes": 3066,
+      "sha256": "ca3c6f325b65895b31be428fab096fe70ecf197c8c439ac5ae2a4a7d07c92aee",
+      "width": 512,
+      "height": 256,
+      "external_dependencies": 0,
+      "id": "v114-inspection-meridian",
+      "type": "texture",
+      "source_file": "source-assets/key-art-v114/build_decals.py",
+      "notes": "Transparent SVG, original vector paths only; static cosmetic wall plane, no interaction."
+    }
+  ]
+}

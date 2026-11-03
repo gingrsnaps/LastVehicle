@@ -1,0 +1,16 @@
+Dripping water loop
+Author: Independent.nu
+Submitted by: qubodup
+Source: https://opengameart.org/content/dripping-water-loop
+Original file: atmosbasement.mp3_.flac
+Download: https://opengameart.org/sites/default/files/atmosbasement.mp3_.flac
+
+The source page names Independent.nu as Author and explicitly lists the license as CC0.
+CC0 1.0 Universal Public Domain Dedication:
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Verified from downloaded source HTML on 2026-11-02.
+Source HTML SHA-256: d9a5c6f8bc3dfb19daca0916b0ae360326cd20552ef89c0aacecd46960c2a2f5
+Original FLAC SHA-256: 247c0ef181c8ba8d190a6194f6ea02d9defb23b70194c52c7f9187b5b7b1cc61
+
+Game derivative: converted to mono OGG Vorbis, original duration retained.

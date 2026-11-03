@@ -1,0 +1,142 @@
+{
+  "file": "attendant.glb",
+  "sha256": "1724e1c32e76554f21e83ecec7cb330699699b2e0cd9a33d59b1cc6f5a2f06e6",
+  "bytes": 2108740,
+  "triangles": 1868,
+  "exported_vertices": 4656,
+  "skin_count": 1,
+  "skin_joint_count": 38,
+  "embedded_images": 8,
+  "external_dependencies": [],
+  "weighted_vertices_with_multiple_joints": 1176,
+  "maximum_weight_sum_error": 2.9802322387695312e-08,
+  "clips": {
+    "Attack": {
+      "duration_seconds": 1.6,
+      "channels": 114,
+      "varying_channels": 30,
+      "endpoint_max_delta": 0
+    },
+    "Backstep": {
+      "duration_seconds": 0.9,
+      "channels": 114,
+      "varying_channels": 32,
+      "endpoint_max_delta": 0.0
+    },
+    "Brace": {
+      "duration_seconds": 1.8,
+      "channels": 114,
+      "varying_channels": 34,
+      "endpoint_max_delta": 0
+    },
+    "Brake": {
+      "duration_seconds": 0.8,
+      "channels": 114,
+      "varying_channels": 32,
+      "endpoint_max_delta": 1.99765891
+    },
+    "CrouchSearch": {
+      "duration_seconds": 4.0,
+      "channels": 114,
+      "varying_channels": 35,
+      "endpoint_max_delta": 0
+    },
+    "DoorPush": {
+      "duration_seconds": 1.8,
+      "channels": 114,
+      "varying_channels": 33,
+      "endpoint_max_delta": 0
+    },
+    "Idle": {
+      "duration_seconds": 3.2,
+      "channels": 114,
+      "varying_channels": 23,
+      "endpoint_max_delta": 0
+    },
+    "Inspect": {
+      "duration_seconds": 3.2,
+      "channels": 114,
+      "varying_channels": 31,
+      "endpoint_max_delta": 0.0
+    },
+    "InspectClose": {
+      "duration_seconds": 3.6,
+      "channels": 114,
+      "varying_channels": 34,
+      "endpoint_max_delta": 0
+    },
+    "Listen": {
+      "duration_seconds": 2.4,
+      "channels": 114,
+      "varying_channels": 25,
+      "endpoint_max_delta": 0.0
+    },
+    "PeekLeft": {
+      "duration_seconds": 1.8,
+      "channels": 114,
+      "varying_channels": 29,
+      "endpoint_max_delta": 0
+    },
+    "PeekRight": {
+      "duration_seconds": 1.8,
+      "channels": 114,
+      "varying_channels": 29,
+      "endpoint_max_delta": 0
+    },
+    "Recover": {
+      "duration_seconds": 1.5,
+      "channels": 114,
+      "varying_channels": 24,
+      "endpoint_max_delta": 0.27326933
+    },
+    "Run": {
+      "duration_seconds": 0.8,
+      "channels": 114,
+      "varying_channels": 12,
+      "endpoint_max_delta": 0.0
+    },
+    "Search": {
+      "duration_seconds": 3.2,
+      "channels": 114,
+      "varying_channels": 17,
+      "endpoint_max_delta": 0.0
+    },
+    "Stalk": {
+      "duration_seconds": 2.2,
+      "channels": 114,
+      "varying_channels": 33,
+      "endpoint_max_delta": 0.0
+    },
+    "StartRun": {
+      "duration_seconds": 0.6,
+      "channels": 114,
+      "varying_channels": 32,
+      "endpoint_max_delta": 0.21231133
+    },
+    "Strike": {
+      "duration_seconds": 1.2,
+      "channels": 114,
+      "varying_channels": 33,
+      "endpoint_max_delta": 0
+    },
+    "TurnLeft": {
+      "duration_seconds": 0.9,
+      "channels": 114,
+      "varying_channels": 33,
+      "endpoint_max_delta": 0.0
+    },
+    "TurnRight": {
+      "duration_seconds": 0.9,
+      "channels": 114,
+      "varying_channels": 33,
+      "endpoint_max_delta": 0.0
+    },
+    "Walk": {
+      "duration_seconds": 1.4,
+      "channels": 114,
+      "varying_channels": 12,
+      "endpoint_max_delta": 6e-08
+    }
+  },
+  "browser_qa_performed": false
+}

@@ -1,0 +1,20 @@
+{
+  "working_directory": "project root",
+  "requirements": [
+    "Blender 4.3.2 or compatible glTF exporter",
+    "Node.js with existing dist/vendor files",
+    "Python 3 + Pillow only for the inspection contact sheet"
+  ],
+  "commands": [
+    "blender --background --python source-assets/garage-details-v113/build_props.py",
+    "node source-assets/garage-details-v113/validate_models.mjs",
+    "blender -b source-assets/garage-details-v113/Meridian_Garage_Details_v113.blend --python source-assets/garage-details-v113/render_props.py",
+    "python source-assets/garage-details-v113/build_sheet.py"
+  ],
+  "notes": [
+    "Only build_props.py changes the GLBs. Rendering adjusts an inspection scene and never re-exports game geometry.",
+    "After regenerating with a different Blender exporter version, recheck byte hashes and refresh the parent asset manifest.",
+    "All twelve props are static cosmetic details; any visor movement belongs in the existing cinematic update.",
+    "Validation is a real Babylon loader/geometry check, not a browser GPU playthrough."
+  ]
+}

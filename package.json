@@ -1,0 +1,12 @@
+{
+  "name": "last-vehicle",
+  "version": "1.14.0",
+  "private": true,
+  "type": "module",
+  "description": "A GingrSnaps Project \u2014 low-poly browser horror built with Babylon.js",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check": "node tools/check.mjs",
+    "serve": "node tools/serve.mjs"
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "release": "1.13",
+  "status": "Asset placement suggestions; runtime integration and in-game visual verification required",
+  "coordinate_system": "Babylon world, metres, Y up. All yaw values in radians.",
+  "root": "assets/models/details-v113/",
+  "common": {
+    "collision": false,
+    "pickable": false,
+    "cast_shadow": false,
+    "receive_shadow": true,
+    "freeze_world_matrix_after_placement": true,
+    "critical_gameplay_items": false,
+    "load": "Preload once during the existing loading screen; reuse AssetContainers and shared Meridian materials.",
+    "ground": "Use groundModel on loaded bounds. Avoid source geometry guesses.",
+    "wall": "Align the named rear_mount to the wall plane and normal. The support_y field refers to the model bottom, not the mounting-anchor height. Keep the entire rear plane on the surface.",
+    "car": "Parent to the stated car node before placement. Named anchors must be resolved through the glTF conversion root: default Babylon handedness mirrors source X. Do not add world-space car details that remain behind during escape.",
+    "interaction": "These props are atmosphere only. Do not create new prompts or journal requirements. Required labels remain readable UI/text planes."
+  },
+  "placements": [
+    {
+      "id": "damaged-intercom",
+      "room": "security",
+      "support": "wall",
+      "position": [
+        -29.75,
+        1.3,
+        22.0
+      ],
+      "yaw": 1.5707963267948966,
+      "anchor": "rear_mount",
+      "surface": "west room wall, inner plane X=-29.75",
+      "quality": "medium"
+    },
+    {
+      "id": "cigarette-tray",
+      "room": "security",
+      "support": "desk",
+      "position": [
+        -23.0,
+        0.925,
+        18.37
+      ],
+      "yaw": 0.12,
+      "surface": "desk top X=-25.5..-22.5 Z=17.375..18.625, Y=.925; clear of key and log",
+      "quality": "high"
+    },
+    {
+      "id": "key-hook-board",
+      "room": "security",
+      "support": "wall",
+      "position": [
+        -29.75,
+        1.43,
+        15.0
+      ],
+      "yaw": 1.5707963267948966,
+      "anchor": "rear_mount",
+      "surface": "west wall; beyond rota board Z=12..14",
+      "quality": "medium"
+    },
+    {
+      "id": "cable-offcuts",
+      "room": "workshop",
+      "support": "bench",
+      "position": [
+        -24.45,
+        1.6,
+        81.7
+      ],
+      "yaw": 0.25,
+      "surface": "bench X=-28.5..-23.5 Z=81.35..82.65, top Y=1.6",
+      "quality": "high"
+    },
+    {
+      "id": "terminal-brush",
+      "room": "workshop",
+      "support": "bench",
+      "position": [
+        -24.4,
+        1.6,
+        82.12
+      ],
+      "yaw": 0.2,
+      "surface": "same workshop bench; clear of cloth positions X=-25.9 and -26.7",
+      "quality": "medium"
+    },
+    {
+      "id": "split-insulation-elbow",
+      "room": "pump",
+      "support": "wall",
+      "position": [
+        29.75,
+        2.15,
+        99.6
+      ],
+      "yaw": -1.5707963267948966,
+      "anchor": "rear_mount",
+      "surface": "east wall; self-supported standoff plates",
+      "requires": "Connect visible pipe ends to socket_lower and socket_right if installed. Do not leave two unexplained open ends.",
+      "quality": "medium"
+    },
+    {
+      "id": "pump-seal-kit",
+      "room": "pump",
+      "support": "desk",
+      "position": [
+        23.5,
+        0.925,
+        91.2
+      ],
+      "yaw": 0.3,
+      "surface": "pump desk centered X=23 Z=91; top Y=.925",
+      "quality": "high"
+    },
+    {
+      "id": "parking-permit",
+      "room": "hero car",
+      "support": "car dashboard",
+      "parent": "world.stage.cockpit",
+      "local_position": [
+        0.36,
+        1.14,
+        0.45
+      ],
+      "yaw": 0.08,
+      "surface": "dashboard top Y=1.14, X=-.775...775, Z=.31...63. Parent to cockpit so visibility follows its supporting dashboard.",
+      "quality": "medium"
+    },
+    {
+      "id": "sagging-sun-visor",
+      "room": "hero car",
+      "support": "car roof underside",
+      "parent": "world.stage.car",
+      "anchor": "roof_pivot",
+      "anchor_target_local": [
+        0.38,
+        1.615,
+        0.2
+      ],
+      "yaw": 0,
+      "surface": "roof underside Y=1.615. Passenger side keeps the driver exit view clear.",
+      "requires": "Align resolved roof_pivot to target after handedness conversion. Animate through a parent pivot only, with a small damped angle; no per-frame allocations or physics.",
+      "quality": "medium"
+    },
+    {
+      "id": "emergency-diagram",
+      "room": "security",
+      "support": "wall",
+      "position": [
+        -29.75,
+        1.55,
+        24.3
+      ],
+      "yaw": 1.5707963267948966,
+      "anchor": "rear_mount",
+      "surface": "west wall; diagram is ornamental, not a replacement for journal guidance",
+      "quality": "medium"
+    },
+    {
+      "id": "torn-weather-strip",
+      "room": "pump",
+      "support": "wall",
+      "position": [
+        29.75,
+        0.25,
+        92.0
+      ],
+      "yaw": -1.5707963267948966,
+      "anchor": "rear_mount",
+      "surface": "east wall beside service area; clear of gate/door thresholds",
+      "quality": "high"
+    },
+    {
+      "id": "discarded-work-glove",
+      "room": "workshop",
+      "support": "bench",
+      "position": [
+        -24.4,
+        1.6,
+        82.42
+      ],
+      "yaw": -0.4,
+      "surface": "same workshop bench; entire glove stays inside top bounds",
+      "quality": "high"
+    }
+  ],
+  "budgets": {
+    "triangles_all_twelve_unique_models": 4115,
+    "bytes_all_twelve_glbs": 264280,
+    "draw_calls_all_twelve_visible_max": 56,
+    "recommended_visible_room_draw_calls_max": 25,
+    "recommended_visible_room_triangles_max": 2500,
+    "low_quality": "Skip this cosmetic pack or show only intercom and diagram. Keep all actual interactions and collision unchanged.",
+    "medium_quality": "Only placements marked medium. Distance-cull small bench details before wall silhouettes.",
+    "high_quality": "All placements. Existing room/distance culling still applies. No additional lights, textures, particles or shadow casters."
+  }
+}

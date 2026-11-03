@@ -1,0 +1,683 @@
+{
+  "scope": "Node-only CPU benchmark. Not GPU FPS or browser frame-time measurement.",
+  "baseline": "482c83ec1eeeb3871184b16ae8290e8f84454a86",
+  "version": "1.10.0",
+  "runtime": "v24.22.1",
+  "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+  "rectangles": 101,
+  "gridPrepareMs": 529.412074,
+  "cornerGraphPrepareMs": 77.84946100000002,
+  "cornerGraphNodes": 292,
+  "cornerGraphEdges": 4831,
+  "caseResults": [
+    {
+      "name": "clear central lane",
+      "start": {
+        "x": 0,
+        "z": 20
+      },
+      "goal": {
+        "x": 0,
+        "z": 98
+      },
+      "startBlocked": false,
+      "goalBlocked": false,
+      "gridRaw": {
+        "samples": 30,
+        "minMs": 0.2186659999999847,
+        "medianMs": 0.9139930000000049,
+        "p95Ms": 5.08739300000002,
+        "maxMs": 8.336610999999948,
+        "totalMs": 47.06509200000016,
+        "waypoints": 124,
+        "found": true
+      },
+      "productionReachable": {
+        "samples": 30,
+        "minMs": 0.0022729999999455686,
+        "medianMs": 0.002349999999978536,
+        "p95Ms": 0.003570999999965352,
+        "maxMs": 0.00580200000001696,
+        "totalMs": 0.07734399999992547,
+        "waypoints": 0,
+        "found": true
+      },
+      "cornerGraph": {
+        "samples": 30,
+        "minMs": 0.002071000000000822,
+        "medianMs": 0.002158000000008542,
+        "p95Ms": 0.0028419999999869106,
+        "maxMs": 0.00363100000004124,
+        "totalMs": 0.06740499999989424,
+        "waypoints": 1,
+        "found": true
+      },
+      "cornerSegmentsValid": true
+    },
+    {
+      "name": "Security alcove to hall",
+      "start": {
+        "x": -23.25,
+        "z": 15.35
+      },
+      "goal": {
+        "x": -22,
+        "z": 26
+      },
+      "startBlocked": false,
+      "goalBlocked": false,
+      "gridRaw": {
+        "samples": 30,
+        "minMs": 0.06935899999996309,
+        "medianMs": 0.07575699999995322,
+        "p95Ms": 1.3886760000000322,
+        "maxMs": 1.8458060000000387,
+        "totalMs": 8.06557499999974,
+        "waypoints": 20,
+        "found": true
+      },
+      "productionReachable": {
+        "samples": 30,
+        "minMs": 0.07063900000002832,
+        "medianMs": 0.08101999999996679,
+        "p95Ms": 1.6196999999999662,
+        "maxMs": 1.8965150000000222,
+        "totalMs": 7.973245000000134,
+        "waypoints": 20,
+        "found": true
+      },
+      "cornerGraph": {
+        "samples": 30,
+        "minMs": 0.2701929999999493,
+        "medianMs": 0.7619939999999588,
+        "p95Ms": 2.4184450000000197,
+        "maxMs": 3.065484000000083,
+        "totalMs": 29.43496000000016,
+        "waypoints": 3,
+        "found": true
+      },
+      "cornerSegmentsValid": true
+    },
+    {
+      "name": "west service passage",
+      "start": {
+        "x": -22,
+        "z": 26
+      },
+      "goal": {
+        "x": -22,
+        "z": 76
+      },
+      "startBlocked": false,
+      "goalBlocked": false,
+      "gridRaw": {
+        "samples": 30,
+        "minMs": 0.5861649999999372,
+        "medianMs": 1.4650470000000269,
+        "p95Ms": 3.9267119999999522,
+        "maxMs": 4.452051999999981,
+        "totalMs": 52.06507099999999,
+        "waypoints": 80,
+        "found": true
+      },
+      "productionReachable": {
+        "samples": 30,
+        "minMs": 0.5543499999999995,
+        "medianMs": 0.7818620000000465,
+        "p95Ms": 2.196604999999977,
+        "maxMs": 3.7112560000000485,
+        "totalMs": 29.935977999999977,
+        "waypoints": 80,
+        "found": true
+      },
+      "cornerGraph": {
+        "samples": 30,
+        "minMs": 0.6536370000000034,
+        "medianMs": 1.507376000000022,
+        "p95Ms": 3.2583609999999226,
+        "maxMs": 4.19992000000002,
+        "totalMs": 48.491186999999286,
+        "waypoints": 9,
+        "found": true
+      },
+      "cornerSegmentsValid": true
+    },
+    {
+      "name": "Workshop to Electrical",
+      "start": {
+        "x": -22,
+        "z": 76
+      },
+      "goal": {
+        "x": 16.05,
+        "z": 39
+      },
+      "startBlocked": false,
+      "goalBlocked": false,
+      "gridRaw": {
+        "samples": 30,
+        "minMs": 0.44233799999983603,
+        "medianMs": 1.207100999999966,
+        "p95Ms": 3.4227449999999635,
+        "maxMs": 3.7796319999999923,
+        "totalMs": 41.023414,
+        "waypoints": 66,
+        "found": true
+      },
+      "productionReachable": {
+        "samples": 30,
+        "minMs": 0.5077900000001137,
+        "medianMs": 1.6347140000000309,
+        "p95Ms": 2.9257900000000063,
+        "maxMs": 3.5350999999998294,
+        "totalMs": 47.79681299999925,
+        "waypoints": 66,
+        "found": true
+      },
+      "cornerGraph": {
+        "samples": 30,
+        "minMs": 0.8010770000000775,
+        "medianMs": 1.9251710000000912,
+        "p95Ms": 4.421610999999984,
+        "maxMs": 4.707331000000067,
+        "totalMs": 60.3090090000012,
+        "waypoints": 2,
+        "found": true
+      },
+      "cornerSegmentsValid": true
+    },
+    {
+      "name": "around repaired vehicle",
+      "start": {
+        "x": 9,
+        "z": 78
+      },
+      "goal": {
+        "x": 13.67,
+        "z": 75.6
+      },
+      "startBlocked": false,
+      "goalBlocked": false,
+      "gridRaw": {
+        "samples": 30,
+        "minMs": 0.028054999999994834,
+        "medianMs": 0.032293999999865264,
+        "p95Ms": 0.7468519999999899,
+        "maxMs": 1.195126000000073,
+        "totalMs": 3.5720520000006672,
+        "waypoints": 8,
+        "found": true
+      },
+      "productionReachable": {
+        "samples": 30,
+        "minMs": 0.02924299999995128,
+        "medianMs": 0.03170399999999063,
+        "p95Ms": 0.8523929999998927,
+        "maxMs": 2.706566000000066,
+        "totalMs": 5.188729000000649,
+        "waypoints": 8,
+        "found": true
+      },
+      "cornerGraph": {
+        "samples": 30,
+        "minMs": 0.21852599999988342,
+        "medianMs": 0.2695200000000568,
+        "p95Ms": 1.8305399999999281,
+        "maxMs": 2.212642000000187,
+        "totalMs": 18.21076000000039,
+        "waypoints": 2,
+        "found": true
+      },
+      "cornerSegmentsValid": true
+    },
+    {
+      "name": "driver side to north exit",
+      "start": {
+        "x": 13.67,
+        "z": 75.6
+      },
+      "goal": {
+        "x": -4,
+        "z": 7
+      },
+      "startBlocked": false,
+      "goalBlocked": false,
+      "gridRaw": {
+        "samples": 30,
+        "minMs": 3.972691000000168,
+        "medianMs": 8.146367000000055,
+        "p95Ms": 14.270831000000044,
+        "maxMs": 22.766103000000157,
+        "totalMs": 260.33170099999984,
+        "waypoints": 109,
+        "found": true
+      },
+      "productionReachable": {
+        "samples": 30,
+        "minMs": 2.560911000000033,
+        "medianMs": 7.3318569999999,
+        "p95Ms": 22.72635799999989,
+        "maxMs": 29.062307000000146,
+        "totalMs": 266.98462000000086,
+        "waypoints": 109,
+        "found": true
+      },
+      "cornerGraph": {
+        "samples": 30,
+        "minMs": 1.0283010000000559,
+        "medianMs": 3.1906719999999495,
+        "p95Ms": 6.416420000000016,
+        "maxMs": 9.88801199999989,
+        "totalMs": 106.38041399999952,
+        "waypoints": 2,
+        "found": true
+      },
+      "cornerSegmentsValid": true
+    },
+    {
+      "name": "blocked evidence inside vehicle",
+      "start": {
+        "x": 9,
+        "z": 78
+      },
+      "goal": {
+        "x": 13,
+        "z": 78
+      },
+      "startBlocked": false,
+      "goalBlocked": true,
+      "gridRaw": {
+        "samples": 30,
+        "minMs": 0.04848500000002787,
+        "medianMs": 0.05029300000001058,
+        "p95Ms": 0.07203100000015183,
+        "maxMs": 0.6112140000000181,
+        "totalMs": 2.108131000000185,
+        "waypoints": 0,
+        "found": false
+      },
+      "productionReachable": {
+        "samples": 30,
+        "minMs": 0.06325300000003153,
+        "medianMs": 0.06592599999999038,
+        "p95Ms": 0.19337900000004993,
+        "maxMs": 0.2090330000000904,
+        "totalMs": 2.6125429999997323,
+        "waypoints": 7,
+        "found": true
+      },
+      "cornerGraph": {
+        "samples": 30,
+        "minMs": 0.0004939999998896383,
+        "medianMs": 0.0005220000000463187,
+        "p95Ms": 0.0005729999998038693,
+        "maxMs": 0.0006550000000515865,
+        "totalMs": 0.01591100000064216,
+        "waypoints": 0,
+        "found": false
+      },
+      "cornerSegmentsValid": true
+    },
+    {
+      "name": "impossible beyond outer wall",
+      "start": {
+        "x": 0,
+        "z": 60
+      },
+      "goal": {
+        "x": 35,
+        "z": 60
+      },
+      "startBlocked": false,
+      "goalBlocked": false,
+      "gridRaw": {
+        "samples": 30,
+        "minMs": 0.015711000000010245,
+        "medianMs": 0.016636000000062268,
+        "p95Ms": 0.0358969999999772,
+        "maxMs": 0.04270900000005895,
+        "totalMs": 0.5474920000008296,
+        "waypoints": 0,
+        "found": false
+      },
+      "productionReachable": {
+        "samples": 30,
+        "minMs": 0.016057000000046173,
+        "medianMs": 0.017023999999992157,
+        "p95Ms": 0.05827599999997801,
+        "maxMs": 0.07235100000002603,
+        "totalMs": 0.6236479999995481,
+        "waypoints": null,
+        "found": false
+      },
+      "cornerGraph": {
+        "samples": 30,
+        "minMs": 1.1609780000001138,
+        "medianMs": 1.5376039999998738,
+        "p95Ms": 2.9210089999999127,
+        "maxMs": 3.509907999999996,
+        "totalMs": 50.87766600000009,
+        "waypoints": 0,
+        "found": false
+      },
+      "cornerSegmentsValid": true
+    },
+    {
+      "name": "closed workshop grille",
+      "start": {
+        "x": -22,
+        "z": 76
+      },
+      "goal": {
+        "x": -15,
+        "z": 76
+      },
+      "closed": true,
+      "startBlocked": false,
+      "goalBlocked": false,
+      "gridRaw": {
+        "samples": 30,
+        "minMs": 0.8752700000000004,
+        "medianMs": 1.3492539999999735,
+        "p95Ms": 2.173750999999811,
+        "maxMs": 2.800025999999889,
+        "totalMs": 42.794587999999294,
+        "waypoints": 97,
+        "found": true
+      },
+      "productionReachable": {
+        "samples": 30,
+        "minMs": 0.7851510000000417,
+        "medianMs": 1.0954860000001645,
+        "p95Ms": 1.7532200000000557,
+        "maxMs": 1.8461670000001504,
+        "totalMs": 35.43059900000185,
+        "waypoints": 97,
+        "found": true
+      },
+      "cornerGraph": {
+        "samples": 30,
+        "minMs": 0.5382650000001377,
+        "medianMs": 0.75745999999981,
+        "p95Ms": 0.9449760000002243,
+        "maxMs": 1.3050799999996343,
+        "totalMs": 22.445960000001833,
+        "waypoints": 8,
+        "found": true
+      },
+      "cornerSegmentsValid": true
+    }
+  ],
+  "movement": [
+    {
+      "case": "clear central lane",
+      "fps": 30,
+      "simulatedSeconds": 24.73333333333372,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 742,
+        "minMs": 0.0035160000002179004,
+        "medianMs": 0.003883000000314496,
+        "p95Ms": 0.015762999999878957,
+        "maxMs": 0.7503150000002279,
+        "totalMs": 5.86857599999621
+      }
+    },
+    {
+      "case": "clear central lane",
+      "fps": 60,
+      "simulatedSeconds": 24.73333333333321,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 1484,
+        "minMs": 0.0035590000002230227,
+        "medianMs": 0.003766000000268832,
+        "p95Ms": 0.003999000000021624,
+        "maxMs": 0.13235400000030495,
+        "totalMs": 6.38497400001188
+      }
+    },
+    {
+      "case": "clear central lane",
+      "fps": 144,
+      "simulatedSeconds": 24.729166666665073,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 3561,
+        "minMs": 0.003435000000081345,
+        "medianMs": 0.0036300000001574517,
+        "p95Ms": 0.005966000000171334,
+        "maxMs": 1.0038030000000617,
+        "totalMs": 21.674116999994112
+      }
+    },
+    {
+      "case": "Security alcove to hall",
+      "fps": 30,
+      "simulatedSeconds": 4.7666666666666595,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 143,
+        "minMs": 0.009874999999738066,
+        "medianMs": 0.01083699999981036,
+        "p95Ms": 0.08597000000008848,
+        "maxMs": 0.9616660000001502,
+        "totalMs": 3.9699599999989914
+      }
+    },
+    {
+      "case": "Security alcove to hall",
+      "fps": 60,
+      "simulatedSeconds": 4.733333333333322,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 284,
+        "minMs": 0.0048529999999118445,
+        "medianMs": 0.005409000000327069,
+        "p95Ms": 0.011442999999871972,
+        "maxMs": 0.3687519999998585,
+        "totalMs": 2.9955070000005435
+      }
+    },
+    {
+      "case": "Security alcove to hall",
+      "fps": 144,
+      "simulatedSeconds": 4.715277777777849,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 679,
+        "minMs": 0.003919000000223605,
+        "medianMs": 0.005306000000018685,
+        "p95Ms": 0.006742000000031112,
+        "maxMs": 0.3194690000000264,
+        "totalMs": 5.329903999999715
+      }
+    },
+    {
+      "case": "west service passage",
+      "fps": 30,
+      "simulatedSeconds": 18.2333333333334,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 547,
+        "minMs": 0.0035859999998137937,
+        "medianMs": 0.005540999999993801,
+        "p95Ms": 0.006785000000036234,
+        "maxMs": 1.152266999999938,
+        "totalMs": 4.886000000000877
+      }
+    },
+    {
+      "case": "west service passage",
+      "fps": 60,
+      "simulatedSeconds": 18.016666666666925,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 1081,
+        "minMs": 0.003548000000137108,
+        "medianMs": 0.004793999999947118,
+        "p95Ms": 0.006327999999939493,
+        "maxMs": 1.002994999999828,
+        "totalMs": 8.23184900000615
+      }
+    },
+    {
+      "case": "west service passage",
+      "fps": 144,
+      "simulatedSeconds": 17.993055555555493,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 2591,
+        "minMs": 0.002779000000373344,
+        "medianMs": 0.0032659999997122213,
+        "p95Ms": 0.004471000000194181,
+        "maxMs": 3.2071619999996983,
+        "totalMs": 15.242913000001408
+      }
+    },
+    {
+      "case": "Workshop to Electrical",
+      "fps": 30,
+      "simulatedSeconds": 17.866666666666713,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 536,
+        "minMs": 0.0024960000000646687,
+        "medianMs": 0.0036219999997229024,
+        "p95Ms": 0.004232999999658205,
+        "maxMs": 2.342747000000145,
+        "totalMs": 4.52107800000158
+      }
+    },
+    {
+      "case": "Workshop to Electrical",
+      "fps": 60,
+      "simulatedSeconds": 17.833333333333602,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 1070,
+        "minMs": 0.0025160000000141736,
+        "medianMs": 0.0036259999997128034,
+        "p95Ms": 0.0047219999996741535,
+        "maxMs": 0.8506040000002031,
+        "totalMs": 7.550050999990617
+      }
+    },
+    {
+      "case": "Workshop to Electrical",
+      "fps": 144,
+      "simulatedSeconds": 17.826388888888864,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 2567,
+        "minMs": 0.002484999999978754,
+        "medianMs": 0.0035910000001422304,
+        "p95Ms": 0.0039999999999054126,
+        "maxMs": 3.3176150000003872,
+        "totalMs": 16.739997000009225
+      }
+    },
+    {
+      "case": "around repaired vehicle",
+      "fps": 30,
+      "simulatedSeconds": 3.0333333333333323,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 91,
+        "minMs": 0.0029340000000956934,
+        "medianMs": 0.0034460000001672597,
+        "p95Ms": 0.00431399999979476,
+        "maxMs": 0.06891899999982343,
+        "totalMs": 0.38280700000177603
+      }
+    },
+    {
+      "case": "around repaired vehicle",
+      "fps": 60,
+      "simulatedSeconds": 2.9999999999999942,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 180,
+        "minMs": 0.0028760000000147556,
+        "medianMs": 0.003470999999990454,
+        "p95Ms": 0.003842999999960739,
+        "maxMs": 0.07620399999996152,
+        "totalMs": 0.7478460000024825
+      }
+    },
+    {
+      "case": "around repaired vehicle",
+      "fps": 144,
+      "simulatedSeconds": 2.9791666666666883,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 429,
+        "minMs": 0.002870000000257278,
+        "medianMs": 0.0034009999999398133,
+        "p95Ms": 0.004167999999936001,
+        "maxMs": 0.11710899999980029,
+        "totalMs": 2.0363070000016705
+      }
+    },
+    {
+      "case": "driver side to north exit",
+      "fps": 30,
+      "simulatedSeconds": 23.233333333333647,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 697,
+        "minMs": 0.002899000000070373,
+        "medianMs": 0.0037089999996169354,
+        "p95Ms": 0.0041959999998653075,
+        "maxMs": 4.010761999999886,
+        "totalMs": 7.368271999994704
+      }
+    },
+    {
+      "case": "driver side to north exit",
+      "fps": 60,
+      "simulatedSeconds": 23.183333333333298,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 1391,
+        "minMs": 0.002625999999963824,
+        "medianMs": 0.0033910000001924345,
+        "p95Ms": 0.0038139999996928964,
+        "maxMs": 4.180957000000035,
+        "totalMs": 10.568170000003192
+      }
+    },
+    {
+      "case": "driver side to north exit",
+      "fps": 144,
+      "simulatedSeconds": 23.159722222220985,
+      "reached": true,
+      "recoveries": 0,
+      "stepCPU": {
+        "samples": 3335,
+        "minMs": 0.0025449999998272688,
+        "medianMs": 0.0033839999996416736,
+        "p95Ms": 0.0037549999997281702,
+        "maxMs": 6.6283919999996215,
+        "totalMs": 25.13998000000265
+      }
+    }
+  ]
+}

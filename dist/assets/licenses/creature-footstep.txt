@@ -1,0 +1,7 @@
+Metal footsteps on concrete
+Author: Thimras
+Source: https://opengameart.org/content/metal-footsteps-on-concrete
+License: CC0 1.0
+https://creativecommons.org/publicdomain/zero/1.0/
+Source declaration verified 2026-11-02.
+A metal foot on concrete, used only for the creature.

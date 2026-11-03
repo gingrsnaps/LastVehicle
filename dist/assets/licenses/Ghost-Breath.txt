@@ -1,0 +1,18 @@
+Ghost breath
+Author: qubodup
+License: CC0 1.0 Universal (CC0-1.0)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Source page: https://opengameart.org/content/ghost-breath
+Download URL: https://opengameart.org/sites/default/files/ghostbreath.flac
+Verified on: 2026-11-02
+
+The live source page explicitly identifies the author and lists CC0 under License(s).
+The source-page HTML snapshot is retained at proof/breath.html.
+Source-page SHA-256: 0586e5290dd9a6ad80240dc530e11bf7a086c884111edd792ac2da3f1a590448
+Source bytes: 749279
+Source SHA-256: f371839853a5dff7dbd5a8c81368f5cfab587f567df5ba962e981d4392c530bc
+
+Source author identifies this as a slowed recording of their own breathing. Used as a distinct idle/listen creature breath, separate from both Ogrebane vocals.
+
+Credits are retained as courtesy. The CC0 declaration applies to these source audio files; unrelated website content and logos are not included in this assertion.
+Full CC0 legal code: CC0-1.0.txt

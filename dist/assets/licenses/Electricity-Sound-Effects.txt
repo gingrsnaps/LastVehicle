@@ -1,0 +1,18 @@
+Electricity Sound Effects
+Author: Brian MacIntosh / BMacZero
+License: CC0 1.0 Universal (CC0-1.0)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Source page: https://opengameart.org/content/electricity-sound-effects-0
+Download URL: https://opengameart.org/sites/default/files/spark.wav
+Verified on: 2026-11-02
+
+The live source page explicitly identifies the author and lists CC0 under License(s).
+The source-page HTML snapshot is retained at proof/electricity.html.
+Source-page SHA-256: b767e7523f3d5fd29a73f74dc2b62ef55bcba17a90fb7e7b269b75f42fa8ef99
+Source bytes: 29740
+Source SHA-256: 9a3d987bdf7f405570aa015f6da42596ce84c5073c18c0561be7cd3ae401bc97
+
+Source describes recordings from a small Tesla generator and optionally asks for credit to Brian MacIntosh. Only spark.wav is selected.
+
+Credits are retained as courtesy. The CC0 declaration applies to these source audio files; unrelated website content and logos are not included in this assertion.
+Full CC0 legal code: CC0-1.0.txt

@@ -1,0 +1,18 @@
+License provenance checked 2026-11-02
+
+Animated Human Low Poly
+Source: https://opengameart.org/content/animated-human-low-poly
+Author: quaternius; posted November 3, 2017. License field: CC0. Original archive also contains License.txt, copied unchanged to Quaternius-Animated-Human.txt.
+Downloaded source HTML SHA-256: 7753ca7b4f33890141acc2d646304bd2ec2838a0cde144f26e0da4bad58469fa
+
+Interface Sounds
+Source: https://opengameart.org/content/interface-sounds
+Author: Kenney; posted February 26, 2020. License field: CC0. Archive License.txt expressly allows personal, educational and commercial projects and is copied unchanged to Kenney-Interface-Sounds.txt.
+Downloaded source HTML SHA-256: e863b328713e4a26086d5e002d524227c28fccd3df63013637b85ce7812e7e57
+
+Dripping water loop
+Source: https://opengameart.org/content/dripping-water-loop
+Author: Independent.nu; submitted by qubodup on August 13, 2009. License field: CC0. Source page author/license metadata is recorded in Dripping-Water-Loop.txt.
+Downloaded source HTML SHA-256: d9a5c6f8bc3dfb19daca0916b0ae360326cd20552ef89c0aacecd46960c2a2f5
+
+The original HTML snapshots and source downloads are retained in the acquisition working folder. No licensing claim is inferred from newer packs by these authors.

@@ -1,0 +1,315 @@
+{
+  "title": "The Attendant",
+  "version": "3.0",
+  "source_type": "Original procedural model, rig, textures, and authored animation; no third-party input assets",
+  "license": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "source_file": "build_attendant.py",
+  "editable_source": "attendant.blend",
+  "provenance": "Generated from numerical geometry and authored bone transforms in build_attendant.py. No Quaternius, Kenney, or downloaded asset data was incorporated.",
+  "gltf_axis": {
+    "up": "+Y",
+    "forward": "+Z",
+    "units": "metres",
+    "origin": "ground-centred between boot soles"
+  },
+  "blender_axis": {
+    "up": "+Z",
+    "forward": "-Y"
+  },
+  "bounds_rest_gltf": {
+    "min": [
+      -0.49757999181747437,
+      0.0,
+      -0.24799999594688416
+    ],
+    "max": [
+      0.49757999181747437,
+      2.133999824523926,
+      0.2930000126361847
+    ],
+    "height_metres": 2.133999824523926
+  },
+  "mesh": {
+    "vertices_blender": 1113,
+    "triangles": 1868,
+    "materials": 10,
+    "real_weighted_skin": true,
+    "blended_joint_weights": true,
+    "joints": 37,
+    "skeleton_bones": 38,
+    "root_motion": false,
+    "embedded_textures": true
+  },
+  "clips": {
+    "Idle": {
+      "duration_seconds": 3.2,
+      "frames": 96,
+      "loop": true,
+      "keyed_bones": 38
+    },
+    "Walk": {
+      "duration_seconds": 1.4,
+      "frames": 42,
+      "loop": true,
+      "keyed_bones": 38
+    },
+    "Run": {
+      "duration_seconds": 0.8,
+      "frames": 24,
+      "loop": true,
+      "keyed_bones": 38
+    },
+    "Listen": {
+      "duration_seconds": 2.4,
+      "frames": 72,
+      "loop": true,
+      "keyed_bones": 38
+    },
+    "Search": {
+      "duration_seconds": 3.2,
+      "frames": 96,
+      "loop": true,
+      "keyed_bones": 38
+    },
+    "Attack": {
+      "duration_seconds": 1.6,
+      "frames": 48,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "Recover": {
+      "duration_seconds": 1.5,
+      "frames": 45,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "Inspect": {
+      "duration_seconds": 3.2,
+      "frames": 96,
+      "loop": true,
+      "keyed_bones": 38
+    },
+    "TurnLeft": {
+      "duration_seconds": 0.9,
+      "frames": 27,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "TurnRight": {
+      "duration_seconds": 0.9,
+      "frames": 27,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "Brake": {
+      "duration_seconds": 0.8,
+      "frames": 24,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "Backstep": {
+      "duration_seconds": 0.9,
+      "frames": 27,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "Brace": {
+      "duration_seconds": 1.8,
+      "frames": 54,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "Strike": {
+      "duration_seconds": 1.2,
+      "frames": 36,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "InspectClose": {
+      "duration_seconds": 3.6,
+      "frames": 108,
+      "loop": true,
+      "keyed_bones": 38
+    },
+    "Stalk": {
+      "duration_seconds": 2.2,
+      "frames": 66,
+      "loop": true,
+      "keyed_bones": 38
+    },
+    "PeekLeft": {
+      "duration_seconds": 1.8,
+      "frames": 54,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "PeekRight": {
+      "duration_seconds": 1.8,
+      "frames": 54,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "DoorPush": {
+      "duration_seconds": 1.8,
+      "frames": 54,
+      "loop": false,
+      "keyed_bones": 38
+    },
+    "CrouchSearch": {
+      "duration_seconds": 4.0,
+      "frames": 120,
+      "loop": true,
+      "keyed_bones": 38
+    },
+    "StartRun": {
+      "duration_seconds": 0.6,
+      "frames": 18,
+      "loop": false,
+      "keyed_bones": 38
+    }
+  },
+  "attack_timing": {
+    "duration_seconds": 1.6,
+    "windup_normalized": [
+      0,
+      0.4
+    ],
+    "swing_normalized": [
+      0.4,
+      0.5
+    ],
+    "contact_normalized": 0.5,
+    "contact_seconds": 0.8,
+    "damage_window_normalized": [
+      0.46,
+      0.56
+    ],
+    "recovery_normalized": [
+      0.56,
+      1.0
+    ],
+    "notes": "One deliberate right-arm overhand raking strike. Damage must be emitted once at normalized 0.50, never at attack start. Clip contains windup, contact, follow-through, and return. Recover is a separately authored settling motion for interrupted states."
+  },
+  "validation": {
+    "browser_qa": "Not performed by asset author. Integrator must inspect playback in Babylon.",
+    "pose_render_sheet": "attendant-contact-sheet.png"
+  },
+  "files": {
+    "attendant.glb": {
+      "bytes": 2108740,
+      "sha256": "1724e1c32e76554f21e83ecec7cb330699699b2e0cd9a33d59b1cc6f5a2f06e6"
+    },
+    "build_attendant.py": {
+      "bytes": 44177,
+      "sha256": "2e950d1efe84db5489e3d36163b4228c3313bbf15280794509f7f6da94e92f3d"
+    },
+    "attendant.blend": {
+      "bytes": 17221908,
+      "sha256": "9044997fae2a131f705ebe641c335748e7fca226a2e9cfb188dc87b5c78546f7"
+    }
+  },
+  "integration": {
+    "asset_version": "3.0",
+    "game_release": "1.11",
+    "axes": {
+      "up": "+Y",
+      "front": "+Z",
+      "units": "metres"
+    },
+    "root_motion": false,
+    "triangles": 1868,
+    "joints": 38,
+    "reference_speeds_metres_per_second": {
+      "Stalk": 0.53475935828877
+    },
+    "foot_contacts_normalized": {
+      "Stalk": [
+        0,
+        0.5
+      ]
+    },
+    "runtime_notes": [
+      "The collision controller owns translation and yaw; every clip is in place.",
+      "Use Stalk playback ratio actual_speed / 0.53475936. Its nominal duration is 2.2 seconds. Allow ratio above 1.65 if stalking faster than 0.88 m/s.",
+      "Sample PeekLeft and PeekRight by paused gameplay phase. Head begins first; torso follows after phase .12; peak attention is .38-.68.",
+      "DoorPush meets its held target by phase .35; retain contact until .68; drive the interaction cue once inside this window. The reference point is Hand.R bone head (wrist). The palm/fingers extend down along the same contact plane.",
+      "Peek actions do not shift the root. The head leans only about 0.068 m to either side at the midpoint; full sleeves retain the existing silhouette width.",
+      "CrouchSearch stays planted, lowers during .02-.26, scans while low .26-.76, and rises by .98. Prefer it for a stopped evidence search.",
+      "StartRun is exactly .6 seconds, 18 source frames; its final pose joins Run at phase zero. Blend while increasing physical speed; it contains no root displacement.",
+      "Baked analytic contacts require no runtime IK solver. Do not infer hidden-player locations from animation state."
+    ],
+    "new_clips": {
+      "Stalk": {
+        "duration": 2.2,
+        "loop": true,
+        "reference_speed": 0.53475935828877,
+        "contacts": [
+          0,
+          0.5
+        ]
+      },
+      "PeekLeft": {
+        "duration": 1.8,
+        "loop": false,
+        "anticipation": [
+          0,
+          0.21
+        ],
+        "body_follow": [
+          0.12,
+          0.38
+        ],
+        "hold": [
+          0.38,
+          0.68
+        ]
+      },
+      "PeekRight": {
+        "duration": 1.8,
+        "loop": false,
+        "anticipation": [
+          0,
+          0.21
+        ],
+        "body_follow": [
+          0.12,
+          0.38
+        ],
+        "hold": [
+          0.38,
+          0.68
+        ]
+      },
+      "DoorPush": {
+        "duration": 1.8,
+        "loop": false,
+        "contact_interval": [
+          0.35,
+          0.68
+        ],
+        "right_hand_gltf": [
+          -0.2,
+          1.3,
+          1.0
+        ]
+      },
+      "CrouchSearch": {
+        "duration": 4,
+        "loop": true,
+        "low_scan_interval": [
+          0.26,
+          0.76
+        ]
+      },
+      "StartRun": {
+        "duration": 0.6,
+        "loop": false,
+        "joins_clip": "Run",
+        "joins_phase": 0
+      }
+    },
+    "browser_playback_verified": false,
+    "inspected_render_sheet": "attendant-contact-sheet.png"
+  }
+}

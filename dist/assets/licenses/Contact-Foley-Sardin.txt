@@ -1,0 +1,24 @@
+CONTACT FOLEY — SOURCE NOTICE
+Creator: Joseph Sardin / BigSoundBank
+License: CC0-1.0 (public domain dedication)
+License text: https://creativecommons.org/publicdomain/zero/1.0/
+
+Footsteps, Shoe on Concrete, sound 0514:
+https://bigsoundbank.com/footsteps-shoe-on-concrete-s0514.html
+Source audio: https://bigsoundbank.com/UPLOAD/bwf-en/0514.wav
+Used for concrete-step-1/2/3.ogg and the shoe layer of grate-step-1/2.ogg.
+
+Footsteps on gravels #1, sound 0510:
+https://bigsoundbank.com/steps-on-gravels-s0510.html
+Source audio: https://bigsoundbank.com/UPLOAD/bwf-en/0510.wav
+Used for debris-step-1/2/3.ogg: real gravel shoe contacts repurposed for loose floor debris.
+
+Creaking metallic door, sound 0616:
+https://bigsoundbank.com/grincement-porte-metalique-s0616.html
+Source audio: https://bigsoundbank.com/UPLOAD/bwf-en/0616.wav
+Used for hinge-creak-1/2.ogg.
+
+Each source page explicitly lists CC0 and permits edits and redistribution.
+Runtime edits: isolated events, mono 32 kHz, band limiting, gain adjustment and short fades.
+Exact source windows and original/runtime SHA256 hashes are in the asset manifest.
+Source licenses checked 2 November 2026. Credit is retained voluntarily.

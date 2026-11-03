@@ -1,0 +1,50 @@
+{
+  "file": "models/maintenance-key-v114.glb",
+  "dimensions": [
+    0.41500000000000004,
+    0.0121,
+    0.086
+  ],
+  "bounds_min": [
+    -0.166,
+    0.0,
+    -0.038
+  ],
+  "bounds_max": [
+    0.249,
+    0.0121,
+    0.048
+  ],
+  "anchors": {
+    "support_bottom": [
+      0,
+      0,
+      0
+    ],
+    "table_support": [
+      -0.105,
+      0,
+      0.005
+    ],
+    "grip": [
+      0,
+      0.008,
+      0
+    ],
+    "ring": [
+      0,
+      0.008,
+      0
+    ],
+    "tag_center": [
+      0.145,
+      0.01,
+      0.005
+    ]
+  },
+  "triangles": 882,
+  "material_count": 5,
+  "texture_count": 0,
+  "bytes": 51828,
+  "sha256": "c9a0b280334c7397f7ba1c935261d7e5b42d5d0937fe6de0a26ce3440f3db853"
+}

@@ -1,0 +1,9 @@
+100 CC0 metal and wood SFX
+Creator: rubberduck
+Source: https://opengameart.org/content/100-cc0-metal-and-wood-sfx
+Original download: https://opengameart.org/sites/default/files/100-CC0-wood-metal-SFX.zip
+License: CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/
+Verified on 2026-11-02: the author's OpenGameArt submission explicitly lists CC0 and links to the CC0 public-domain dedication. Attribution is retained voluntarily.
+Included source recordings: metal_open_01.ogg, lock_open_01.ogg, tools_03.ogg, metal_spring_01.ogg, wood_cracking_02.ogg, wood_squeak_01.ogg.
+Delivered effects were downmixed, filtered, edge-faded and level-adjusted, then re-encoded. See assets-manifest.json for exact input/output hashes and processing.
+This notice describes this particular archive, not every work by the creator or every file on OpenGameArt.

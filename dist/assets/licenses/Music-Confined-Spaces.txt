@@ -1,0 +1,14 @@
+CONFINED SPACES — SOURCE NOTICE
+Title: Confined Spaces
+Creator: Tsorthan Grove
+Source: https://opengameart.org/content/confined-spaces
+License: CC0-1.0 (public domain dedication)
+License text: https://creativecommons.org/publicdomain/zero/1.0/
+Source page lists CC0 and explicitly dedicates the recording to public use.
+Downloaded archive: confined_spaces_ogg_0.7z
+Selected member: Confined Spaces A (Loop).ogg
+Runtime derivative: confined-ambience.ogg
+Edit: short downmixed circular-crossfaded excerpt, filtering and gain adjustment.
+Exact source window, original hash, runtime hash and processing are in the asset manifest.
+This is an edited recording by the named creator, not an original composition by GingrSnaps.
+Source license checked 2 November 2026.

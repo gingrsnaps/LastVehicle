@@ -1,0 +1,150 @@
+{
+  "scope": "CPU-only interleaved queries; same actual fixture; cached prototype NOT integrated or browser tested",
+  "preparationMs": {
+    "baseline": 207.68928799999998,
+    "cached": 207.03043499999995
+  },
+  "changes": [
+    "precomputed coordinate objects",
+    "per-query cached dynamic endpoint blockage",
+    "no failed-edge string allocation when avoided set empty",
+    "octile heuristic"
+  ],
+  "report": [
+    {
+      "name": "clear central lane",
+      "baseline": {
+        "medianMs": 0.003795000000025084,
+        "p95Ms": 0.0120380000000182,
+        "maxMs": 0.037101000000006934
+      },
+      "cached": {
+        "medianMs": 0.0037130000000047403,
+        "p95Ms": 0.00643800000000283,
+        "maxMs": 0.023079999999993106
+      },
+      "allSegmentsClear": true,
+      "equalFound": true
+    },
+    {
+      "name": "Security alcove to hall",
+      "baseline": {
+        "medianMs": 0.0774420000000191,
+        "p95Ms": 0.39194400000008045,
+        "maxMs": 2.2887120000000323
+      },
+      "cached": {
+        "medianMs": 0.05627299999991919,
+        "p95Ms": 0.20480700000001661,
+        "maxMs": 0.5116150000000061
+      },
+      "allSegmentsClear": true,
+      "equalFound": true
+    },
+    {
+      "name": "west service passage",
+      "baseline": {
+        "medianMs": 0.7194590000000289,
+        "p95Ms": 1.0848250000000235,
+        "maxMs": 1.505790999999931
+      },
+      "cached": {
+        "medianMs": 0.32424200000002656,
+        "p95Ms": 0.7020250000000487,
+        "maxMs": 3.3836900000000014
+      },
+      "allSegmentsClear": true,
+      "equalFound": true
+    },
+    {
+      "name": "Workshop to Electrical",
+      "baseline": {
+        "medianMs": 0.5819940000000088,
+        "p95Ms": 1.0403729999999314,
+        "maxMs": 5.1794250000000375
+      },
+      "cached": {
+        "medianMs": 0.16761499999995522,
+        "p95Ms": 0.3826839999999265,
+        "maxMs": 2.356076999999914
+      },
+      "allSegmentsClear": true,
+      "equalFound": true
+    },
+    {
+      "name": "around repaired vehicle",
+      "baseline": {
+        "medianMs": 0.032060999999998785,
+        "p95Ms": 0.11043099999994865,
+        "maxMs": 0.2962289999999257
+      },
+      "cached": {
+        "medianMs": 0.027551000000016757,
+        "p95Ms": 0.05568299999993087,
+        "maxMs": 0.0945920000000342
+      },
+      "allSegmentsClear": true,
+      "equalFound": true
+    },
+    {
+      "name": "driver side to north exit",
+      "baseline": {
+        "medianMs": 2.117195000000038,
+        "p95Ms": 3.258715000000052,
+        "maxMs": 6.146437999999989
+      },
+      "cached": {
+        "medianMs": 0.2275929999999562,
+        "p95Ms": 0.4632119999999986,
+        "maxMs": 0.5487530000000334
+      },
+      "allSegmentsClear": true,
+      "equalFound": true
+    },
+    {
+      "name": "blocked evidence inside vehicle",
+      "baseline": {
+        "medianMs": 0.054186000000072454,
+        "p95Ms": 0.09989599999994425,
+        "maxMs": 0.16582799999991948
+      },
+      "cached": {
+        "medianMs": 0.07586099999980433,
+        "p95Ms": 0.1689969999999903,
+        "maxMs": 0.2999170000000504
+      },
+      "allSegmentsClear": true,
+      "equalFound": true
+    },
+    {
+      "name": "impossible beyond outer wall",
+      "baseline": {
+        "medianMs": 0.011231000000179847,
+        "p95Ms": 0.012040999999953783,
+        "maxMs": 0.013363999999910448
+      },
+      "cached": {
+        "medianMs": 0.016881000000012136,
+        "p95Ms": 0.018281999999999243,
+        "maxMs": 0.1430080000000089
+      },
+      "allSegmentsClear": true,
+      "equalFound": true
+    },
+    {
+      "name": "closed workshop grille",
+      "baseline": {
+        "medianMs": 0.8825320000000829,
+        "p95Ms": 1.4005990000000565,
+        "maxMs": 1.8867989999998827
+      },
+      "cached": {
+        "medianMs": 0.617511999999806,
+        "p95Ms": 0.9801569999999629,
+        "maxMs": 1.2812329999999292
+      },
+      "allSegmentsClear": true,
+      "equalFound": true
+    }
+  ]
+}

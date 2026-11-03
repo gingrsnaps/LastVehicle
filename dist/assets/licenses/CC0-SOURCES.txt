@@ -1,0 +1,32 @@
+All third-party files enumerated in assets-manifest.json are CC0 1.0 Universal.
+
+CC0 deed: https://creativecommons.org/publicdomain/zero/1.0/
+CC0 legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
+
+Verified on 2026-11-02 against author/asset source pages and, for the
+Kenney Car Kit, the original archive's License.txt (copied alongside).
+
+Models: Kenney, Car Kit 3.1
+https://kenney.nl/assets/car-kit
+https://opengameart.org/content/car-kit
+
+Music: yd, EmptyCity: Background Music
+https://opengameart.org/content/emptycity-background-music
+
+Ventilation: qubodup, (defect) motor loop
+https://opengameart.org/content/defect-motor-loop
+
+Metal, rattle: Brian MacIntosh / BMacZero, Mechanical Sounds
+https://opengameart.org/content/mechanical-sounds
+
+Alarm: Frenchyboy, Alarm
+https://opengameart.org/content/alarm-2
+
+Footstep: TinyWorlds, Different steps on wood, stone, leaves, gravel and mud
+https://opengameart.org/node/5701
+
+Scare: TinyWorlds, Horror SFX
+https://opengameart.org/content/horror-sfx
+
+The license declaration applies to these listed assets. Do not infer that
+other assets found on the same websites have the same license.

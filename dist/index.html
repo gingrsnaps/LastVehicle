@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#10191b" />
+    <meta
+      name="description"
+      content="Last Vehicle. A short, atmospheric low-poly horror game. A GingrSnaps Project."
+    />
+    <title>Last Vehicle — A GingrSnaps Project</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css?v=1.14.0" />
+  </head>
+  <body>
+    <canvas id="game" aria-label="Last Vehicle game view" tabindex="0"></canvas>
+    <div id="impact-edge" aria-hidden="true"></div>
+    <div id="vignette" aria-hidden="true"></div>
+    <div id="loading">
+      <div class="studio-mark">GS<span></span></div>
+      <p class="eyebrow">A GingrSnaps Project</p>
+      <div class="load-track"><i id="load-fill"></i></div>
+      <p id="load-label" role="status">Opening Meridian…</p><span id="load-percent">0%</span>
+      <div id="load-actions" class="hidden button-row"><button id="load-retry" class="btn">Retry loading</button><button id="load-simple" class="btn accent">Retry with simpler graphics</button></div>
+    </div>
+    <div id="intro" class="hidden" aria-hidden="true">
+      <div id="intro-content" class="intro-content">
+        <div class="studio-mark">GS<span></span></div>
+        <p>A GingrSnaps Project</p>
+      </div>
+      <button id="intro-skip" class="btn intro-skip">Skip intro</button>
+    </div>
+    <main id="menu" class="hidden screen">
+      <div class="menu-shade"></div>
+      <div class="topline">
+        <span class="brand">GINGRSNAPS</span
+        ><span>MERIDIAN PARKING <i></i> 00:17</span>
+      </div>
+      <div class="menu-content">
+        <span class="ticket-stamp" aria-hidden="true">LAST EXIT / 042</span>
+        <p class="eyebrow">
+          <span class="line"></span> A SHORT HORROR EXPERIENCE
+        </p>
+        <h1>LAST<br /><span>VEHICLE</span></h1>
+        <p class="tagline">Everyone has left.<br />Someone stayed.</p>
+        <nav class="menu-buttons" aria-label="Main menu">
+          <button id="continue" class="hidden primary">
+            <span>Continue</span><span>↗</span>
+          </button>
+          <div id="continue-summary" class="continue-summary hidden"></div>
+          <button id="new-game" class="primary">
+            <span>Enter the garage</span><span>↗</span>
+          </button>
+          <button id="settings-button">Settings <span>＋</span></button>
+          <button id="credits-button">Credits <span>＋</span></button>
+        </nav>
+      </div>
+      <div class="menu-caption">
+        <span class="tiny-square"></span>
+        <div>
+          <span>B2 / BAY 042</span>
+          <p>The last ticket of the night.</p>
+        </div>
+      </div>
+      <footer>
+        <span>HEADPHONES RECOMMENDED</span
+        ><span>EXPLORATION <b>·</b> SURVIVAL</span><span>v1.13 · CANDIDATE</span>
+      </footer>
+    </main>
+    <div id="hud" class="hidden">
+      <div class="hud-top">
+        <div id="objective-block" class="hidden">
+          <span id="chapter" class="eyebrow">01 / THE LAST TICKET</span>
+          <p id="objective"></p>
+          <small id="objective-hint"></small>
+        </div>
+        <button id="pause-button" aria-label="Pause game">Ⅱ</button>
+      </div>
+      <div id="tutorial" class="hidden"></div>
+      <button id="journal-button" class="journal-indicator"><kbd id="journal-key">J</kbd> Journal <i id="journal-dot" class="unread-dot hidden"></i></button>
+      <div id="hint-card" class="hidden" role="status"></div>
+      <div id="note-preview" class="hidden" role="status"></div>
+      <div id="crosshair" aria-hidden="true"><i></i></div>
+      <div id="world-prompt" class="hidden" aria-hidden="true">
+        <kbd id="world-prompt-key">E</kbd>
+      </div>
+      <div id="interaction" class="hidden">
+        <kbd id="interact-key">E</kbd><span id="interaction-label"></span>
+      </div>
+      <div id="action-progress" class="hidden" role="status">
+        <span id="action-label"></span>
+        <div><i id="action-fill"></i></div>
+      </div>
+      <div id="subtitle" class="hidden" role="status"></div>
+      <div class="hud-bottom">
+        <span id="location">MERIDIAN / B2</span
+        ><span id="difficulty-label">MEDIUM</span>
+        <div id="stamina-meter" class="stamina" role="progressbar" aria-label="Sprint stamina" aria-valuemin="0" aria-valuemax="100"><span id="stamina-label">STAMINA</span><i id="stamina-fill"></i></div>
+        <span id="bolt-status"></span>
+        <span id="flash-status">F · FLASHLIGHT</span>
+      </div>
+      <div id="fps" class="hidden" data-corner="top-right"><span id="fps-text"></span><canvas id="fps-graph" width="240" height="60" class="hidden" aria-label="Recent gameplay frame times"></canvas><small id="fps-legend" class="hidden"></small></div>
+      <div id="touch-controls">
+        <div id="move-pad"><span>MOVE</span><i id="move-knob"></i></div>
+        <div id="look-pad"></div>
+        <div class="touch-actions">
+          <button id="touch-run" aria-label="Toggle sprint">RUN</button
+          ><button id="touch-light" aria-label="Flashlight">LIGHT</button
+          ><button id="touch-use" aria-label="Interact">USE</button><button id="touch-hint" aria-label="Open journal hints">HINT</button><button id="touch-throw" aria-label="Throw a bolt">THROW</button><button id="touch-objective" aria-label="Show current objective">TASK</button>
+        </div>
+      </div>
+    </div>
+    <div id="toast" class="hidden" role="status"></div>
+    <div id="danger" aria-hidden="true"></div>
+    <section id="overlay" class="hidden screen">
+      <div class="overlay-scrim"></div>
+      <div
+        id="panel"
+        class="panel"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Game menu"
+        tabindex="-1"
+      ></div>
+    </section>
+    <input id="settings-file" type="file" accept="application/json,.json" hidden />
+    <input id="save-file" type="file" accept="application/json,.json" hidden />
+    <noscript
+      >This game requires JavaScript and a browser with WebGL support.</noscript
+    >
+    <script src="vendor/babylon.js"></script>
+    <script src="vendor/babylonjs.loaders.min.js"></script>
+    <script type="module" src="js/main.js?v=1.14.0"></script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Last Vehicle · v1.13 audio audition</title>
+<style>
+body{max-width:860px;margin:40px auto;padding:0 24px;background:#151d1c;color:#e9e4d7;font:16px/1.65 system-ui,sans-serif}
+h1{font-weight:500;letter-spacing:.03em}p{color:#b7c4be}section{border-top:1px solid #3a4945;padding:18px 0}
+h2{font-size:17px;margin:0 0 6px}audio{width:100%;max-width:560px}small{display:block;color:#acbbb4}
+a{color:#d4b77b}.tag{font:12px monospace;border:1px solid #65756f;border-radius:4px;padding:2px 6px;margin-left:8px}
+</style>
+<h1>Last Vehicle <span class="tag">v1.13</span></h1>
+<p>Individual audio cues. The game mix and animation sync require a separate playthrough. All players start at 35% volume. A loop button controls each longer cue; playback never starts automatically.</p>
+<main id="cues"></main>
+<p><a href="README.md">Integration and provenance notes</a> · <a href="audio-inspection.json">Decode inspection</a></p>
+<script>
+// Direct relative paths allow this authoring sheet to work without a fetch API
+// or microphone permissions when opened from the complete local project.
+const cues = [
+ ['motif','Exploration theme','Three muted notes; 14.4-second loop.',true],
+ ['return','Tense return','Same theme, beating pedal and restrained pulse.',true],
+ ['cloth-shift','Cloth / weight shift','Body movement at zero; second brush around 0.28 seconds.',false],
+ ['cart-wheel','Cart wheel','Squeak should begin with the visible wheel movement.',false],
+ ['cart-impact','Cart collision','Main peak at 5 milliseconds: trigger at the contact frame.',false],
+ ['pressure-burst','Pressure line','Pipe vibration at zero; air release at 0.18 seconds.',false],
+ ['fan-stop','Relay / fan cutoff','Relay click at zero; fan coasts down over 2.9 seconds.',false],
+ ['exit-rain','Exit rain / wind','Synthetic weather with a quiet existing CC0 water recording.',true]
+];
+for (const [file,title,note,canLoop] of cues) {
+ const section=document.createElement('section'), heading=document.createElement('h2'), caption=document.createElement('small'), audio=document.createElement('audio');
+ heading.textContent=title; caption.textContent=note; audio.controls=true; audio.preload='metadata'; audio.volume=.35; audio.src='../../dist/assets/audio/lv113-'+file+'.ogg';
+ // Pause other cues so comparing files does not accidentally stack the mix.
+ audio.addEventListener('play',()=>document.querySelectorAll('audio').forEach(other=>{if(other!==audio)other.pause()}));
+ section.append(heading,caption,audio);
+ if(canLoop){const label=document.createElement('label'), box=document.createElement('input');box.type='checkbox';box.addEventListener('change',()=>audio.loop=box.checked);label.append(box,document.createTextNode(' Loop'));section.append(label)}
+ document.querySelector('#cues').append(section);
+}
+</script>
+</html>

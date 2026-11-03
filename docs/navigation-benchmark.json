@@ -1,0 +1,20 @@
+{
+  "build": "1.3.0",
+  "baselineCommit": "d007ab44731443f8418c8444073f19ef3729b84b",
+  "environment": "Node v24.22.1 on the build host; Babylon NullEngine; authored collision proxies; NOT a browser/FPS measurement",
+  "method": "100 warmed route calls per implementation, same current scene and four route pairs; one-time current static-grid preparation occurs during loading",
+  "blockers": 71,
+  "gridPreparationMs": 124.914,
+  "baseline": {
+    "samples": 100,
+    "medianMs": 0.962,
+    "p95Ms": 4.66,
+    "maxMs": 6.073
+  },
+  "current": {
+    "samples": 100,
+    "medianMs": 0.585,
+    "p95Ms": 1.966,
+    "maxMs": 4.419
+  }
+}

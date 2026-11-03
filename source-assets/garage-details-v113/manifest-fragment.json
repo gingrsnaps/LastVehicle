@@ -1,0 +1,1979 @@
+{
+  "title": "Meridian Worn Garage Details",
+  "version": "1.0",
+  "game_release": "Last Vehicle 1.13",
+  "license": "CC0-1.0",
+  "source_type": "Original numeric geometry and palette materials; no downloaded assets, textures or fonts",
+  "source_file": "build_props.py",
+  "editable_source": "Meridian_Garage_Details_v113.blend",
+  "coordinate_system": {
+    "up": "+Y",
+    "forward": "+Z",
+    "units": "metres"
+  },
+  "palette_srgb": {
+    "teal": "#2e514e",
+    "steel": "#63706b",
+    "dark": "#1a292b",
+    "rubber": "#152024",
+    "ochre": "#b09a61",
+    "paper": "#b9b7a3",
+    "rust": "#76503a",
+    "red": "#8d4034",
+    "glass": "#425b58",
+    "concrete": "#737d75",
+    "cloth": "#657266",
+    "dust": "#85816c"
+  },
+  "runtime_directory": "dist/assets/models/details-v113",
+  "assets": [
+    {
+      "id": "damaged-intercom",
+      "file": "assets/models/details-v113/damaged-intercom.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 7,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.16998755931854248,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.155,
+        0.5567632080614566,
+        0.12859031558036804
+      ],
+      "dimensions": [
+        0.3249875593185425,
+        0.5567632080614566,
+        0.12859031558036804
+      ],
+      "triangles": 418,
+      "vertices_authored": 256,
+      "anchors": {
+        "speaker": {
+          "position": [
+            0,
+            0.3967632080614567,
+            0.119
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "damaged-intercom__speaker"
+        },
+        "call_button": {
+          "position": [
+            0.005,
+            0.19676320806145667,
+            0.131
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "damaged-intercom__call_button"
+        },
+        "cable_entry": {
+          "position": [
+            -0.105,
+            0.10176320806145668,
+            0.07
+          ],
+          "node": "damaged-intercom__cable_entry"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "damaged-intercom__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.2783816040307283,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "damaged-intercom__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear mounting plane Z=0. Speaker and button anchors are cosmetic; do not add an interaction unless it has an authored outcome.",
+      "bytes": 27500,
+      "sha256": "5753028e8ffc73ed5e001f63c44bb55f0bcee109ab1b61787d343d96e4a89db1",
+      "parts": [
+        {
+          "name": "mounting flange",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "worn steel enclosure",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "speaker recess",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "bent speaker bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "bent speaker bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "bent speaker bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "bent speaker bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "bent speaker bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "bent speaker bar",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "call plate",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "call button",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "broken label insert",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "captive cable",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "captive cable",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "captive cable",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "captive cable",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "corner impact",
+          "vertices": 4,
+          "faces": 1
+        },
+        {
+          "name": "fracture in face",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "fracture in face",
+          "vertices": 8,
+          "faces": 6
+        }
+      ]
+    },
+    {
+      "id": "cigarette-tray",
+      "file": "assets/models/details-v113/cigarette-tray.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 5,
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.116,
+        0.0,
+        -0.085
+      ],
+      "bounds_max": [
+        0.116,
+        0.043,
+        0.085
+      ],
+      "dimensions": [
+        0.232,
+        0.043,
+        0.17
+      ],
+      "triangles": 316,
+      "vertices_authored": 196,
+      "anchors": {
+        "surface": {
+          "position": [
+            0,
+            0.02,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cigarette-tray__surface"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cigarette-tray__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Set support-bottom on a tabletop. Debris is joined into one mesh and has no collision or interaction.",
+      "bytes": 20216,
+      "sha256": "3f904e8caa7ae59464cf37e87cb5c7e8a39ae2c94dd652fb84797ffd1e523044",
+      "parts": [
+        {
+          "name": "pressed tray base",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "raised rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "raised rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "raised rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "raised rim",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "ash bed",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "paper cigarette stub",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "stained filter",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "extinguished end",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "paper cigarette stub",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "stained filter",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "extinguished end",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "paper cigarette stub",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "stained filter",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "extinguished end",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "compressed ash",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "compressed ash",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "compressed ash",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "compressed ash",
+          "vertices": 10,
+          "faces": 7
+        }
+      ]
+    },
+    {
+      "id": "key-hook-board",
+      "file": "assets/models/details-v113/key-hook-board.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 5,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.285,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.285,
+        0.45,
+        0.1016591414809227
+      ],
+      "dimensions": [
+        0.57,
+        0.45,
+        0.1016591414809227
+      ],
+      "triangles": 914,
+      "vertices_authored": 524,
+      "anchors": {
+        "last_hook": {
+          "position": [
+            -0.196,
+            0.29,
+            0.096
+          ],
+          "node": "key-hook-board__last_hook"
+        },
+        "empty_hook": {
+          "position": [
+            0.196,
+            0.29,
+            0.096
+          ],
+          "node": "key-hook-board__empty_hook"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "key-hook-board__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.225,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "key-hook-board__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Wall-backed board with four hooks. Three empty key silhouettes convey absence; only one decorative key is present.",
+      "bytes": 52996,
+      "sha256": "e0aea19f88e3d72be9d683180a2ae5162393cfb6c44bd2f54a4954f4ddffd624",
+      "parts": [
+        {
+          "name": "steel frame",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "faded backing",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "label holder",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "blank paper tag",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "key hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "key hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "old key outline",
+          "vertices": 40,
+          "faces": 40
+        },
+        {
+          "name": "old key shaft outline",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "old tooth outline",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "label holder",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "blank paper tag",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "key hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "key hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "old key outline",
+          "vertices": 40,
+          "faces": 40
+        },
+        {
+          "name": "old key shaft outline",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "old tooth outline",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "label holder",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "blank paper tag",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "key hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "key hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "old key outline",
+          "vertices": 40,
+          "faces": 40
+        },
+        {
+          "name": "old key shaft outline",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "old tooth outline",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "label holder",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "blank paper tag",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "key hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "key hook",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "old key outline",
+          "vertices": 40,
+          "faces": 40
+        },
+        {
+          "name": "old key shaft outline",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "old tooth outline",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "remaining key ring",
+          "vertices": 48,
+          "faces": 48
+        },
+        {
+          "name": "remaining key blade",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "remaining key teeth",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "hex fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "worn lower corner",
+          "vertices": 4,
+          "faces": 1
+        }
+      ]
+    },
+    {
+      "id": "cable-offcuts",
+      "file": "assets/models/details-v113/cable-offcuts.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 5,
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.19150835275650024,
+        0.0,
+        -0.1032575761526823
+      ],
+      "bounds_max": [
+        0.19226279854774475,
+        0.02199999988079071,
+        0.11798043549060822
+      ],
+      "dimensions": [
+        0.383771151304245,
+        0.02199999988079071,
+        0.22123801164329052
+      ],
+      "triangles": 300,
+      "vertices_authored": 182,
+      "anchors": {
+        "pick_centre": {
+          "position": [
+            0,
+            0.024999999940395357,
+            0.02
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cable-offcuts__pick_centre"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cable-offcuts__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Small cable bundle on a known bench or floor support. Tangent points touch the support plane; never spawn as a blocking collider.",
+      "bytes": 19640,
+      "sha256": "433778e7a1dad42f7d27a197727c438a2dd7040eda47c6abcdb5e2fa127ce498",
+      "parts": [
+        {
+          "name": "cut insulated lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "cut insulated lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "cut insulated lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "exposed copper",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "cut sleeve ring",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "cut insulated lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "cut insulated lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "cut insulated lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "exposed copper",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "cut sleeve ring",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "cut insulated lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "cut insulated lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "cut insulated lead",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "exposed copper",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "cut sleeve ring",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "discarded crimp sleeve",
+          "vertices": 8,
+          "faces": 6
+        }
+      ]
+    },
+    {
+      "id": "terminal-brush",
+      "file": "assets/models/details-v113/terminal-brush.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 3,
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.1509999930858612,
+        0.0,
+        -0.026000000536441803
+      ],
+      "bounds_max": [
+        0.12170000374317169,
+        0.0485,
+        0.026000000536441803
+      ],
+      "dimensions": [
+        0.2726999968290329,
+        0.0485,
+        0.052000001072883606
+      ],
+      "triangles": 340,
+      "vertices_authored": 220,
+      "anchors": {
+        "handle": {
+          "position": [
+            -0.067,
+            0.0235,
+            0
+          ],
+          "node": "terminal-brush__handle"
+        },
+        "brush_tip": {
+          "position": [
+            0.12,
+            0.0245,
+            0
+          ],
+          "node": "terminal-brush__brush_tip"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "terminal-brush__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Intended for workshop bench top Y=1.6 or desk top Y=.925. Brush is a cosmetic detail; do not make it a required new pickup.",
+      "bytes": 21112,
+      "sha256": "d6cc0afc7b18053df4a47bb7f23a0323a1aaa37e6f56947dd69c1a667fa72864",
+      "parts": [
+        {
+          "name": "rubber grip",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "brush shaft",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "wire bristle bundle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grip rib",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grip rib",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grip rib",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grip rib",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "end cap",
+          "vertices": 16,
+          "faces": 10
+        }
+      ]
+    },
+    {
+      "id": "split-insulation-elbow",
+      "file": "assets/models/details-v113/split-insulation-elbow.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 4,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.07100000232458115,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.26,
+        0.34600002408027647,
+        0.21899999678134918
+      ],
+      "dimensions": [
+        0.33100000232458116,
+        0.34600002408027647,
+        0.21899999678134918
+      ],
+      "triangles": 416,
+      "vertices_authored": 244,
+      "anchors": {
+        "socket_lower": {
+          "position": [
+            0,
+            0.0049999999999999906,
+            0.145
+          ],
+          "normal": [
+            0,
+            -1,
+            0
+          ],
+          "node": "split-insulation-elbow__socket_lower"
+        },
+        "socket_right": {
+          "position": [
+            0.26,
+            0.27499999999999997,
+            0.145
+          ],
+          "normal": [
+            1,
+            0,
+            0
+          ],
+          "node": "split-insulation-elbow__socket_right"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "split-insulation-elbow__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.17300001204013823,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "split-insulation-elbow__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear support plane at Z=0. Connect incoming/outgoing pipe only to the named socket anchors; includes wall fixing straps.",
+      "bytes": 24256,
+      "sha256": "92e12006cd5408e4bfa45768468980cb5ce8ae63b8a91004c208d18ab8cfa780",
+      "parts": [
+        {
+          "name": "exposed rusty pipe",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "exposed rusty pipe",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "exposed rusty pipe",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "exposed rusty pipe",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "exposed rusty pipe",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "mould-dark insulation",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "mould-dark insulation",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "mould-dark insulation",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "mould-dark insulation",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "mould-dark insulation",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "rear saddle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "stand off",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "rear saddle",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "stand off",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "exposed seam",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "exposed seam",
+          "vertices": 10,
+          "faces": 7
+        },
+        {
+          "name": "lower sealing band",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "right sealing band",
+          "vertices": 16,
+          "faces": 10
+        }
+      ]
+    },
+    {
+      "id": "pump-seal-kit",
+      "file": "assets/models/details-v113/pump-seal-kit.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 3,
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.09800000488758087,
+        0.0,
+        -0.06652750074863434
+      ],
+      "bounds_max": [
+        0.12300000339746475,
+        0.019167961552739143,
+        0.07599999755620956
+      ],
+      "dimensions": [
+        0.22100000828504562,
+        0.019167961552739143,
+        0.1425274983048439
+      ],
+      "triangles": 472,
+      "vertices_authored": 248,
+      "anchors": {
+        "gasket_centre": {
+          "position": [
+            -0.035,
+            0.008559508636593818,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "pump-seal-kit__gasket_centre"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "pump-seal-kit__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Loose pump gasket and washer laid flat. Appropriate on pump shelf/ground; not an active puzzle object.",
+      "bytes": 27616,
+      "sha256": "a58e5900cb8f4eaa301507f6fc31650d38da6c131b0b1cae048287b09ec2c87e",
+      "parts": [
+        {
+          "name": "compressed rubber gasket",
+          "vertices": 80,
+          "faces": 80
+        },
+        {
+          "name": "rusted clamp ring",
+          "vertices": 80,
+          "faces": 80
+        },
+        {
+          "name": "gasket fixing ear",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "gasket fixing ear",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "gasket fixing ear",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "gasket fixing ear",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "retaining bolt",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "loose nut",
+          "vertices": 12,
+          "faces": 8
+        }
+      ]
+    },
+    {
+      "id": "parking-permit",
+      "file": "assets/models/details-v113/parking-permit.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 5,
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.0715,
+        0.0,
+        -0.0395
+      ],
+      "bounds_max": [
+        0.0715,
+        0.018700000023748727,
+        0.0395
+      ],
+      "dimensions": [
+        0.143,
+        0.018700000023748727,
+        0.079
+      ],
+      "triangles": 96,
+      "vertices_authored": 64,
+      "anchors": {
+        "dashboard_contact": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "parking-permit__dashboard_contact"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "parking-permit__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Dashboard holder. Parent to the car before positioning. Keep the support-bottom on a verified dashboard surface, not on glass.",
+      "bytes": 9432,
+      "sha256": "73f05229d7a086c11cc911bf073ca439d6caa7b44f2b5f60c892cd267f9e8768",
+      "parts": [
+        {
+          "name": "rubber non-slip base",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "permit sleeve",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "faded permit card",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "permit colored band",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "printed visual rule",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "printed visual rule",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "printed visual rule",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "faded stamp",
+          "vertices": 8,
+          "faces": 6
+        }
+      ]
+    },
+    {
+      "id": "sagging-sun-visor",
+      "file": "assets/models/details-v113/sagging-sun-visor.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 7,
+      "support_type": "car",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.17,
+        0.0,
+        -0.032
+      ],
+      "bounds_max": [
+        0.17,
+        0.2405,
+        0.030500000013038518
+      ],
+      "dimensions": [
+        0.34,
+        0.2405,
+        0.06250000001303851
+      ],
+      "triangles": 130,
+      "vertices_authored": 84,
+      "anchors": {
+        "roof_pivot": {
+          "position": [
+            -0.09,
+            0.2405,
+            -0.015
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "sagging-sun-visor__roof_pivot"
+        },
+        "visor_hinge": {
+          "position": [
+            -0.13,
+            0.178,
+            0
+          ],
+          "normal": [
+            1,
+            0,
+            0
+          ],
+          "node": "sagging-sun-visor__visor_hinge"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "sagging-sun-visor__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Model has bottom origin for deterministic bounds. For roof installation align roof_pivot to the existing car roof mount, then use visor_hinge as a rotation reference. This static model already has a shallow sag; do not add physics.",
+      "bytes": 12864,
+      "sha256": "5602a3115e1c850dc400dce29080800bc26c8e778432d35b8ec900b9bcf078e7",
+      "parts": [
+        {
+          "name": "fabric padded visor",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "sunken mirror frame",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "fogged mirror insert",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "ticket elastic",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "caught paper slip",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "roof mounting arm",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "roof mounting arm",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "roof mount",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "frayed lower edge",
+          "vertices": 4,
+          "faces": 1
+        }
+      ]
+    },
+    {
+      "id": "emergency-diagram",
+      "file": "assets/models/details-v113/emergency-diagram.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 6,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.32,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.32,
+        0.58,
+        0.04500000178813934
+      ],
+      "dimensions": [
+        0.64,
+        0.58,
+        0.04500000178813934
+      ],
+      "triangles": 376,
+      "vertices_authored": 244,
+      "anchors": {
+        "diagram_face": {
+          "position": [
+            0,
+            0.29,
+            0.044
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "emergency-diagram__diagram_face"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "emergency-diagram__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.29,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "emergency-diagram__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Decorative plan board. It is not the gameplay map. Required directions and route text must live in the journal/UI and stay consistent with the level.",
+      "bytes": 25076,
+      "sha256": "63257735d4be501f00f92d02eeaa82ac4c71ce4c3a795aec6f4d0d80bb22f0f4",
+      "parts": [
+        {
+          "name": "metal notice frame",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "stained notice sheet",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "diagram room line",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "highlighted route",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "highlighted exit",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "route arrow",
+          "vertices": 3,
+          "faces": 1
+        },
+        {
+          "name": "current-area dot",
+          "vertices": 20,
+          "faces": 12
+        },
+        {
+          "name": "corner fixing",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "corner fixing",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "corner fixing",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "corner fixing",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "leak stain",
+          "vertices": 5,
+          "faces": 1
+        }
+      ]
+    },
+    {
+      "id": "torn-weather-strip",
+      "file": "assets/models/details-v113/torn-weather-strip.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 3,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.017,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.10205784440040588,
+        0.68,
+        0.0914294421672821
+      ],
+      "dimensions": [
+        0.11905784440040589,
+        0.68,
+        0.0914294421672821
+      ],
+      "triangles": 186,
+      "vertices_authored": 116,
+      "anchors": {
+        "channel_top": {
+          "position": [
+            0,
+            0.68,
+            0.009
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "torn-weather-strip__channel_top"
+        },
+        "channel_bottom": {
+          "position": [
+            0,
+            0.0,
+            0.009
+          ],
+          "normal": [
+            0,
+            -1,
+            0
+          ],
+          "node": "torn-weather-strip__channel_bottom"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "torn-weather-strip__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.34,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "torn-weather-strip__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Wall/door-jamb detail; rear plane Z=0. Keep away from navigation thresholds. The ragged piece is attached to its extrusion, never floating.",
+      "bytes": 12576,
+      "sha256": "be9cb8b68a282258d18477b168e8e761688361d51f1ecd45c7e02c3cf7452556",
+      "parts": [
+        {
+          "name": "attachment channel",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "rubber seal stem",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "partly peeled lip",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "partly peeled lip",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "partly peeled lip",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "partly peeled lip",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "retaining fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "retaining fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "retaining fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "retaining fastener",
+          "vertices": 12,
+          "faces": 8
+        },
+        {
+          "name": "torn rubber web",
+          "vertices": 4,
+          "faces": 1
+        }
+      ]
+    },
+    {
+      "id": "discarded-work-glove",
+      "file": "assets/models/details-v113/discarded-work-glove.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 3,
+      "support_type": "desk",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.09873108634352684,
+        0.0,
+        -0.091
+      ],
+      "bounds_max": [
+        0.051,
+        0.03400000043213367,
+        0.145108045399189
+      ],
+      "dimensions": [
+        0.14973108634352683,
+        0.03400000043213367,
+        0.236108045399189
+      ],
+      "triangles": 151,
+      "vertices_authored": 101,
+      "anchors": {
+        "cuff": {
+          "position": [
+            0,
+            0.018000000432133675,
+            -0.091
+          ],
+          "node": "discarded-work-glove__cuff"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "discarded-work-glove__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rest support-bottom on workshop cloth or bench. Single joined mesh, no physics; keep clear of pickup colliders.",
+      "bytes": 10996,
+      "sha256": "e9f2d6a2c5451a3de7b9ecebbeb2ef760dc828c1ceee30feb16806bd11a87005",
+      "parts": [
+        {
+          "name": "flattened glove palm",
+          "vertices": 16,
+          "faces": 10
+        },
+        {
+          "name": "worn cuff",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folded glove finger",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "knuckle seam",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folded glove finger",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "knuckle seam",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folded glove finger",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "knuckle seam",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "folded glove finger",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "knuckle seam",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "turned glove thumb",
+          "vertices": 8,
+          "faces": 6
+        },
+        {
+          "name": "grease mark",
+          "vertices": 5,
+          "faces": 1
+        }
+      ]
+    }
+  ],
+  "total_bytes": 264280,
+  "total_triangles": 4115,
+  "draw_calls_max_all_types_visible": 56,
+  "runtime_notes": [
+    "One mesh per prop; each used palette material creates one primitive/submesh.",
+    "Use shared materials by Meridian material name when instantiating multiple props.",
+    "Do not give these cosmetic details physics or navigation collision.",
+    "No animation clips, lights, textures, cameras or audio are embedded.",
+    "Named anchors are geometry-local; Babylon default handedness mirrors X through the glTF root."
+  ],
+  "source_files": {
+    "build_props.py": {
+      "bytes": 21867,
+      "sha256": "4cd9586ab656958436427ac416cdafdf0cb266e963713e32077858fc7002c788"
+    },
+    "Meridian_Garage_Details_v113.blend": {
+      "bytes": 975156,
+      "sha256": "ffe5d5aaeb5910eb7c4129c967da39cfe192e756d9bbb480578484cbf7896fda"
+    }
+  }
+}

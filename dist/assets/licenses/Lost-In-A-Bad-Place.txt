@@ -1,0 +1,18 @@
+Lost in a bad place (horror ambience loop)
+Author: congusbongus
+License: CC0 1.0 Universal (CC0-1.0)
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+Source page: https://opengameart.org/content/lost-in-a-bad-place-horror-ambience-loop
+Download URL: https://opengameart.org/sites/default/files/lost_2.ogg
+Verified on: 2026-11-02
+
+The live source page explicitly identifies the author and lists CC0 under License(s).
+The source-page HTML snapshot is retained at proof/lost.html.
+Source-page SHA-256: a92698d57549051bae1aa1aefe2779ca6af8ad9de894e6e533a1a34b1cd7d693
+Source bytes: 2785640
+Source SHA-256: ad9a9f39240ef5862d3a6dc5220893926c6873aa0e08a641dadf3f1c0acc2cd4
+
+Source author describes a seamless horror/space ambience with dark string pads and distant beacon-like sounds. Published filename lost.ogg is served as lost_2.ogg.
+
+Credits are retained as courtesy. The CC0 declaration applies to these source audio files; unrelated website content and logos are not included in this assertion.
+Full CC0 legal code: CC0-1.0.txt

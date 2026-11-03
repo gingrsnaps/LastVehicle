@@ -1,0 +1,24 @@
+Last Vehicle 1.14 — original maintenance key and wall marks
+
+Original numeric geometry, simple lettering paths, palette, SVG artwork, and
+asset-authoring scripts in this folder were created for A GingrSnaps Project.
+No external models, images, fonts, recordings or third-party logos were used
+as inputs to the runtime assets.
+
+The original asset content and authoring scripts listed here are dedicated to
+the public domain under CC0 1.0 Universal:
+https://creativecommons.org/publicdomain/zero/1.0/
+
+To the extent possible under law, copyright and related rights in this
+original content are waived. The content is supplied without warranty.
+
+Covered runtime files:
+- models/maintenance-key-v114.glb
+- textures/v114-graffiti-low-tide.svg
+- textures/v114-graffiti-night.svg
+- textures/v114-inspection-surface.svg
+- textures/v114-inspection-meridian.svg
+
+This dedication does not change any other project, engine or dependency
+license. The inspection sheet's labels use installed DejaVu Sans only for
+presentation; that font is not included in or needed by any runtime asset.

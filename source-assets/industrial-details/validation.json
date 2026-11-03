@@ -1,0 +1,680 @@
+{
+  "passed": true,
+  "models": 24,
+  "engine": "Babylon.js 9.33.1 NullEngine glTF and default left-handed validation",
+  "browser_visual_qa": false,
+  "results": [
+    {
+      "id": "wheel-stop",
+      "meshes": 4,
+      "triangles": 204,
+      "materials": 4,
+      "minimum": [
+        -0.8600000143051147,
+        0,
+        -0.125
+      ],
+      "maximum": [
+        0.8600000143051147,
+        0.2044999897480011,
+        0.13099999725818634
+      ],
+      "left_handed_minimum": [
+        -0.8600000143051147,
+        0,
+        -0.125
+      ],
+      "left_handed_maximum": [
+        0.8600000143051147,
+        0.2044999897480011,
+        0.13099999725818634
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 1
+    },
+    {
+      "id": "ticket-dispenser",
+      "meshes": 7,
+      "triangles": 273,
+      "materials": 7,
+      "minimum": [
+        -0.2150000035762787,
+        0,
+        -0.1899999976158142
+      ],
+      "maximum": [
+        0.2150000035762787,
+        1.340000033378601,
+        0.24549999833106995
+      ],
+      "left_handed_minimum": [
+        -0.2150000035762787,
+        0,
+        -0.1899999976158142
+      ],
+      "left_handed_maximum": [
+        0.2150000035762787,
+        1.340000033378601,
+        0.24549999833106995
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "pipe-bracket",
+      "meshes": 1,
+      "triangles": 236,
+      "materials": 1,
+      "minimum": [
+        -0.09399999678134918,
+        0,
+        0
+      ],
+      "maximum": [
+        0.11249999701976776,
+        0.30000001192092896,
+        0.2939999997615814
+      ],
+      "left_handed_minimum": [
+        -0.11249999701976776,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.09399999678134918,
+        0.30000001192092896,
+        0.2939999997615814
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "conduit-junction",
+      "meshes": 3,
+      "triangles": 424,
+      "materials": 3,
+      "minimum": [
+        -0.17249999940395355,
+        0,
+        0
+      ],
+      "maximum": [
+        0.17249999940395355,
+        0.3449999988079071,
+        0.1224999949336052
+      ],
+      "left_handed_minimum": [
+        -0.17249999940395355,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.17249999940395355,
+        0.3449999988079071,
+        0.1224999949336052
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 5
+    },
+    {
+      "id": "cable-tray",
+      "meshes": 2,
+      "triangles": 136,
+      "materials": 2,
+      "minimum": [
+        -0.6000000238418579,
+        0,
+        0
+      ],
+      "maximum": [
+        0.6000000238418579,
+        0.09000000357627869,
+        0.33000001311302185
+      ],
+      "left_handed_minimum": [
+        -0.6000000238418579,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.6000000238418579,
+        0.09000000357627869,
+        0.33000001311302185
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 4
+    },
+    {
+      "id": "pressure-gauge",
+      "meshes": 4,
+      "triangles": 440,
+      "materials": 4,
+      "minimum": [
+        -0.12800000607967377,
+        0,
+        0
+      ],
+      "maximum": [
+        0.12800000607967377,
+        0.27399998903274536,
+        0.10400000214576721
+      ],
+      "left_handed_minimum": [
+        -0.12800000607967377,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.12800000607967377,
+        0.27399998903274536,
+        0.10400000214576721
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 4
+    },
+    {
+      "id": "fire-extinguisher",
+      "meshes": 5,
+      "triangles": 452,
+      "materials": 5,
+      "minimum": [
+        -0.11699999868869781,
+        0,
+        0
+      ],
+      "maximum": [
+        0.18399040400981903,
+        0.6675000190734863,
+        0.2619999945163727
+      ],
+      "left_handed_minimum": [
+        -0.18399040400981903,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.11699999868869781,
+        0.6675000190734863,
+        0.2619999945163727
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "battery-charger",
+      "meshes": 7,
+      "triangles": 449,
+      "materials": 7,
+      "minimum": [
+        -0.30900001525878906,
+        0,
+        -0.1550000011920929
+      ],
+      "maximum": [
+        0.30900001525878906,
+        0.37558847665786743,
+        0.25218430161476135
+      ],
+      "left_handed_minimum": [
+        -0.30900001525878906,
+        0,
+        -0.1550000011920929
+      ],
+      "left_handed_maximum": [
+        0.30900001525878906,
+        0.37558847665786743,
+        0.25218430161476135
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "tool-tray",
+      "meshes": 3,
+      "triangles": 252,
+      "materials": 3,
+      "minimum": [
+        -0.23749999701976776,
+        0,
+        -0.14000000059604645
+      ],
+      "maximum": [
+        0.23749999701976776,
+        0.07249999791383743,
+        0.14000000059604645
+      ],
+      "left_handed_minimum": [
+        -0.23749999701976776,
+        0,
+        -0.14000000059604645
+      ],
+      "left_handed_maximum": [
+        0.23749999701976776,
+        0.07249999791383743,
+        0.14000000059604645
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 1
+    },
+    {
+      "id": "tool-board",
+      "meshes": 4,
+      "triangles": 728,
+      "materials": 4,
+      "minimum": [
+        -0.46000000834465027,
+        0,
+        0
+      ],
+      "maximum": [
+        0.46000000834465027,
+        0.7599999904632568,
+        0.13249999284744263
+      ],
+      "left_handed_minimum": [
+        -0.46000000834465027,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.46000000834465027,
+        0.7599999904632568,
+        0.13249999284744263
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "desk-lamp",
+      "meshes": 5,
+      "triangles": 248,
+      "materials": 5,
+      "minimum": [
+        -0.22222834825515747,
+        0,
+        -0.19557085633277893
+      ],
+      "maximum": [
+        0.24500000476837158,
+        0.5199999809265137,
+        0.1599999964237213
+      ],
+      "left_handed_minimum": [
+        -0.24500000476837158,
+        0,
+        -0.19557085633277893
+      ],
+      "left_handed_maximum": [
+        0.22222834825515747,
+        0.5199999809265137,
+        0.1599999964237213
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "wall-fan",
+      "meshes": 3,
+      "triangles": 368,
+      "materials": 3,
+      "minimum": [
+        -0.3100000023841858,
+        0,
+        0
+      ],
+      "maximum": [
+        0.3100000023841858,
+        0.6000000238418579,
+        0.1957063376903534
+      ],
+      "left_handed_minimum": [
+        -0.3100000023841858,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.3100000023841858,
+        0.6000000238418579,
+        0.1957063376903534
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "folded-rag",
+      "meshes": 3,
+      "triangles": 298,
+      "materials": 3,
+      "minimum": [
+        -0.1539846658706665,
+        0,
+        -0.11282666772603989
+      ],
+      "maximum": [
+        0.15359483659267426,
+        0.030465606600046158,
+        0.11260819435119629
+      ],
+      "left_handed_minimum": [
+        -0.15359483659267426,
+        0,
+        -0.11282666772603989
+      ],
+      "left_handed_maximum": [
+        0.1539846658706665,
+        0.030465606600046158,
+        0.11260819435119629
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 1
+    },
+    {
+      "id": "hose-reel",
+      "meshes": 4,
+      "triangles": 1520,
+      "materials": 4,
+      "minimum": [
+        -0.2774170935153961,
+        0,
+        0
+      ],
+      "maximum": [
+        0.24799999594688416,
+        0.5709999799728394,
+        0.4399999976158142
+      ],
+      "left_handed_minimum": [
+        -0.24799999594688416,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.2774170935153961,
+        0.5709999799728394,
+        0.4399999976158142
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "maintenance-trolley",
+      "meshes": 4,
+      "triangles": 729,
+      "materials": 4,
+      "minimum": [
+        -0.3725000023841858,
+        0,
+        -0.375
+      ],
+      "maximum": [
+        0.3725000023841858,
+        0.9037764072418213,
+        0.2849999964237213
+      ],
+      "left_handed_minimum": [
+        -0.3725000023841858,
+        0,
+        -0.375
+      ],
+      "left_handed_maximum": [
+        0.3725000023841858,
+        0.9037764072418213,
+        0.2849999964237213
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 3
+    },
+    {
+      "id": "electrical-box",
+      "meshes": 5,
+      "triangles": 273,
+      "materials": 5,
+      "minimum": [
+        -0.25,
+        0,
+        0
+      ],
+      "maximum": [
+        0.25,
+        0.7099999785423279,
+        0.22779422998428345
+      ],
+      "left_handed_minimum": [
+        -0.25,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.25,
+        0.7099999785423279,
+        0.22779422998428345
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 4
+    },
+    {
+      "id": "drain-grate",
+      "meshes": 1,
+      "triangles": 172,
+      "materials": 1,
+      "minimum": [
+        -0.25999999046325684,
+        0,
+        -0.3499999940395355
+      ],
+      "maximum": [
+        0.25999999046325684,
+        0.04749999940395355,
+        0.3499999940395355
+      ],
+      "left_handed_minimum": [
+        -0.25999999046325684,
+        0,
+        -0.3499999940395355
+      ],
+      "left_handed_maximum": [
+        0.25999999046325684,
+        0.04749999940395355,
+        0.3499999940395355
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "safety-bollard",
+      "meshes": 3,
+      "triangles": 268,
+      "materials": 3,
+      "minimum": [
+        -0.14499999582767487,
+        0,
+        -0.14499999582767487
+      ],
+      "maximum": [
+        0.14499999582767487,
+        0.9399999976158142,
+        0.14499999582767487
+      ],
+      "left_handed_minimum": [
+        -0.14499999582767487,
+        0,
+        -0.14499999582767487
+      ],
+      "left_handed_maximum": [
+        0.14499999582767487,
+        0.9399999976158142,
+        0.14499999582767487
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 1
+    },
+    {
+      "id": "service-bucket",
+      "meshes": 3,
+      "triangles": 412,
+      "materials": 3,
+      "minimum": [
+        -0.15599460899829865,
+        0,
+        -0.14800000190734863
+      ],
+      "maximum": [
+        0.15599460899829865,
+        0.4949999749660492,
+        0.14800000190734863
+      ],
+      "left_handed_minimum": [
+        -0.15599460899829865,
+        0,
+        -0.14800000190734863
+      ],
+      "left_handed_maximum": [
+        0.15599460899829865,
+        0.4949999749660492,
+        0.14800000190734863
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "wall-clock",
+      "meshes": 4,
+      "triangles": 472,
+      "materials": 4,
+      "minimum": [
+        -0.16599999368190765,
+        0,
+        0
+      ],
+      "maximum": [
+        0.16599999368190765,
+        0.3319999873638153,
+        0.09300000220537186
+      ],
+      "left_handed_minimum": [
+        -0.16599999368190765,
+        0,
+        0
+      ],
+      "left_handed_maximum": [
+        0.16599999368190765,
+        0.3319999873638153,
+        0.09300000220537186
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "ticket-stack",
+      "meshes": 2,
+      "triangles": 132,
+      "materials": 2,
+      "minimum": [
+        -0.06359485536813736,
+        0,
+        -0.03784618899226189
+      ],
+      "maximum": [
+        0.09465870261192322,
+        0.03530201315879822,
+        0.044499997049570084
+      ],
+      "left_handed_minimum": [
+        -0.09465870261192322,
+        0,
+        -0.03784618899226189
+      ],
+      "left_handed_maximum": [
+        0.06359485536813736,
+        0.03530201315879822,
+        0.044499997049570084
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 1
+    },
+    {
+      "id": "warning-stand",
+      "meshes": 4,
+      "triangles": 280,
+      "materials": 4,
+      "minimum": [
+        -0.20999999344348907,
+        0,
+        -0.20749999582767487
+      ],
+      "maximum": [
+        0.20999999344348907,
+        0.7471243739128113,
+        0.20749999582767487
+      ],
+      "left_handed_minimum": [
+        -0.20999999344348907,
+        0,
+        -0.20749999582767487
+      ],
+      "left_handed_maximum": [
+        0.20999999344348907,
+        0.7471243739128113,
+        0.20749999582767487
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    },
+    {
+      "id": "cable-coil",
+      "meshes": 3,
+      "triangles": 876,
+      "materials": 3,
+      "minimum": [
+        -0.17900000512599945,
+        0,
+        -0.1771780401468277
+      ],
+      "maximum": [
+        0.3149999976158142,
+        0.054794225841760635,
+        0.22100000083446503
+      ],
+      "left_handed_minimum": [
+        -0.3149999976158142,
+        0,
+        -0.1771780401468277
+      ],
+      "left_handed_maximum": [
+        0.17900000512599945,
+        0.054794225841760635,
+        0.22100000083446503
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 1
+    },
+    {
+      "id": "parts-cabinet",
+      "meshes": 5,
+      "triangles": 385,
+      "materials": 5,
+      "minimum": [
+        -0.29499998688697815,
+        0,
+        -0.23999999463558197
+      ],
+      "maximum": [
+        0.29499998688697815,
+        0.8100000023841858,
+        0.29899999499320984
+      ],
+      "left_handed_minimum": [
+        -0.29499998688697815,
+        0,
+        -0.23999999463558197
+      ],
+      "left_handed_maximum": [
+        0.29499998688697815,
+        0.8100000023841858,
+        0.29899999499320984
+      ],
+      "external_dependencies": 0,
+      "anchors_verified": 2
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+Alarm — Frenchyboy
+License: CC0 1.0 Universal
+Source: https://opengameart.org/content/alarm-2
+Download: https://opengameart.org/sites/default/files/alarm_0.wav
+Verified: 2026-11-02
+Source page lists author Frenchyboy, sound-effect type, alarm and siren tags, and CC0 license.
+Original two-second stereo WAV was downmixed, reduced in gain, edge-faded, and encoded as Ogg Vorbis.
+Legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode.en

@@ -1,0 +1,41 @@
+--- /workspace/scratch/66b2db176362/lv111-nav-review/baseline-js/navigation.js	2026-11-02 17:43:52.400898656 -0700
++++ /workspace/scratch/66b2db176362/lv111-nav-review/baseline-js/navigation-cached-prototype.js	2026-11-02 17:45:55.005106501 -0700
+@@ -54,7 +54,8 @@
+ export const AGENT_RADIUS = .34;
+ const CELL = .625, WIDTH = 97, HEIGHT = 177;
+ const DIRECTIONS = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
+-const worldPoint = (k) => ({ x: -30 + (k % WIDTH) * CELL, z: 1 + Math.floor(k / WIDTH) * CELL });
++const points = Array.from({length: WIDTH * HEIGHT}, (_,k) => ({ x: -30 + (k % WIDTH) * CELL, z: 1 + Math.floor(k / WIDTH) * CELL }));
++const worldPoint = (k) => points[k];
+ const indexOf = (p) => Math.max(0, Math.min(HEIGHT - 1, Math.round((p.z - 1) / CELL))) * WIDTH + Math.max(0, Math.min(WIDTH - 1, Math.round((p.x + 30) / CELL)));
+ export function prepareNavigation(rects) {
+   const it=navigationSteps(rects); let step; do {step=it.next();} while(!step.done); return step.value;
+@@ -140,8 +141,9 @@
+     if(x>=0&&x<WIDTH&&z>=0&&z<HEIGHT&&grid.component[k]===grid.component[s]&&lineClear(worldPoint(k),goal,rects,AGENT_RADIUS)){connected=true;break;}
+   }
+   if(!connected)return [];
+-  grid.scratch ||= {came:new Int32Array(WIDTH*HEIGHT),cost:new Float32Array(WIDTH*HEIGHT),closed:new Uint8Array(WIDTH*HEIGHT)};
+-  const {came,cost,closed}=grid.scratch; came.fill(-1);cost.fill(Infinity);closed.fill(0);
++  grid.scratch ||= {came:new Int32Array(WIDTH*HEIGHT),cost:new Float32Array(WIDTH*HEIGHT),closed:new Uint8Array(WIDTH*HEIGHT),dynamicBlocked:new Int8Array(WIDTH*HEIGHT)};
++  const {came,cost,closed,dynamicBlocked}=grid.scratch; came.fill(-1);cost.fill(Infinity);closed.fill(0);dynamicBlocked.fill(-1);
++  const avoidEdges=avoided.size>0;
+   const open = new MinHeap();
+   cost[s] = 0; open.push({ k: s, g: 0, f: 0 });
+   let end = -1;
+@@ -157,12 +159,13 @@
+       const nx = x + dx, nz = z + dz, k = nz * WIDTH + nx;
+       if (nx < 0 || nx >= WIDTH || nz < 0 || nz >= HEIGHT || closed[k] || !grid.walkable[k]) continue;
+       const p = worldPoint(k);
+-      if (blocked(p.x, p.z, grid.dynamic, AGENT_RADIUS) || !lineClear(worldPoint(c.k), p, grid.dynamic, AGENT_RADIUS)) continue;
++      if(dynamicBlocked[k]<0)dynamicBlocked[k]=blocked(p.x,p.z,grid.dynamic,AGENT_RADIUS)?1:0;
++      if (dynamicBlocked[k] || !lineClear(worldPoint(c.k), p, grid.dynamic, AGENT_RADIUS)) continue;
+       // Penalize a recently failed edge. A single narrow doorway remains usable
+       // when there is no alternative; the actor still tries a physical backstep.
+-      const nc = c.g + (direction<4?1:Math.SQRT2) + (avoided.has(`${c.k}:${k}`)?12:0); if (nc >= cost[k]) continue;
++      const nc = c.g + (direction<4?1:Math.SQRT2) + (avoidEdges&&avoided.has(`${c.k}:${k}`)?12:0); if (nc >= cost[k]) continue;
+       cost[k] = nc; came[k] = c.k;
+-      open.push({ k, g: nc, f: nc + Math.hypot(nx - gx,nz - gz) });
++      open.push({ k, g: nc, f: nc + (Math.max(Math.abs(nx-gx),Math.abs(nz-gz))+(Math.SQRT2-1)*Math.min(Math.abs(nx-gx),Math.abs(nz-gz))) });
+     }
+   }
+   if (end < 0) return [];

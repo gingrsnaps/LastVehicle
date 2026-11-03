@@ -1,0 +1,17 @@
+GRATE CONTACT — COMPOSITE NOTICE
+Runtime derivatives: grate-step-1.ogg and grate-step-2.ogg
+These are edited Foley composites, not documentary recordings of a real grate.
+
+Shoe layer: Joseph Sardin / BigSoundBank, Footsteps, Shoe on Concrete (0514), CC0.
+https://bigsoundbank.com/footsteps-shoe-on-concrete-s0514.html
+
+Metal layer: rubberduck, 100 CC0 metal and wood SFX, CC0.
+https://opengameart.org/content/100-cc0-metal-and-wood-sfx
+Archive: https://opengameart.org/sites/default/files/100-CC0-wood-metal-SFX.zip
+Newly used members: metal_hit_03.ogg and metal_hit_04.ogg.
+These two source members were not used by the prior release's contact effects.
+
+License: CC0-1.0, https://creativecommons.org/publicdomain/zero/1.0/
+Processing: band limiting, impact alignment, gain layering, normalization and short fades.
+Exact source hashes, contribution records and output hashes are in the asset manifest.
+Source licenses checked 2 November 2026. Credit is retained voluntarily.

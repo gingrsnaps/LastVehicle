@@ -1,0 +1,285 @@
+{
+  "verified_on": "2026-11-02",
+  "tool_versions": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+  "runtime_bytes": 638654,
+  "runtime_count": 6,
+  "assets": [
+    {
+      "file": "audio/aftermath.ogg",
+      "bytes": 315019,
+      "sha256": "820195bd376b5590564be87bf14f65b4ebac8cb6377c9e5aa90116eecabdcf9a",
+      "duration": 40.0,
+      "duration_seconds": 40.0,
+      "decoded_duration_seconds": 40.0,
+      "channels": 2,
+      "sample_rate": 32000,
+      "codec": "vorbis",
+      "peak_dbfs": -11.559,
+      "rms_dbfs": -27.11,
+      "true_peak_dbfs": -11.6,
+      "integrated_lufs": -26.7,
+      "sample_peak_clipping": false,
+      "clipped_sample_count": 0,
+      "nonfinite_sample_count": 0,
+      "decode_check": "Passed ffmpeg -xerror complete decode; no errors.",
+      "loop_boundary": {
+        "end_to_start_step": 0.004586901,
+        "end_to_start_step_dbfs": -46.77,
+        "interior_adjacent_step_p99": 0.004401792,
+        "step_to_interior_p99_ratio": 1.0421,
+        "interior_adjacent_step_p999": 0.005861346,
+        "end_to_start_within_interior_p999": true,
+        "end_to_start_within_interior_p99": false,
+        "max_adjacent_step_within_100ms_of_wrap": 0.004586901,
+        "method": "Numerical continuity check on decoded Ogg; no listening audition claimed."
+      }
+    },
+    {
+      "file": "audio/creature-attack.ogg",
+      "bytes": 9858,
+      "sha256": "e671b8490b94e64aa13b273dc40592c19791715f443be48c17b598355087e68e",
+      "duration": 0.914656,
+      "duration_seconds": 0.914656,
+      "decoded_duration_seconds": 0.946,
+      "channels": 1,
+      "sample_rate": 32000,
+      "codec": "vorbis",
+      "peak_dbfs": -6.346,
+      "rms_dbfs": -26.496,
+      "true_peak_dbfs": -6.3,
+      "integrated_lufs": -23.5,
+      "sample_peak_clipping": false,
+      "clipped_sample_count": 0,
+      "nonfinite_sample_count": 0,
+      "decode_check": "Passed ffmpeg -xerror complete decode; no errors."
+    },
+    {
+      "file": "audio/creature-breath.ogg",
+      "bytes": 25696,
+      "sha256": "44dd507c8232bff2f141ee8f1527e52fee4895d0716deb3ac57bc5ed88d6aabf",
+      "duration": 3.415719,
+      "duration_seconds": 3.415719,
+      "decoded_duration_seconds": 3.415719,
+      "channels": 1,
+      "sample_rate": 32000,
+      "codec": "vorbis",
+      "peak_dbfs": -14.74,
+      "rms_dbfs": -29.23,
+      "true_peak_dbfs": -14.7,
+      "integrated_lufs": -27.8,
+      "sample_peak_clipping": false,
+      "clipped_sample_count": 0,
+      "nonfinite_sample_count": 0,
+      "decode_check": "Passed ffmpeg -xerror complete decode; no errors."
+    },
+    {
+      "file": "audio/creature-recover.ogg",
+      "bytes": 8919,
+      "sha256": "e356500752c3c4e15af2efd3a0987c2c4ad1186f66ffa4d53107477e7c385f71",
+      "duration": 0.714313,
+      "duration_seconds": 0.714313,
+      "decoded_duration_seconds": 0.710313,
+      "channels": 1,
+      "sample_rate": 32000,
+      "codec": "vorbis",
+      "peak_dbfs": -9.158,
+      "rms_dbfs": -27.865,
+      "true_peak_dbfs": -9.0,
+      "integrated_lufs": -26.6,
+      "sample_peak_clipping": false,
+      "clipped_sample_count": 0,
+      "nonfinite_sample_count": 0,
+      "decode_check": "Passed ffmpeg -xerror complete decode; no errors."
+    },
+    {
+      "file": "audio/surge.ogg",
+      "bytes": 6253,
+      "sha256": "26dc802a7c53277e004d4d42ffa2a789808f202573b37336d6e39b337c94e554",
+      "duration": 0.336719,
+      "duration_seconds": 0.336719,
+      "decoded_duration_seconds": 0.332719,
+      "channels": 1,
+      "sample_rate": 32000,
+      "codec": "vorbis",
+      "peak_dbfs": -8.429,
+      "rms_dbfs": -36.347,
+      "true_peak_dbfs": -8.0,
+      "integrated_lufs": null,
+      "sample_peak_clipping": false,
+      "clipped_sample_count": 0,
+      "nonfinite_sample_count": 0,
+      "decode_check": "Passed ffmpeg -xerror complete decode; no errors."
+    },
+    {
+      "file": "audio/unease.ogg",
+      "bytes": 272909,
+      "sha256": "0532b450a07b7efe56a10c51e35444ea5f4ab996481b3eced9a848f224019001",
+      "duration": 40.0,
+      "duration_seconds": 40.0,
+      "decoded_duration_seconds": 40.0,
+      "channels": 2,
+      "sample_rate": 32000,
+      "codec": "vorbis",
+      "peak_dbfs": -11.6,
+      "rms_dbfs": -25.979,
+      "true_peak_dbfs": -11.6,
+      "integrated_lufs": -25.8,
+      "sample_peak_clipping": false,
+      "clipped_sample_count": 0,
+      "nonfinite_sample_count": 0,
+      "decode_check": "Passed ffmpeg -xerror complete decode; no errors.",
+      "loop_boundary": {
+        "end_to_start_step": 0.000965964,
+        "end_to_start_step_dbfs": -60.301,
+        "interior_adjacent_step_p99": 0.002236371,
+        "step_to_interior_p99_ratio": 0.4319,
+        "interior_adjacent_step_p999": 0.005217273,
+        "end_to_start_within_interior_p999": true,
+        "end_to_start_within_interior_p99": true,
+        "max_adjacent_step_within_100ms_of_wrap": 0.001272149,
+        "method": "Numerical continuity check on decoded Ogg; no listening audition claimed."
+      }
+    }
+  ],
+  "original_decode_checks": [
+    {
+      "file": "originals/Monster-Sounds-Volume-2/Monster-1.wav",
+      "sha256": "ac042cd669d74d5fa92187f17f7ef0ab024f89f8fd9be9e854ccf248270f921a",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/Monster-2.wav",
+      "sha256": "fd0c97cd0a5be99ed21617eab2373e2180825bb1329664080a7b7a095da3337b",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/Monster-3.wav",
+      "sha256": "29aed55a2b146098fc00d88d273c7958d42d9f873c15226dac4b9522b0b0b772",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/Monster-4.wav",
+      "sha256": "9bad9e38aa312416ea4b9913feb1e25e899c2120070f358ed60d7ba5eaf6eca6",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/Monster-5.wav",
+      "sha256": "b6043984a93b2a571f2a0d299c3968f6331736aa674608f6f69d8d2caa77cfbf",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/Monster-6.wav",
+      "sha256": "a54488ece4de9bea31c14a1f5858d92ad4d7edd0b14f59892ca0b3ba32ee2e7f",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/Monster-7.wav",
+      "sha256": "ff1a392b9eb36c037e93cedc940146fbbdf26484607b090dd87e4c3cb047b103",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/Monster-8.wav",
+      "sha256": "e7fc1c4a831c429f27f55722a102520038f764d0c01b867197d05469a7e39224",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-10.wav",
+      "sha256": "9f8967357f20dc564bbe3fd5d80e81e80bbe7c9b7dc9645a49678d2bdeaa50df",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-11.wav",
+      "sha256": "d03dc3c190ceed07b46400fc13c7e0d514a6871bfad9d0132f7000b8f212403f",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-12.wav",
+      "sha256": "ee196e95205ab470ee929938b47fd24f63fa4bb4a089188839d12edb497842c1",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-13.wav",
+      "sha256": "4143d375cb67565a3dd7cf90d73f8336076b5577aae8b36e624fe837189fb6db",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-14.wav",
+      "sha256": "7f474ff6c2705cc930333ae5023486fbb28ff932337020ced62943254942c532",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-15.wav",
+      "sha256": "c9723aaa9072f735930a72971fceaf68d2fe6c95534a2143acfe67bc9d736b44",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-16.wav",
+      "sha256": "e320fc6914b5af0465425806ec1865c07fab00c4e1d60a3d2502e8a78cd4ec55",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-17.wav",
+      "sha256": "d1b24ef7b588deb608d49091162b4580c6663e946b7a1435df4d77d226a46a6f",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-18.wav",
+      "sha256": "8bc44b7846dd71adf30aa29b722b705062dc9fc2074367e09376bf9f6159c80d",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/Monster-Sounds-Volume-2/monster-9.wav",
+      "sha256": "fda82c20c26e9e4d8d4154983df1cd151c3a5a68cb0f899f21ca057e738dc343",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/evil.ogg",
+      "sha256": "00a1dbb05c6d122f1909d2c7c20666b4367b14a4c13469dce86983ad51579c1b",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/ghostbreath.flac",
+      "sha256": "f371839853a5dff7dbd5a8c81368f5cfab587f567df5ba962e981d4392c530bc",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/lost.ogg",
+      "sha256": "ad9a9f39240ef5862d3a6dc5220893926c6873aa0e08a641dadf3f1c0acc2cd4",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    },
+    {
+      "file": "originals/spark.wav",
+      "sha256": "9a3d987bdf7f405570aa015f6da42596ce84c5073c18c0561be7cd3ae401bc97",
+      "decoded": true,
+      "ffmpeg_errors": ""
+    }
+  ],
+  "duplicate_check": {
+    "compared_to": "proof/existing-audio-manifest.json (pre-v1.8 source manifest snapshot)",
+    "runtime_sha256_duplicates": false,
+    "original_filename_duplicates": false,
+    "creature_originals_distinct": true
+  },
+  "audition": "No subjective listening audition was performed. Roles are selected from source descriptions and measured envelopes; in-game listening/mix review remains appropriate."
+}

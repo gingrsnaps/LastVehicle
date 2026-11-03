@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "assets": 5,
+  "total_encoded_bytes": 60692,
+  "key_triangles": 882,
+  "key_materials": 5,
+  "key_textures": 0,
+  "svg_count": 4,
+  "svg_raster_dimensions_each": [
+    512,
+    256
+  ],
+  "rgba8_raster_bytes_four": 2097152,
+  "external_dependencies": 0,
+  "xml_static_paths_verified": true,
+  "browser_visual_qa": false
+}

@@ -1,0 +1,103 @@
+{
+  "asset_version": "3.0",
+  "game_release": "1.11",
+  "axes": {
+    "up": "+Y",
+    "front": "+Z",
+    "units": "metres"
+  },
+  "root_motion": false,
+  "triangles": 1868,
+  "joints": 38,
+  "reference_speeds_metres_per_second": {
+    "Stalk": 0.53475935828877
+  },
+  "foot_contacts_normalized": {
+    "Stalk": [
+      0,
+      0.5
+    ]
+  },
+  "runtime_notes": [
+    "The collision controller owns translation and yaw; every clip is in place.",
+    "Use Stalk playback ratio actual_speed / 0.53475936. Its nominal duration is 2.2 seconds. Allow ratio above 1.65 if stalking faster than 0.88 m/s.",
+    "Sample PeekLeft and PeekRight by paused gameplay phase. Head begins first; torso follows after phase .12; peak attention is .38-.68.",
+    "DoorPush meets its held target by phase .35; retain contact until .68; drive the interaction cue once inside this window. The reference point is Hand.R bone head (wrist). The palm/fingers extend down along the same contact plane.",
+    "Peek actions do not shift the root. The head leans only about 0.068 m to either side at the midpoint; full sleeves retain the existing silhouette width.",
+    "CrouchSearch stays planted, lowers during .02-.26, scans while low .26-.76, and rises by .98. Prefer it for a stopped evidence search.",
+    "StartRun is exactly .6 seconds, 18 source frames; its final pose joins Run at phase zero. Blend while increasing physical speed; it contains no root displacement.",
+    "Baked analytic contacts require no runtime IK solver. Do not infer hidden-player locations from animation state."
+  ],
+  "new_clips": {
+    "Stalk": {
+      "duration": 2.2,
+      "loop": true,
+      "reference_speed": 0.53475935828877,
+      "contacts": [
+        0,
+        0.5
+      ]
+    },
+    "PeekLeft": {
+      "duration": 1.8,
+      "loop": false,
+      "anticipation": [
+        0,
+        0.21
+      ],
+      "body_follow": [
+        0.12,
+        0.38
+      ],
+      "hold": [
+        0.38,
+        0.68
+      ]
+    },
+    "PeekRight": {
+      "duration": 1.8,
+      "loop": false,
+      "anticipation": [
+        0,
+        0.21
+      ],
+      "body_follow": [
+        0.12,
+        0.38
+      ],
+      "hold": [
+        0.38,
+        0.68
+      ]
+    },
+    "DoorPush": {
+      "duration": 1.8,
+      "loop": false,
+      "contact_interval": [
+        0.35,
+        0.68
+      ],
+      "right_hand_gltf": [
+        -0.2,
+        1.3,
+        1.0
+      ]
+    },
+    "CrouchSearch": {
+      "duration": 4,
+      "loop": true,
+      "low_scan_interval": [
+        0.26,
+        0.76
+      ]
+    },
+    "StartRun": {
+      "duration": 0.6,
+      "loop": false,
+      "joins_clip": "Run",
+      "joins_phase": 0
+    }
+  },
+  "browser_playback_verified": false,
+  "inspected_render_sheet": "attendant-contact-sheet.png"
+}

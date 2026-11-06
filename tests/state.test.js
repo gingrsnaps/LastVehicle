@@ -28,19 +28,19 @@ test("Safe checkpoints retain repair progress without storing transient pursuit 
   assert.deepEqual(restored.flags,s.flags);assert.equal(restored.flags.includes("trapped"),false);
   assert.deepEqual(restored.checkpoint,{x:-6,z:8,yaw:0});
 });
-test("Every legacy checkpoint migrates to reachable v2 progress; original local save is backed up", () => {
+test("Every legacy checkpoint migrates to reachable v3 progress; original local save is backed up", () => {
   const legacy=["car","key","fuse","power","terminal","release","valve","alarm","trapped","gate","escaped"];
-  const counts=[0,1,3,5,6,7,7,7,7,7,8,9];
+  const counts=[0,1,3,5,6,7,7,7,7,7,8,FLAG_IDS.length];
   for(let n=0;n<=legacy.length;n++){
     const raw={...newGame("hard"),version:1,flags:legacy.slice(0,n)};
     const migrated=validateSave(raw);
-    assert.equal(migrated.version,2);assert.equal(migrated.difficulty,"hard");
+    assert.equal(migrated.version,3);assert.equal(migrated.difficulty,"hard");
     assert.deepEqual(migrated.flags,FLAG_IDS.slice(0,counts[n]));
   }
   const original=JSON.stringify({...newGame(),version:1,flags:["car","key","fuse"]});
   const data=new Map([["lastvehicle.save",original]]);
   const store=new SaveStore({getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v)});
-  const migrated=store.readGame();assert.equal(migrated.version,2);
+  const migrated=store.readGame();assert.equal(migrated.version,3);
   assert.equal(data.get("lastvehicle.save.v1.backup"),original);
   store.writeGame(migrated);store.readGame();assert.equal(data.get("lastvehicle.save.v1.backup"),original);
 });

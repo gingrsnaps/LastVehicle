@@ -1,0 +1,431 @@
+{
+  "version": "1.17.0",
+  "scope": "Actual GLB geometry and simulated logic. Imported materials skipped; injected texture objects. No GPU, audible or full human playthrough approval.",
+  "surfaces": {
+    "maps": 12,
+    "materials": 11,
+    "meshes": 1486,
+    "projectedVertices": 34524
+  },
+  "scenery": [
+    {
+      "type": "shrub",
+      "x": -32.2,
+      "z": -5,
+      "size": 1,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -33.400000000000006,
+      "z": -15.5,
+      "size": 1.2,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -34.6,
+      "z": -26,
+      "size": 1.4,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -32.2,
+      "z": -36.5,
+      "size": 1,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -33.400000000000006,
+      "z": -47,
+      "size": 1.2,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -34.6,
+      "z": -57.5,
+      "size": 1.4,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -32.2,
+      "z": -68,
+      "size": 1,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -33.400000000000006,
+      "z": -78.5,
+      "size": 1.2,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -34.6,
+      "z": -89,
+      "size": 1.4,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "tree",
+      "x": -39,
+      "z": -17,
+      "baseY": 0,
+      "backdrop": true
+    },
+    {
+      "type": "tree",
+      "x": -43,
+      "z": -40,
+      "baseY": 0,
+      "backdrop": true
+    },
+    {
+      "type": "tree",
+      "x": -39,
+      "z": -63,
+      "baseY": 0,
+      "backdrop": true
+    },
+    {
+      "type": "tree",
+      "x": -43,
+      "z": -86,
+      "baseY": 0,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 32.2,
+      "z": -5,
+      "size": 1,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 33.400000000000006,
+      "z": -15.5,
+      "size": 1.2,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 34.6,
+      "z": -26,
+      "size": 1.4,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 32.2,
+      "z": -36.5,
+      "size": 1,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 33.400000000000006,
+      "z": -47,
+      "size": 1.2,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 34.6,
+      "z": -57.5,
+      "size": 1.4,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 32.2,
+      "z": -68,
+      "size": 1,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 33.400000000000006,
+      "z": -78.5,
+      "size": 1.2,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 34.6,
+      "z": -89,
+      "size": 1.4,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "tree",
+      "x": 39,
+      "z": -17,
+      "baseY": 0,
+      "backdrop": true
+    },
+    {
+      "type": "tree",
+      "x": 43,
+      "z": -40,
+      "baseY": 0,
+      "backdrop": true
+    },
+    {
+      "type": "tree",
+      "x": 39,
+      "z": -63,
+      "baseY": 0,
+      "backdrop": true
+    },
+    {
+      "type": "tree",
+      "x": 43,
+      "z": -86,
+      "baseY": 0,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -17.3,
+      "z": -64,
+      "size": 0.85,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -17.900000000000002,
+      "z": -76,
+      "size": 0.95,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": -18.5,
+      "z": -88,
+      "size": 1.05,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 17.3,
+      "z": -64,
+      "size": 0.85,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 17.900000000000002,
+      "z": -76,
+      "size": 0.95,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    },
+    {
+      "type": "shrub",
+      "x": 18.5,
+      "z": -88,
+      "size": 1.05,
+      "baseY": 0,
+      "triangles": 240,
+      "backdrop": true
+    }
+  ],
+  "routes": [
+    {
+      "closed": true,
+      "goal": {
+        "x": 24,
+        "z": -30
+      },
+      "frames": 346,
+      "recoveries": 0
+    },
+    {
+      "closed": true,
+      "goal": {
+        "x": 23,
+        "z": -44
+      },
+      "frames": 136,
+      "recoveries": 0
+    },
+    {
+      "closed": true,
+      "goal": {
+        "x": -16,
+        "z": -34
+      },
+      "frames": 454,
+      "recoveries": 0
+    },
+    {
+      "closed": false,
+      "goal": {
+        "x": 24,
+        "z": -30
+      },
+      "frames": 346,
+      "recoveries": 0
+    },
+    {
+      "closed": false,
+      "goal": {
+        "x": 23,
+        "z": -44
+      },
+      "frames": 136,
+      "recoveries": 0
+    },
+    {
+      "closed": false,
+      "goal": {
+        "x": -16,
+        "z": -34
+      },
+      "frames": 379,
+      "recoveries": 0
+    }
+  ],
+  "visibility": [
+    {
+      "area": "garage",
+      "enabledBatches": 265,
+      "triangles": 20877
+    },
+    {
+      "area": "yard",
+      "enabledBatches": 170,
+      "triangles": 21761
+    },
+    {
+      "area": "road",
+      "enabledBatches": 170,
+      "triangles": 21761
+    }
+  ],
+  "budget": {
+    "rooms": {
+      "garage": {
+        "batches": 136,
+        "triangles": 17979,
+        "shadowBatches": 2
+      },
+      "storage": {
+        "batches": 26,
+        "triangles": 2614,
+        "shadowBatches": 2
+      },
+      "yard": {
+        "batches": 94,
+        "triangles": 8762,
+        "shadowBatches": 5
+      },
+      "security": {
+        "batches": 31,
+        "triangles": 1457,
+        "shadowBatches": 1
+      },
+      "workshop": {
+        "batches": 35,
+        "triangles": 2309,
+        "shadowBatches": 5
+      },
+      "electrical": {
+        "batches": 19,
+        "triangles": 830,
+        "shadowBatches": 3
+      },
+      "pump": {
+        "batches": 20,
+        "triangles": 2600,
+        "shadowBatches": 1
+      },
+      "gatehouse": {
+        "batches": 39,
+        "triangles": 1628,
+        "shadowBatches": 1
+      },
+      "road": {
+        "batches": 24,
+        "triangles": 2578,
+        "shadowBatches": 2
+      }
+    },
+    "enabledStaticBatches": 170,
+    "spatial": {
+      "cellMetres": 6,
+      "staticBodies": 191,
+      "dynamicBodies": 21,
+      "cells": 283,
+      "queries": 9444,
+      "candidates": 199674,
+      "linearEquivalent": 2002128
+    },
+    "limits": {
+      "garage": {
+        "batches": 300,
+        "triangles": 150000
+      },
+      "serviceRoom": {
+        "batches": 120,
+        "triangles": 50000
+      },
+      "fixtureLightSlots": 4,
+      "enemyPathNodesPerSlice": 128,
+      "audioVoices": 24
+    },
+    "dynamicRoots": 283,
+    "shadowCasters": 501
+  }
+}

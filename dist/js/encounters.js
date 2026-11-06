@@ -2,7 +2,7 @@
  * this controller. Required-task beats have priority over optional ambience;
  * close attacks and witnessed locker inspections always win the frame. */
 export const MAJOR_ENCOUNTERS = ["securityBreach", "workshopBreach", "powerSurge"];
-export const QUALITY_ENCOUNTERS=[...MAJOR_ENCOUNTERS,'closePass','shelterInspection','carReturn','cartPush','pressureBurst'];
+export const QUALITY_ENCOUNTERS=[...MAJOR_ENCOUNTERS,'closePass','shelterInspection','carReturn','cartPush','pressureBurst','yardFence','gatehouseBreach'];
 export const ENCOUNTER_IDS = [...QUALITY_ENCOUNTERS,"watcher","cabinet","crossing","pursuit","locker","window"];
 export class EncounterDirector {
   constructor(state) { this.reset(state); }
@@ -21,11 +21,11 @@ export class EncounterDirector {
     if(chase)this.chaseDuration+=dt;
     if(this.chasing&&!chase){this.recovery=Math.max(this.recovery,6+Math.min(18,this.chaseDuration*.6));this.chaseDuration=0;}
     if(failures>this.failures){this.recovery=Math.max(this.recovery,Math.min(36,12+failures*6));this.failures=failures;}
-    if(this.state.flags.length!==this.progress){this.progress=this.state.flags.length;this.recovery=Math.max(this.recovery,3);}
+    if(this.state.flags.length!==this.progress){this.progress=this.state.flags.length;if(!this.queue.includes('securityBreach'))this.recovery=Math.max(this.recovery,3);}
     this.chasing=chase;
   }
   next({mode,hiding=false,vehicle=false,busy=false,ready=()=>true}) {
-    if(this.active||hiding||vehicle||busy||this.chasing||this.recovery>0||["chase","attack","recover","inspect"].includes(mode))return null;
+    if(this.active||hiding||vehicle||busy||this.chasing||this.recovery>0||["chase","attack","recover","inspect","stunned"].includes(mode))return null;
     const index=this.queue.findIndex(id=>ready(id)&&(MAJOR_ENCOUNTERS.includes(id)?this.quiet<=0:this.quiet<=0&&this.recovery<=0&&!this.chasing));
     if(index<0)return null;return this.active=this.queue.splice(index,1)[0];
   }

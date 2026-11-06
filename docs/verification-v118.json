@@ -1,0 +1,227 @@
+{
+  "version": "1.18.0",
+  "scope": "Shipped GLB geometry and non-image materials, injected texture handles, simulated logic. No GPU rendering, JPEG decode or audible approval.",
+  "surfaces": {
+    "maps": 14,
+    "materials": 163,
+    "meshes": 2618,
+    "projectedVertices": 154265,
+    "invalidGeometry": [],
+    "missingMaterials": [],
+    "roles": {
+      "concrete": 11,
+      "metal": 52,
+      "grain": 66,
+      "fabric": 10,
+      "moss": 4,
+      "rust": 13,
+      "peeling": 1,
+      "asphalt": 1,
+      "brick": 1,
+      "wood": 3,
+      "leaf-litter": 1
+    },
+    "reusedMaterials": 123
+  },
+  "imageMaterialModelsSkipped": [
+    "sedan.glb",
+    "hatchback.glb",
+    "van.glb",
+    "suv.glb",
+    "cone.glb",
+    "box.glb",
+    "storage-crate.glb",
+    "industrial-machine.glb",
+    "control-console.glb",
+    "valve-pipe.glb"
+  ],
+  "breach": {
+    "frames": 136,
+    "contact": 1,
+    "position": {
+      "x": 15.117714491355136,
+      "z": -44
+    }
+  },
+  "warmup": [
+    {
+      "z": 98,
+      "room": "garage",
+      "external": false
+    },
+    {
+      "z": 98,
+      "room": "garage",
+      "external": false
+    },
+    {
+      "z": 18,
+      "room": "security",
+      "external": true
+    },
+    {
+      "z": 18,
+      "room": "security",
+      "external": true
+    },
+    {
+      "z": 45,
+      "room": "storage",
+      "external": false
+    },
+    {
+      "z": 45,
+      "room": "storage",
+      "external": false
+    },
+    {
+      "z": 76,
+      "room": "workshop",
+      "external": false
+    },
+    {
+      "z": 76,
+      "room": "workshop",
+      "external": false
+    },
+    {
+      "z": 39,
+      "room": "electrical",
+      "external": false
+    },
+    {
+      "z": 39,
+      "room": "electrical",
+      "external": false
+    },
+    {
+      "z": 98,
+      "room": "pump",
+      "external": false
+    },
+    {
+      "z": 98,
+      "room": "pump",
+      "external": false
+    },
+    {
+      "z": 7,
+      "room": "garage",
+      "external": true
+    },
+    {
+      "z": 7,
+      "room": "garage",
+      "external": true
+    },
+    {
+      "z": -18,
+      "room": "yard",
+      "external": true
+    },
+    {
+      "z": -18,
+      "room": "yard",
+      "external": true
+    },
+    {
+      "z": -42,
+      "room": "gatehouse",
+      "external": true
+    },
+    {
+      "z": -42,
+      "room": "gatehouse",
+      "external": true
+    },
+    {
+      "z": -79,
+      "room": "road",
+      "external": true
+    },
+    {
+      "z": -79,
+      "room": "road",
+      "external": true
+    },
+    {
+      "z": 77.57,
+      "room": "garage",
+      "external": false
+    }
+  ],
+  "budget": {
+    "rooms": {
+      "garage": {
+        "batches": 189,
+        "triangles": 25234,
+        "shadowBatches": 17
+      },
+      "storage": {
+        "batches": 38,
+        "triangles": 4523,
+        "shadowBatches": 8
+      },
+      "yard": {
+        "batches": 148,
+        "triangles": 33526,
+        "shadowBatches": 9
+      },
+      "security": {
+        "batches": 62,
+        "triangles": 6275,
+        "shadowBatches": 3
+      },
+      "workshop": {
+        "batches": 62,
+        "triangles": 5968,
+        "shadowBatches": 11
+      },
+      "electrical": {
+        "batches": 26,
+        "triangles": 1899,
+        "shadowBatches": 5
+      },
+      "pump": {
+        "batches": 39,
+        "triangles": 6498,
+        "shadowBatches": 6
+      },
+      "gatehouse": {
+        "batches": 67,
+        "triangles": 6047,
+        "shadowBatches": 5
+      },
+      "road": {
+        "batches": 55,
+        "triangles": 7176,
+        "shadowBatches": 10
+      }
+    },
+    "enabledStaticBatches": 390,
+    "spatial": {
+      "cellMetres": 6,
+      "staticBodies": 191,
+      "dynamicBodies": 21,
+      "cells": 283,
+      "queries": 0,
+      "candidates": 0,
+      "linearEquivalent": 0
+    },
+    "limits": {
+      "garage": {
+        "batches": 300,
+        "triangles": 150000
+      },
+      "serviceRoom": {
+        "batches": 120,
+        "triangles": 50000
+      },
+      "fixtureLightSlots": 4,
+      "enemyPathNodesPerSlice": 128,
+      "audioVoices": 24
+    },
+    "dynamicRoots": 283,
+    "shadowCasters": 216
+  }
+}

@@ -1,6 +1,6 @@
-import { groundModel, PARKED_CARS } from './placement.js?v=1.14.0';
-import { DRAIN_COVERS } from './surfaces.js?v=1.14.0';
-import { yieldTask } from './preparation.js?v=1.14.0';
+import { groundModel, PARKED_CARS } from './placement.js?v=1.19.0';
+import { DRAIN_COVERS } from './surfaces.js?v=1.19.0';
+import { yieldTask } from './preparation.js?v=1.19.0';
 const B=globalThis.BABYLON;
 // Ground/support Y and wall back planes are explicit, in metres. The same
 // measured instance supplies its collider and its placement-audit record.

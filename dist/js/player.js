@@ -1,7 +1,7 @@
-import { InteractionFocus } from "./interaction.js?v=1.14.0";
-import { MouseCapture } from "./capture.js?v=1.14.0";
-import { difficultyRules } from "./difficulty.js?v=1.14.0";
-import { moveCircle } from "./navigation.js?v=1.14.0";
+import { InteractionFocus } from "./interaction.js?v=1.19.0";
+import { MouseCapture } from "./capture.js?v=1.19.0";
+import { difficultyRules } from "./difficulty.js?v=1.19.0";
+import { moveCircle } from "./navigation.js?v=1.19.0";
 
 /** A single input owner. Mouse deltas represent angles, so never multiply them by
  * frame time or devicePixelRatio. Translation and interpolation DO use seconds. */
@@ -63,9 +63,9 @@ export class Player {
       }
       if (!e.repeat)
         for (const action of ["interact", "flashlight", "journal", "hint", "objective", "throw"])
-          if (e.code === this.settings.bindings[action]) this.onAction(action);
+          if (e.code === this.settings.bindings[action]) {if(action==='throw'&&this.settings.throwGuide)this.throwAiming=true;else this.onAction(action);}
     });
-    window.addEventListener("keyup", (e) => this.keys.delete(e.code));
+    window.addEventListener("keyup", (e) => {this.keys.delete(e.code);if(e.code===this.settings.bindings.throw&&this.throwAiming){this.throwAiming=false;if(this.active)this.onAction('throw');}});
     window.addEventListener("blur", () => this.clear());
     canvas.addEventListener("pointerdown", (e) => {
       if (!this.active || e.pointerType === "touch" || e.button !== 0) return;
@@ -108,6 +108,7 @@ export class Player {
     });
   }
   clear() {
+    this.throwAiming=false;
     this.keys.clear();
     this.focus?.reset();
     this.touchMove = { x: 0, y: 0 };
@@ -219,7 +220,7 @@ export class Player {
             dt,
       ),
     );
-    const speed = this.crouched ? 1.3 : this.sprinting ? 4.5 : 2.6;
+    const speed = this.crouched ? 1.4 : this.sprinting ? 4.9 : 2.95;
     const desiredX =
       (Math.sin(this.yaw) * forward + Math.cos(this.yaw) * right) * speed;
     const desiredZ =

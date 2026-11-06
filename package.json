@@ -1,6 +1,6 @@
 {
   "name": "last-vehicle",
-  "version": "1.14.0",
+  "version": "1.19.0",
   "private": true,
   "type": "module",
   "description": "A GingrSnaps Project \u2014 low-poly browser horror built with Babylon.js",

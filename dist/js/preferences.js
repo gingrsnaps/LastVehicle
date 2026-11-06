@@ -1,6 +1,6 @@
-import { DEFAULT_SETTINGS, validateSettings } from "./state.js?v=1.14.0";
+import { DEFAULT_SETTINGS, validateSettings } from "./state.js?v=1.19.0";
 
-export const GRAPHICS_KEYS = ["quality", "shadows", "glow", "fxaa", "resolution", "scale", "adaptive", "adaptiveFloor"];
+export const GRAPHICS_KEYS = ["quality", "shadows", "glow", "fxaa", "resolution", "scale", "adaptive", "adaptiveFloor", "weatherEffects"];
 export const PRESETS = {
   low: { shadows: "off", glow: false, fxaa: false },
   medium: { shadows: "medium", glow: true, fxaa: false },
@@ -8,11 +8,11 @@ export const PRESETS = {
 };
 export const CATEGORIES = {
   gameplay: ["difficulty", "skipIntro", "objectiveHUD", "objectiveMode", "journalNotify", "hintReminders", "easyAdrenaline", "staminaMode"],
-  display: [...GRAPHICS_KEYS, "brightness"],
+  display: [...GRAPHICS_KEYS, "brightness", "skyBrightness"],
   performance: ["fpsCap", "menuFPS", "fpsMode", "fpsCorner", "fpsSize"],
   audio: ["master", "music", "ambience", "sfx", "uiVolume", "loudEffects", "dynamicRange", "soundCaptions","monoAudio"],
-  comfort: ["reducedMotion", "cinematicMotion", "fov", "bob", "sway", "uiScale", "subtitleSize", "promptScale", "crosshair", "crosshairSize", "crosshairContrast", "subtitles", "reducedFlashes", "interactionHighlight","cameraShake","scareScreenEffects","sprintFOV","subtitleBackground","speakerLabels"],
-  controls: ["mouseMode", "sensitivity", "separateAxes", "sensitivityY", "invertY", "lookSmoothing", "sprintMode", "crouchMode", "bindings","controllerEnabled","controllerDeadzone","controllerCurve","controllerLook"],
+  comfort: ['sceneryMotion','stableHorizon',"reducedMotion", "cinematicMotion", "fov", "bob", "sway", "uiScale", "subtitleSize", "promptScale", "crosshair", "crosshairSize", "crosshairContrast", "subtitles", "reducedFlashes", "interactionHighlight","cameraShake","scareScreenEffects","sprintFOV","subtitleBackground","speakerLabels"],
+  controls: ['throwGuide',"mouseMode", "sensitivity", "separateAxes", "sensitivityY", "invertY", "lookSmoothing", "sprintMode", "crouchMode", "bindings","controllerEnabled","controllerDeadzone","controllerCurve","controllerLook"],
 };
 const pick = s => Object.fromEntries(GRAPHICS_KEYS.map(k => [k, s[k]]));
 

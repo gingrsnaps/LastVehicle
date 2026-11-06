@@ -1,5 +1,6 @@
-import { groundModel } from "./placement.js?v=1.14.0";
-import { PUDDLES } from "./surfaces.js?v=1.14.0";
+import { groundModel } from "./placement.js?v=1.19.0";
+import { PUDDLES } from "./surfaces.js?v=1.19.0";
+import { loadSurfaceTexture } from './texture-loader.js?v=1.19.0';
 const B=globalThis.BABYLON;
 
 /** Authored decay follows water, gravity and room function. These meshes are
@@ -16,14 +17,7 @@ export class Decay {
   }
   async load(){
     const w=this.w;
-    const texture=file=>new Promise(resolve=>{
-      // A failed optional surface map falls back to its subdued base material.
-      // The explicit timeout prevents a stalled request from blocking Start.
-      let timer,settled=false,t;
-      const finish=ok=>{if(settled)return;settled=true;clearTimeout(timer);if(!ok){t?.dispose();w.failedAssets??=[];w.failedAssets.push(file);}resolve(ok?t:null);};
-      t=new B.Texture("assets/textures/"+file,w.scene,false,false,B.Texture.TRILINEAR_SAMPLINGMODE,()=>finish(true),()=>finish(false));
-      t.anisotropicFilteringLevel=2;timer=setTimeout(()=>finish(false),7000);
-    });
+    const texture=file=>loadSurfaceTexture(w,file);
     for(const [prefix,names] of [["moss",["decayMoss","decayMold"]],["rust",["decayRust"]],["peeling",["decayPeel"]]]){
       const [color,rough]=await Promise.all([texture(prefix+"-albedo.jpg"),texture(prefix+"-roughness.jpg")]);
       if(rough)rough.gammaSpace=false;

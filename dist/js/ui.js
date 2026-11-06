@@ -1,10 +1,10 @@
-import { inventoryStatus } from "./tasks.js?v=1.14.0";
-import { renderJournal, returnSummary } from "./journal.js?v=1.14.0";
-import { destination } from "./guidance.js?v=1.14.0";
-import { DIFFICULTIES, difficultyRules } from "./difficulty.js?v=1.14.0";
-import { renderSettings } from "./settings-ui.js?v=1.14.0";
-import { PRESETS } from "./preferences.js?v=1.14.0";
-import { renderMap } from "./map.js?v=1.14.0";
+import { inventoryStatus } from "./tasks.js?v=1.19.0";
+import { renderJournal, returnSummary } from "./journal.js?v=1.19.0";
+import { destination } from "./guidance.js?v=1.19.0";
+import { DIFFICULTIES, difficultyRules } from "./difficulty.js?v=1.19.0";
+import { renderSettings } from "./settings-ui.js?v=1.19.0";
+import { PRESETS } from "./preferences.js?v=1.19.0";
+import { renderMap } from "./map.js?v=1.19.0";
 export const $ = (id) => document.getElementById(id);
 export const escapeHTML = (s) =>
   String(s).replace(
@@ -401,12 +401,18 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
     const times = (this.game.stats?.samples() || []).sort((a,b) => a-b);
     const capture = this.game.player?.mouseCapture;
     let previousCrash=null;try{previousCrash=JSON.parse(this.game.store.get("lastCrash")||"null");}catch{}
-    return { version: "1.14.0", pass:this.game.profilePass || "Normal play", metrics:this.game.stats?.summary() || null, browser: globalThis.navigator?.userAgent || "unknown", embedded: window.self !== window.top,
+    return { version: "1.19.0", pass:this.game.profilePass || "Normal play", metrics:this.game.stats?.summary() || null, browser: globalThis.navigator?.userAgent || "unknown", embedded: window.self !== window.top,
       playing: this.game.playing, started: this.game.started, inputMode: this.game.player?.captureMode,
       pointerLocked: document.pointerLockElement === this.game.canvas, captureState: capture?.state,
-      preparation: this.game.world?.preparation || null,
+      preparation: this.game.world?.preparation || null, loadingStage:this.game.loadingStage||null,
+      surfaceCoverage:this.game.world?.surfaceLibrary?.report||null,assetHealth:this.game.world?.assetHealth||null,
       ai:this.game.threat?.diagnostics?.()||null,placement:this.game.world?.placements?.report?.()||null,
       profiling: this.game.hitches?.report() || null,
+      areaTimings:this.game.areaTimings?.report()||{},
+      outdoorEffects:this.game.world?.yard?.effectCounts||{},
+      sky:{meshes:this.game.world?.sky?.meshes.length||0,visible:this.game.world?.sky?.visible||false},
+      guidance:this.game.world?.guideRoute?.result||null,
+      cpuActiveMeshEvaluationMs:this.game.sceneInstrumentation?.activeMeshesEvaluationTimeCounter.current??null,
       shaderCompilationMs: this.game.instrumentation?.shaderCompilationTimeCounter.total ?? null,
       drawCalls: this.game.sceneInstrumentation?.drawCallsCounter.current ?? null,
       shadowCasters: this.game.world?.shadowCasterCount ?? null,
@@ -428,9 +434,10 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
   }
   performanceRoute() {
     this.show("performance-route",this.head("OPTIONAL LOCAL TEST", "Check frame pacing")+
-      '<p>Use the same graphics and route for both passes. This records timings only; it does not move you, complete tasks, or upload data.</p><ol><li>Start a new Easy run by bay 042, before collecting the Security key.</li><li>Walk north to the exit and return south, entering Security, Storage, Workshop, Electrical and Pump Room.</li><li>Toggle the flashlight in each room without completing objectives. Open and close the journal once.</li><li>Return here and finish the pass. Repeat the same route without reloading.</li></ol><div class="button-row"><button id="profile-first" class="btn">Begin first pass</button><button id="profile-second" class="btn">Begin second pass</button><button id="profile-finish" class="btn accent">Finish pass & export</button></div><p class="settings-note">First-pass GPU work, repeated stalls and CPU-heavy sections can then be compared. Timings depend on this machine. Keep playtime and route similar.</p>');
+      '<p>Use the same graphics, weather setting and route for both passes. This records local timings; it does not move you or complete tasks.</p><p><b>Exterior route — after raising the garage shutter:</b></p><ol><li>Begin at the shutter. Follow BARRIER CONTROL into the yard.</li><li>Visit UTILITY SELECTOR under the generator awning, then enter GATEHOUSE through its front door.</li><li>Turn toward BARRIER BRAKE, then walk to DOCK WINCH and return to the shutter.</li><li>Toggle the flashlight, turn toward the sky and look back into the garage. Open and close the journal once.</li><li>Finish/export, then repeat without reloading. After clearing the road, also record a separate driving pass.</li></ol><p>Before the yard unlocks, use the garage loop: bay 042 → north exit → Security → Storage → Workshop → Electrical → Pump Room → bay 042.</p><div class="button-row"><button id="profile-first" class="btn">Begin first pass</button><button id="profile-second" class="btn">Begin second pass</button><button id="profile-finish" class="btn accent">Finish pass & export</button></div><p class="settings-note">Reports include area timings, slow-frame sections, visibility counts, nearby-collision candidates and current weather. GPU timing can be unavailable. First pass means first traversal after normal preparation; it is not an unprepared shader benchmark.</p>');
     const begin=label=>{
       this.game.stats.reset(); this.game.hitches.events.length=0; this.game.hitches.maxima={};
+      this.game.areaTimings?.reset();
       this.game.profilePass=label; this.toast(label+" started. Walk the route, then return here.",5000);
       this.hide();this.game.resume();
     };
@@ -438,7 +445,7 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
     $("profile-finish").onclick=()=>{
       const report=this.diagnostics();this.game.profileReports ||= [];
       this.game.profileReports.push(report);if(this.game.profileReports.length>2)this.game.profileReports.shift();
-      this.downloadJSON({version:"1.14.0",passes:this.game.profileReports},"LastVehicle-performance-route.json");
+      this.downloadJSON({version:"1.19.0",passes:this.game.profileReports},"LastVehicle-performance-route.json");
     };
   }
   actionKey(action){return this.game.player?.inputDevice==='controller'?({interact:'A',flashlight:'X',journal:'Y',hint:'View',sprint:'L3',crouch:'B',throw:'RB',objective:'D-pad ↑'}[action]||action):keyName(this.game.settings.bindings[action]);}
@@ -462,7 +469,7 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
     const g=this.game;g.renderFault=true;g.lastError=error?.message||"Unknown error";
     g.recoveryLog?.capture(error,{objective:g.currentObjective()?.[0],mode:g.threat?.mode,
       position:g.player?{...g.player.pos}:null});
-    g.store.set("lastCrash",JSON.stringify({version:"1.14.0",...g.recoveryLog?.error}));
+    g.store.set("lastCrash",JSON.stringify({version:"1.19.0",...g.recoveryLog?.error}));
     g.stopInput();g.audio.suspend();
     const previous=g.store.readGame(),saved=g.store.available&&!!previous;
     this.show("recovery",this.head("GAME PAUSED","Restore a clean checkpoint",false)+
@@ -478,7 +485,7 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
     this.show(
       "credits",
       this.head("A GINGRSNAPS PROJECT", "Last Vehicle") +
-        `<p>A short horror game about the people who are still here when everyone else goes home.</p><div class="credits-list"><strong>Created for GingrSnaps</strong><br>Babylon.js — Apache 2.0<br><br><strong>Public-domain / CC0 assets</strong><br>Vehicles & props — Kenney, Car Kit 3.1, Factory Kit and Furniture Kit<br>The Attendant — original creature, rig & animation<br>Meridian worn details, maintenance key, wall paint, weather and three-note score — original CC0 assets<br>Legacy optional human — Quaternius (2017 CC0 pack)<br>Interface & impact sounds — Kenney<br>Music — “Dream 2 Ambience” by TokyoGeisha; legacy “EmptyCity” by yd; “Horror Atmosphere” by Juhani Junkala / SubspaceAudio; horror ambience by congusbongus<br>Sound effects — qubodup, Brian MacIntosh / BMacZero, TinyWorlds, Independent.nu, Frenchyboy, congusbongus looneybits Ogrebane, rubberduck and Thimras.<br>Surface textures — Poly Haven: Rob Tuytel, Amal Kumar and Dimitrios Savva.<br><br>Original level geometry, interface, story, and game code were created for this project.<br><br><a href="assets/CREDITS.md" target="_blank" rel="noopener">Complete audio and model credits ↗</a><br><a href="assets/assets-manifest.json" target="_blank" rel="noopener">Asset sources and license manifest ↗</a></div><div class="button-row"><button id="credits-back" class="btn accent">Back</button><button id="credits-intro" class="btn">Replay studio intro</button></div>`,
+        `<p>A short horror game about the people who are still here when everyone else goes home.</p><div class="credits-list"><strong>Created for GingrSnaps</strong><br>Babylon.js — Apache 2.0<br><br><strong>Public-domain / CC0 assets</strong><br>Vehicles & props — Kenney, Car Kit 3.1, Factory Kit and Furniture Kit<br>The Attendant — original creature, rig & animation<br>Meridian worn details, service-yard props, maintenance key, wall paint, weather and three-note score — original CC0 assets<br>Legacy optional human — Quaternius (2017 CC0 pack)<br>Interface & impact sounds — Kenney<br>Music — “Dream 2 Ambience” by TokyoGeisha; legacy “EmptyCity” by yd; “Horror Atmosphere” by Juhani Junkala / SubspaceAudio; horror ambience by congusbongus<br>Sound effects — qubodup, Brian MacIntosh / BMacZero, TinyWorlds, Independent.nu, Frenchyboy, congusbongus looneybits Ogrebane, rubberduck and Thimras.<br>Surface textures — Poly Haven: Rob Tuytel, Amal Kumar, Dimitrios Savva, Dario Barresi, Charlotte Baglioni and Rico Cilliers.<br><br>Original level geometry, interface, story, and game code were created for this project.<br><br><a href="assets/CREDITS.md" target="_blank" rel="noopener">Complete audio and model credits ↗</a><br><a href="assets/assets-manifest.json" target="_blank" rel="noopener">Asset sources and license manifest ↗</a></div><div class="button-row"><button id="credits-back" class="btn accent">Back</button><button id="credits-intro" class="btn">Replay studio intro</button></div>`,
     );
     $("credits-intro").onclick = () => this.game.replayIntro();
     $("credits-back").onclick = () => this.back();

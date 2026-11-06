@@ -1,4 +1,4 @@
-import { sightClear } from "./navigation.js?v=1.14.0";
+import { sightClear } from "./navigation.js?v=1.19.0";
 
 /** Target small authored interaction volumes on visible handles/items. Full 3D
  * occlusion reaches the object; table tops no longer behave like tall walls. */

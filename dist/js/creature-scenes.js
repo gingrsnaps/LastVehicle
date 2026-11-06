@@ -1,12 +1,12 @@
-import { reachableGoal } from './navigation.js?v=1.14.0';
-import { dampAngle } from './animation.js?v=1.14.0';
-import { roomAt } from './guidance.js?v=1.14.0';
+import { reachableGoal } from './navigation.js?v=1.19.0';
+import { dampAngle } from './animation.js?v=1.19.0';
+import { roomAt } from './guidance.js?v=1.19.0';
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 export const CREATURE_SCENES={
   cartPush:{room:'storage',goal:{x:-24,z:42.65},yaw:Math.PI,duration:2.6,impact:.72},
   carReturn:{room:'garage',goal:{x:9,z:67.4},yaw:Math.PI,duration:1.6,impact:.65,retreat:[{x:15,z:67.2},{x:15,z:72}]},
-  workshopBreach:{room:'workshop',goal:{x:-15.85,z:76},yaw:-Math.PI/2,duration:3.4,impact:1.6},
+  workshopBreach:{room:'workshop',goal:{x:-15.85,z:76},yaw:-Math.PI/2,duration:1.55,impact:.24},
   powerSurge:{room:'electrical',goal:{x:16.05,z:39},yaw:Math.PI/2,duration:2.7,impact:.85},
   closePass:{room:'storage',goal:{x:-22,z:60},yaw:Math.PI,duration:2.2,impact:.65},
 };
@@ -18,7 +18,7 @@ export const CREATURE_SCENES={
 export class CreatureScenes {
   constructor(game){this.g=game;this.reset();}
   reset(){this.active=null;this.cooldown=0;this.pose=null;this.waiting=new Map();}
-  fallbackReady(id){return (this.waiting.get(id)||0)>=12;}
+  fallbackReady(id){return (this.waiting.get(id)||0)>=4;}
   cancel(requeue=true){
     const g=this.g,a=this.active;if(!a)return;
     if(a.wheelVoice)g.audio.releaseVoice?.(a.wheelVoice);
@@ -36,7 +36,7 @@ export class CreatureScenes {
     }
     if(typeof t.stageRoute!=='function')return false;
     if(!this.active){
-      if(this.cooldown||d.quiet>0||d.recovery>0||d.active||p.hiding||p.vehicle||g.pendingAction||['dormant','waiting','reveal','attack','recover','chase','inspect','trapped','lured'].includes(t.mode))return false;
+      if(t.doorApproach||this.cooldown||d.quiet>0||d.recovery>0||d.active||p.hiding||p.vehicle||g.pendingAction||['dormant','waiting','reveal','attack','recover','stunned','chase','inspect','trapped','lured'].includes(t.mode))return false;
       const room=roomAt(p.pos);
       let id=d.queue.find(id=>CREATURE_SCENES[id]?.room===room);
       if(!id&&g.state.flags.includes('key')&&!g.state.scares.includes('closePass')&&p.pos.x<-18&&p.pos.z>51&&p.pos.z<68&&dist(t.pos,CREATURE_SCENES.closePass.goal)<14){id='closePass';d.request(id);}
@@ -56,10 +56,9 @@ export class CreatureScenes {
       d.queue=d.queue.filter(x=>x!==id);d.active=id;
       t.stageRoute([spec.goal],id==='workshopBreach'?'Brace':'Listen');
       if(id!=='carReturn')g.audio.play(id==='closePass'?'panel-scrape':'handle-strain',{volume:.25,position:{...t.pos,y:1.4},refDistance:4});
-      if(id!=='carReturn')g.ui.subtitle(id==='cartPush'?'[A hand closes around the storage cart.]':id==='closePass'?'[Metal scrapes in the service passage.]':id==='workshopBreach'?'[The workshop grille strains.]':'[Something moves at the Electrical doorway.]',3);
     }
     const a=this.active;a.time+=dt;
-    if(p.vehicle||p.hiding||dist(p.pos,a.spec.goal)>19||t.mode!=='staged'||(a.phase==='approach'&&a.time>15)){
+    if(p.vehicle||p.hiding||dist(p.pos,a.spec.goal)>19||t.mode!=='staged'||(a.phase==='approach'&&a.time>7)){
       this.cancel();return false;
     }
     if(a.phase==='withdraw'){
@@ -72,7 +71,7 @@ export class CreatureScenes {
       t.yaw=dampAngle(t.yaw,a.spec.yaw,8,dt);
       a.cue+=dt;
       if(a.cue>3){a.cue=0;g.audio.play('creature-breath',{volume:.3,position:{...t.pos,y:1.7},refDistance:4});}
-      if(!g.visualReadable({...t.pos,y:1.5},1.8,18))return true;
+      if(!g.visualReadable({...t.pos,y:1.5},1.8,18)){if(a.time>7)this.cancel(false);return true;}
       a.phase='beat';a.time=0;g.audio.prepareBeat?.(a.spec.impact+.3);
       if(a.id==='workshopBreach'&&Math.abs(p.pos.x+17)>1.1)g.world.visuals.setGrille(1);
       if(a.id==='powerSurge')g.world.atmosphere.playSurge(()=>{g.audio.play('lv113-fan-stop',{volume:.38,position:{x:23,y:3.73,z:42},refDistance:4});});
@@ -84,9 +83,9 @@ export class CreatureScenes {
     }
     t.yaw=dampAngle(t.yaw,a.spec.yaw,10,dt);
     if(a.id==='workshopBreach'){
-      this.pose=time<1?{clip:'Brace',phase:.5*smooth(time)}:{clip:'Strike',phase:Math.min(1,(time-1)/1.2)};
+      this.pose={clip:'Strike',phase:time<.24?time/.24*.5:.5+Math.min(1,(time-.24)/.8)*.5};
       // Actual palm at phase .5: (-.20,1.44,+1.10), rotated to the grille.
-      if(time>2.4)g.world.visuals.setGrille(1-smooth((time-2.4)/1));
+      if(time>.8)g.world.visuals.setGrille(1-smooth((time-.8)/.75));
     }else if(a.id==='cartPush'){
       this.pose={clip:'DoorPush',phase:Math.min(1,time/1.8)};
       if(time>=a.spec.impact){

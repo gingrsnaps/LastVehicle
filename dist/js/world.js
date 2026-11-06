@@ -1,18 +1,27 @@
-import { Distractions } from "./distractions.js?v=1.14.0";
-import { selectFixtures, lightingPhase, fixturePower, ambientPower } from "./lighting.js?v=1.14.0";
-import { Details } from "./details.js?v=1.14.0";
-import { RichDetails } from "./rich-details.js?v=1.14.0";
-import { EquipmentScenes } from "./equipment-scenes.js?v=1.14.0";
-import { PlacementRegistry } from "./anchors.js?v=1.14.0";
-import { Decay } from "./decay.js?v=1.14.0";
-import { PUDDLES, SurfaceEffects } from "./surfaces.js?v=1.14.0";
-import { PARKING_ROWS, PARKED_CARS, groundModel } from "./placement.js?v=1.14.0";
-import { PROP_LAYOUT, PROP_SIZES, propCollider } from "./props.js?v=1.14.0";
-import { Atmosphere } from "./atmosphere.js?v=1.14.0";
-import { Staging } from "./staging.js?v=1.14.0";
-import { roomAt } from "./guidance.js?v=1.14.0";
-import { consumeSteps, yieldTask, waitForReady, loadInBatches } from "./preparation.js?v=1.14.0";
-import { Visuals } from "./visuals.js?v=1.14.0";
+import { signTextureSize } from './sign-sizing.js?v=1.19.0';
+import { ServiceYard } from './yard.js?v=1.19.0';
+import { Scenery } from './scenery.js?v=1.19.0';
+import { Landscape } from './landscape.js?v=1.19.0';
+import { SurfaceLibrary } from './surface-library.js?v=1.19.0';
+import { NightSky } from './night-sky.js?v=1.19.0';
+import { GuideRoute } from './wayfinding.js?v=1.19.0';
+import { sectorVisible } from './visibility.js?v=1.19.0';
+import { indexSpatial, spatialReport } from './spatial.js?v=1.19.0';
+import { Distractions } from "./distractions.js?v=1.19.0";
+import { selectFixtures, lightingPhase, fixturePower, ambientPower } from "./lighting.js?v=1.19.0";
+import { Details } from "./details.js?v=1.19.0";
+import { RichDetails } from "./rich-details.js?v=1.19.0";
+import { EquipmentScenes } from "./equipment-scenes.js?v=1.19.0";
+import { PlacementRegistry } from "./anchors.js?v=1.19.0";
+import { Decay } from "./decay.js?v=1.19.0";
+import { PUDDLES, SurfaceEffects } from "./surfaces.js?v=1.19.0";
+import { PARKING_ROWS, PARKED_CARS, groundModel } from "./placement.js?v=1.19.0";
+import { PROP_LAYOUT, PROP_SIZES, propCollider } from "./props.js?v=1.19.0";
+import { Atmosphere } from "./atmosphere.js?v=1.19.0";
+import { Staging } from "./staging.js?v=1.19.0";
+import { roomAt } from "./guidance.js?v=1.19.0";
+import { consumeSteps, yieldTask, waitForReady, loadInBatches } from "./preparation.js?v=1.19.0";
+import { Visuals } from "./visuals.js?v=1.19.0";
 /**
  * Scene construction. Public CC0 cars are dressed with original modular geometry.
  * Units are metres; Y is up and the north exit is at Z=0. A flat, continuous floor
@@ -26,8 +35,8 @@ export class World {
     this.scene = new B.Scene(engine);
     this.scene.clearColor = new B.Color4(0.016, 0.025, 0.031, 1);
     this.scene.fogMode = B.Scene.FOGMODE_EXP2;
-    this.scene.fogDensity = 0.019;
-    this.scene.fogColor = C("#162126");
+    this.scene.fogDensity = 0.014;
+    this.scene.fogColor = C("#080e13");
     this.scene.imageProcessingConfiguration.toneMappingEnabled = true;
     this.scene.imageProcessingConfiguration.toneMappingType =
       B.ImageProcessingConfiguration.TONEMAPPING_ACES;
@@ -126,16 +135,20 @@ export class World {
     await consumeSteps(this.roomSteps(),()=>report("Preparing the rooms", .15));
     this.buildWorker(); await yieldTask();
     this.visuals = new Visuals(this, {defer:true});
-    await this.visuals.buildAsync(); this.finishConstruction();
+    await this.visuals.buildAsync(); this.finishConstruction({deferYard:true});
+    report('Constructing the service yard',.2);await this.yard.buildAsync();
     report("Garage constructed", .22);
   }
-  finishConstruction() {
+  finishConstruction({deferYard=false}={}) {
     this.stage = new Staging(this);
     this.atmosphere = new Atmosphere(this);
     this.decay = new Decay(this);
+    this.surfaceLibrary=new SurfaceLibrary(this);
     this.surfaces = new SurfaceEffects(this);
     this.equipment=new EquipmentScenes(this);
     this.distractions=new Distractions(this);
+    this.yard=new ServiceYard(this,{defer:deferYard});
+    this.sky=new NightSky(this);this.guideRoute=new GuideRoute(this.rects);
     for (const door of this.shortcuts) this.visuals.dynamicRoots.add(door.mesh);
     this.waypoint = B.MeshBuilder.CreateTorus("requested destination marker", { diameter: 1.15, thickness: 0.055, tessellation: 16 }, this.scene);
     this.waypoint.material = this.materials.warm;
@@ -143,6 +156,12 @@ export class World {
     this.waypoint.isPickable = false;
     this.waypoint.setEnabled(false);
     this.visuals.dynamicRoots.add(this.waypoint);
+    // A flat arrow means "walk this way"; an upright diamond means "object".
+    this.guideArrow=new B.Mesh('requested route arrow',this.scene);
+    const arrow=new B.VertexData();arrow.positions=[0,0,.7,-.38,0,.1,.38,0,.1,-.1,0,.1,.1,0,.1,-.1,0,-.5,.1,0,-.5];arrow.indices=[0,2,1,3,4,5,4,6,5];arrow.normals=Array.from({length:7},()=>[0,1,0]).flat();arrow.applyToMesh(this.guideArrow);
+    this.guideArrow.material=this.materials.warm;this.guideArrow.isPickable=false;this.guideArrow.setEnabled(false);this.visuals.dynamicRoots.add(this.guideArrow);
+    this.guideObject=B.MeshBuilder.CreateTorus('requested object diamond',{diameter:.38,thickness:.035,tessellation:4},this.scene);
+    this.guideObject.rotation.x=Math.PI/2;this.guideObject.material=this.materials.warm;this.guideObject.isPickable=false;this.guideObject.setEnabled(false);this.visuals.dynamicRoots.add(this.guideObject);
     this.scene.skipPointerMovePicking = true;
     this.beamDirection=B.Vector3.Zero();this.beamRight=B.Vector3.Zero();
     this.scene.onBeforeRenderObservable.add(() => {
@@ -240,7 +259,7 @@ export class World {
     bg = "#253c3a",
   ) {
     // Keep long, narrow labels proportional while retaining readable texel height.
-    const width=Math.max(w<2.6?512:1024,Math.ceil(64*w/h)),height=Math.round(width*h/w);
+    const {width,height}=signTextureSize(w,h,this.engine.getCaps().maxTextureSize);
     const tex = new B.DynamicTexture(
       "sign " + text,
       { width, height },
@@ -262,7 +281,7 @@ export class World {
     const mat = new B.StandardMaterial("print " + text, this.scene);
     mat.diffuseTexture = tex;
     mat.emissiveColor = new B.Color3(0.025, 0.025, 0.025);
-    const essential=/EXIT|SHELTER|SECURITY|WORKSHOP|STORAGE|ELECTRICAL|PUMP|SERVICE|POWER|VENT|REPAIR|GATE|RELEASE|ACCESS/.test(text);
+    const essential=/EXIT|SHELTER|SECURITY|WORKSHOP|STORAGE|ELECTRICAL|PUMP|SERVICE|POWER|VENT|REPAIR|GATE|RELEASE|ACCESS|BARRIER|CONTROL|UTILITY|WINCH/.test(text);
     if(essential){
       // Illuminate only the letters. The panel remains dark and receives the
       // actual room lights; there is no new point light or bloom halo per sign.
@@ -306,7 +325,7 @@ export class World {
     const circuit=roomAt({x,z})==='garage'?(Math.abs(x)<4?'lane':'edge'):roomAt({x,z}),key='fixture-'+circuit+(warm?'warm':'cool');
     if(!this.materials[key])this.materials[key]=diffuser.material.clone(key);
     diffuser.material=this.materials[key];
-    const fixture = { x, z, base:warm?5:7, color:C(warm ? "#ffd095" : "#a1c3c3"),diffuserMaterial:diffuser.material };
+    const fixture = { x, z, base:warm?2.1:2.8, range:8, color:C(warm ? "#ffd095" : "#a1c3c3"),diffuserMaterial:diffuser.material };
     this.lights.push(fixture);
     return fixture;
   }
@@ -326,7 +345,7 @@ export class World {
     // The north wall has a real opening, with a separate sliding exit gate collider.
     this.box("north wall left", -17, 2.1, 1, 26, 4.4, 0.5, "concrete", true);
     this.box("north wall right", 17, 2.1, 1, 26, 4.4, 0.5, "concrete", true);
-    this.box("outside floor", 0, -0.2, -4, 8, 0.4, 10, "floor");
+    // The yard slab meets this floor at Z=-1; no coplanar apron overlay.
     this.box("outside left", -4, 2, -4, 0.4, 4, 10, "dark", true);
     this.box("outside right", 4, 2, -4, 0.4, 4, 10, "dark", true);
     this.exitGate = this.box(
@@ -554,8 +573,9 @@ export class World {
   *roomSteps() {
     this.roomTitle("01  SECURITY", -16.75, 18, -1);
     this.desk(-24, 18);
-    this.box("key on desk", -23.4, 0.98, 18, 0.22, 0.06, 0.1, "yellow");
-    this.interactive("key", "Take maintenance key", -23.4, 1, 18);
+    this.box("key on desk", -23.4, 1.26, 17.55, 0.22, 0.06, 0.1, "yellow");
+    this.box('raised key tray support',-23.4,1.075,17.55,.6,.3,.35,'teal');
+    this.interactive("key", "Take maintenance key", -23.4, 1.28, 17.55);
     this.paper("log", -24.5, 18);
     this.desk(-25, 13);
     this.box("CRT case", -25, 1.3, 13, 0.9, 0.78, 0.8, "dark");
@@ -744,6 +764,9 @@ export class World {
     this.richDetails=new RichDetails(this);await this.richDetails.load();
     this.equipment.bindSource();
     for(const f of this.lights)if(f.range&&f.range<=5)f.emergency=true;
+    await this.yard.load();
+    this.landscape=new Landscape(this);
+    this.scenery=new Scenery(this);await this.scenery.load();
     this.placements.resolve();
   }
   placeModel(name, x, z, rotation = 0, scale = 1, y = 0) {
@@ -776,7 +799,7 @@ export class World {
     return root;
   }
   sync(state, immediate = true) {
-    this.visibleRoom=null;this.updateRoomVisibility({x:0,z:50},1);
+    this.visibleRoom=null;this.visibilityTimer=0;
     this.powered = state.flags.includes("power");
     this.lightingPhase=lightingPhase(state);
     this.hemi.intensity=ambientPower(this.lightingPhase);
@@ -785,7 +808,11 @@ export class World {
     this.grilleClosed = false;
     this.visuals.sync(state, immediate);
     this.stage.sync(state, immediate);
-    if(immediate){this.atmosphere.reset(state);this.surfaces?.reset();this.equipment?.reset(state);}
+    this.yard?.sync(state,immediate);
+    if(immediate){
+      this.atmosphere.reset(state);this.surfaces?.reset();this.equipment?.reset(state);
+      this.guideRoute?.reset();this.guideSeconds=0;this.guideArrow?.setEnabled(false);this.guideObject?.setEnabled(false);
+    }
     for (const [index, door] of this.shortcuts.entries()) {
       const open = state.flags.includes("key") ;
       const target = open ? 5.8 : 1.8;
@@ -794,9 +821,13 @@ export class World {
       else if (door.open !== open) this.visuals.animator.to("shortcut" + index, door.mesh.position.y, target, 0.8, apply);
       door.open = open;
     }
+    // A completed exterior task must not briefly select the title camera's
+    // garage sectors. Re-evaluate at the last actual player position instead.
+    this.updateRoomVisibility(this.visibilityPosition||{x:0,z:50},1);
   }
 
   setSettings(s) {
+    this.sky?.setSettings(s);this.yard?.setSettings?.(s);
     this.detailLevel=s.quality==='low'?0:s.quality==='high'?2:1;this.visibleRoom=null;
     this.richDetails?.setSettings(s);
     this.atmosphere?.setSettings(s);
@@ -814,18 +845,22 @@ export class World {
     this.glow.intensity = s.reducedFlashes ? 0.15 : 0.28;
     if (s.fxaa && !this.fxaa) this.fxaa = new B.FxaaPostProcess("optional FXAA", 1, this.camera);
     if (!s.fxaa && this.fxaa) { this.fxaa.dispose(this.camera); this.fxaa = null; }
-    this.scene.fogDensity = 0.019;
+    this.scene.fogDensity = 0.014;
   }
   async warmup(report = () => {}, options = {}) {
     const savedPosition=this.camera.position.clone(), savedRotation=this.camera.rotation.clone();
+    const priorVisibility=this.visibilityPosition||savedPosition;
+    const savedVisibility={x:priorVisibility.x,z:priorVisibility.z};
     const workerEnabled=this.worker.isEnabled(), hand=this.visuals.hand.isEnabled(), action=this.visuals.actionHand.isEnabled();
-    const cockpit=this.stage.cockpit.isEnabled();this.stage.cockpit.setEnabled(true);this.atmosphere.prepare(true);this.surfaces?.prepare(true);this.equipment?.prepare(true);
+    const cockpit=this.stage.cockpit.isEnabled();this.stage.cockpit.setEnabled(true);this.atmosphere.prepare(true);this.surfaces?.prepare(true);this.equipment?.prepare(true);this.yard?.prepare(true);this.sky?.prepare(true);
     this.worker.setEnabled(true); this.visuals.hand.setEnabled(true); this.visuals.actionHand.setEnabled(true);
-    const views=[[10,98,Math.PI],[-23,18,Math.PI],[-23,45,0],[-23,76,-Math.PI/2],[24,39,Math.PI/2],[24,98,Math.PI/2],[0,7,Math.PI]];
+    const views=[[10,98,Math.PI],[-23,18,Math.PI],[-23,45,0],[-23,76,-Math.PI/2],[24,39,Math.PI/2],[24,98,Math.PI/2],[0,7,Math.PI],[0,-18,Math.PI],[23,-42,0],[-8,-79,Math.PI]];
     const started=performance.now();
     try {
       for (let i=0;i<views.length;i++) {
         const [x,z,yaw]=views[i]; this.camera.position.set(x,1.68,z); this.camera.rotation.set(0,yaw,0);
+        // Sector culling follows each preparation view, just as it does in play.
+        this.updateRoomVisibility({x,z},1);
         this.updateLights({x,z},0,false,0,true);
         this.flash.intensity=950; this.spill.intensity=90;
         report("Preparing lighting · room "+(i+1)+" / "+views.length, .67+.25*i/views.length);
@@ -847,16 +882,18 @@ export class World {
       // for the first time just as the final chase reaches the car.
       this.stage.setVehicleLighting(true);
       this.camera.position.copyFrom(B.Vector3.TransformCoordinates(this.stage.driverEye,this.stage.car.computeWorldMatrix(true)));
-      this.camera.rotation.set(0,this.stage.car.rotation.y,0);this.stage.driving=true;
+      this.camera.rotation.set(0,this.stage.car.rotation.y,0);this.updateRoomVisibility(this.camera.position,1);this.stage.driving=true;
       this.flash.intensity=520;this.spill.intensity=360;
       await waitForReady(()=>{this.scene.render();return this.scene.isReady(true);},{label:'Escape headlights',...options});
       this.stage.driving=false;this.stage.setVehicleLighting(false);
       this.preparation={ready:true,rooms:views.length,milliseconds:Math.round(performance.now()-started)};
     } finally {
       this.stage.driving=false;this.stage.setVehicleLighting(false);
-      this.stage.cockpit.setEnabled(cockpit);this.atmosphere.prepare(false);this.surfaces?.prepare(false);this.equipment?.prepare(false);
+      this.stage.cockpit.setEnabled(cockpit);this.atmosphere.prepare(false);this.surfaces?.prepare(false);this.equipment?.prepare(false);this.yard?.prepare(false);
+      this.sky?.prepare(false);
       this.worker.setEnabled(workerEnabled); this.visuals.hand.setEnabled(hand); this.visuals.actionHand.setEnabled(action);
       this.camera.position.copyFrom(savedPosition); this.camera.rotation.copyFrom(savedRotation);
+      this.updateRoomVisibility(savedVisibility,1);
       this.visuals.setFlash(false); this.flash.intensity=0; this.spill.intensity=0;
       this.scene.resetLastAnimationTimeFrame();
     }
@@ -892,12 +929,23 @@ export class World {
     this.waypoint.position.set(x, 0.055, z);
     this.waypoint.scaling.setAll(1 + Math.sin(time * 3) * 0.07);
   }
+  requestGuide(task,player,seconds){
+    this.waypoint.setEnabled(false);this.guideSeconds=seconds;
+    if(seconds>0&&task)this.guideRoute.request(task,this.interactives,player.pos);
+    else {this.guideRoute.reset();this.guideArrow.setEnabled(false);this.guideObject.setEnabled(false);}
+  }
+  tickGuide(player,dt){
+    const g=this.guideSeconds>0?this.guideRoute.tick(player.pos,dt):null;
+    this.guideArrow.setEnabled(g?.kind==='route');this.guideObject.setEnabled(g?.kind==='object');
+    if(g){const m=g.kind==='route'?this.guideArrow:this.guideObject;m.position.set(g.point.x,g.point.y,g.point.z);m.rotation.y=g.kind==='route'?g.yaw:player.yaw;}
+    return g;
+  }
   menuCamera(time) {
     this.camera.position.set(3.1 + Math.sin(time * 0.07) * 0.65, 1.55, 80.7);
     this.camera.setTarget(new B.Vector3(12, 1.45, 71));
     this.updateLights(this.camera.position, time, false);
   }
-  /** Merge static meshes by material and 25m sector. This reduces draw calls while
+  /** Merge static meshes by material and 16/25m sector. This reduces draw calls while
    * preserving useful frustum-culling bounds. Dynamic gates and the actor stay
    * separate. Collision rectangles are independent and therefore unchanged. */
   optimizeStatic() { for (const _ of this.optimizationSteps()) {} }
@@ -923,14 +971,16 @@ export class World {
     for (const m of [...this.scene.meshes]) {
       if (!m.geometry || !m.material || isDynamic(m)) continue;
       m.computeWorldMatrix(true);
+      // Vertex-color foliage and soft water edges have different attribute
+      // layouts. Merging incompatible layouts can throw during preparation.
       const key =
-        m.material.uniqueId + ":" + roomAt(m.getAbsolutePosition()) + ":" + Math.floor(m.getAbsolutePosition().z / 25) + ":" + !!m.metadata?.lvCaster + ':' + (m.metadata?.detailQuality||0);
+        m.material.uniqueId + ":" + roomAt(m.getAbsolutePosition()) + ":" + Math.floor(m.getAbsolutePosition().z / (m.getAbsolutePosition().z<25?16:25)) + ":" + !!m.metadata?.lvCaster + ':' + (m.metadata?.detailQuality||0)+':'+!!m.metadata?.backdrop+':'+m.getVerticesDataKinds().sort().join(',')+':'+!!m.hasVertexAlpha;
       if (!groups.has(key)) groups.set(key, []);
       groups.get(key).push(m);
     }
     this.roomBatches=[];
     for (const meshes of groups.values()) {
-      const zone=roomAt(meshes[0].getAbsolutePosition()),detailQuality=meshes[0].metadata?.detailQuality||0;
+      const zone=roomAt(meshes[0].getAbsolutePosition()),detailQuality=meshes[0].metadata?.detailQuality||0,backdrop=!!meshes[0].metadata?.backdrop,vertexAlpha=!!meshes[0].hasVertexAlpha;
       let batch=meshes[0];
       if (meshes.length > 1) {
         const merged = B.Mesh.MergeMeshes(
@@ -946,11 +996,13 @@ export class World {
           merged.name = "static sector · "+zone;
           merged.metadata={lvCaster:!!meshes[0].metadata?.lvCaster,detailQuality};
           merged.isPickable = false;
+          merged.hasVertexAlpha = vertexAlpha;
           merged.receiveShadows = true;
           merged.freezeWorldMatrix();
         }
       } else meshes[0].freezeWorldMatrix();
-      this.roomBatches.push({mesh:batch,zone,detailQuality,enabled:true});
+      batch.computeWorldMatrix(true);const b=batch.getBoundingInfo().boundingBox;
+      this.roomBatches.push({mesh:batch,zone,detailQuality,backdrop,bounds:{minX:b.minimumWorld.x,maxX:b.maximumWorld.x,minZ:b.minimumWorld.z,maxZ:b.maximumWorld.z},enabled:true});
       yield;
     }
     this.shadow.getShadowMap().renderList = [];
@@ -969,23 +1021,24 @@ export class World {
       this.shadow.addShadowCaster(m);
     this.shadowCasterCount=this.shadow.getShadowMap().renderList.length;
     this.scene.skipPointerMovePicking = true;
+    indexSpatial(this.rects);
   }
   /** Conservative room culling, sampled at 4 Hz. Keep the main garage and
    * adjacent west rooms visible through every doorway; ordinary Babylon frustum
    * culling remains active inside each material/room/sector batch. */
   updateRoomVisibility(pos,dt){
     this.visibilityTimer=(this.visibilityTimer||0)-dt;if(this.visibilityTimer>0)return;this.visibilityTimer=.25;
-    const room=roomAt(pos);if(room===this.visibleRoom)return;this.visibleRoom=room;
-    const west=["security","storage","workshop"],index=west.indexOf(room);
+    this.visibilityPosition||={x:0,z:0};this.visibilityPosition.x=pos.x;this.visibilityPosition.z=pos.z;
+    const room=roomAt(pos);this.visibleRoom=room;
     for(const batch of this.roomBatches||[]){
-      const visible=batch.detailQuality<=(this.detailLevel??0)&&(room==="garage"||batch.zone==="garage"||batch.zone===room||(index>=0&&Math.abs(west.indexOf(batch.zone)-index)===1&&west.includes(batch.zone)));
+      const visible=sectorVisible(batch,pos,room,!!this.yard?.state?.flags.includes('gate'),this.detailLevel??0);
       if(visible!==batch.enabled){batch.mesh.setEnabled(visible);batch.enabled=visible;}
     }
   }
   renderBudgetReport(){
     const rooms={};
     for(const b of this.roomBatches||[]){const room=rooms[b.zone]||={batches:0,triangles:0,shadowBatches:0};room.batches++;room.triangles+=(b.mesh.getTotalIndices?.()||0)/3;if(b.mesh.metadata?.lvCaster)room.shadowBatches++;}
-    return {rooms,limits:{garage:{batches:300,triangles:150000},serviceRoom:{batches:120,triangles:50000},fixtureLightSlots:4,enemyPathNodesPerSlice:128,audioVoices:24},dynamicRoots:this.visuals.dynamicRoots.size,shadowCasters:this.shadowCasterCount||0};
+    return {rooms,enabledStaticBatches:this.roomBatches?.filter(b=>b.enabled).length,spatial:spatialReport(this.rects),limits:{garage:{batches:300,triangles:150000},serviceRoom:{batches:120,triangles:50000},fixtureLightSlots:4,enemyPathNodesPerSlice:128,audioVoices:24},dynamicRoots:this.visuals.dynamicRoots.size,shadowCasters:this.shadowCasterCount||0};
   }
   dispose() {
     this.scene.dispose();

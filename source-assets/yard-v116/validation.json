@@ -1,0 +1,499 @@
+{
+  "passed": true,
+  "engine": "Babylon.js 9.33.1 NullEngine",
+  "browser_visual_qa": false,
+  "external_dependencies": 0,
+  "textures": 0,
+  "all_materials_opaque": true,
+  "all_source_components_closed": true,
+  "all_loaded_normals_finite_and_unit": true,
+  "all_triangles_non_degenerate": true,
+  "winding_matches_normals": true,
+  "assets": 6,
+  "total_triangles": 5128,
+  "total_bytes": 295064,
+  "results": [
+    {
+      "id": "loading-trolley",
+      "sha256": "18b1aec732cf3af3992fa099492011fd65f862c560cd4647eacd0f6cf3b134c3",
+      "closed_components": 49,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 796,
+          "meshes": 8,
+          "materials": 8,
+          "bounds_min": [
+            -0.6000000238418579,
+            0,
+            -0.5
+          ],
+          "bounds_max": [
+            0.6000000238418579,
+            1.100000023841858,
+            0.5
+          ],
+          "dimensions": [
+            1.2000000476837158,
+            1.100000023841858,
+            1
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.000000067179426,
+          "anchors": {
+            "handle": [
+              0,
+              1.0750000476837158,
+              -0.4749999940395355
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 796,
+          "meshes": 8,
+          "materials": 8,
+          "bounds_min": [
+            -0.6000000238418579,
+            0,
+            -0.5
+          ],
+          "bounds_max": [
+            0.6000000238418579,
+            1.100000023841858,
+            0.5
+          ],
+          "dimensions": [
+            1.2000000476837158,
+            1.100000023841858,
+            1
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.000000067179426,
+          "anchors": {
+            "handle": [
+              0,
+              1.0750000476837158,
+              -0.4749999940395355
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "bollard-chain",
+      "sha256": "54cfce240307412a98f3edbdcac1ef8e954399b116f172b719b4bb19bc52f5ca",
+      "closed_components": 31,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 1600,
+          "meshes": 7,
+          "materials": 7,
+          "bounds_min": [
+            -0.800000011920929,
+            0,
+            -0.30000001192092896
+          ],
+          "bounds_max": [
+            0.800000011920929,
+            0.9860000014305115,
+            0.30300000309944153
+          ],
+          "dimensions": [
+            1.600000023841858,
+            0.9860000014305115,
+            0.6030000150203705
+          ],
+          "normal_length_min": 0.9999999557730107,
+          "normal_length_max": 1.000000074601117,
+          "anchors": {
+            "chain_midpoint": [
+              0,
+              0.5849999785423279,
+              0.0949999988079071
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 1600,
+          "meshes": 7,
+          "materials": 7,
+          "bounds_min": [
+            -0.800000011920929,
+            0,
+            -0.30000001192092896
+          ],
+          "bounds_max": [
+            0.800000011920929,
+            0.9860000014305115,
+            0.30300000309944153
+          ],
+          "dimensions": [
+            1.600000023841858,
+            0.9860000014305115,
+            0.6030000150203705
+          ],
+          "normal_length_min": 0.9999999557730107,
+          "normal_length_max": 1.000000074601117,
+          "anchors": {
+            "chain_midpoint": [
+              0,
+              0.5849999785423279,
+              0.0949999988079071
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "freight-tarp",
+      "sha256": "31ac78bc628266cf36ae20a2480e84739091243976a7fc57d2d531f3dee8803c",
+      "closed_components": 38,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 572,
+          "meshes": 5,
+          "materials": 5,
+          "bounds_min": [
+            -1.25,
+            0,
+            -0.75
+          ],
+          "bounds_max": [
+            1.25,
+            1.2000000476837158,
+            0.75
+          ],
+          "dimensions": [
+            2.5,
+            1.2000000476837158,
+            1.5
+          ],
+          "normal_length_min": 0.9999999631911985,
+          "normal_length_max": 1.0000000904927588,
+          "anchors": {
+            "cover_top": [
+              0.27000001072883606,
+              1.2000000476837158,
+              -0.019999999552965164
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 572,
+          "meshes": 5,
+          "materials": 5,
+          "bounds_min": [
+            -1.25,
+            0,
+            -0.75
+          ],
+          "bounds_max": [
+            1.25,
+            1.2000000476837158,
+            0.75
+          ],
+          "dimensions": [
+            2.5,
+            1.2000000476837158,
+            1.5
+          ],
+          "normal_length_min": 0.9999999631911985,
+          "normal_length_max": 1.0000000904927588,
+          "anchors": {
+            "cover_top": [
+              -0.27000001072883606,
+              1.2000000476837158,
+              -0.019999999552965164
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "wall-services",
+      "sha256": "36bce94c1f76dc48786c5babde28fbd43368fd495f71a47fc03ebb2494ddbce5",
+      "closed_components": 40,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 728,
+          "meshes": 5,
+          "materials": 5,
+          "bounds_min": [
+            -0.6499999761581421,
+            0,
+            0
+          ],
+          "bounds_max": [
+            0.6499999761581421,
+            2.4000000953674316,
+            0.2919999957084656
+          ],
+          "dimensions": [
+            1.2999999523162842,
+            2.4000000953674316,
+            0.2919999957084656
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.0000000886657596,
+          "anchors": {
+            "junction_face": [
+              0.28999999165534973,
+              1.5700000524520874,
+              0.17499999701976776
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ],
+            "rear_mount": [
+              0,
+              1.2000000476837158,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 728,
+          "meshes": 5,
+          "materials": 5,
+          "bounds_min": [
+            -0.6499999761581421,
+            0,
+            0
+          ],
+          "bounds_max": [
+            0.6499999761581421,
+            2.4000000953674316,
+            0.2919999957084656
+          ],
+          "dimensions": [
+            1.2999999523162842,
+            2.4000000953674316,
+            0.2919999957084656
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.0000000886657596,
+          "anchors": {
+            "junction_face": [
+              -0.28999999165534973,
+              1.5700000524520874,
+              0.17499999701976776
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ],
+            "rear_mount": [
+              0,
+              1.2000000476837158,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "gatehouse-chair",
+      "sha256": "28a83c317816c54912ada41d4659114ca3e5b665e89a157de80ee128ca87ec47",
+      "closed_components": 19,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 436,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.32499998807907104,
+            0,
+            -0.32499998807907104
+          ],
+          "bounds_max": [
+            0.32499998807907104,
+            0.9764099717140198,
+            0.32499998807907104
+          ],
+          "dimensions": [
+            0.6499999761581421,
+            0.9764099717140198,
+            0.6499999761581421
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.0000001208376466,
+          "anchors": {
+            "seat_top": [
+              0,
+              0.5239999890327454,
+              0.004999999888241291
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 436,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.32499998807907104,
+            0,
+            -0.32499998807907104
+          ],
+          "bounds_max": [
+            0.32499998807907104,
+            0.9764099717140198,
+            0.32499998807907104
+          ],
+          "dimensions": [
+            0.6499999761581421,
+            0.9764099717140198,
+            0.6499999761581421
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.0000001208376466,
+          "anchors": {
+            "seat_top": [
+              0,
+              0.5239999890327454,
+              0.004999999888241291
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "calendar-coat",
+      "sha256": "df611781e579dfd43a48c7d7d557a6664789b9bfd1f2e00df6f31b433e44f17d",
+      "closed_components": 69,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 996,
+          "meshes": 8,
+          "materials": 8,
+          "bounds_min": [
+            -0.550000011920929,
+            0,
+            0
+          ],
+          "bounds_max": [
+            0.550000011920929,
+            1.2000000476837158,
+            0.21799999475479126
+          ],
+          "dimensions": [
+            1.100000023841858,
+            1.2000000476837158,
+            0.21799999475479126
+          ],
+          "normal_length_min": 0.999999958619335,
+          "normal_length_max": 1.0000000874168264,
+          "anchors": {
+            "calendar_face": [
+              0.3149999976158142,
+              0.7149999737739563,
+              0.06499999761581421
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ],
+            "rear_mount": [
+              0,
+              0.6000000238418579,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 996,
+          "meshes": 8,
+          "materials": 8,
+          "bounds_min": [
+            -0.550000011920929,
+            0,
+            0
+          ],
+          "bounds_max": [
+            0.550000011920929,
+            1.2000000476837158,
+            0.21799999475479126
+          ],
+          "dimensions": [
+            1.100000023841858,
+            1.2000000476837158,
+            0.21799999475479126
+          ],
+          "normal_length_min": 0.999999958619335,
+          "normal_length_max": 1.0000000874168264,
+          "anchors": {
+            "calendar_face": [
+              -0.3149999976158142,
+              0.7149999737739563,
+              0.06499999761581421
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ],
+            "rear_mount": [
+              0,
+              0.6000000238418579,
+              0
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

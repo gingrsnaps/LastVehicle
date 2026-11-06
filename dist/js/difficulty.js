@@ -3,11 +3,12 @@
 export const DIFFICULTIES = Object.freeze({
   easy: Object.freeze({
     id: "easy", intercept:false,
+    boltStun:2.1,boltSightDelay:.4,
     label: "Easy",
     description:
       "More breathing room. Slower pursuit, quieter footsteps, and generous stamina.",
     attackWindup: .9, attackRecovery: 1.2, listen: 1.5, searchRadius: 5, searchChecks: 3, predictDistance: 1.8, predictTime: 1.2, lureRetention: .88,
-    chase: 3.05,
+    chase: 3.25,
     investigate: 1.5,
     lure: 2.35,
     standingVision: 16,
@@ -24,12 +25,13 @@ export const DIFFICULTIES = Object.freeze({
   }),
   medium: Object.freeze({
     id: "medium", intercept:true,
+    boltStun:1.55,boltSightDelay:.7,
     label: "Medium",
     description:
       "The intended balance. Listen, break line of sight, and plan your escape.",
     attackWindup: .72, attackRecovery: .95, listen: 1.1, searchRadius: 8, searchChecks: 5, predictDistance: 3.4, predictTime: 2, lureRetention: .7,
-    chase: 3.7,
-    investigate: 1.85,
+    chase: 4.05,
+    investigate: 2.05,
     lure: 2.7,
     standingVision: 21,
     crouchVision: 13,
@@ -45,12 +47,13 @@ export const DIFFICULTIES = Object.freeze({
   }),
   hard: Object.freeze({
     id: "hard", intercept:true,
+    boltStun:1.05,boltSightDelay:1,
     label: "Hard",
     description:
       "A faster, more alert Attendant. Longer searches and less sprint endurance.",
     attackWindup: .58, attackRecovery: .75, listen: .8, searchRadius: 11, searchChecks: 7, predictDistance: 5, predictTime: 2.6, lureRetention: .55,
-    chase: 4.25,
-    investigate: 2.1,
+    chase: 4.6,
+    investigate: 2.35,
     lure: 3.05,
     standingVision: 25,
     crouchVision: 16,

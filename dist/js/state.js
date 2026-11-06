@@ -1,12 +1,12 @@
-import { ENCOUNTER_IDS } from "./encounters.js?v=1.14.0";
-import { TASKS } from "./tasks.js?v=1.14.0";
-import { difficultyId } from "./difficulty.js?v=1.14.0";
+import { ENCOUNTER_IDS } from "./encounters.js?v=1.19.0";
+import { TASKS, currentTask } from "./tasks.js?v=1.19.0";
+import { difficultyId } from "./difficulty.js?v=1.19.0";
 /**
  * Last Vehicle — pure game rules and persistence.
  * This module has no Babylon or DOM dependency, so the important save/progression
  * rules can be tested using Node. Never trust a JSON file just because we made it.
  */
-export const VERSION = 2;
+export const VERSION = 3;
 const LEGACY_FLAGS = ["car","key","fuse","power","terminal","release","valve","alarm","trapped","gate","escaped"];
 export const FLAG_IDS = TASKS.map(task=>task.id);
 export const NOTE_IDS = [
@@ -16,6 +16,7 @@ export const NOTE_IDS = [
   "plaque",
   "incident",
   "dispatch",
+  "yard-log",
 ];
 export const ACTIONS = {
   forward: "KeyW",
@@ -46,12 +47,17 @@ export const DEFAULT_SETTINGS = Object.freeze({
   sprintMode: "hold",
   crouchMode: "toggle",
   reducedMotion: false,
+  stableHorizon: true,
+  throwGuide: true,
   skipIntro: false,
   shadows: "off",
   glow: false,
   fxaa: false,
   adaptive: false,
   adaptiveFloor: 0.65,
+  weatherEffects: 'reduced',
+  skyBrightness: .8,
+  sceneryMotion: true,
   menuFPS: 30,
   fpsMode: "off",
   fpsCorner: "top-right",
@@ -95,6 +101,7 @@ export const DEFAULT_SETTINGS = Object.freeze({
   bindings: { ...ACTIONS },
 });
 export const NOTES = {
+  'yard-log':{title:'The gatehouse handover',tag:'GATEHOUSE · FINAL SHIFT',text:'The garage shutter opens into the service yard. The STREET BARRIER is a separate interlock.\n\n1. Disconnect LOADING at the utility selector beside the generator. The loading feed is flooded.\n2. Select GATEHOUSE. The dry supply operates the barrier motor.\n3. Turn the yellow BARRIER BRAKE wheel beside the damaged side door.\n4. Winch the cargo dolly aside from the loading dock.\n\nThe roadworks container leaves an open lane beside it. Follow the OPEN LANE arrow.\n\nVehicle 042 is underlined three times. The attached ticket is still warm.'},
   notice: {
     title: "A notice under the wiper",
     tag: "YOUR CAR · BAY 042",
@@ -140,6 +147,7 @@ export function newGame(difficulty = "medium") {
     journal: {hints:{}, observations:[], mechanisms:[], readNotes:[], lastObjective:"", controlsSeen:false},
     bolts:3,
     boltHistory:[],
+    refills:[],
     seconds: 0,
     checkpoint: { x: 10, z: 98, yaw: Math.PI },
     savedAt: 0,
@@ -152,9 +160,8 @@ export function mark(s, id) {
   if (FLAG_IDS.includes(id) && !has(s, id)) s.flags.push(id);
 }
 export function objective(s) {
-  return (
-    OBJECTIVES.find(([id]) => !has(s, id)) ?? ["done", "You made it out", ""]
-  );
+  const task=currentTask(s);
+  return task?[task.id,task.title,task.instruction]:["done", "You made it out", ""];
 }
 export function collectNote(s, id) {
   if (NOTE_IDS.includes(id) && !s.notes.includes(id)) s.notes.push(id);
@@ -169,6 +176,7 @@ export function validateSettings(raw = {}) {
     sensitivityY: [0.25, 3],
     uiVolume: [0, 1], loudEffects: [0.25, 1],
     adaptiveFloor: [0.5, 1], fpsSize: [0.8, 1.5],
+    skyBrightness: [.35,1.2],
     uiScale: [0.85, 1.3], crosshairSize: [0.5, 2],
     fov: [60, 105],
     master: [0, 1],
@@ -189,8 +197,8 @@ export function validateSettings(raw = {}) {
     out[key] = clamp(raw[key], a, b, out[key]);
   for (const key of [
     "objectiveHUD", "journalNotify", "easyAdrenaline",
-    "controllerEnabled","monoAudio","speakerLabels",
-    "separateAxes", "reducedMotion", "skipIntro", "glow", "fxaa", "adaptive", "crosshairContrast",
+    "controllerEnabled","monoAudio","speakerLabels","sceneryMotion",
+    "separateAxes", "reducedMotion", "stableHorizon", "throwGuide", "skipIntro", "glow", "fxaa", "adaptive", "crosshairContrast",
     "cinematicMotion",
     "invertY",
     "rawMouse",
@@ -207,6 +215,7 @@ export function validateSettings(raw = {}) {
     if (typeof raw[key] === "boolean") out[key] = raw[key];
   if (["full", "night"].includes(raw.dynamicRange))
     out.dynamicRange = raw.dynamicRange;
+  if(['off','reduced','full'].includes(raw.weatherEffects))out.weatherEffects=raw.weatherEffects;
   if (["low", "medium", "high", "custom"].includes(raw.quality))
     out.quality = raw.quality;
   if (["auto", "720", "1080", "1440"].includes(raw.resolution))
@@ -249,7 +258,7 @@ export function validateSettings(raw = {}) {
 export function validateSave(raw) {
   if (
     !raw ||
-    ![1, VERSION].includes(raw.version) ||
+    ![1, 2, VERSION].includes(raw.version) ||
     !Array.isArray(raw.flags) ||
     !Array.isArray(raw.notes)
   )
@@ -262,8 +271,12 @@ export function validateSave(raw) {
     // mutate the supplied backup, or infer a win from an unfinished old run.
     let n=0; while(n<LEGACY_FLAGS.length && flags.includes(LEGACY_FLAGS[n]))n++;
     const through=[-1,0,2,4,5,6,6,6,6,6,7,8][n];
-    flags=FLAG_IDS.slice(0,through+1);
+    flags=n===LEGACY_FLAGS.length?[...FLAG_IDS]:FLAG_IDS.slice(0,through+1);
   }
+  // A completed pre-expansion run stays complete. An unfinished v2 run resumes
+  // after its existing objectives and discovers the yard normally.
+  const oldOrder=['car','battery','key','fuse','repair','power','terminal','gate','escaped'];
+  if(raw.version===2 && oldOrder.every(id=>raw.flags.includes(id)))flags=[...FLAG_IDS];
   let gap = false;
   s.flags = FLAG_IDS.filter(id => { if(!flags.includes(id))gap=true;return !gap; });
   s.notes = [...new Set(raw.notes.filter((x) => NOTE_IDS.includes(x)))];
@@ -274,7 +287,7 @@ export function validateSave(raw) {
       ),
     ),
   ];
-  s.visited = [...new Set((Array.isArray(raw.visited) ? raw.visited : []).filter(x => ["security", "storage", "workshop", "electrical", "pump"].includes(x)))];
+  s.visited = [...new Set((Array.isArray(raw.visited) ? raw.visited : []).filter(x => ["security", "storage", "workshop", "electrical", "pump",'yard','gatehouse','road'].includes(x)))];
   s.tutorial = [...new Set((Array.isArray(raw.tutorial) ? raw.tutorial : []).filter(x => ["look", "move", "flashlight", "interact", "stealth"].includes(x)))];
   const journal=raw.journal && typeof raw.journal === "object" ? raw.journal : {};
   for(const id of FLAG_IDS.slice(0,s.flags.length+1)) {
@@ -283,11 +296,12 @@ export function validateSave(raw) {
   }
   s.journal.readNotes=[...new Set((Array.isArray(journal.readNotes)?journal.readNotes:[]).filter(id=>s.notes.includes(id)))];
   s.journal.observations=[...new Set((Array.isArray(journal.observations)?journal.observations:[]).filter(id=>["wetTracks","heardDoor"].includes(id)))];
-  s.journal.mechanisms=[...new Set((Array.isArray(journal.mechanisms)?journal.mechanisms:[]).filter(id=>['repair','fuse','power','terminal','gate'].includes(id)))];
+  s.journal.mechanisms=[...new Set((Array.isArray(journal.mechanisms)?journal.mechanisms:[]).filter(id=>['repair','fuse','power','terminal','gate','yard','isolate','barrier','route'].includes(id)))];
   s.journal.lastObjective=[...FLAG_IDS,"done"].includes(journal.lastObjective)?journal.lastObjective:"";
   s.journal.controlsSeen=journal.controlsSeen===true;
   s.bolts=Number.isInteger(raw.bolts)?clamp(raw.bolts,0,3,3):3;
-  s.boltHistory=(Array.isArray(raw.boltHistory)?raw.boltHistory:[]).filter(p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.z)&&Math.abs(p.x)<=31&&p.z>=-20&&p.z<=115&&Number.isInteger(p.uses)&&p.uses>0).slice(-3).map(p=>({x:p.x,z:p.z,uses:Math.min(3,p.uses)}));
+  s.boltHistory=(Array.isArray(raw.boltHistory)?raw.boltHistory:[]).filter(p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.z)&&Math.abs(p.x)<=31&&p.z>=-101&&p.z<=115&&Number.isInteger(p.uses)&&p.uses>0).slice(-3).map(p=>({x:p.x,z:p.z,uses:Math.min(3,p.uses)}));
+  s.refills=[...new Set((Array.isArray(raw.refills)?raw.refills:[]).filter(id=>['refill-workshop','refill-yard','refill-gatehouse'].includes(id)))];
   s.seconds = clamp(raw.seconds, 0, 864000, 0);
   s.savedAt = clamp(raw.savedAt, 0, 9999999999999, 0);
   // Restore only authored safe positions: arbitrary imported coordinates could put
@@ -296,6 +310,10 @@ export function validateSave(raw) {
   return s;
 }
 export function safeCheckpoint(s) {
+  if(has(s,'route'))return {x:-15,z:-32,yaw:Math.PI};
+  if(has(s,'barrier'))return {x:23,z:-42,yaw:Math.PI/2};
+  if(has(s,'isolate'))return {x:23,z:-22,yaw:Math.PI};
+  if(has(s,'yard'))return {x:-9,z:-47,yaw:Math.PI};
   if (has(s,"gate")) return {x:-6,z:8,yaw:0};
   if (has(s,"terminal")) return {x:-22,z:18,yaw:Math.PI/2};
   if (has(s,"power")) return {x:24,z:40,yaw:-Math.PI/2};
@@ -307,6 +325,7 @@ export function safeCheckpoint(s) {
 }
 export function checkpointSave(s) {
   const saved = structuredClone(s);
+  delete saved.driving;delete saved.carPosition; // Live guidance, never an unsafe vehicle checkpoint.
   saved.checkpoint=safeCheckpoint(saved); saved.savedAt=Date.now();
   // Enemy, locker occupancy, temporary lures and drive animation are deliberately
   // transient. Continuing rebuilds a safe world with a fresh grace period.
@@ -341,7 +360,7 @@ export class SaveStore {
       const s = this.get("save");
       if(!s)return null;
       const raw=JSON.parse(s),valid=validateSave(raw);
-      if(raw.version===1 && !this.get("save.v1.backup"))this.set("save.v1.backup",s);
+      if(raw.version<VERSION && !this.get('save.v'+raw.version+'.backup'))this.set('save.v'+raw.version+'.backup',s);
       return valid;
     } catch {
       return null;

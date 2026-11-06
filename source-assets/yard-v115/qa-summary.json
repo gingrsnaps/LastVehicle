@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "assets": 10,
+  "total_encoded_bytes": 359156,
+  "triangles": 5867,
+  "min_triangles": 336,
+  "max_triangles": 1156,
+  "external_dependencies": 0,
+  "textures": 0,
+  "ground_contact": "All actual loaded mesh bounds have minimum Y=0 within 1e-6 m",
+  "anchors": "Both Babylon handedness modes validated",
+  "geometry_validation": "validation.json",
+  "blender_contact_sheet": "Meridian_Service_Yard_v115_Contact_Sheet.png",
+  "browser_visual_qa": false
+}

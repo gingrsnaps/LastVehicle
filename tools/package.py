@@ -23,7 +23,7 @@ sources = [ROOT / "dist/index.html", ROOT / "dist/style.css"]
 for folder, pattern in [("dist/js", "*.js"), ("tools", "*"), ("tests", "*.js")]:
     sources.extend(sorted(p for p in (ROOT / folder).glob(pattern) if p.is_file()))
 sources.extend(ROOT / name for name in ["START_GAME.py", "START_WINDOWS.bat", "START_MAC_LINUX.sh", "package.json"])
-parts = ["# Last Vehicle 1.14 — complete commented source\n\nEdit the actual files. This is a reading copy of the runtime, launchers, packaging tools and tests. Vendor libraries, models, music and sound recordings are supplied separately with their notices. Read UPDATE_1_14.md and BUILD_AND_EDIT_GUIDE.md for the walkthrough.\n"]
+parts = ["# Last Vehicle 1.19 — complete commented source\n\nEdit the actual files. This is a reading copy of the runtime, launchers, packaging tools and tests. Vendor libraries, models, music and sound recordings are supplied separately with their notices. Read UPDATE_1_19.md and BUILD_AND_EDIT_GUIDE.md for the walkthrough.\n"]
 languages = {".js": "javascript", ".mjs": "javascript", ".py": "python", ".html": "html", ".css": "css", ".json": "json", ".bat": "bat", ".sh": "sh"}
 for path in sources:
     parts.append(f"\n## {path.relative_to(ROOT).as_posix()}\n\n```{languages.get(path.suffix, '')}\n{path.read_text(encoding='utf-8').rstrip()}\n```\n")
@@ -52,5 +52,5 @@ for name, selected, base in [
         count = len(archive.namelist())
     temporary.replace(target)
     reports.append({"file": name, "bytes": target.stat().st_size, "files": count, "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
-(output / "v114-package-verification.json").write_text(json.dumps(reports, indent=2) + "\n", encoding="utf-8")
+(output / "v119-package-verification.json").write_text(json.dumps(reports, indent=2) + "\n", encoding="utf-8")
 print(json.dumps(reports, indent=2))

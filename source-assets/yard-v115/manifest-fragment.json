@@ -1,0 +1,698 @@
+{
+  "game_release": "Last Vehicle 1.15",
+  "assets": [
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-dock-cluster",
+      "file": "models/v115-yard-dock-cluster.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.72,
+        0.0,
+        -0.6
+      ],
+      "bounds_max": [
+        0.83094054043293,
+        1.1465000017881395,
+        0.7252365946769714
+      ],
+      "dimensions": [
+        1.55094054043293,
+        1.1465000017881395,
+        1.3252365946769715
+      ],
+      "triangles": 464,
+      "vertices_authored": 314,
+      "anchors": {
+        "crate_top": {
+          "position": [
+            0,
+            1.1460000017881393,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dock-cluster__crate_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dock-cluster__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Floor-supported pallet and strapped freight. Suggested blocker: 1.6 by 1.25 m; never place across a doorway.",
+      "bytes": 29988,
+      "sha256": "fe8cdee8e71e9e3fb09cddc3ec6eb6ed724000c7487630e141831ca80e711f9f"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-dumpster-refuse",
+      "file": "models/v115-yard-dumpster-refuse.glb",
+      "draw_calls_max": 8,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -1.2513946622610093,
+        0.0,
+        -0.54
+      ],
+      "bounds_max": [
+        0.975,
+        1.6334999799728394,
+        0.54
+      ],
+      "dimensions": [
+        2.226394662261009,
+        1.6334999799728394,
+        1.08
+      ],
+      "triangles": 448,
+      "vertices_authored": 294,
+      "anchors": {
+        "lid_contact": {
+          "position": [
+            0,
+            1.35,
+            -0.24
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dumpster-refuse__lid_contact"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dumpster-refuse__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Floor origin includes caster wheels. Use a broad body blocker; do not collide every refuse detail.",
+      "bytes": 29252,
+      "sha256": "db18e152fe63778a1d75caff7bc53b6a08f642757e3b2a7fa44d5e935972c84e"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-cable-reel",
+      "file": "models/v115-yard-cable-reel.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.3840000033378601,
+        0.0,
+        -0.38999998569488525
+      ],
+      "bounds_max": [
+        1.065,
+        0.7799999713897705,
+        0.6215586066246033
+      ],
+      "dimensions": [
+        1.44900000333786,
+        0.7799999713897705,
+        1.0115585923194885
+      ],
+      "triangles": 1156,
+      "vertices_authored": 608,
+      "anchors": {
+        "toolcase_lid": {
+          "position": [
+            0.78,
+            0.34,
+            0.1
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cable-reel__toolcase_lid"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cable-reel__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Grounded spool and toolcase; keep outside narrow routes.",
+      "bytes": 66072,
+      "sha256": "21771482cd8d71ad2f99f8490659aa4181f2085dd67732585c5e67d8d1114c07"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-drain-weeds",
+      "file": "models/v115-yard-drain-weeds.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.5566312074661255,
+        0.0,
+        -0.32
+      ],
+      "bounds_max": [
+        0.54,
+        0.23209949547890574,
+        0.5565739870071411
+      ],
+      "dimensions": [
+        1.0966312074661255,
+        0.23209949547890574,
+        0.8765739870071412
+      ],
+      "triangles": 539,
+      "vertices_authored": 375,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drain-weeds__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Decorative ground cover, no blocker. Set origin to terrain support; drain frame is only 25 mm high.",
+      "bytes": 33932,
+      "sha256": "63d365aaf0549e708666921b56d9425e506e9686a701a3cc8486b8277e7f4c6b"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-road-barrier",
+      "file": "models/v115-yard-road-barrier.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -1.2,
+        0,
+        -0.315
+      ],
+      "bounds_max": [
+        1.2,
+        1.0236228704452515,
+        0.315
+      ],
+      "dimensions": [
+        2.4,
+        1.0236228704452515,
+        0.63
+      ],
+      "triangles": 384,
+      "vertices_authored": 230,
+      "anchors": {
+        "top": {
+          "position": [
+            0,
+            0.92,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "road-barrier__top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "road-barrier__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Solid barrier: use 2.4 by .58 m navigation/collision footprint; do not mark as breakable unless implemented.",
+      "bytes": 24948,
+      "sha256": "b8ca01cf474c3acde8edb65310ea6740346cbfde4b4b0d8515b608f967771888"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-gatehouse-desk",
+      "file": "models/v115-yard-gatehouse-desk.glb",
+      "draw_calls_max": 8,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.84,
+        0.0,
+        -0.38
+      ],
+      "bounds_max": [
+        0.84,
+        1.570759892463684,
+        0.386
+      ],
+      "dimensions": [
+        1.68,
+        1.570759892463684,
+        0.766
+      ],
+      "triangles": 612,
+      "vertices_authored": 392,
+      "anchors": {
+        "work_surface": {
+          "position": [
+            0,
+            0.831,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-desk__work_surface"
+        },
+        "radio": {
+          "position": [
+            -0.4,
+            0.98,
+            0.04
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "gatehouse-desk__radio"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-desk__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Floor-supported workstation. Front is +Z. Interactable control should use radio or work_surface anchor; avoid vague prompts for every prop.",
+      "bytes": 38940,
+      "sha256": "66466fb79e42f360ee16600057cc1c1015f428abf56a4691d8eb1370644ff22a"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-coat-noticeboard",
+      "file": "models/v115-yard-coat-noticeboard.glb",
+      "draw_calls_max": 7,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.5706936898827553,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.55,
+        1.3800000000000001,
+        0.19899998605251312
+      ],
+      "dimensions": [
+        1.1206936898827553,
+        1.3800000000000001,
+        0.19899998605251312
+      ],
+      "triangles": 336,
+      "vertices_authored": 222,
+      "anchors": {
+        "paper": {
+          "position": [
+            0.27,
+            0.9,
+            0.074
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "coat-noticeboard__paper"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "coat-noticeboard__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.6900000000000001,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "coat-noticeboard__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear mounting plane Z=0. Set origin on the lower edge of a wall mount, usually 1.0 m above floor; +Z faces room.",
+      "bytes": 24012,
+      "sha256": "5097643d9e9da4a8c1e77c2c1c7ff865bfc6c2e9393723e8e4876a8d1bbaf519"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-utility-transformer",
+      "file": "models/v115-yard-utility-transformer.glb",
+      "draw_calls_max": 9,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.8143083453178406,
+        0.0,
+        -0.525
+      ],
+      "bounds_max": [
+        0.75,
+        2.129999876022339,
+        0.525
+      ],
+      "dimensions": [
+        1.5643083453178406,
+        2.129999876022339,
+        1.05
+      ],
+      "triangles": 680,
+      "vertices_authored": 430,
+      "anchors": {
+        "control": {
+          "position": [
+            0,
+            0.95,
+            0.45
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "utility-transformer__control"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "utility-transformer__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Grounded concrete plinth with cabinet. Use 1.50 by 1.05 m body blocker; the top bushings and wires are decorative.",
+      "bytes": 41236,
+      "sha256": "edd38843365c6666212a4dcd1a6b570605bc1d1630ed749435766f4bc410b2f3"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-fence-panel",
+      "file": "models/v115-yard-fence-panel.glb",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -1.55,
+        0.0,
+        -0.12
+      ],
+      "bounds_max": [
+        1.55,
+        2.2300000190734863,
+        0.12
+      ],
+      "dimensions": [
+        3.1,
+        2.2300000190734863,
+        0.24
+      ],
+      "triangles": 608,
+      "vertices_authored": 392,
+      "anchors": {
+        "strike": {
+          "position": [
+            0,
+            1.35,
+            -0.07
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "fence-panel__strike"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "fence-panel__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "3.10 m wide open panel. Ground origin at concrete feet. Collision can block walking, but line-of-sight should pass through the wire openings.",
+      "bytes": 34936,
+      "sha256": "4d6a540dbb8a68ec5d1e966ae814e6be0ed2c230d4bdc3d1b2e76cb1276ea7c9"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-drum-store",
+      "file": "models/v115-yard-drum-store.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.75,
+        0.0,
+        -0.56
+      ],
+      "bounds_max": [
+        0.75,
+        1.1785000562667847,
+        0.94456822514534
+      ],
+      "dimensions": [
+        1.5,
+        1.1785000562667847,
+        1.50456822514534
+      ],
+      "triangles": 640,
+      "vertices_authored": 376,
+      "anchors": {
+        "drum_top": {
+          "position": [
+            -0.38,
+            1.18,
+            -0.2
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drum-store__drum_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drum-store__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Floor support pallet with drums; ideal for a loading corner. Suggested blocker 1.55 by 1.2 m.",
+      "bytes": 35840,
+      "sha256": "f898f34916dfb21bb9f631db8b0c1b996fb3d03f19365a58208dff3f25a31099"
+    }
+  ]
+}

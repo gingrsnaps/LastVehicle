@@ -1,13 +1,15 @@
+> Current release: **1.19 — Patrols, wayfinding and the night yard**. Start with [UPDATE_1_19.md](UPDATE_1_19.md) for the expanded campaign, manual driving, controls and verified limits. Earlier update files are historical.
+
 # Last Vehicle — build, play, and edit guide
 
 **A GingrSnaps Project**  
-Browser edition 1.14 candidate · Babylon.js 9.33.1 · 3 November 2026
+Browser edition 1.19 candidate · Babylon.js 9.33.1 · 6 November 2026
 
 This guide assumes you have never built a 3D game. You do not need an Unreal project, a game-editor installation, or a build pipeline. The browser runs the JavaScript, Babylon.js draws the world, and the files in this package supply the story, models, sound, and interface.
 
 The delivered implementation contains the beginning, middle, failure recovery, and ending. It is not only a walking demo. However, automated scene and gameplay checks are not the same as a human browser playtest. Read `VERIFICATION.md` for the exact limits before advertising performance or charging for a release.
 
-Read **UPDATE_1_14.md** first for the current pursuit, controls, settings, journal, physical encounters, worn assets, music, source walkthrough and release limits. UPDATE_1_3.md through UPDATE_1_13.md are historical notes. Browser QA is outstanding, so the live site remains 1.12. The story and walkthrough below still apply.
+Read **UPDATE_1_19.md** first for the current exterior routes, sky, scenery, controls, settings, source walkthrough and release limits. UPDATE_1_3.md through UPDATE_1_16.md are historical notes. Browser QA is outstanding, so the live site remains 1.12. The story and walkthrough below still apply.
 
 ## 1. Start with a working copy
 
@@ -94,13 +96,13 @@ You play **Erin Cole**, leaving a late shift at **Meridian Parking** at 00:17. Y
 
 Your battery has been removed and its lead deliberately cut. A notice directs you to recover it and find a replacement cable through Security. The office log reports movement behind the inspection blind, although there is no night attendant on the roster. An incident report describes a shape too tall to be an ordinary worker. The exit and stairs have been isolated. The creature seems to be repeating an old shift, collecting the last ticket each night. The horror comes from a familiar place becoming a controlled trap.
 
-You cannot fight him. Repair the car, restore and authorize the exit, then survive the return to bay 042. Corners, five shelter lockers, the west passage and optional distractions provide ways to break pursuit. The ending is an automatic in-car escape after a final driver-door interaction.
+You cannot kill him. A direct bolt hit briefly staggers him; repeated rapid hits are resisted. Repair the car, restore and authorize the exit, then survive the return to bay 042. Corners, eight shelter lockers, the west passage and optional distractions provide ways to break pursuit. The garage opens into a service yard with four additional tasks. The ending requires driving the main car through the yard and left around the roadworks container to the street. See UPDATE_1_19.md for the current full walkthrough.
 
 ### Pacing and scares
 
 Three required-task opportunities form the core: the Security blind lifts and the Attendant strikes the wired window after the key pickup; the Workshop hatch bursts open after collecting supplies; and Electrical's cover bangs open during the change to emergency lighting. The single enemy walks around the Security partition to begin its hunt. Workshop and Electrical noises can attract it through ordinary hearing rules.
 
-A director queues each beat once, respects attacks/inspections, and spaces main impacts by 45 active-play seconds, with additional recovery after chases and failed attempts. Events require proximity and do not force the camera; a player who rushes out during deferral may miss a beat until returning. Optional lamp, locker and car-window moments depend on view, actual proximity and pacing. Completed impacts persist in saves. Journal observations describe only fired events. No microphone is required. See UPDATE_1_8.md for the full staging and testing details.
+A director saves each contact once and spaces optional beats. The key reveal bypasses progression delay; the electrical contact belongs directly to its action. Optional staged scenes have bounded timeouts and do not force the camera. Exterior impacts are placed in the natural view from their controls. The single hunter retains its actual position. Optional lamp, locker and car-window moments depend on view, actual proximity and pacing. Completed impacts persist in saves. Journal observations describe only fired events. No microphone is required. See UPDATE_1_8.md for the full staging and testing details.
 
 ## 4. Walkthrough — spoilers
 
@@ -112,7 +114,11 @@ A director queues each beat once, respects attacks/inspections, and spaces main 
 6. **Restore exit power.** At Electrical's panel select **Ventilation → Lighting → Access**. A wrong order resets this puzzle without losing the fuse.
 7. **Authorize the motor.** Enter **1986** at Security's terminal. The shift log and north dedication plaque give this founding year. The motor is authorized directly; no release-key or coolant task is required.
 8. **Raise the shutter.** Use the motor to the left of the north exit. You can move while it opens. The noise draws attention and the final return becomes more pressured.
-9. **Return and drive out.** Lose pursuit using rooms, lockers, the west passage or optional noise tools. Use the repaired car's driver door. The driver door opens as you enter, then closes and audibly latches. The engine starts after the door closes, and a continuous automatic drive carries you to the street. Mouse movement permits a bounded view inside; Escape pauses. Walking out on foot does not finish the story.
+9. **Inspect the yard barrier.** Walk through the garage shutter and use the north service-yard cabinet.
+10. **Select the dry supply.** At the east utility awning choose LOADING OFF, then GATEHOUSE ON.
+11. **Release the brake.** Use the yellow wheel beside the damaged side door in the gatehouse.
+12. **Clear the approach.** Use the loading-dock winch to pull the cargo dolly aside.
+13. **Return and drive out.** Enter the car's left driver door. W/S accelerate, brake or reverse; A/D steer. Drive through the garage shutter and street barrier, then pass the roadworks container along the OPEN LANE sign. E exits only when stopped with space on the left. Mouse-look and Escape remain available. Walking out on foot does not finish the story.
 
 The valve and siren provide an initial nine-second distraction with an eighteen-second reset. Repeated use of the same source shortens its investigation, with a 2.5-second minimum. They do not override a fresh visual chase. The workshop grille can be dropped only from outside while the Attendant is inside; it lasts twelve seconds. It is not a required objective or permanent solution. Use E at a SHELTER locker to enter and again to leave. If it saw you enter, find another route before it finishes checking the locker.
 
@@ -143,7 +149,7 @@ The garage is about 60 metres wide and 110 metres long. World **Y** is height; *
 | Electrical | 26 | 39 | Circuit-order puzzle |
 | Pump room | 25 | 98 | Optional valve distraction, dispatch evidence |
 | Gate motor | -4.7 | 5 | Final release |
-| Street beyond exit | 0 | -15 | End of automatic drive |
+| Street beyond service road | 0 | -95 | Controlled driving finish |
 
 Architecture is built in `World.buildArchitecture()` and rooms in `World.buildRooms()`. The models are loaded afterward. Keeping interaction anchors independent of the model mesh means you can replace a car without rewriting its story logic.
 
@@ -240,9 +246,9 @@ A save contains a schema version, completed flags, collected note IDs, fired sca
 
 Objectives form an ordered prefix. For example, a save cannot claim the gate is open while the fuse has never been found. The validator drops out-of-order progress. If you intentionally change the objective order in a future game update, create a proper save migration and test it rather than simply changing the version number.
 
-The game saves immediately on completed objectives. Routine 30-second saves prefer an idle callback (with a deadline/fallback); pausing and page exit also save. Journal reading/reveal changes save while play is paused. Manual Save uses the same safe-checkpoint policy. Export produces a JSON file; Import validates and restores it. Enemy pursuit, temporary traps, locker occupancy and a running car sequence are transient. Reloading restores completed progress to a safe authored location with a fresh grace period. Schema-1 saves migrate to schema 2 with completed old tasks credited; the original local JSON is backed up once under `lastvehicle.save.v1.backup` when storage works.
+The game saves immediately on completed objectives. Routine 30-second saves prefer an idle callback (with a deadline/fallback); pausing and page exit also save. Journal reading/reveal changes save while play is paused. Manual Save uses the same safe-checkpoint policy. Export produces a JSON file; Import validates and restores it. Enemy pursuit, temporary traps, locker occupancy and a running car sequence are transient. Reloading restores completed progress to a safe authored location with a fresh grace period. Schema-1 saves migrate to schema 3 with completed old tasks credited; the original local JSON is backed up once under `lastvehicle.save.v1.backup` when storage works.
 
-Read `UPDATE_1_13.md` for current behavior, and historical `UPDATE_1_4.md`/`UPDATE_1_5.md` for earlier settings and preparation changes. Quick setup plus all six detailed categories, safe graphics preview, rolling FPS metrics, GPU-dependent adaptive resolution, reduced motion and intro replay remain included. Gameplay now offers optional objective HUD and journal notifications instead of automatic hint reminders.
+Read `UPDATE_1_19.md` for current behavior, and historical `UPDATE_1_4.md`/`UPDATE_1_5.md` for earlier settings and preparation changes. Quick setup plus all six detailed categories, safe graphics preview, rolling FPS metrics, GPU-dependent adaptive resolution, reduced motion and intro replay remain included. Gameplay now offers optional objective HUD and journal notifications instead of automatic hint reminders.
 
 Settings are independent of the story save. Exporting story progress does not change another player's preferred sensitivity or volume. Invalid imported settings are clamped, and keybinding conflicts are rejected or swapped by the remapping interface.
 
@@ -352,7 +358,7 @@ The Attendant uses **skeletal animation**: a mesh is weighted to 38 deform joint
 
 A separate empty gloved hand reaches during interactions; it works when the flashlight is put away. Optional Cinematic interaction motion adds a small, two-degree field-of-view focus change during the valve action, without forced aiming or camera shake. Turn it off in Settings → Comfort if you prefer a steady camera. Object animation remains enabled.
 
-Ordinary pickups and the exit shutter allow movement. Repair and the valve briefly lock translation while allowing looking, and the interaction key cancels it without advancing progress. Pausing freezes action progress; returning to the title or loading another run clears it. A run token prevents stale callbacks from writing flags into a new game, and an active-time watchdog releases an action that fails to finish. The gate collider opens near the end of travel; its completed objective is saved only at the end. Version-1 saves migrate to schema 2.
+Ordinary pickups and the exit shutter allow movement. Repair and the valve briefly lock translation while allowing looking, and the interaction key cancels it without advancing progress. Pausing freezes action progress; returning to the title or loading another run clears it. A run token prevents stale callbacks from writing flags into a new game, and an active-time watchdog releases an action that fails to finish. The gate collider opens near the end of travel; its completed objective is saved only at the end. Version-1 saves migrate to schema 3.
 
 ### The Attendant: information it actually has
 
@@ -366,7 +372,7 @@ Distractions last nine seconds and leave a remembered sound location; they do no
 
 ### Difficulty and save compatibility
 
-Choose Easy, Medium, or Hard on the new-game screen. Settings → Gameplay can change it during the same run. The chosen ID is stored in `state.difficulty` and preserved by export/import and checkpoint normalization. The save schema is now version 2; schema-1 checkpoints migrate, and files without a difficulty field become Medium. Invalid values also become Medium.
+Choose Easy, Medium, or Hard on the new-game screen. Settings → Gameplay can change it during the same run. The chosen ID is stored in `state.difficulty` and preserved by export/import and checkpoint normalization. The save schema is now version 3; schema-1 and schema-2 checkpoints migrate, and files without a difficulty field become Medium. Invalid values also become Medium.
 
 | Tuning | Easy | Medium | Hard |
 |---|---:|---:|---:|

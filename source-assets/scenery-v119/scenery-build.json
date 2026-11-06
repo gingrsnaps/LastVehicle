@@ -1,0 +1,2247 @@
+{
+  "release": "Last Vehicle 1.19",
+  "units": "metres",
+  "front_axis": "+Z",
+  "material_names": [
+    "Yard115_teal",
+    "Yard115_steel",
+    "Yard115_dark",
+    "Yard115_rubber",
+    "Yard115_ochre",
+    "Yard115_paper",
+    "Yard115_rust",
+    "Yard115_concrete",
+    "Yard115_cloth",
+    "Yard115_dust",
+    "Yard115_wood",
+    "Yard115_moss"
+  ],
+  "total_triangles": 4136,
+  "total_bytes": 314888,
+  "assets": [
+    {
+      "id": "worn-pallet-stack",
+      "file": "assets/models/lv119-worn-pallet-stack.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.59,
+        0.0,
+        -0.47800000000000004
+      ],
+      "bounds_max": [
+        0.614,
+        0.5740000009536743,
+        0.45
+      ],
+      "dimensions": [
+        1.204,
+        0.5740000009536743,
+        0.928
+      ],
+      "triangles": 736,
+      "vertices_authored": 484,
+      "closed_components": 58,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "worn-pallet-stack__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Keep clear of pedestrian strips, controls and vehicle swept paths; footprint 1.22 x .92 m.",
+      "bytes": 54228,
+      "sha256": "38e7354f3e568a688133f55e8331afc09e6cd00ba765b0882e36cd46248ac1fd",
+      "parts": [
+        {
+          "name": "lower bearer",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.007268800089756648
+        },
+        {
+          "name": "lower bearer",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.007268799779315789
+        },
+        {
+          "name": "lower bearer",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.007268800400197506
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520003606875735
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520003606875735
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013519999677858627
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520001230062921
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520006323233247
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520006323233247
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00889200173939268
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00889199844095856
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008891999100645384
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008892000225993494
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008892003291596971
+        },
+        {
+          "name": "dark end wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.200080047671992e-05
+        },
+        {
+          "name": "dark end wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.199943259668845e-05
+        },
+        {
+          "name": "lower bearer",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00726880133152008
+        },
+        {
+          "name": "lower bearer",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.007268802165829888
+        },
+        {
+          "name": "lower bearer",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0072688030389447995
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.001352002533773581
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520002054671445
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013519999726365008
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520002442722525
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520005159080029
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520000502467155
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00889200018718839
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008891996733533842
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00889199785888195
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00889199797529727
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008891990563521787
+        },
+        {
+          "name": "dark end wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.199959751839435e-05
+        },
+        {
+          "name": "dark end wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.200233327845734e-05
+        },
+        {
+          "name": "lower bearer",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.007268797916670637
+        },
+        {
+          "name": "lower bearer",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.007268798178605115
+        },
+        {
+          "name": "lower bearer",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.007268809247761964
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.001352000360687574
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013519997398058572
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.001352000224869698
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013519999920390544
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520000502467155
+        },
+        {
+          "name": "spacer block",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0013520005159080033
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008397995649526518
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.72134323293966e-07
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.672836848845135e-07
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008891996539508297
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.710041245445605e-07
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.697938902613952e-07
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008891998596178986
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.706103133386894e-07
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.700555215706117e-07
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008891994909693795
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.72844941820946e-07
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.677493461718104e-07
+        },
+        {
+          "name": "worn top plank",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008891988390435772
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.769752604266003e-07
+        },
+        {
+          "name": "nail head",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.646837426970363e-07
+        },
+        {
+          "name": "dark end wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.200113032013172e-05
+        },
+        {
+          "name": "dark end wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.199946170051894e-05
+        }
+      ]
+    },
+    {
+      "id": "dented-bin",
+      "file": "assets/models/lv119-dented-bin.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.32,
+        0.0,
+        -0.3370199632644653
+      ],
+      "bounds_max": [
+        0.36967031478881834,
+        1.145,
+        0.281
+      ],
+      "dimensions": [
+        0.6896703147888184,
+        1.145,
+        0.6180199632644654
+      ],
+      "triangles": 348,
+      "vertices_authored": 208,
+      "closed_components": 18,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dented-bin__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Open cavity and canted lid make the outline readable; no animation or implied interaction.",
+      "bytes": 27948,
+      "sha256": "0e35667f7c423e9a4d5c09f903cae2081c334910adf7e8162e22efae810de180",
+      "parts": [
+        {
+          "name": "hollow dented bin shell",
+          "vertices": 32,
+          "faces": 32,
+          "closed": true,
+          "signed_volume_m3": 0.03566749932816793
+        },
+        {
+          "name": "bin cavity floor",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.007350001096104582
+        },
+        {
+          "name": "rear rolling wheel",
+          "vertices": 24,
+          "faces": 14,
+          "closed": true,
+          "signed_volume_m3": 0.0017598748205879626
+        },
+        {
+          "name": "rear wheel fork",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.000528000139941772
+        },
+        {
+          "name": "front support foot",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0011759997966388864
+        },
+        {
+          "name": "rear rolling wheel",
+          "vertices": 24,
+          "faces": 14,
+          "closed": true,
+          "signed_volume_m3": 0.0017598749273020073
+        },
+        {
+          "name": "rear wheel fork",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0005279998489034674
+        },
+        {
+          "name": "front support foot",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0011760002234950662
+        },
+        {
+          "name": "loose supported lid",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.015345010178862138
+        },
+        {
+          "name": "lid lifting grip",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0005145000641277872
+        },
+        {
+          "name": "bin handle lug",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00023099714114020254
+        },
+        {
+          "name": "bin handle lug",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00023099764560659717
+        },
+        {
+          "name": "rear grip",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0005475816118026457
+        },
+        {
+          "name": "faded collection label",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0005472007615026095
+        },
+        {
+          "name": "label stencil",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 1.0500060549626742e-05
+        },
+        {
+          "name": "label stencil",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 1.0500058730637349e-05
+        },
+        {
+          "name": "label stencil",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 1.0499648245361943e-05
+        },
+        {
+          "name": "panel abrasion",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0002039998459319275
+        }
+      ]
+    },
+    {
+      "id": "damaged-road-barrier",
+      "file": "assets/models/lv119-damaged-road-barrier.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 5,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.1800000000000002,
+        0,
+        -0.285
+      ],
+      "bounds_max": [
+        1.05,
+        0.7074494957923889,
+        0.41
+      ],
+      "dimensions": [
+        2.2300000000000004,
+        0.7074494957923889,
+        0.695
+      ],
+      "triangles": 204,
+      "vertices_authored": 126,
+      "closed_components": 12,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "damaged-road-barrier__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery or an explicitly authored blocker. Use outside the driveable route; 2.25 m wide with a broad stable base.",
+      "bytes": 18520,
+      "sha256": "eacc01d30f8580d55a19d40c2a1487a967930c565806ccc57fd1c1b47d8126ab",
+      "parts": [
+        {
+          "name": "damaged concrete plinth",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.19069597421912476
+        },
+        {
+          "name": "chipped concrete body",
+          "vertices": 18,
+          "faces": 11,
+          "closed": true,
+          "signed_volume_m3": 0.3224200107118425
+        },
+        {
+          "name": "faded warning face",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006840004352852699
+        },
+        {
+          "name": "old stripe",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00010800039550910398
+        },
+        {
+          "name": "faded warning face",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006839997270920621
+        },
+        {
+          "name": "old stripe",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00010799968246525778
+        },
+        {
+          "name": "faded warning face",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006840001636495189
+        },
+        {
+          "name": "old stripe",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00010800064774230131
+        },
+        {
+          "name": "faded warning face",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006839987278605497
+        },
+        {
+          "name": "old stripe",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00010800318947682766
+        },
+        {
+          "name": "exposed rigid reinforcement",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00014271140025812196
+        },
+        {
+          "name": "grounded broken chip",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0050805000743518285
+        }
+      ]
+    },
+    {
+      "id": "tire-stack",
+      "file": "assets/models/lv119-tire-stack.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 2,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.3449999988079071,
+        0.0,
+        -0.35999998450279236
+      ],
+      "bounds_max": [
+        0.3700000047683716,
+        0.46765372157096863,
+        0.3449999988079071
+      ],
+      "dimensions": [
+        0.7150000035762787,
+        0.46765372157096863,
+        0.7049999833106995
+      ],
+      "triangles": 864,
+      "vertices_authored": 480,
+      "closed_components": 27,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "tire-stack__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Three supported tires, 0.70 m diameter; allow clearance around the entire footprint.",
+      "bytes": 56748,
+      "sha256": "fc6aada1ded6f709404ce372bffd8600435415b6c71040a1bb250f9ddaf9894b",
+      "parts": [
+        {
+          "name": "open tire carcass",
+          "vertices": 96,
+          "faces": 96,
+          "closed": true,
+          "signed_volume_m3": 0.0328576680816089
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812513023168623
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812505353096637
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812513023168623
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812505353096637
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812511997622338
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0001581250576236925
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812513023168623
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812513402124748
+        },
+        {
+          "name": "open tire carcass",
+          "vertices": 96,
+          "faces": 96,
+          "closed": true,
+          "signed_volume_m3": 0.03285767090020879
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0001581248729962681
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0001581248752321092
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812505747211011
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.000158124389902999
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812490726966938
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812542718170638
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812507748099347
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812497925556573
+        },
+        {
+          "name": "open tire carcass",
+          "vertices": 96,
+          "faces": 96,
+          "closed": true,
+          "signed_volume_m3": 0.032857660650430866
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812512477471813
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812519268365585
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812512477471813
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812519268365585
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812514660259094
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812561226387825
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812512477471813
+        },
+        {
+          "name": "raised worn tread",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015812553465366364
+        }
+      ]
+    },
+    {
+      "id": "abandoned-hand-truck",
+      "file": "assets/models/lv119-abandoned-hand-truck.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.29600000381469727,
+        0.0,
+        -0.4099999964237213
+      ],
+      "bounds_max": [
+        0.29600000381469727,
+        1.1799999475479126,
+        0.45
+      ],
+      "dimensions": [
+        0.5920000076293945,
+        1.1799999475479126,
+        0.8599999964237213
+      ],
+      "triangles": 440,
+      "vertices_authored": 256,
+      "closed_components": 18,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "abandoned-hand-truck__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Tip rests at floor level and wheels touch the floor. Do not place in front of a task or shelter.",
+      "bytes": 33204,
+      "sha256": "90a50ac87ad3f5f453eef2bc5489b529f7e9ce4c75f85f58a07c54c3b12fba1d",
+      "parts": [
+        {
+          "name": "rubber wheel",
+          "vertices": 24,
+          "faces": 14,
+          "closed": true,
+          "signed_volume_m3": 0.0038024997544804746
+        },
+        {
+          "name": "hub",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 5.430587286051972e-05
+        },
+        {
+          "name": "leaning upright",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0018077114204970704
+        },
+        {
+          "name": "rubber handle",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.00030546910905589653
+        },
+        {
+          "name": "rubber wheel",
+          "vertices": 24,
+          "faces": 14,
+          "closed": true,
+          "signed_volume_m3": 0.0038024998175387736
+        },
+        {
+          "name": "hub",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 5.430570308817551e-05
+        },
+        {
+          "name": "leaning upright",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0018077093266886846
+        },
+        {
+          "name": "rubber handle",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0003054711948304129
+        },
+        {
+          "name": "wheel axle",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0007939954108830231
+        },
+        {
+          "name": "frame cross bar",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0006844785627132898
+        },
+        {
+          "name": "frame cross bar",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0006844777623579529
+        },
+        {
+          "name": "frame cross bar",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0006844771026711276
+        },
+        {
+          "name": "grounded toe plate",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.016332798559839524
+        },
+        {
+          "name": "toe stiffening fold",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.002279999156598933
+        },
+        {
+          "name": "faded company plate",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0008351989284468191
+        },
+        {
+          "name": "plate lettering",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 1.0000328378131005e-05
+        },
+        {
+          "name": "plate lettering",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 1.0000110099402569e-05
+        },
+        {
+          "name": "plate lettering",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 1.000000823599597e-05
+        }
+      ]
+    },
+    {
+      "id": "wall-vent",
+      "file": "assets/models/lv119-wall-vent.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 4,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.45999999999999996,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.45999999999999996,
+        0.88,
+        0.17237123265862464
+      ],
+      "dimensions": [
+        0.9199999999999999,
+        0.88,
+        0.17237123265862464
+      ],
+      "triangles": 224,
+      "vertices_authored": 144,
+      "closed_components": 16,
+      "anchors": {
+        "front_center": {
+          "position": [
+            0,
+            0.44,
+            0.17
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-vent__front_center"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "wall-vent__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.44,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-vent__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Wall-mounted lower-edge origin with rear Z=0. Front +Z, 0.90 m wide. Mount against a real wall at 0.45\u20132.3 m lower-edge height.",
+      "bytes": 19664,
+      "sha256": "3ec69d63d6d5bcd4f53f3eef6c85a92cc7c4e0bbf1348e850604f4a82b255154",
+      "parts": [
+        {
+          "name": "dark vent recess",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.04821599662924807
+        },
+        {
+          "name": "vent frame side",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0073919997084885836
+        },
+        {
+          "name": "vent frame side",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.007392000950252017
+        },
+        {
+          "name": "vent frame crosspiece",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0075599995907396095
+        },
+        {
+          "name": "vent frame crosspiece",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00755999893105278
+        },
+        {
+          "name": "sloped metal louver",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.005460000635745626
+        },
+        {
+          "name": "sloped metal louver",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.005460000136129868
+        },
+        {
+          "name": "sloped metal louver",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.005459998889515796
+        },
+        {
+          "name": "sloped metal louver",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.005460001082004356
+        },
+        {
+          "name": "sloped metal louver",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00546000178655959
+        },
+        {
+          "name": "sloped metal louver",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.005459999326073256
+        },
+        {
+          "name": "sloped metal louver",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.005459995882119983
+        },
+        {
+          "name": "mounting screw",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 6.147045496618372e-06
+        },
+        {
+          "name": "mounting screw",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 6.147813110146682e-06
+        },
+        {
+          "name": "mounting screw",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 6.147146147365371e-06
+        },
+        {
+          "name": "mounting screw",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 6.145600006372358e-06
+        }
+      ]
+    },
+    {
+      "id": "timber-bundle",
+      "file": "assets/models/lv119-timber-bundle.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.11,
+        0.0,
+        -0.382
+      ],
+      "bounds_max": [
+        1.11,
+        0.34800000000000003,
+        0.382
+      ],
+      "dimensions": [
+        2.22,
+        0.34800000000000003,
+        0.764
+      ],
+      "triangles": 204,
+      "vertices_authored": 136,
+      "closed_components": 17,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "timber-bundle__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Broad 2.25 x 0.75 m stack; use along walls or outside fences, never across a walking lane.",
+      "bytes": 17580,
+      "sha256": "d9b663d0c216a54f2c45db18c1da8a75e2ac08fc3c7e6ec4b708be12bc572f20",
+      "parts": [
+        {
+          "name": "weathered timber",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.05738700274378062
+        },
+        {
+          "name": "weathered timber",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.05661149974912406
+        },
+        {
+          "name": "weathered timber",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.055836004515488945
+        },
+        {
+          "name": "weathered timber",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.05738700336466232
+        },
+        {
+          "name": "weathered timber",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.056611500370005764
+        },
+        {
+          "name": "weathered timber",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.05583600451548895
+        },
+        {
+          "name": "weathered timber",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.053768002428114414
+        },
+        {
+          "name": "weathered timber",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.056611510614554085
+        },
+        {
+          "name": "weathered timber",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.05583600886166096
+        },
+        {
+          "name": "bundle top band",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0004995048511773346
+        },
+        {
+          "name": "bundle side band",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015451468061655781
+        },
+        {
+          "name": "bundle side band",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015451343885312485
+        },
+        {
+          "name": "bundle top band",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0004994941409677261
+        },
+        {
+          "name": "bundle side band",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015451122696201003
+        },
+        {
+          "name": "bundle side band",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00015451122696201014
+        },
+        {
+          "name": "exposed end wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 9.599867674599748e-05
+        },
+        {
+          "name": "exposed end wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 9.600092744221933e-05
+        }
+      ]
+    },
+    {
+      "id": "drain-reeds",
+      "file": "assets/models/lv119-drain-reeds.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 2,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.30346164107322693,
+        0.0,
+        -0.30273813009262085
+      ],
+      "bounds_max": [
+        0.29800355434417725,
+        0.7773889899253845,
+        0.3265399634838104
+      ],
+      "dimensions": [
+        0.6014651954174042,
+        0.7773889899253845,
+        0.6292780935764313
+      ],
+      "triangles": 560,
+      "vertices_authored": 368,
+      "closed_components": 44,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drain-reeds__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Grounded opaque foliage. Repeat at damp wall/fence bases outside clear task approaches. 0.6\u20130.8 m tall; no collision needed.",
+      "bytes": 41040,
+      "sha256": "d965b236389a0a65c0de86e24f357e51043bc5e151e207a7d8f5706db05cb157",
+      "parts": [
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 6.294448807390532e-05
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 2.302048637640533e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182093874135414e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182094867000463e-05
+        },
+        {
+          "name": "dry seed head",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.0002039078912427309
+        },
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.553340522766422e-05
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 2.6441620965063823e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.18209756895764e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182079261587206e-05
+        },
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 8.812231199802531e-05
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 2.998654009282269e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182100380812096e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182111079217219e-05
+        },
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 0.00010071121262929715
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 3.361486072132417e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.18210405668651e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.18210903617001e-05
+        },
+        {
+          "name": "dry seed head",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00020390891283265467
+        },
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 6.294450501324417e-05
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 2.302046961707068e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182102040669534e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182092202938897e-05
+        },
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.553348768851721e-05
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 2.644245645910814e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182113651855615e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182106572955188e-05
+        },
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 8.812230968639292e-05
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 2.9986510227786308e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.18210573830432e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182098357186385e-05
+        },
+        {
+          "name": "dry seed head",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.0002039075986128106
+        },
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 0.00010071122051158453
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 3.361502426931415e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182118472177534e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182106830645353e-05
+        },
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 6.294450122368286e-05
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 2.3020625159612486e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182097629590618e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182136753021041e-05
+        },
+        {
+          "name": "rooted reed stem",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 7.553338188396687e-05
+        },
+        {
+          "name": "bent reed tip",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 2.644206847435271e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.18211058989012e-05
+        },
+        {
+          "name": "pointed reed leaf",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 8.182100130701049e-05
+        },
+        {
+          "name": "dry seed head",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.0002039078329592787
+        }
+      ]
+    },
+    {
+      "id": "rubble-cluster",
+      "file": "assets/models/lv119-rubble-cluster.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.45877491378137014,
+        0,
+        -0.31777584151663185
+      ],
+      "bounds_max": [
+        0.30245842307870974,
+        0.139,
+        0.34703032249994537
+      ],
+      "dimensions": [
+        0.7612333368600799,
+        0.139,
+        0.6648061640165772
+      ],
+      "triangles": 260,
+      "vertices_authored": 152,
+      "closed_components": 11,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "rubble-cluster__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Small grounded rubble patch. Place at damaged wall bases or beyond fences; decorative only unless a real blocker is authored.",
+      "bytes": 19464,
+      "sha256": "bb42e37d03f3af40812abe15c967da7cc067524ec1bd60cd716c270f4b1cc17c",
+      "parts": [
+        {
+          "name": "grounded masonry fragment",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0013007500468423434
+        },
+        {
+          "name": "grounded masonry fragment",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.003963249631245465
+        },
+        {
+          "name": "grounded masonry fragment",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.004401150375997531
+        },
+        {
+          "name": "grounded masonry fragment",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.00503874960365162
+        },
+        {
+          "name": "grounded masonry fragment",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.001740749915673708
+        },
+        {
+          "name": "grounded masonry fragment",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.00491774951175709
+        },
+        {
+          "name": "grounded masonry fragment",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.002625150087377885
+        },
+        {
+          "name": "grounded masonry fragment",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.006637249869527295
+        },
+        {
+          "name": "splintered board",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007955998651423295
+        },
+        {
+          "name": "splintered board",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007955999148613701
+        },
+        {
+          "name": "splintered board",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007955998584726983
+        }
+      ]
+    },
+    {
+      "id": "maintenance-shed",
+      "file": "assets/models/lv119-maintenance-shed.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.1699999570846558,
+        0,
+        -1.38
+      ],
+      "bounds_max": [
+        1.16,
+        2.55,
+        1.38
+      ],
+      "dimensions": [
+        2.329999957084656,
+        2.55,
+        2.76
+      ],
+      "triangles": 296,
+      "vertices_authored": 194,
+      "closed_components": 23,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "maintenance-shed__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Background-only suggested. Ground origin, 2.3 x 2.7 m footprint. Use outside playable fence, no interior or runtime door interaction.",
+      "bytes": 26492,
+      "sha256": "5483bafdb14199f1fc26f194ce710e2bd4d614b70fc81271fa69c193b900ce17",
+      "parts": [
+        {
+          "name": "concrete shed footing",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.9927759677326927
+        },
+        {
+          "name": "shed wall body",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 10.281999349594116
+        },
+        {
+          "name": "pitched roof",
+          "vertices": 6,
+          "faces": 5,
+          "closed": true,
+          "signed_volume_m3": 1.568784157435099
+        },
+        {
+          "name": "corner trim",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.014088802660504968
+        },
+        {
+          "name": "corner trim",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.01408885077883799
+        },
+        {
+          "name": "corner trim",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.014088666221747786
+        },
+        {
+          "name": "corner trim",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.01408871434008082
+        },
+        {
+          "name": "front siding seam",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007124547458564221
+        },
+        {
+          "name": "front siding seam",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007125344515467678
+        },
+        {
+          "name": "front siding seam",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007124482848060651
+        },
+        {
+          "name": "front siding seam",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007124977564672001
+        },
+        {
+          "name": "front siding seam",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.000712512594570096
+        },
+        {
+          "name": "front siding seam",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007125019910745336
+        },
+        {
+          "name": "front siding seam",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007125270591738344
+        },
+        {
+          "name": "front siding seam",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.000712564409089584
+        },
+        {
+          "name": "shed door",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.047599977852466224
+        },
+        {
+          "name": "door cross batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.002116797026246784
+        },
+        {
+          "name": "door cross batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0021168996269504254
+        },
+        {
+          "name": "door handle",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00020826219891508391
+        },
+        {
+          "name": "boarded side window",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.01657601942618686
+        },
+        {
+          "name": "window shutter board",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.004800049588084221
+        },
+        {
+          "name": "window shutter board",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.004799982377638415
+        },
+        {
+          "name": "rigid gutter pipe",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.004512788630866755
+        }
+      ]
+    }
+  ]
+}

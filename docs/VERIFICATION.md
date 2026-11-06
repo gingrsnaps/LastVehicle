@@ -1,64 +1,77 @@
-# Last Vehicle 1.14 — verification report
+# Last Vehicle 1.19 — verification record
 
-Recorded for the 3 November 2026 candidate. **173 automated tests passed, with zero failures, cancellations or skips.** The integrity check passed runtime JavaScript syntax, entry points, required audio/texture dependencies and **129 recorded asset hashes**. This verifies the supplied code and data within the test scope; it is not a real-browser acceptance certificate.
+This record separates logic/geometry evidence from rendered gameplay. It covers the complete downloadable 1.19 candidate. The QA browser reports **WebGL unavailable**, so there is no GPU playthrough, monitor-based lighting approval, audible-mix approval, physical controller/mouse acceptance or hardware FPS claim. Live 1.12 remains unchanged pending the accepted full rendered playthrough.
 
-## Environment and reproducibility
+## Reproduced defects and repairs
 
-Tests use Node's built-in runner, Babylon.js 9.33.1 NullEngine, actual imported GLB geometry, a bounded DOM facade and strict Web Audio facades. The production Game, Player and UI handlers complete all required tasks and the vehicle ending. NullEngine does not render WebGL images or play sound.
+- **Outdoor hint aim:** all nine audited exterior approach scenarios failed when aiming at the displayed diamond, 0.62 m above the actual interaction anchor. The marker now surrounds that anchor, uses the same reach condition, and falls back incrementally from unreachable stand-off views. Tests follow the rendered marker coordinates rather than silently substituting the item coordinate. A production Game/Player/UI facade follows the exterior chapter and completes every normal E action and selector button sequence on Easy, Medium and Hard.
+- **Pillar stall:** a hunter approaching the pillar at X=-5.8, Z=57 could stop near (-5.0226,55.9549) and repeatedly plan without recovery. A nearby path point was skipped before the next swept segment was clear, while replanning reset the progress timer. The corner is now traversed at simulated 30, 60 and 144 Hz. A separate no-progress watchdog survives replanning and uses physical recovery.
+- **Patrol gaps:** the existing 11 sparse targets were reachable, but medium baseline simulations first entered the yard after 108–119 seconds and left it unattended for 160–180 seconds. The new 21-stop, five-section planner records arrivals, validates route costs, bounds age scores, cools failed goals and changes priorities from public chapter state. It does not track hidden player coordinates.
+- **Misleading directions:** the outdoor left/right prose and sign arrows disagreed with the actual north-facing camera. Current instructions use landmarks; journal map projection, facing arrow, roadworks direction, handover note and sign glyphs are consistent. Three loading labels now face out from their shutters.
+- **Physical supports and moving parts:** perimeter fence endpoints meet; 117 unique posts have matching footings; the gatehouse side-door label has a lintel; brake and selector plates have real supporting faces. Two six-metre booms replace an arm that rose 30.7 m. The diagonal tow rope and roof wires are removed. The covered channel and entire dolly sweep avoid stationary bodies.
+
+## Automated suite
+
+The final full suite result is **219 tests passed, zero failed**. Run `npm test` to reproduce. This includes the established progression, input/capture failure, saves, settings, puzzles, manual driving, ending, audio finite-value guards, pooled effects, animation contact, context-loss and preparation recovery checks.
+
+The first integration run exposed two scenery-access mistakes: a hand truck blocked the dock bolt-tray standing point, and a pallet stack blocked a shelter approach despite not overlapping the locker body. Both placements were moved. The final suite retains those access checks instead of weakening them. This is why a clear mesh footprint alone is insufficient evidence that a scene is playable.
+
+`node tools/check.mjs` validates syntax, runtime dependencies and hashes for **181 enumerated assets**. The game retains **76 Ogg audio files**. No new music, sound recordings or surface-image files were added in 1.19. The local launcher and complete browser packaging remain in the project.
+
+## Patrol simulation results
+
+`verification-v119.json` records actual imported colliders and real Threat movement logic. Six ten-minute quiet-patrol simulations cover two seeds per difficulty. The player is far away and hidden to isolate patrol coverage; these numbers are not pursuit balance measurements or human playtime.
+
+| Difficulty | First exterior entry, two seeds | Longest later yard absence, two seeds |
+|---|---|---|
+| Easy | 42.9 / 43.5 seconds | 58.3 / 43.0 seconds |
+| Medium | 31.6 / 32.1 seconds | 43.9 / 33.6 seconds |
+| Hard | 27.7 / 28.2 seconds | 39.4 / 39.9 seconds |
+
+Every exterior patrol stop receives an actual arrival in all six runs, with zero navigation recoveries and no body crossing an active collider. Two additional 15-minute medium simulations cover interior and return chapters, including actual Workshop/Pump entries and both car aisles. The closed chapter stays inside. Pursuit and heard evidence can legitimately interrupt these quiet patrol timings during real play.
+
+The known pillar corner reaches its destination at three simulated tick rates without recovery or repeated planning. These are meaningful route samples, not proof of every possible player/enemy movement sequence. Existing direct bolt stun, lost-sight distraction, nearby sound, locker evidence and door-breach regression checks pass.
+
+## Assets, placement and lighting evidence
+
+The ten new GLBs total **314,888 bytes**, **4,136 prototype triangles**, and at most **864 triangles per prototype**. The source package includes actual Blender studio renders, a contact sheet, source `.blend`, commented generator, licenses, dimensions and hashes. Their independent validation uses the shipped Babylon loader in both handedness modes and checks finite geometry/UVs, normals, winding, anchors and dependencies.
+
+The integration adds **90 placements**. Actual transformed ground bounds are checked; all large new playable-area props are clear of other authored bodies, all shelter approaches are clear, the dock bolt tray remains accessible, wall vents project out from their support faces, and the car/dolly routes remain usable. The tree band is separated from building footprints. Registered placement/support output is supplied in `placement-audit.json`; its generic support resolver alone is not proof of architectural mounting, hence the explicit gatehouse and fence tests.
+
+The new star field contains **640 stars in a three-mesh sky system**. Its brightness changes neither the ambient light nor AI visibility. Sky/weather ticks allocate no new scene meshes or lights in the sampled run. Fog colour, global fill and fixture intensity/radius are reduced; control labels remain locally readable. These numerical/geometry assertions cannot verify final perceived darkness or texture appearance on a monitor.
+
+## Material coverage and rendering cost
+
+`materials-v119.json` uses the actual PBR materials for non-image GLBs, including the new pack. Ten existing image-bearing GLBs skip materials because NullEngine lacks a browser image decoder. Existing embedded atlases, including the creature's eight image maps, are retained at runtime. An injected-handle pass verifies assignments and UV projection; it does not decode or render JPEGs.
+
+The pass assigns **202 eligible material objects**, projects **236,573 vertices across 3,026 meshes**, and reports zero invalid geometry or required-map omissions. Fourteen shared v117/v118 surface maps and the existing decay maps are reused; these counts are not new image allocations. **153 identical imported material objects** consolidate onto canonical render states, retaining differences in alpha/culling. New textured prop meshes are explicitly checked for an albedo assignment.
+
+The material-aware fixture has **833 static material/sector batches**, with **458 enabled** at the restored deep-garage sample before frustum culling. The comparable 1.18 fixture had 686 total / 390 enabled. Added scenery therefore increases geometry and batch counts; this release does not claim a measured rendering speedup. It avoids runtime scenery streaming, per-prop lights, extra background shadow casters and unbounded path replanning. The four fixture slots, fixed effect/bolt pools, 24-voice audio cap, spatial collision buckets and 128-node A* slices remain bounded. All-materials-skipped fixture counts are not comparable to the material-aware ones.
+
+## Reproduce reports and packages
 
 ```bash
+npm test
 node tools/check.mjs
-node --test tests/*.test.js
 ```
 
-The placement audit is regenerated with POSIX shell syntax:
+On a POSIX shell, regenerate the current records with:
 
 ```bash
-LV_PLACEMENT_REPORT=docs/placement-audit.json node --test tests/world.test.js
+LV119_REPORT=docs/verification-v119.json LV118_REPORT=docs/materials-v119.json LV_PLACEMENT_REPORT=docs/placement-audit.json npm test
 ```
 
-Windows users can set LV_PLACEMENT_REPORT in their terminal before invoking Node, or inspect the supplied audit. It contains **131 registered placements and zero unresolved entries**. It covers registered supports, not a visual approval of every triangle from every viewpoint.
+The LV118_REPORT variable names the retained material regression suite, not the current build version. On Windows, set those environment variables before running the command, or inspect the supplied JSON. Rebuild the guide and both ZIP files with:
 
-## New stability coverage
+```bash
+python tools/build-guide.py
+python tools/package.py --output releases
+```
 
-- A throwing `getGamepads()` is never evaluated while controls are disabled. When enabled, a SecurityError is caught once until explicit retry/re-enable. A real moving Game.frame sequence remains playable under this denial.
-- Graphics-context loss pauses the real game, preserves the checkpoint and records the error. Context restoration alone does not resume it. These are simulated engine notifications; physical GPU loss is not reproduced.
-- Fourteen model jobs never exceed two simultaneous jobs, and failure is returned only after workers have settled.
-- Render sizing respects hardware limits and an 8,294,400-pixel cap for oversized/supersampled windows, including a hidden/zero-sized fallback.
-- Thirty simulated minutes of scene mixing keep constant gain automation bounded and voice counts within the cap. Player exertion and rain mute on pause; stopping releases voices. This is a deterministic audio-facade simulation, not a hardware/memory soak or audible test.
-- The earlier battery-pickup non-finite panner regression remains covered for modern AudioParams and compatibility setPosition calls, including float32 overflow, moving emitters and repeated voice cleanup.
+The packager verifies CRCs, safe archive paths and the correct `index.html` location. The full project includes launchers, instructions, complete commented code, tests and editable sources. The itch archive contains the same runtime with `index.html` at its root. Vendor and asset notices are preserved.
 
-## New game and asset coverage
+## Remaining release gate
 
-- Car inspection changes arrival lighting to outage; restored lanes increase the same authored visibility calculation used by the enemy. Display brightness remains separate from AI perception.
-- Wet footsteps are heard at a distance where dry walking is not, and a solid wall attenuates the route. The enemy performs its bounded listening turn.
-- Story pursuit requires actual sight, keeps the sole actor at its current position, and cannot chase a hidden player from unseen coordinates.
-- Swept bolt collision stops wall tunneling at simulated 30, 60 and 144 Hz. Bolts fall after wall strikes and settle at floor height; each produces only one contact event.
-- Three-bolt supply and bounded regional habituation survive validated saves. Old saves receive defaults. A third repeated impact checks plausible cover while direct visual pursuit retains priority.
-- Compact objective modes respond through the real Game action path. New default guidance and existing explicit journal preferences/remaps survive validation. Throwing consumes and saves ammunition.
-- The actual key GLB imports with a ring-grip anchor, correct full-size bounds and a desktop support plane at Y=.925. Pickup retains scale across simulated 30/60/144 Hz and resets to its grounded transform.
-- Four non-interactive wall marks sit off the actual perimeter faces; flaking plaster uses a separate plane to avoid coplanar overlap. They add no navigation blockers.
+The available browser cannot initialize WebGL. A full rendered run, audio balance review, physical mouse/controller and iframe acceptance, lighting/material placement inspection and real first/repeat frame-time measurements remain outstanding. The exact earlier user crash was not reproduced or diagnosed from a supplied log. Retained cleanup/recovery safeguards address known failure paths without establishing that they caused that report.
 
-## Retained checks
-
-The complete suite still covers progression prerequisites, task/journal consistency, remapped interaction prompts, imported saves, difficulty, optional hints, safe checkpoint placement, settings import/export and Apply/Keep/Revert. Battery recovery, repair, breaker sequence, Security terminal, gate and left driver door all complete through production handlers.
-
-Pointer capture waits for confirmation, supports legacy void-return requests, handles raw-input rejection and retains an explicit drag fallback. Optional controllers cover neutral arming, button edges, deadzones, reconnection and disconnect pause. These API-state fixtures do not replace real browser permission or physical gamepad tests.
-
-AI evidence expires; locker checks require supported evidence and physical arrival. Routes cross actual imported car/prop footprints, service doorways, U-shaped obstacles, shutters and moving-cart conditions without intersecting the tested solids. Last-seen pursuit and observed car-loop cutoffs remain bounded. Contact poses, the 21 imported creature clips, full-size battery grip, pauseable intro/actions, and once-only encounters remain checked.
-
-Surface effects use shared puddle geometry and fixed pools. The entire escaping car clears its route; cockpit/headlight attachment and exclusions remain tested. No new runtime effect allocates an unbounded stream of meshes.
-
-## Asset records
-
-The runtime manifest contains **129 entries** and the audio folder contains **64 Ogg files**. Existing external asset bytes are retained. The new key is 882 triangles and 51,828 GLB bytes; four SVGs total 8,864 bytes. Actual exported geometry, normals, anchors and hashes are validated in the source pack. Blender model renders/contact sheets are supplied separately from in-game visual approval.
-
-The six new audio files total **247,779 encoded bytes**. Recorded inspection reports finite full decodes, no clipping, loop-seam checks for all three loops, and matching hashes from two same-toolchain rebuilds. They contain 5,338,496 source-rate float32 bytes, or 10,676,992 bytes (10.18 MiB) at 48 kHz before browser overhead. These are additions, not the entire game's audio-memory total. Exact source authors, input hashes and CC0 provenance remain in both packages.
-
-## Browser gate and limits
-
-The managed preview service returned `preview relay unavailable: No such file or directory`. Consequently no current browser screenshot, real-device input/audio review, complete human playthrough, cold-load GPU/memory measurement or before/after FPS comparison was possible.
-
-Unverified areas include final light/key/sign readability, flashlight/headlight glare, audible balance, subjective scare quality, physical controller compatibility, embedded pointer-lock/fullscreen behavior and first-time completion duration. The implementation addresses a reproduced controller exception and known allocation/automation risks; it does not establish that every reported crash or stutter is gone.
-
-**1.14 is delivered as complete downloadable candidate packages and a saved source version. Live 1.12 remains unchanged pending the accepted complete browser playthrough.** UPDATE_1_14.md supplies the acceptance route and diagnostic-export instructions. No 60-FPS guarantee, zero-freeze claim or premium-quality certification is made.
+Use the full route and settings instructions in UPDATE_1_19.md. If a failure recurs, export the local diagnostic JSON from the loading/recovery screen or Pause → Advanced diagnostics and record the exact action and failure type. A game that passes logic tests can still have device-specific rendering failures.

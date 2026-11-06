@@ -1,6 +1,6 @@
-import { RICH_LAYOUT } from './detail-layout.js?v=1.14.0';
-import { groundModel } from './placement.js?v=1.14.0';
-import { yieldTask } from './preparation.js?v=1.14.0';
+import { RICH_LAYOUT } from './detail-layout.js?v=1.19.0';
+import { groundModel } from './placement.js?v=1.19.0';
+import { yieldTask } from './preparation.js?v=1.19.0';
 const B=globalThis.BABYLON;
 export class RichDetails {
  constructor(w){this.w=w;this.instances=[];this.visor=null;this.quality='low';}

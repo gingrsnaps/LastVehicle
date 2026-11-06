@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "assets": 6,
+  "total_encoded_bytes": 295064,
+  "triangles": 5128,
+  "closed_components": 246,
+  "external_dependencies": 0,
+  "textures": 0,
+  "ground_contact": "All actual loaded mesh bounds have minimum Y=0 within 1e-6 m; wall models are mounted at their lower edge",
+  "anchors": "Both Babylon handedness modes validated; two wall assets have rear mounting plane Z=0",
+  "normals": "All finite and unit-length; triangle winding matches normals; no degenerate triangles",
+  "geometry_validation": "validation.json",
+  "blender_contact_sheet": "Meridian_Yard_Details_v116_Contact_Sheet.png",
+  "browser_visual_qa": false
+}

@@ -1,6 +1,7 @@
 /** Authoritative task contract. The journal, map, prompts and save flag order
  * all derive from these records. Keep IDs stable so existing checkpoints survive.
  * Text may contain {use}; render it using the CURRENT binding, never a literal E. */
+import { EXPANSION_TASKS } from './campaign.js?v=1.19.0';
 export const TASKS = [
   {
     "id": "car",
@@ -113,7 +114,7 @@ export const TASKS = [
     },
     "hints": [
       "Follow the west service passage south to Workshop.",
-      "Aim at the labelled cabinet on the west wall and press {use}. Both parts are collected together."
+      "Aim at the labelled cabinet beside the damaged side door and press {use}. Both parts are collected together."
     ]
   },
   {
@@ -218,7 +219,7 @@ export const TASKS = [
     "id": "gate",
     "action": "gate",
     "title": "Raise the exit shutter",
-    "instruction": "Use the gate motor to the left of the north exit. Then return to your car.",
+    "instruction": "Use the gate motor to the left of the north exit. Walk outside and inspect the service-yard barrier.",
     "label": "Raise exit shutter",
     "requires": [
       "car",
@@ -245,7 +246,7 @@ export const TASKS = [
     },
     "hints": [
       "The motor is beside the north shutter, on its left.",
-      "Press {use} at the motor. You can move while the shutter rises. Return to bay 042 when it finishes."
+      "Press {use} at the motor. You can move while the shutter rises. Continue on foot into the service yard when it finishes."
     ]
   },
   {
@@ -285,8 +286,21 @@ export const TASKS = [
     ]
   }
 ];
+// Append the exterior chapter before the existing ending, keeping old IDs stable.
+const ending=TASKS.pop();
+for(const spec of EXPANSION_TASKS)TASKS.push({...spec,action:spec.id,requires:TASKS.map(t=>t.id),notes:['yard-log']});
+ending.requires=TASKS.map(t=>t.id);ending.title='Return to your car and drive out';ending.label='Enter driver seat';
+ending.instruction='Return to bay 042 and enter the left driver door. Drive through the garage shutter, across the yard and left around the roadworks container to the street.';
+ending.why='The street barrier and cargo lane are clear. You control the car all the way to the road.';
+ending.hints=['Use the unlocked service passage to return to bay 042.','Use the left driver handle. Move forward/back to accelerate/brake or reverse; left/right steers. Use again when stopped to exit. Follow the OPEN LANE arrow past the container.'];
+TASKS.push(ending);
 export const TASK_BY_ID = Object.fromEntries(TASKS.map(task=>[task.id,task]));
-export const currentTask = state => TASKS.find(task=>!state.flags.includes(task.id)) || null;
+export const currentTask = state => {
+  const task=TASKS.find(task=>!state.flags.includes(task.id))||null;
+  if(task?.id==='escaped'&&state.driving)return {...task,title:'Drive to the street',instruction:'Drive through the garage shutter and open street barrier. Use the open lane beside the roadworks container, then follow the lane to the street.',destination:{room:'road',name:'SERVICE ROAD · STREET',x:0,z:-95,portal:[0,-58]},hints:['Follow the amber road lights north.','Accelerate/brake with forward/back, steer with left/right. Follow the OPEN LANE sign beside the container. You can reverse and reposition.']};
+  if(task?.id==='escaped'&&state.carPosition)return {...task,title:'Return to your parked car',instruction:'Enter the left driver door of your parked car, then drive north to the street.',destination:{room:state.carPosition.z<0?'yard':'garage',name:'PARKED CAR · LEFT DRIVER DOOR',...state.carPosition,portal:[state.carPosition.x,state.carPosition.z]}};
+  return task;
+};
 export function keyLabel(code="KeyE") {
   return ({ArrowLeft:"←",ArrowRight:"→",ArrowUp:"↑",ArrowDown:"↓"})[code] || String(code).replace(/^(Key|Digit)/,"").replace(/(Left|Right)$/,"").replace("Control","Ctrl");
 }

@@ -1,4 +1,4 @@
-import { moveCircle } from './navigation.js?v=1.14.0';
+import { moveCircle } from './navigation.js?v=1.19.0';
 const B=globalThis.BABYLON;
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 /** Prebuilt physical aftermath. The cart has one dynamic collider, and the

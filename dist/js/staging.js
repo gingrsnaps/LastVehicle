@@ -1,16 +1,21 @@
-import { stealthVisibility } from "./lighting.js?v=1.14.0";
-import { roomAt } from "./guidance.js?v=1.14.0";
+import { VehicleController } from './vehicle.js?v=1.19.0';
+import { stealthVisibility } from "./lighting.js?v=1.19.0";
+import { roomAt } from "./guidance.js?v=1.19.0";
 const B=globalThis.BABYLON;
 const smooth=t=>t*t*(3-2*t);
 export const DRIVE_START=2.2, DRIVE_END=14.6;
 export const SHELTERS=[
+ {id:'hide-yard',name:'Yard service locker',x:27,z:-33,entry:{x:27,z:-31.75},yaw:Math.PI},
+ {id:'hide-dock',name:'Dock shelter locker',x:-26,z:-51,entry:{x:-26,z:-49.75},yaw:Math.PI},
+ {id:'hide-gatehouse',name:'Gatehouse locker',x:27,z:-50,entry:{x:27,z:-48.75},yaw:Math.PI},
  {id:"hide-security",name:"Security locker",x:-28,z:10,entry:{x:-28,z:11.25},yaw:Math.PI},
  {id:"hide-storage",name:"Storage locker",x:-28,z:43,entry:{x:-28,z:44.25},yaw:Math.PI},
  {id:"hide-workshop",name:"Workshop locker",x:-28,z:85,entry:{x:-28,z:86.25},yaw:Math.PI},
  {id:"hide-electrical",name:"Electrical locker",x:25,z:48,entry:{x:25,z:49.25},yaw:Math.PI},
  {id:"hide-pump",name:"Pump-room locker",x:21,z:88,entry:{x:21,z:89.25},yaw:Math.PI},
 ];
-// Sample a curved bay exit once. Arc-length traversal gives one continuous speed
+// Legacy reference curve retained for clearance regression tests only.
+// Runtime driving is controlled by VehicleController. Sample a curved bay exit once. Arc-length traversal gives one continuous speed
 // profile through the turn and straight lane; the camera never jumps at a joint.
 const drivePath=[];
 for(let i=0;i<=50;i++){
@@ -108,6 +113,7 @@ export class Staging {
     mesh.metadata={...mesh.metadata,lvCaster:true};w.shadowMeshes.push(mesh);w.shadow.addShadowCaster(mesh);
   }
   this.carRect={x:13,z:78,w:4.1,d:1.85,enabled:true,name:"bay 042 car",y:.83,h:1.66,dynamic:true};w.rects.push(this.carRect);
+  this.vehicle=new VehicleController(w.rects,this.carRect);
   this.car.computeWorldMatrix(true);this.driverHandle=this.doors.find(d=>d.side===this.driverSide).handle.getAbsolutePosition().clone();
   // Aim at the handle's exterior face, clear of the simplified body collider.
   this.driverHandle.z-=.035;
@@ -177,7 +183,7 @@ export class Staging {
   this.kit.setEnabled(!has("fuse"));
   this.hood.rotation.x=has("repair")?0:has("car")?-.95:0;
   this.installedBattery.position.y=1.075;this.installedBattery.setEnabled(has("repair"));this.newCable.setEnabled(has("repair"));this.newCable.scaling.x=1;
-  if(immediate){this.setVehicleLighting(false);this.car.position.set(13,0,78);this.car.rotation.y=-Math.PI/2;this.carRect.enabled=true;this.cockpit.setEnabled(false);this.driving=false;for(const s of this.spots)s.door.rotation.y=0;for(const wheel of this.wheels)wheel.rotation.x=0;for(const door of this.doors)door.node.rotation.y=0;}
+  if(immediate){this.vehicle.reset();this.setVehicleLighting(false);this.car.position.set(13,0,78);this.car.rotation.y=-Math.PI/2;this.carRect.enabled=true;this.cockpit.setEnabled(false);this.driving=false;for(const s of this.spots)s.door.rotation.y=0;for(const wheel of this.wheels)wheel.rotation.x=0;for(const door of this.doors)door.node.rotation.y=0;this.carRect.x=13;this.carRect.z=78;this.carRect.w=4.1;this.carRect.d=1.85;this.car.computeWorldMatrix(true);this.driverHandle.copyFrom(this.doors.find(d=>d.side===-1).handle.getAbsolutePosition());this.driverHandle.x-=Math.cos(this.car.rotation.y)*.05;this.driverHandle.z+=Math.sin(this.car.rotation.y)*.05;this.w.interactives.find(i=>i.id==='car').pos.copyFrom(this.driverHandle);}
  }
  action(id,t){
   if(id==="car")this.hood.rotation.x=-smooth(t)*.95;
@@ -200,6 +206,7 @@ export class Staging {
  }
  beginDrive(player){
   this.entryEye=this.w.camera.position.clone();this.entryView=this.w.camera.rotation.clone();
+  this.vehicle.reset({x:this.car.position.x,z:this.car.position.z,yaw:this.car.rotation.y});
   this.driving=true;this.driveTime=0;this.engineStarted=false;this.windowHit=false;this.carRect.enabled=true;this.cockpit.setEnabled(true);this.hood.rotation.x=0;
   this.setVehicleLighting(true);
   player.vehicle=true;player.flashlight=false;player.vehicleHeading=this.car.rotation.y;player.yaw=player.targetYaw=this.car.rotation.y;player.pitch=player.targetPitch=0;
@@ -211,10 +218,12 @@ export class Staging {
   const open=t<.35?0:t<.65?smooth((t-.35)/.3):t<1.05?1:1-smooth(Math.min(1,(t-1.05)/.45));
   const driver=this.doors.find(d=>d.side===this.driverSide);driver.node.rotation.y=1.12*open;
   if(t>=DRIVE_START)this.carRect.enabled=false;
-  const pose=drivePose(t),travel=Math.hypot(pose.x-this.car.position.x,pose.z-this.car.position.z);
-  for(const wheel of this.wheels)wheel.rotation.x+=travel/.375;
+  const before=this.vehicle.distance;
+  const controls=t<DRIVE_START?{}:{throttle:(player.down?.('forward')?1:0)-(player.down?.('back')?1:0)-(player.padMove?.y||0)-(player.touchMove?.y||0),steer:(player.down?.('right')?1:0)-(player.down?.('left')?1:0)+(player.padMove?.x||0)+(player.touchMove?.x||0)};
+  const pose=this.vehicle.tick(dt,controls),travel=this.vehicle.distance-before;
+  for(const wheel of this.wheels)wheel.rotation.x+=travel/.375*Math.sign(pose.speed||1);
   this.car.position.set(pose.x,0,pose.z);this.car.rotation.y=pose.yaw;
-  this.steering.rotation.z=t<6?-.32*Math.sin(Math.min(1,t/6)*Math.PI):0;
+  this.steering.rotation.z=-this.vehicle.steer*.5;
   const turn=this.car.rotation.y-(player.vehicleHeading??this.car.rotation.y);player.vehicleHeading=this.car.rotation.y;player.yaw+=turn;player.targetYaw+=turn;
   this.car.computeWorldMatrix(true);
   const eye=B.Vector3.TransformCoordinates(this.driverEye,this.car.getWorldMatrix());
@@ -229,7 +238,22 @@ export class Staging {
   const yawDelta=Math.atan2(Math.sin(player.yaw-this.entryView.y),Math.cos(player.yaw-this.entryView.y));
   this.w.camera.position.copyFrom(eye);this.w.camera.rotation.set(this.entryView.x+(player.pitch-this.entryView.x)*entry,this.entryView.y+yawDelta*entry,0);
   this.w.camera.getViewMatrix(true);
-  return t>=DRIVE_END;
+  // A very short departure hold occurs only after the PLAYER clears the road.
+  if(pose.z<-94){this.vehicle.finishTime+=dt;this.vehicle.speed=Math.max(0,this.vehicle.speed-dt*3);}
+  return this.vehicle.finishTime>=1.5;
+ }
+ exitDrive(player){
+  if(!this.driving||this.driveTime<DRIVE_START)return false;
+  const exit=this.vehicle.exitPoint();if(!exit)return false;
+  this.driving=false;player.vehicle=false;this.cockpit.setEnabled(false);this.setVehicleLighting(false);
+  player.pos=exit;player.height=1.68;player.pitch=player.targetPitch=0;player.yaw=player.targetYaw=this.car.rotation.y;
+  player.clear();player.updateCamera();
+  this.carRect.x=this.car.position.x;this.carRect.z=this.car.position.z;
+  this.carRect.w=Math.abs(Math.sin(this.car.rotation.y))*4.5+Math.abs(Math.cos(this.car.rotation.y))*2;
+  this.carRect.d=Math.abs(Math.cos(this.car.rotation.y))*4.5+Math.abs(Math.sin(this.car.rotation.y))*2;this.carRect.enabled=true;
+  this.car.computeWorldMatrix(true);this.driverHandle.copyFrom(this.doors.find(d=>d.side===-1).handle.getAbsolutePosition());this.driverHandle.x-=Math.cos(this.car.rotation.y)*.05;this.driverHandle.z+=Math.sin(this.car.rotation.y)*.05;
+  this.w.interactives.find(i=>i.id==='car').pos.copyFrom(this.driverHandle);
+  return true;
  }
  /** Test the actual window exterior before playing the optional escape beat.
   * Coordinates are transformed to the moving car, so the bonnet/rear bumper

@@ -1,0 +1,188 @@
+{
+  "version": "1.19.0",
+  "scope": "Actual GLBs/colliders and simulated logic. Materials skipped here; no GPU/rendered-gameplay or audible-performance approval.",
+  "patrol": [
+    {
+      "difficulty": "easy",
+      "seed": 1,
+      "firstExteriorSeconds": 42.866666666666795,
+      "maxExteriorAbsenceSeconds": 58.33333333333258,
+      "outsideSeconds": 388.66666666676025,
+      "uniqueArrivals": 12,
+      "recoveries": 0,
+      "planning": {
+        "plans": 25,
+        "slices": 80,
+        "maxSliceMs": 1.88,
+        "pending": false
+      }
+    },
+    {
+      "difficulty": "easy",
+      "seed": 10000,
+      "firstExteriorSeconds": 43.46666666666676,
+      "maxExteriorAbsenceSeconds": 43.00000000000012,
+      "outsideSeconds": 412.40000000011247,
+      "uniqueArrivals": 11,
+      "recoveries": 0,
+      "planning": {
+        "plans": 25,
+        "slices": 109,
+        "maxSliceMs": 5.81,
+        "pending": false
+      }
+    },
+    {
+      "difficulty": "medium",
+      "seed": 1,
+      "firstExteriorSeconds": 31.60000000000073,
+      "maxExteriorAbsenceSeconds": 43.90000000000007,
+      "outsideSeconds": 406.333333333441,
+      "uniqueArrivals": 12,
+      "recoveries": 0,
+      "planning": {
+        "plans": 36,
+        "slices": 122,
+        "maxSliceMs": 1.8,
+        "pending": false
+      }
+    },
+    {
+      "difficulty": "medium",
+      "seed": 10000,
+      "firstExteriorSeconds": 32.13333333333407,
+      "maxExteriorAbsenceSeconds": 33.600000000000655,
+      "outsideSeconds": 414.1000000001138,
+      "uniqueArrivals": 11,
+      "recoveries": 0,
+      "planning": {
+        "plans": 33,
+        "slices": 147,
+        "maxSliceMs": 1.2,
+        "pending": false
+      }
+    },
+    {
+      "difficulty": "hard",
+      "seed": 1,
+      "firstExteriorSeconds": 27.6666666666672,
+      "maxExteriorAbsenceSeconds": 39.43333333333366,
+      "outsideSeconds": 399.0666666667685,
+      "uniqueArrivals": 12,
+      "recoveries": 0,
+      "planning": {
+        "plans": 46,
+        "slices": 126,
+        "maxSliceMs": 1.29,
+        "pending": false
+      }
+    },
+    {
+      "difficulty": "hard",
+      "seed": 10000,
+      "firstExteriorSeconds": 28.166666666667226,
+      "maxExteriorAbsenceSeconds": 39.9000000000003,
+      "outsideSeconds": 424.2333333334552,
+      "uniqueArrivals": 12,
+      "recoveries": 0,
+      "planning": {
+        "plans": 38,
+        "slices": 136,
+        "maxSliceMs": 1.29,
+        "pending": false
+      }
+    },
+    {
+      "chapter": "interior",
+      "seconds": 900,
+      "uniqueArrivals": 13,
+      "recoveries": 0
+    },
+    {
+      "chapter": "return",
+      "seconds": 900,
+      "uniqueArrivals": 18,
+      "recoveries": 0
+    }
+  ],
+  "placement": {
+    "newProps": 90,
+    "largeBodyOverlaps": [],
+    "fencePosts": 117
+  },
+  "scene": {
+    "rooms": {
+      "garage": {
+        "batches": 137,
+        "triangles": 18003,
+        "shadowBatches": 2
+      },
+      "storage": {
+        "batches": 26,
+        "triangles": 2614,
+        "shadowBatches": 2
+      },
+      "yard": {
+        "batches": 94,
+        "triangles": 9698,
+        "shadowBatches": 5
+      },
+      "security": {
+        "batches": 31,
+        "triangles": 1457,
+        "shadowBatches": 1
+      },
+      "workshop": {
+        "batches": 35,
+        "triangles": 2309,
+        "shadowBatches": 5
+      },
+      "electrical": {
+        "batches": 19,
+        "triangles": 830,
+        "shadowBatches": 3
+      },
+      "pump": {
+        "batches": 20,
+        "triangles": 2600,
+        "shadowBatches": 1
+      },
+      "gatehouse": {
+        "batches": 37,
+        "triangles": 1688,
+        "shadowBatches": 1
+      },
+      "road": {
+        "batches": 28,
+        "triangles": 2914,
+        "shadowBatches": 2
+      }
+    },
+    "enabledStaticBatches": 173,
+    "spatial": {
+      "cellMetres": 6,
+      "staticBodies": 230,
+      "dynamicBodies": 21,
+      "cells": 285,
+      "queries": 980130,
+      "candidates": 20016128,
+      "linearEquivalent": 246012630
+    },
+    "limits": {
+      "garage": {
+        "batches": 300,
+        "triangles": 150000
+      },
+      "serviceRoom": {
+        "batches": 120,
+        "triangles": 50000
+      },
+      "fixtureLightSlots": 4,
+      "enemyPathNodesPerSlice": 128,
+      "audioVoices": 24
+    },
+    "dynamicRoots": 281,
+    "shadowCasters": 501
+  },
+  "skyStars": 640
+}

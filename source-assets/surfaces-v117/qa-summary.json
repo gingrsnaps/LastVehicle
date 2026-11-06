@@ -1,0 +1,19 @@
+{
+  "maps": 12,
+  "materials": 6,
+  "size": [
+    512,
+    512
+  ],
+  "runtime_encoded_bytes": 643916,
+  "rgba8_base_bytes": 12582912,
+  "rgba8_with_mips_estimate_bytes": 16777216,
+  "upstream_md5": "all matched official files metadata",
+  "runtime_hashes": "recorded in manifest-fragment.json",
+  "normal_maps": 0,
+  "displacement_maps": 0,
+  "runtime_external_requests": 0,
+  "color_processing": "none beyond RGB encoding and filtered resize",
+  "contact_sheet": "Surface_Contact_Sheet.jpg",
+  "in_game_render_verified": false
+}

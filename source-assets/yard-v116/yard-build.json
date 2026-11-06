@@ -1,0 +1,2252 @@
+{
+  "title": "Meridian Yard Details",
+  "version": "1.0",
+  "game_release": "Last Vehicle 1.16",
+  "license": "CC0-1.0",
+  "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+  "source_file": "build_props.py",
+  "editable_source": "Meridian_Yard_Details_v116.blend",
+  "coordinate_system": {
+    "up": "+Y",
+    "forward": "+Z",
+    "units": "metres"
+  },
+  "palette_srgb": {
+    "teal": "#2e514e",
+    "steel": "#63706b",
+    "dark": "#1a292b",
+    "rubber": "#152024",
+    "ochre": "#b09a61",
+    "paper": "#b9b7a3",
+    "rust": "#76503a",
+    "concrete": "#737d75",
+    "cloth": "#657266",
+    "dust": "#85816c"
+  },
+  "material_names": [
+    "Yard115_teal",
+    "Yard115_steel",
+    "Yard115_dark",
+    "Yard115_rubber",
+    "Yard115_ochre",
+    "Yard115_paper",
+    "Yard115_rust",
+    "Yard115_concrete",
+    "Yard115_cloth",
+    "Yard115_dust"
+  ],
+  "assets": [
+    {
+      "id": "loading-trolley",
+      "file": "assets/models/v116-yard-loading-trolley.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 8,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.6,
+        0.0,
+        -0.5
+      ],
+      "bounds_max": [
+        0.6,
+        1.100000023841858,
+        0.5
+      ],
+      "dimensions": [
+        1.2,
+        1.100000023841858,
+        1.0
+      ],
+      "triangles": 796,
+      "vertices_authored": 496,
+      "closed_components": 49,
+      "anchors": {
+        "handle": {
+          "position": [
+            0,
+            1.075,
+            -0.475
+          ],
+          "normal": [
+            0,
+            0,
+            -1
+          ],
+          "node": "loading-trolley__handle"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "loading-trolley__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.46,
+          0.0,
+          -0.31
+        ],
+        [
+          -0.46,
+          0.0,
+          0.34
+        ],
+        [
+          0.46,
+          0.0,
+          -0.31
+        ],
+        [
+          0.46,
+          0.0,
+          0.34
+        ]
+      ],
+      "notes": "1.20 by 1.00 m overall footprint. Fixed scenery; wheels do not imply push interaction. Place beside the loading wall, outside the vehicle lane.",
+      "bytes": 45920,
+      "sha256": "18b1aec732cf3af3992fa099492011fd65f862c560cd4647eacd0f6cf3b134c3",
+      "parts": [
+        {
+          "name": "rubber caster",
+          "vertices": 24,
+          "faces": 14,
+          "closed": true,
+          "signed_volume_m3": 0.0026459994429994067
+        },
+        {
+          "name": "caster hub",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.724588411084068e-05
+        },
+        {
+          "name": "wheel fork",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007837518739203611
+        },
+        {
+          "name": "rubber caster",
+          "vertices": 24,
+          "faces": 14,
+          "closed": true,
+          "signed_volume_m3": 0.0026460002676079357
+        },
+        {
+          "name": "caster hub",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.7246441934257786e-05
+        },
+        {
+          "name": "wheel fork",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007837500888854265
+        },
+        {
+          "name": "rubber caster",
+          "vertices": 24,
+          "faces": 14,
+          "closed": true,
+          "signed_volume_m3": 0.0026459988342442853
+        },
+        {
+          "name": "caster hub",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.724514681380243e-05
+        },
+        {
+          "name": "wheel fork",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007837519515305755
+        },
+        {
+          "name": "rubber caster",
+          "vertices": 24,
+          "faces": 14,
+          "closed": true,
+          "signed_volume_m3": 0.0026460004931626218
+        },
+        {
+          "name": "caster hub",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.724707251725096e-05
+        },
+        {
+          "name": "wheel fork",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007837501664956412
+        },
+        {
+          "name": "loading deck",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.07308001350611448
+        },
+        {
+          "name": "edge bumper",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0016200041864067299
+        },
+        {
+          "name": "edge bumper",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0016200004611164331
+        },
+        {
+          "name": "deck cross lip",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0010620023046309752
+        },
+        {
+          "name": "deck cross lip",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.001061997919653854
+        },
+        {
+          "name": "handle upright",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0013876987795811136
+        },
+        {
+          "name": "handle upright",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0013876917364541446
+        },
+        {
+          "name": "push bar",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0016970652504824102
+        },
+        {
+          "name": "freight crate",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.179927989297236
+        },
+        {
+          "name": "crate corner batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006140440236777069
+        },
+        {
+          "name": "crate corner batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006140339343498149
+        },
+        {
+          "name": "crate corner batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.000614040710691673
+        },
+        {
+          "name": "crate corner batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006140393719154723
+        },
+        {
+          "name": "front crate batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007700003528346616
+        },
+        {
+          "name": "front crate batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0007699927858387428
+        },
+        {
+          "name": "vertical freight strap",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00018410070333629844
+        },
+        {
+          "name": "vertical freight strap",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00018410021827245748
+        },
+        {
+          "name": "strap over lid",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0003195005895880358
+        },
+        {
+          "name": "shipping paper",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00018899616164465757
+        },
+        {
+          "name": "shipping stencil",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.1943297168860776e-06
+        },
+        {
+          "name": "shipping stencil",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.194999104986596e-06
+        },
+        {
+          "name": "shipping stencil",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.19687145141263e-06
+        },
+        {
+          "name": "freight crate",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.09200400874639551
+        },
+        {
+          "name": "crate corner batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0004936402547173202
+        },
+        {
+          "name": "crate corner batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0004936390808628249
+        },
+        {
+          "name": "crate corner batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0004936407397811613
+        },
+        {
+          "name": "crate corner batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0004936348802099628
+        },
+        {
+          "name": "front crate batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006050016187752287
+        },
+        {
+          "name": "front crate batten",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006050026859156784
+        },
+        {
+          "name": "vertical freight strap",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00014910022340094043
+        },
+        {
+          "name": "vertical freight strap",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00014909847717111318
+        },
+        {
+          "name": "strap over lid",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00026550807524472475
+        },
+        {
+          "name": "shipping paper",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00018900020707709114
+        },
+        {
+          "name": "shipping stencil",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.1954647662739047e-06
+        },
+        {
+          "name": "shipping stencil",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.195789759047316e-06
+        },
+        {
+          "name": "shipping stencil",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.1956393892566323e-06
+        },
+        {
+          "name": "supported deck wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00011519826754617174
+        }
+      ]
+    },
+    {
+      "id": "bollard-chain",
+      "file": "assets/models/v116-yard-bollard-chain.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 7,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.7999999999999999,
+        0,
+        -0.3
+      ],
+      "bounds_max": [
+        0.7999999999999999,
+        0.9860000014305115,
+        0.303
+      ],
+      "dimensions": [
+        1.5999999999999999,
+        0.9860000014305115,
+        0.603
+      ],
+      "triangles": 1600,
+      "vertices_authored": 832,
+      "closed_components": 31,
+      "anchors": {
+        "chain_midpoint": {
+          "position": [
+            0,
+            0.585,
+            0.095
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "bollard-chain__chain_midpoint"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "bollard-chain__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.73,
+          0,
+          -0.23
+        ],
+        [
+          -0.42999999999999994,
+          0,
+          0.23
+        ],
+        [
+          0.42999999999999994,
+          0,
+          -0.23
+        ],
+        [
+          0.73,
+          0,
+          0.23
+        ]
+      ],
+      "notes": "1.60 by .60 m feet. Use post blockers and an explicit chain crossing rule if required. Do not treat the entire open gap as an opaque AI sight blocker.",
+      "bytes": 88624,
+      "sha256": "54cfce240307412a98f3edbdcac1ef8e954399b116f172b719b4bb19bc52f5ca",
+      "parts": [
+        {
+          "name": "damaged concrete footing",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.03623900071155125
+        },
+        {
+          "name": "post socket",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0015591709913375476
+        },
+        {
+          "name": "painted bollard",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.012372616811868893
+        },
+        {
+          "name": "warning collar",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.0020038618822582066
+        },
+        {
+          "name": "dark cap",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.000790451536886395
+        },
+        {
+          "name": "chain attachment eye",
+          "vertices": 32,
+          "faces": 32,
+          "closed": true,
+          "signed_volume_m3": 6.437656217409925e-05
+        },
+        {
+          "name": "foot anchor bolt",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 2.7664197356595338e-05
+        },
+        {
+          "name": "foot anchor bolt",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 2.766448111894231e-05
+        },
+        {
+          "name": "cast foot scar",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 1.9999526557512598e-05
+        },
+        {
+          "name": "damaged concrete footing",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.03623900093953125
+        },
+        {
+          "name": "post socket",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0015591712144669148
+        },
+        {
+          "name": "painted bollard",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.012372616889479104
+        },
+        {
+          "name": "warning collar",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.002003861571817348
+        },
+        {
+          "name": "dark cap",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.0007904516144966084
+        },
+        {
+          "name": "chain attachment eye",
+          "vertices": 32,
+          "faces": 32,
+          "closed": true,
+          "signed_volume_m3": 6.437513608640677e-05
+        },
+        {
+          "name": "foot anchor bolt",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 2.766421918446818e-05
+        },
+        {
+          "name": "foot anchor bolt",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 2.7664701822989933e-05
+        },
+        {
+          "name": "cast foot scar",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 1.999995705167142e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017485442399149e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017098687356349e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017266210596064e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017220862811276e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017293379855497e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017154848654166e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017239264920736e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017275872082489e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017231412949818e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.01724620739696e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017094983060206e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017411705116212e-05
+        },
+        {
+          "name": "sagging chain link",
+          "vertices": 40,
+          "faces": 40,
+          "closed": true,
+          "signed_volume_m3": 7.017556064662737e-05
+        }
+      ]
+    },
+    {
+      "id": "freight-tarp",
+      "file": "assets/models/v116-yard-freight-tarp.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 5,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.25,
+        0.0,
+        -0.75
+      ],
+      "bounds_max": [
+        1.2500000000000004,
+        1.2,
+        0.75
+      ],
+      "dimensions": [
+        2.5000000000000004,
+        1.2,
+        1.5
+      ],
+      "triangles": 572,
+      "vertices_authored": 362,
+      "closed_components": 38,
+      "anchors": {
+        "cover_top": {
+          "position": [
+            0.27,
+            1.2,
+            -0.02
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "freight-tarp__cover_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "freight-tarp__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -1.12,
+          0.0,
+          -0.65
+        ],
+        [
+          -1.12,
+          0.0,
+          0.65
+        ],
+        [
+          1.12,
+          0.0,
+          -0.65
+        ],
+        [
+          1.12,
+          0.0,
+          0.65
+        ]
+      ],
+      "notes": "2.50 by 1.50 m footprint, about 1.20 m tall. Coarse opaque cover blocker may use the body bounds. Keep a clear passage around the cluster.",
+      "bytes": 34992,
+      "sha256": "31ac78bc628266cf36ae20a2480e84739091243976a7fc57d2d531f3dee8803c",
+      "parts": [
+        {
+          "name": "pallet runner",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.04050002122918766
+        },
+        {
+          "name": "pallet runner",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.04050000384449959
+        },
+        {
+          "name": "pallet runner",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.04050002371271451
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0180000135054191
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.01799999798337619
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.018000001708666488
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.017999998914698757
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.018000000544513266
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0179999986042579
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.018000000699733693
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.01799999208499988
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.017999994258085884
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.01799999177455902
+        },
+        {
+          "name": "pallet top slat",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.018000006054838497
+        },
+        {
+          "name": "stacked freight under tarp",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.7496999424571792
+        },
+        {
+          "name": "crate brace below hem",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.000671997666358948
+        },
+        {
+          "name": "crate brace below hem",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006720029826586447
+        },
+        {
+          "name": "stacked freight under tarp",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.8930249504822618
+        },
+        {
+          "name": "crate brace below hem",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006720005718913547
+        },
+        {
+          "name": "crate brace below hem",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006719889740149181
+        },
+        {
+          "name": "closed draped tarp",
+          "vertices": 18,
+          "faces": 32,
+          "closed": true,
+          "signed_volume_m3": 2.0390983461014307
+        },
+        {
+          "name": "tie rope",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.000401323603000491
+        },
+        {
+          "name": "tie rope",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00032597137442280655
+        },
+        {
+          "name": "tie rope",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.0003107025756132007
+        },
+        {
+          "name": "tie rope",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00040181007352657616
+        },
+        {
+          "name": "rope anchor knot",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 7.576794208337857e-05
+        },
+        {
+          "name": "rope anchor knot",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 7.575412746518856e-05
+        },
+        {
+          "name": "tie rope",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.0004419235532016804
+        },
+        {
+          "name": "tie rope",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00032593516925771875
+        },
+        {
+          "name": "tie rope",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.0003107292259301173
+        },
+        {
+          "name": "tie rope",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00044237589463591565
+        },
+        {
+          "name": "rope anchor knot",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 7.575575727969407e-05
+        },
+        {
+          "name": "rope anchor knot",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 7.576107357939085e-05
+        },
+        {
+          "name": "low freight label",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0004212017132279778
+        },
+        {
+          "name": "freight label ink",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 5.757145117968294e-06
+        },
+        {
+          "name": "freight label ink",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 5.759032016309619e-06
+        },
+        {
+          "name": "freight label ink",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 5.759395814190348e-06
+        },
+        {
+          "name": "freight label ink",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 5.76027377974242e-06
+        }
+      ]
+    },
+    {
+      "id": "wall-services",
+      "file": "assets/models/v116-yard-wall-services.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 5,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.65,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.65,
+        2.4,
+        0.2919999957084656
+      ],
+      "dimensions": [
+        1.3,
+        2.4,
+        0.2919999957084656
+      ],
+      "triangles": 728,
+      "vertices_authored": 444,
+      "closed_components": 40,
+      "anchors": {
+        "junction_face": {
+          "position": [
+            0.29,
+            1.57,
+            0.175
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-services__junction_face"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "wall-services__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            1.2,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-services__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear mounting plane Z=0; +Z faces away from wall. Lower origin is the bottom of the wall service set, not terrain. Place 0.08\u20130.20 m above grade so outlet clears it.",
+      "bytes": 41016,
+      "sha256": "36bce94c1f76dc48786c5babde28fbd43368fd495f71a47fc03ebb2494ddbce5",
+      "parts": [
+        {
+          "name": "wall attachment pad",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00036000001515882707
+        },
+        {
+          "name": "wall attachment pad",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0003599998502371211
+        },
+        {
+          "name": "wall attachment pad",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00036000132483119784
+        },
+        {
+          "name": "wall attachment pad",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0003599997144192457
+        },
+        {
+          "name": "wall attachment pad",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00036000049052139105
+        },
+        {
+          "name": "wall attachment pad",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00035999961740647746
+        },
+        {
+          "name": "gutter bottom",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.008970019407570362
+        },
+        {
+          "name": "gutter rear lip",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00338000771201526
+        },
+        {
+          "name": "gutter front lip",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.002703979611396789
+        },
+        {
+          "name": "gutter closed end",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006578072595099611
+        },
+        {
+          "name": "gutter closed end",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0006578184353808556
+        },
+        {
+          "name": "gutter dark bed",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0012750150102268374
+        },
+        {
+          "name": "gutter outlet collar",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.0009629879302034795
+        },
+        {
+          "name": "downpipe",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.016291056711149093
+        },
+        {
+          "name": "downpipe clamp",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.0004921085928799586
+        },
+        {
+          "name": "clamp wall tab",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00043200026266276815
+        },
+        {
+          "name": "downpipe clamp",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.0004921074529799326
+        },
+        {
+          "name": "clamp wall tab",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00043199782764228624
+        },
+        {
+          "name": "downpipe clamp",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 0.000492109723078707
+        },
+        {
+          "name": "clamp wall tab",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00043200163054280016
+        },
+        {
+          "name": "downpipe outlet",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0010402495208836626
+        },
+        {
+          "name": "downpipe outlet",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0006500856470665894
+        },
+        {
+          "name": "outlet dark end",
+          "vertices": 20,
+          "faces": 12,
+          "closed": true,
+          "signed_volume_m3": 4.34725613255674e-05
+        },
+        {
+          "name": "junction housing",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.021600000249842797
+        },
+        {
+          "name": "junction front",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.001519000235324105
+        },
+        {
+          "name": "junction seam",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 2.3999600671231747e-05
+        },
+        {
+          "name": "junction warning plate",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 8.800121334691835e-05
+        },
+        {
+          "name": "box screw",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 1.6845660866238075e-06
+        },
+        {
+          "name": "box screw",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 1.6854100977070545e-06
+        },
+        {
+          "name": "box screw",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 1.684073746825249e-06
+        },
+        {
+          "name": "box screw",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 1.6834237612783917e-06
+        },
+        {
+          "name": "left electrical conduit",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.0006976364432678869
+        },
+        {
+          "name": "left electrical conduit",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 2.1604505794433197e-05
+        },
+        {
+          "name": "right electrical conduit",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.0010133552908276515
+        },
+        {
+          "name": "right electrical conduit",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00011843870500645882
+        },
+        {
+          "name": "right electrical conduit",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.0001629712739183257
+        },
+        {
+          "name": "conduit saddle",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00011699983588187024
+        },
+        {
+          "name": "conduit saddle",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00011699935566866776
+        },
+        {
+          "name": "conduit saddle",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00011699862079694875
+        },
+        {
+          "name": "conduit saddle",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00011699477666600957
+        }
+      ]
+    },
+    {
+      "id": "gatehouse-chair",
+      "file": "assets/models/v116-yard-gatehouse-chair.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.32499998807907104,
+        0.0,
+        -0.32499998807907104
+      ],
+      "bounds_max": [
+        0.32499998807907104,
+        0.9764099717140198,
+        0.32499998807907104
+      ],
+      "dimensions": [
+        0.6499999761581421,
+        0.9764099717140198,
+        0.6499999761581421
+      ],
+      "triangles": 436,
+      "vertices_authored": 256,
+      "closed_components": 19,
+      "anchors": {
+        "seat_top": {
+          "position": [
+            0,
+            0.524,
+            0.005
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-chair__seat_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-chair__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.29,
+          0.0,
+          -0.29
+        ],
+        [
+          -0.29,
+          0.0,
+          0.29
+        ],
+        [
+          0.29,
+          0.0,
+          -0.29
+        ],
+        [
+          0.29,
+          0.0,
+          0.29
+        ]
+      ],
+      "notes": ".65 by .65 m footprint. Seat anchor is at the top of its cushion. Static scenery; keep the chair outside gatehouse doors and interaction approach zones.",
+      "bytes": 26096,
+      "sha256": "28a83c317816c54912ada41d4659114ca3e5b665e89a157de80ee128ca87ec47",
+      "parts": [
+        {
+          "name": "rubber foot",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0001732411935032967
+        },
+        {
+          "name": "splayed steel leg",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0006122422350927081
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.00017324119350329661
+        },
+        {
+          "name": "splayed steel leg",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0006122432034014006
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.00017324120077925417
+        },
+        {
+          "name": "splayed steel leg",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0006122429584441611
+        },
+        {
+          "name": "rubber foot",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.00017324120077925423
+        },
+        {
+          "name": "splayed steel leg",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0006122419107062644
+        },
+        {
+          "name": "seat pan",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.014850000074754151
+        },
+        {
+          "name": "seat cushion",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.01685400051064789
+        },
+        {
+          "name": "back upright",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0007476209333011263
+        },
+        {
+          "name": "seat side rail",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00042205526309165443
+        },
+        {
+          "name": "back upright",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.0007476196430313093
+        },
+        {
+          "name": "seat side rail",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00042205935036084447
+        },
+        {
+          "name": "rounded chair back",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.011638123542070385
+        },
+        {
+          "name": "back upholstery",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.002543998901577046
+        },
+        {
+          "name": "back fastener",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.368006825136646e-06
+        },
+        {
+          "name": "back fastener",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.3658337391292175e-06
+        },
+        {
+          "name": "seat wear",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.7400476382269245e-05
+        }
+      ]
+    },
+    {
+      "id": "calendar-coat",
+      "file": "assets/models/v116-yard-calendar-coat.glb",
+      "license": "CC0-1.0",
+      "draw_calls_max": 8,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.55,
+        0,
+        0.0
+      ],
+      "bounds_max": [
+        0.55,
+        1.2,
+        0.21799999475479126
+      ],
+      "dimensions": [
+        1.1,
+        1.2,
+        0.21799999475479126
+      ],
+      "triangles": 996,
+      "vertices_authored": 636,
+      "closed_components": 69,
+      "anchors": {
+        "calendar_face": {
+          "position": [
+            0.315,
+            0.715,
+            0.065
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "calendar-coat__calendar_face"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "calendar-coat__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.6,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "calendar-coat__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear plane Z=0; lower origin is the hanging coat hem. Mount about .85\u20131.05 m above floor; +Z faces the room. Calendar is decorative, not a readable puzzle or promised interaction.",
+      "bytes": 58416,
+      "sha256": "df611781e579dfd43a48c7d7d557a6664789b9bfd1f2e00df6f31b433e44f17d",
+      "parts": [
+        {
+          "name": "wall hook rail",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.005500002298504114
+        },
+        {
+          "name": "rail mounting bolt",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 7.12914091612521e-06
+        },
+        {
+          "name": "rail mounting bolt",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 7.129299774533149e-06
+        },
+        {
+          "name": "coat hook",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.951607262327631e-05
+        },
+        {
+          "name": "coat hook",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 1.8102757167071087e-05
+        },
+        {
+          "name": "coat hook",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.9517112478885494e-05
+        },
+        {
+          "name": "coat hook",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 1.8103268909423326e-05
+        },
+        {
+          "name": "coat hook",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.9515497822624896e-05
+        },
+        {
+          "name": "coat hook",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 1.8105337706704957e-05
+        },
+        {
+          "name": "coat hanger",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.0161259928718223e-05
+        },
+        {
+          "name": "coat hanger",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 8.63118281510348e-05
+        },
+        {
+          "name": "coat hanger",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 0.00014965235338119454
+        },
+        {
+          "name": "coat hanger",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 8.631167171794602e-05
+        },
+        {
+          "name": "hanging coat torso",
+          "vertices": 16,
+          "faces": 10,
+          "closed": true,
+          "signed_volume_m3": 0.03141999752339568
+        },
+        {
+          "name": "left hanging sleeve",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 0.006535000760777621
+        },
+        {
+          "name": "right hanging sleeve",
+          "vertices": 10,
+          "faces": 7,
+          "closed": true,
+          "signed_volume_m3": 0.006990000004710357
+        },
+        {
+          "name": "coat split",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0001275007271033245
+        },
+        {
+          "name": "coat pocket",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00033350044395774603
+        },
+        {
+          "name": "coat pocket",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.000333500395451362
+        },
+        {
+          "name": "coat button",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.741728202536862e-06
+        },
+        {
+          "name": "coat button",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.741898884375889e-06
+        },
+        {
+          "name": "coat button",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.7414089698965294e-06
+        },
+        {
+          "name": "coat button",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 3.7418115728845255e-06
+        },
+        {
+          "name": "damp coat hem",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.00017999995543505081
+        },
+        {
+          "name": "calendar backing",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.010990799133044977
+        },
+        {
+          "name": "calendar sheet",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0036960001064774892
+        },
+        {
+          "name": "calendar header",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 0.0004319990597044425
+        },
+        {
+          "name": "header abstract mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.068229024298486e-06
+        },
+        {
+          "name": "header abstract mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.068602523456022e-06
+        },
+        {
+          "name": "header abstract mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.068427900473285e-06
+        },
+        {
+          "name": "header abstract mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 7.067574188113213e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.66894562123343e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.219989594072106e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2198440749198266e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.669253636772437e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2200235485409703e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.220115710670752e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.669544675076997e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2198270976853915e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.220319437483941e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.668807378038757e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2197761659820897e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2200478017330187e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.6687491703778505e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2201060093939304e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2197009810867454e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.668834056550015e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2194463225702464e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.219412368101379e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.669127520173783e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2188836485147425e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.218796337023379e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.668916517402979e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2200672042866554e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2198731787502774e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.669166325281065e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2198052698125448e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.219814971089363e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.668836481869219e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2200186979025602e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.219984743433695e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.669161474642652e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.220144814501207e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.219805269812543e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 4.6688461831460425e-06
+        },
+        {
+          "name": "calendar date mark",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 3.2199313864111883e-06
+        },
+        {
+          "name": "calendar selected date",
+          "vertices": 8,
+          "faces": 6,
+          "closed": true,
+          "signed_volume_m3": 9.839151365061607e-06
+        },
+        {
+          "name": "calendar binder ring",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 1.833155693020675e-05
+        },
+        {
+          "name": "calendar binder ring",
+          "vertices": 12,
+          "faces": 8,
+          "closed": true,
+          "signed_volume_m3": 1.8332672577040882e-05
+        }
+      ]
+    }
+  ],
+  "total_bytes": 295064,
+  "total_triangles": 5128,
+  "runtime_notes": [
+    "One mesh per prop, material primitives; share Yard115 materials and batch static placements.",
+    "Every source component is a closed consistently wound positive-volume solid.",
+    "No textures, animation, audio, cameras, lights, particles or external dependencies.",
+    "Babylon left-handed glTF loading mirrors X. Preserve its import root; use loaded anchor nodes."
+  ]
+}

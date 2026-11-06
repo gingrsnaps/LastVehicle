@@ -1,6 +1,6 @@
-import { snapshotPosition, setSpatialPosition } from "./spatial-audio.js?v=1.14.0";
-import { acousticRoute } from "./acoustics.js?v=1.14.0";
-import { segmentHits } from "./navigation.js?v=1.14.0";
+import { snapshotPosition, setSpatialPosition } from "./spatial-audio.js?v=1.19.0";
+import { acousticRoute } from "./acoustics.js?v=1.19.0";
+import { segmentHits } from "./navigation.js?v=1.19.0";
 
 /** Local, licensed recordings through a Web Audio mixer. World effects use real
  * 3D emitters; headphones, distance and walls all affect their perceived source. */
@@ -102,6 +102,7 @@ export class AudioMixer {
     names.push("concrete-step-1","concrete-step-2","concrete-step-3","debris-step-1","debris-step-2","debris-step-3","grate-step-1","grate-step-2","hinge-creak-1","hinge-creak-2");
     names.push('lv113-motif','lv113-return','lv113-cloth-shift','lv113-cart-wheel','lv113-cart-impact','lv113-pressure-burst','lv113-fan-stop','lv113-exit-rain');
     names.push('lv114-city-night','lv114-entrance-rain','lv114-distant-thunder','lv114-bolt-impact','lv114-electric-cutoff','lv114-player-breath');
+    names.push('lv115-roof-rain','lv115-yard-wind','lv115-gravel-step-1','lv115-gravel-step-2','lv115-bolt-metal','lv115-bolt-glass','lv115-bolt-water','lv115-fence-strike','lv115-door-breach','lv115-road-gravel','lv115-engine-idle','lv115-yard-tension');
     this.loadAbort=new AbortController();const signal=this.loadAbort.signal;
     let next=0;
     const worker=async()=>{
@@ -159,6 +160,7 @@ export class AudioMixer {
       refDistance = 2,
       maxDistance = 45,
       reverb = true,
+      priority = 0,
     } = {},
   ) {
     if (!this.ctx || !this.buffers[name]) return null;
@@ -169,12 +171,15 @@ export class AudioMixer {
     let src,gain,filter,panner,send=null,voice=null;
     try {
     if(this.voices.size>=this.maxVoices){
-      const oldest=[...this.voices].find(v=>!v.loop);
+      // A footstep must not immediately evict the bolt impact that explains a
+      // distraction. Important one-shots remain inside the same voice ceiling.
+      let oldest;
+      for(const v of this.voices)if(!v.loop&&(v.priority||0)<=priority&&(!oldest||(v.priority||0)<(oldest.priority||0)))oldest=v;
       if(!oldest)return null;this.releaseVoice(oldest);
     }
     // The separate loud-effects control scales authored stingers and metal/alarm
     // events before spatialization. Night mode additionally compresses the mix.
-    const baseVolume = volume, loud = ["scare", "metal", "alarm", "rattle", "hatch-impact", "creature-attack", "surge", "metal-stress", "wood-crack",'door-strike','lv113-cart-impact','lv113-pressure-burst','lv114-distant-thunder','lv114-electric-cutoff'].includes(name);
+    const baseVolume = volume, loud = ["scare", "metal", "alarm", "rattle", "hatch-impact", "creature-attack", "surge", "metal-stress", "wood-crack",'door-strike','lv113-cart-impact','lv113-pressure-burst','lv114-distant-thunder','lv114-electric-cutoff','lv115-fence-strike','lv115-door-breach'].includes(name);
     if (loud) volume *= this.settings?.loudEffects ?? 1;
     src = this.ctx.createBufferSource();
     gain = this.ctx.createGain();
@@ -216,6 +221,7 @@ export class AudioMixer {
       volume, baseVolume, loud,
       bus,
       loop,
+      priority,
       send,
     };
     this.voices.add(voice);
@@ -272,9 +278,9 @@ export class AudioMixer {
       this.lastWater=this.waterBag.pop();name='water-step-'+this.lastWater;
     }
     if(!profile.water&&!creature){
-      const kind=profile.kind||'concrete',count=kind==='grate'?2:3;
+      const kind=profile.kind||'concrete',count=['grate','gravel'].includes(kind)?2:3;
       this.stepLast ||= {};let n=1+Math.floor(Math.random()*count);if(n===this.stepLast[kind])n=n%count+1;this.stepLast[kind]=n;
-      name=profile.wetness>.2?'footstep-wet':`${kind}-step-${n}`;
+      name=profile.wetness>.2?'footstep-wet':kind==='gravel'?`lv115-gravel-step-${n}`:`${kind}-step-${n}`;
     }
     return this.play(name,{volume:profile.volume*(profile.water?1.3:1),rate:profile.rate*(.96+Math.random()*.08),position:creature?point:null,refDistance:3,reverb:creature});
   }
@@ -294,6 +300,7 @@ export class AudioMixer {
     for(const name of ["service","tension","unease","aftermath"])if(!this.loops[name])this.loops[name]=this.play(name,{bus:name==="service"?"ambience":"music",volume:0,loop:true,reverb:false});
     for(const [key,file,bus] of [['motif','lv113-motif','music'],['returnTheme','lv113-return','music'],['exitRain','lv113-exit-rain','ambience']])if(!this.loops[key])this.loops[key]=this.play(file,{bus,volume:0,loop:true,reverb:false});
     for(const [key,file,bus] of [['city','lv114-city-night','ambience'],['entranceRain','lv114-entrance-rain','ambience'],['breath','lv114-player-breath','sfx']])if(!this.loops[key])this.loops[key]=this.play(file,{bus,volume:0,loop:true,reverb:false});
+    for(const [key,file,bus] of [['yardWind','lv115-yard-wind','ambience'],['roofRain','lv115-roof-rain','ambience'],['yardTension','lv115-yard-tension','music']])if(!this.loops[key])this.loops[key]=this.play(file,{bus,volume:0,loop:true,reverb:false});
     this.thunderTimer=65;this.mixDirty=true;
     if (!this.worldLoops.length) {
       this.worldLoops.push(
@@ -385,6 +392,8 @@ export class AudioMixer {
       filter.connect(gain);gain.connect(this.buses.sfx);
       for(const harmonic of [1,2,3]){const o=this.ctx.createOscillator();oscillators.push(o);o.type=harmonic===1?"triangle":"sine";o.frequency.value=34*harmonic;o.connect(filter);o.start();}
       this.engineNodes={gain,filter,oscillators};this.engineNext=0;
+      this.engineIdle=this.play('lv115-engine-idle',{volume:.24,loop:true,reverb:false});
+      this.engineRoad=this.play('lv115-road-gravel',{volume:0,loop:true,reverb:false});
     }catch(error){
       this.reportFault("car engine",error.message);
       for(const o of oscillators)try{o.stop();}catch{}
@@ -392,12 +401,14 @@ export class AudioMixer {
     }
   }
 
-  updateEngine(seconds){
+  updateEngine(seconds,speed=0){
     if(!this.engineNodes || seconds<this.engineNext)return;this.engineNext=seconds+.08;
-    const rpm=34+Math.min(1,Math.max(0,(seconds-2.2)/5))*34;
+    const rpm=34+Math.min(1,Math.abs(speed)/6.2)*34;
+    this.setVoiceGain(this.engineRoad,Math.min(.28,Math.abs(speed)*.045),.2);
     this.engineNodes.oscillators.forEach((o,i)=>o.frequency.setTargetAtTime(rpm*(i+1),this.ctx.currentTime,.12));
   }
   stopEngine(){
+    if(this.engineIdle)this.releaseVoice(this.engineIdle);if(this.engineRoad)this.releaseVoice(this.engineRoad);this.engineIdle=this.engineRoad=null;
     if(!this.engineNodes)return;
     for(const o of this.engineNodes.oscillators){try{o.stop();o.disconnect();}catch{}}
     this.engineNodes.filter.disconnect();this.engineNodes.gain.disconnect();this.engineNodes=null;
@@ -438,11 +449,15 @@ export class AudioMixer {
     levels.motif=calm*(this.returning?0:(this.carProximity||0)*.4);
     levels.returnTheme=calm*(this.returning?(this.carProximity||0)*.45:0);
     levels.exitRain=(this.mixPaused?0:1)*(this.exitProximity||0)*.65;
+    const outside=['yard','road','gatehouse'].includes(this.musicRoom),sheltered=this.musicRoom==='gatehouse',audible=this.mixPaused?0:this.duckTimer>0?.25:1;
+    levels.yardWind=outside?(sheltered?.10:.42)*audible:0;levels.roofRain=outside?(sheltered?.5:.18)*audible:0;
+    levels.yardTension=outside?(['chase','attack','recover'].includes(this.musicMode)?.05:.22)*audible:0;
+    if(outside){levels.music*=.2;levels.service=0;}
     const weather=this.weatherProximity||0;
     levels.city=this.mixPaused?0:.1+weather*.18;
     levels.entranceRain=this.mixPaused?0:weather*.34*(1-(this.exitProximity||0));
     levels.breath=this.mixPaused?0:(this.breathLevel||0)*.9;
-    levels.ambience=this.fansStopped?.07:.17;
+    levels.ambience=outside?0:this.fansStopped?.07:.17;
     for(const [name,level] of Object.entries(levels)){
       const voice=this.loops[name];if(!voice)continue;
       voice.volume=level;this.setVoiceGain(voice,level,this.duckTimer>0?.08:.8);
@@ -464,7 +479,7 @@ export class AudioMixer {
     const t = this.ctx.currentTime;
     this.worldGain.gain.setTargetAtTime(0, t, .45);
     this.loops.music?.gain.gain.setTargetAtTime(.12, t, .65);
-    for(const name of ["service","tension","unease","aftermath","motif","returnTheme","exitRain","city","entranceRain","breath"])this.loops[name]?.gain.gain.setTargetAtTime(0,t,.45);
+    for(const name of ["service","tension","unease","aftermath","motif","returnTheme","exitRain","city","entranceRain","breath","yardWind","roofRain","yardTension"])this.loops[name]?.gain.gain.setTargetAtTime(0,t,.45);
   }
   async soundTest() {
     if (!await this.unlock()) return false;
@@ -497,6 +512,7 @@ export class AudioMixer {
 /** Source geometry containing an emitter must not muffle its own sound. */
 export function audioOccluded(listener,source,rects) {
   for(const b of rects) {
+    if(b.seeThrough)continue;
     if(Math.abs(source.x-b.x)<b.w/2 && Math.abs(source.z-b.z)<b.d/2)continue;
     if(segmentHits(listener,source,b,.05))return true;
   }

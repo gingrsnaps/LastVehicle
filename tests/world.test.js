@@ -120,7 +120,7 @@ test("Every interactive can be aimed at from a reachable approach point", () => 
     "car-passenger": [13.67,81.2],
     battery: [9.6,75.6],
     repair: [9.1,78],
-    key: [-23.4, 20.1],
+    key: [-23.4, 19.3],
     log: [-24.5, 20.1],
     terminal: [-25, 15.7],
     release: [-28, 25.6],
@@ -468,7 +468,7 @@ test("Successful readiness visits all rooms and leaves hand models hidden (GPU r
   world.visuals.hand.setEnabled(false);world.visuals.actionHand.setEnabled(false);
   const stages=[];
   try {await world.warmup((label,p)=>stages.push([label,p]));} finally {world.scene.isReady=ready;}
-  assert.equal(world.preparation.rooms,7);assert.equal(world.preparation.ready,true);
+  assert.equal(world.preparation.rooms,10);assert.equal(world.preparation.ready,true);
   assert.equal(world.visuals.hand.isEnabled(),false); assert.equal(world.visuals.actionHand.isEnabled(),false);
   assert.ok(stages.every(([,p])=>p<1),"Only Game may report Ready after preparation completes");
 });
@@ -604,7 +604,7 @@ test("Security's real actor alcove and both routes around the wired window remai
 });
 test("Security and surge transforms survive batching, pause cleanly and fire one saved-impact cue",()=>{
   world.sync(newGame());const a=world.atmosphere,v=world.visuals;let impacts=0,done=0;
-  a.playSecurity(()=>impacts++,()=>done++);v.tick(.9,0,null,true);assert.equal(impacts,0);
+  a.playSecurity(()=>impacts++,()=>done++);v.tick(.1,0,null,true);assert.equal(impacts,0);
   assert.ok(a.securityShutter.position.y>1.78);const y=a.securityShutter.position.y;
   v.tick(1,0,null,false);assert.equal(a.securityShutter.position.y,y);
   v.tick(1,0,null,true);assert.equal(impacts,1);assert.equal(a.windowDamage.isEnabled(),true);
@@ -614,12 +614,12 @@ test("Security and surge transforms survive batching, pause cleanly and fire one
   world.sync({...newGame(),scares:["securityBreach","powerSurge"]});assert.equal(a.windowDamage.isEnabled(),true);assert.equal(a.emergencyMode,true);
   world.sync(newGame());assert.equal(a.windowDamage.isEnabled(),false);assert.equal(a.emergencyMode,false);
 });
-test("Conservative room culling keeps garage and adjacent door views, and restores batches on reset",()=>{
+test("Conservative room culling keeps adjacent door views and preserves the current sector on reset",()=>{
   world.updateRoomVisibility({x:-24,z:18},1);
-  for(const b of world.roomBatches)assert.equal(b.enabled,["garage","security","storage"].includes(b.zone));
-  world.updateRoomVisibility({x:0,z:40},1);assert.ok(world.roomBatches.every(b=>b.enabled));
+  for(const b of world.roomBatches)assert.equal(b.enabled,!b.backdrop&&["garage","security","storage"].includes(b.zone));
+  world.updateRoomVisibility({x:0,z:40},1);assert.ok(world.roomBatches.every(b=>b.enabled===(!b.backdrop&&!['yard','gatehouse','road'].includes(b.zone))));
   world.updateRoomVisibility({x:24,z:39},1);assert.ok(world.roomBatches.some(b=>!b.enabled));
-  world.sync(newGame());assert.ok(world.roomBatches.every(b=>b.enabled));
+  world.sync(newGame());for(const b of world.roomBatches)assert.equal(b.enabled,!b.backdrop&&["garage","electrical"].includes(b.zone));
 });
 
 test("Delivered cars and props are grounded after actual glTF transforms, and the full car route stays clear",async()=>{
@@ -637,13 +637,13 @@ test("Delivered cars and props are grounded after actual glTF transforms, and th
   assert.equal(w.richDetails.instances.length,12);
   const key=w.visuals.key,grip=w.visuals.keyGrip;
   assert.ok(grip,'imported maintenance key has its real ring-grip anchor');
-  assert.ok(Math.abs(key.metadata.placement.bottom-.925)<.0001,'key rests on the measured desk top');
+  assert.ok(Math.abs(key.metadata.placement.bottom-1.225)<.0001,'key rests on the raised tray support');
   assert.ok(key.metadata.placement.w>.4&&key.metadata.placement.w<.43);
   assert.equal(w.visuals.dynamicRoots.has(key),true);
   for(const fps of [30,60,144]){
     w.sync(newGame());w.visuals.action('key',.45,()=>{});
     for(let t=0;t<.45;t+=1/fps){w.visuals.animator.tick(1/fps);assert.equal(key.scaling.x,1);}
-    w.sync(newGame());assert.ok(Math.abs(key.position.y-.925)<.0001);
+    w.sync(newGame());assert.ok(Math.abs(key.position.y-1.225)<.0001);
   }
   assert.equal(w.decay.paint.length,4);
   for(const mark of w.decay.paint){assert.ok(Math.abs(Math.abs(mark.plane.position.x)-29.75)<.005);assert.equal(mark.plane.isPickable,false);}

@@ -1,0 +1,529 @@
+{
+  "game_release": "Last Vehicle 1.16",
+  "assets": [
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-loading-trolley",
+      "file": "models/v116-yard-loading-trolley.glb",
+      "draw_calls_max": 8,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.6,
+        0.0,
+        -0.5
+      ],
+      "bounds_max": [
+        0.6,
+        1.100000023841858,
+        0.5
+      ],
+      "dimensions": [
+        1.2,
+        1.100000023841858,
+        1.0
+      ],
+      "triangles": 796,
+      "vertices_authored": 496,
+      "closed_components": 49,
+      "anchors": {
+        "handle": {
+          "position": [
+            0,
+            1.075,
+            -0.475
+          ],
+          "normal": [
+            0,
+            0,
+            -1
+          ],
+          "node": "loading-trolley__handle"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "loading-trolley__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.46,
+          0.0,
+          -0.31
+        ],
+        [
+          -0.46,
+          0.0,
+          0.34
+        ],
+        [
+          0.46,
+          0.0,
+          -0.31
+        ],
+        [
+          0.46,
+          0.0,
+          0.34
+        ]
+      ],
+      "notes": "1.20 by 1.00 m overall footprint. Fixed scenery; wheels do not imply push interaction. Place beside the loading wall, outside the vehicle lane.",
+      "bytes": 45920,
+      "sha256": "18b1aec732cf3af3992fa099492011fd65f862c560cd4647eacd0f6cf3b134c3"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-bollard-chain",
+      "file": "models/v116-yard-bollard-chain.glb",
+      "draw_calls_max": 7,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.7999999999999999,
+        0,
+        -0.3
+      ],
+      "bounds_max": [
+        0.7999999999999999,
+        0.9860000014305115,
+        0.303
+      ],
+      "dimensions": [
+        1.5999999999999999,
+        0.9860000014305115,
+        0.603
+      ],
+      "triangles": 1600,
+      "vertices_authored": 832,
+      "closed_components": 31,
+      "anchors": {
+        "chain_midpoint": {
+          "position": [
+            0,
+            0.585,
+            0.095
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "bollard-chain__chain_midpoint"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "bollard-chain__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.73,
+          0,
+          -0.23
+        ],
+        [
+          -0.42999999999999994,
+          0,
+          0.23
+        ],
+        [
+          0.42999999999999994,
+          0,
+          -0.23
+        ],
+        [
+          0.73,
+          0,
+          0.23
+        ]
+      ],
+      "notes": "1.60 by .60 m feet. Use post blockers and an explicit chain crossing rule if required. Do not treat the entire open gap as an opaque AI sight blocker.",
+      "bytes": 88624,
+      "sha256": "54cfce240307412a98f3edbdcac1ef8e954399b116f172b719b4bb19bc52f5ca"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-freight-tarp",
+      "file": "models/v116-yard-freight-tarp.glb",
+      "draw_calls_max": 5,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.25,
+        0.0,
+        -0.75
+      ],
+      "bounds_max": [
+        1.2500000000000004,
+        1.2,
+        0.75
+      ],
+      "dimensions": [
+        2.5000000000000004,
+        1.2,
+        1.5
+      ],
+      "triangles": 572,
+      "vertices_authored": 362,
+      "closed_components": 38,
+      "anchors": {
+        "cover_top": {
+          "position": [
+            0.27,
+            1.2,
+            -0.02
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "freight-tarp__cover_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "freight-tarp__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -1.12,
+          0.0,
+          -0.65
+        ],
+        [
+          -1.12,
+          0.0,
+          0.65
+        ],
+        [
+          1.12,
+          0.0,
+          -0.65
+        ],
+        [
+          1.12,
+          0.0,
+          0.65
+        ]
+      ],
+      "notes": "2.50 by 1.50 m footprint, about 1.20 m tall. Coarse opaque cover blocker may use the body bounds. Keep a clear passage around the cluster.",
+      "bytes": 34992,
+      "sha256": "31ac78bc628266cf36ae20a2480e84739091243976a7fc57d2d531f3dee8803c"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-wall-services",
+      "file": "models/v116-yard-wall-services.glb",
+      "draw_calls_max": 5,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.65,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.65,
+        2.4,
+        0.2919999957084656
+      ],
+      "dimensions": [
+        1.3,
+        2.4,
+        0.2919999957084656
+      ],
+      "triangles": 728,
+      "vertices_authored": 444,
+      "closed_components": 40,
+      "anchors": {
+        "junction_face": {
+          "position": [
+            0.29,
+            1.57,
+            0.175
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-services__junction_face"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "wall-services__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            1.2,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-services__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear mounting plane Z=0; +Z faces away from wall. Lower origin is the bottom of the wall service set, not terrain. Place 0.08\u20130.20 m above grade so outlet clears it.",
+      "bytes": 41016,
+      "sha256": "36bce94c1f76dc48786c5babde28fbd43368fd495f71a47fc03ebb2494ddbce5"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-gatehouse-chair",
+      "file": "models/v116-yard-gatehouse-chair.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.32499998807907104,
+        0.0,
+        -0.32499998807907104
+      ],
+      "bounds_max": [
+        0.32499998807907104,
+        0.9764099717140198,
+        0.32499998807907104
+      ],
+      "dimensions": [
+        0.6499999761581421,
+        0.9764099717140198,
+        0.6499999761581421
+      ],
+      "triangles": 436,
+      "vertices_authored": 256,
+      "closed_components": 19,
+      "anchors": {
+        "seat_top": {
+          "position": [
+            0,
+            0.524,
+            0.005
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-chair__seat_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-chair__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.29,
+          0.0,
+          -0.29
+        ],
+        [
+          -0.29,
+          0.0,
+          0.29
+        ],
+        [
+          0.29,
+          0.0,
+          -0.29
+        ],
+        [
+          0.29,
+          0.0,
+          0.29
+        ]
+      ],
+      "notes": ".65 by .65 m footprint. Seat anchor is at the top of its cushion. Static scenery; keep the chair outside gatehouse doors and interaction approach zones.",
+      "bytes": 26096,
+      "sha256": "28a83c317816c54912ada41d4659114ca3e5b665e89a157de80ee128ca87ec47"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-calendar-coat",
+      "file": "models/v116-yard-calendar-coat.glb",
+      "draw_calls_max": 8,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.55,
+        0,
+        0.0
+      ],
+      "bounds_max": [
+        0.55,
+        1.2,
+        0.21799999475479126
+      ],
+      "dimensions": [
+        1.1,
+        1.2,
+        0.21799999475479126
+      ],
+      "triangles": 996,
+      "vertices_authored": 636,
+      "closed_components": 69,
+      "anchors": {
+        "calendar_face": {
+          "position": [
+            0.315,
+            0.715,
+            0.065
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "calendar-coat__calendar_face"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "calendar-coat__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.6,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "calendar-coat__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear plane Z=0; lower origin is the hanging coat hem. Mount about .85\u20131.05 m above floor; +Z faces the room. Calendar is decorative, not a readable puzzle or promised interaction.",
+      "bytes": 58416,
+      "sha256": "df611781e579dfd43a48c7d7d557a6664789b9bfd1f2e00df6f31b433e44f17d"
+    }
+  ]
+}

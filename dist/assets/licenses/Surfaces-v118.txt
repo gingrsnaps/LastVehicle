@@ -1,0 +1,16 @@
+LAST VEHICLE 1.18 — WOVEN SURFACE
+
+Book Pattern by Rob Tuytel / Poly Haven
+Source: https://polyhaven.com/a/book_pattern
+License: CC0-1.0 — https://polyhaven.com/license
+Dedication: https://creativecommons.org/publicdomain/zero/1.0/
+Verified 5 November 2026.
+
+The col1 and rough maps were downloaded as original 1K JPEGs. Supplied source
+MD5 values were checked against Poly Haven metadata. Both were resized to
+512 x 512 RGB and saved as JPEG quality 88 for this browser game. Material
+tints and a 0.3 m repeat are applied by the game's surface library.
+
+Runtime files: textures/v118-fabric-albedo.jpg and v118-fabric-roughness.jpg.
+Full hashes, source URLs and processing appear in assets-manifest.json.
+This notice covers these art files; game code and branding have separate terms.

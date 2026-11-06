@@ -1145,5 +1145,9 @@ button:disabled {
 #stamina-label{position:absolute;bottom:12px;left:0;white-space:nowrap;font:9px monospace;color:#c5ccba;letter-spacing:.08em}
 #stamina-meter.low #stamina-fill{background:#d59263}
 #bolt-status{font:10px monospace;color:#bac4b5}
-.driving #bolt-status,.driving #objective-block{visibility:hidden}
+.driving #objective-block{visibility:hidden}
+.driving #bolt-status{visibility:visible;color:#e0cf9f;font-size:12px}
 @media(max-width:600px){#stamina-meter{width:85px}#stamina-label{font-size:8px}#bolt-status{font-size:9px}.hud-bottom{gap:10px}.touch-actions{flex-wrap:wrap;max-width:180px}}
+
+/* Requested route help stays separate from the nearby use prompt. */
+#direction-hint{position:absolute;left:50%;top:18%;transform:translateX(-50%);max-width:min(90vw,38rem);padding:.45rem .7rem;background:rgba(9,19,20,.82);border:1px solid #8e895f;color:#e7d7ac;letter-spacing:.06em;text-align:center;font-size:.8rem;pointer-events:none}

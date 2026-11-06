@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "assets": 10,
+  "total_encoded_bytes": 314888,
+  "triangles": 4136,
+  "maximum_triangles_per_asset": 864,
+  "closed_components": 244,
+  "external_dependencies": 0,
+  "textures": 0,
+  "uvs": "Every actual loaded mesh has finite, complete UVs. Runtime may reproject physical texture scale.",
+  "ground_contact": "All actual loaded bounds minimum Y=0 within 1e-6 m; wall vent uses lower-edge/rear mounting origin.",
+  "anchors": "Both Babylon handedness modes validated; wall rear plane Z=0.",
+  "normals": "Finite, unit length; triangle winding agrees; no degenerate triangles.",
+  "geometry_validation": "validation.json",
+  "blender_contact_sheet": "Meridian_Scenery_v119_Contact_Sheet.jpg",
+  "browser_visual_qa": false,
+  "studio_visual_qa": {
+    "reviewed": true,
+    "method": "Actual final Blender Cycles source-mesh contact sheet inspected visually; studio base palette, not runtime texture recipes or night lighting.",
+    "notes": "All ten recognizable silhouettes are visible with supported components. Tire contact, stacked timber, bin wheel forks and reed bases were corrected before final validation. No cable geometry supplied."
+  }
+}

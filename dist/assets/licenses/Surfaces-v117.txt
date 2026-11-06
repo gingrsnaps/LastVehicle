@@ -1,0 +1,35 @@
+Last Vehicle 1.17 supplemental surfaces
+
+License: Creative Commons CC0 1.0 Universal
+https://creativecommons.org/publicdomain/zero/1.0/
+Official provider license: https://polyhaven.com/license
+Verified: 2026-11-05
+
+Poly Haven identifies these texture assets as CC0. Its official license page
+permits commercial use and redistribution. This file records the asset license;
+it does not relicense the game code, GingrSnaps branding or Poly Haven website.
+
+Asphalt 01 — Dario Barresi, Charlotte Baglioni
+https://polyhaven.com/a/asphalt_01
+
+Rough Concrete — Dimitrios Savva
+https://polyhaven.com/a/rough_concrete
+
+Brick Wall 001 — Rob Tuytel, Dimitrios Savva
+https://polyhaven.com/a/brick_wall_001
+
+Weathered Brown Planks — Dimitrios Savva, Rico Cilliers
+https://polyhaven.com/a/weathered_brown_planks
+
+Painted Metal Shutter — Dario Barresi, Rico Cilliers, Charlotte Baglioni
+https://polyhaven.com/a/painted_metal_shutter
+
+Forest Leaves 02 — Rob Tuytel
+https://polyhaven.com/a/forest_leaves_02
+
+Delivered maps are 512×512 RGB JPEG size/encoding conversions of official 1K
+Diffuse and Rough JPG files. Source colors are retained. No generated content,
+normal map or displacement map is supplied by this pack. The complete project
+includes source images, official API metadata, acquisition/conversion script,
+source hashes, runtime hashes and a technical tiling contact sheet under
+source-assets/surfaces-v117/.

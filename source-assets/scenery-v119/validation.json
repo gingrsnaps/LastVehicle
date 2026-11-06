@@ -1,0 +1,707 @@
+{
+  "passed": true,
+  "engine": "Babylon.js 9.33.1 NullEngine",
+  "browser_visual_qa": false,
+  "external_dependencies": 0,
+  "textures": 0,
+  "all_materials_opaque": true,
+  "all_source_components_closed": true,
+  "all_loaded_normals_finite_and_unit": true,
+  "all_triangles_non_degenerate": true,
+  "winding_matches_normals": true,
+  "assets": 10,
+  "total_triangles": 4136,
+  "total_bytes": 314888,
+  "results": [
+    {
+      "id": "worn-pallet-stack",
+      "sha256": "38e7354f3e568a688133f55e8331afc09e6cd00ba765b0882e36cd46248ac1fd",
+      "closed_components": 58,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 736,
+          "meshes": 3,
+          "materials": 3,
+          "bounds_min": [
+            -0.5899999737739563,
+            0,
+            -0.4779999852180481
+          ],
+          "bounds_max": [
+            0.6140000224113464,
+            0.5740000009536743,
+            0.44999998807907104
+          ],
+          "dimensions": [
+            1.2039999961853027,
+            0.5740000009536743,
+            0.9279999732971191
+          ],
+          "normal_length_min": 0.9999999957951079,
+          "normal_length_max": 1.000000026576282,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 736,
+          "meshes": 3,
+          "materials": 3,
+          "bounds_min": [
+            -0.6140000224113464,
+            0,
+            -0.4779999852180481
+          ],
+          "bounds_max": [
+            0.5899999737739563,
+            0.5740000009536743,
+            0.44999998807907104
+          ],
+          "dimensions": [
+            1.2039999961853027,
+            0.5740000009536743,
+            0.9279999732971191
+          ],
+          "normal_length_min": 0.9999999957951079,
+          "normal_length_max": 1.000000026576282,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "dented-bin",
+      "sha256": "0e35667f7c423e9a4d5c09f903cae2081c334910adf7e8162e22efae810de180",
+      "closed_components": 18,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 348,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.3199999928474426,
+            0,
+            -0.3370199501514435
+          ],
+          "bounds_max": [
+            0.3696703016757965,
+            1.1449999809265137,
+            0.2809999883174896
+          ],
+          "dimensions": [
+            0.6896702945232391,
+            1.1449999809265137,
+            0.6180199384689331
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.0000001138727999,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 348,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.3696703016757965,
+            0,
+            -0.3370199501514435
+          ],
+          "bounds_max": [
+            0.3199999928474426,
+            1.1449999809265137,
+            0.2809999883174896
+          ],
+          "dimensions": [
+            0.6896702945232391,
+            1.1449999809265137,
+            0.6180199384689331
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.0000001138727999,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "damaged-road-barrier",
+      "sha256": "eacc01d30f8580d55a19d40c2a1487a967930c565806ccc57fd1c1b47d8126ab",
+      "closed_components": 12,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 204,
+          "meshes": 5,
+          "materials": 5,
+          "bounds_min": [
+            -1.1799999475479126,
+            0,
+            -0.2849999964237213
+          ],
+          "bounds_max": [
+            1.0499999523162842,
+            0.7074494957923889,
+            0.4099999964237213
+          ],
+          "dimensions": [
+            2.2299998998641968,
+            0.7074494957923889,
+            0.6949999928474426
+          ],
+          "normal_length_min": 0.9999999803783892,
+          "normal_length_max": 1.000000074601117,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 204,
+          "meshes": 5,
+          "materials": 5,
+          "bounds_min": [
+            -1.0499999523162842,
+            0,
+            -0.2849999964237213
+          ],
+          "bounds_max": [
+            1.1799999475479126,
+            0.7074494957923889,
+            0.4099999964237213
+          ],
+          "dimensions": [
+            2.2299998998641968,
+            0.7074494957923889,
+            0.6949999928474426
+          ],
+          "normal_length_min": 0.9999999803783892,
+          "normal_length_max": 1.000000074601117,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "tire-stack",
+      "sha256": "fc6aada1ded6f709404ce372bffd8600435415b6c71040a1bb250f9ddaf9894b",
+      "closed_components": 27,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 864,
+          "meshes": 2,
+          "materials": 2,
+          "bounds_min": [
+            -0.3449999988079071,
+            0,
+            -0.35999998450279236
+          ],
+          "bounds_max": [
+            0.3700000047683716,
+            0.46765372157096863,
+            0.3449999988079071
+          ],
+          "dimensions": [
+            0.7150000035762787,
+            0.46765372157096863,
+            0.7049999833106995
+          ],
+          "normal_length_min": 0.9999999746093466,
+          "normal_length_max": 1.000000067179426,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 864,
+          "meshes": 2,
+          "materials": 2,
+          "bounds_min": [
+            -0.3700000047683716,
+            0,
+            -0.35999998450279236
+          ],
+          "bounds_max": [
+            0.3449999988079071,
+            0.46765372157096863,
+            0.3449999988079071
+          ],
+          "dimensions": [
+            0.7150000035762787,
+            0.46765372157096863,
+            0.7049999833106995
+          ],
+          "normal_length_min": 0.9999999746093466,
+          "normal_length_max": 1.000000067179426,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "abandoned-hand-truck",
+      "sha256": "90a50ac87ad3f5f453eef2bc5489b529f7e9ce4c75f85f58a07c54c3b12fba1d",
+      "closed_components": 18,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 440,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.29600000381469727,
+            0,
+            -0.4099999964237213
+          ],
+          "bounds_max": [
+            0.29600000381469727,
+            1.1799999475479126,
+            0.44999998807907104
+          ],
+          "dimensions": [
+            0.5920000076293945,
+            1.1799999475479126,
+            0.8599999845027924
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.0000000873293724,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 440,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.29600000381469727,
+            0,
+            -0.4099999964237213
+          ],
+          "bounds_max": [
+            0.29600000381469727,
+            1.1799999475479126,
+            0.44999998807907104
+          ],
+          "dimensions": [
+            0.5920000076293945,
+            1.1799999475479126,
+            0.8599999845027924
+          ],
+          "normal_length_min": 0.999999962774509,
+          "normal_length_max": 1.0000000873293724,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "wall-vent",
+      "sha256": "3ec69d63d6d5bcd4f53f3eef6c85a92cc7c4e0bbf1348e850604f4a82b255154",
+      "closed_components": 16,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 224,
+          "meshes": 4,
+          "materials": 4,
+          "bounds_min": [
+            -0.46000000834465027,
+            0,
+            0
+          ],
+          "bounds_max": [
+            0.46000000834465027,
+            0.8799999952316284,
+            0.17237123847007751
+          ],
+          "dimensions": [
+            0.9200000166893005,
+            0.8799999952316284,
+            0.17237123847007751
+          ],
+          "normal_length_min": 1,
+          "normal_length_max": 1.0000000284208457,
+          "anchors": {
+            "front_center": [
+              0,
+              0.4399999976158142,
+              0.17000000178813934
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ],
+            "rear_mount": [
+              0,
+              0.4399999976158142,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 224,
+          "meshes": 4,
+          "materials": 4,
+          "bounds_min": [
+            -0.46000000834465027,
+            0,
+            0
+          ],
+          "bounds_max": [
+            0.46000000834465027,
+            0.8799999952316284,
+            0.17237123847007751
+          ],
+          "dimensions": [
+            0.9200000166893005,
+            0.8799999952316284,
+            0.17237123847007751
+          ],
+          "normal_length_min": 1,
+          "normal_length_max": 1.0000000284208457,
+          "anchors": {
+            "front_center": [
+              0,
+              0.4399999976158142,
+              0.17000000178813934
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ],
+            "rear_mount": [
+              0,
+              0.4399999976158142,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "timber-bundle",
+      "sha256": "d9b663d0c216a54f2c45db18c1da8a75e2ac08fc3c7e6ec4b708be12bc572f20",
+      "closed_components": 17,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 204,
+          "meshes": 3,
+          "materials": 3,
+          "bounds_min": [
+            -1.1100000143051147,
+            0,
+            -0.38199999928474426
+          ],
+          "bounds_max": [
+            1.1100000143051147,
+            0.3479999899864197,
+            0.38199999928474426
+          ],
+          "dimensions": [
+            2.2200000286102295,
+            0.3479999899864197,
+            0.7639999985694885
+          ],
+          "normal_length_min": 1,
+          "normal_length_max": 1,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 204,
+          "meshes": 3,
+          "materials": 3,
+          "bounds_min": [
+            -1.1100000143051147,
+            0,
+            -0.38199999928474426
+          ],
+          "bounds_max": [
+            1.1100000143051147,
+            0.3479999899864197,
+            0.38199999928474426
+          ],
+          "dimensions": [
+            2.2200000286102295,
+            0.3479999899864197,
+            0.7639999985694885
+          ],
+          "normal_length_min": 1,
+          "normal_length_max": 1,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "drain-reeds",
+      "sha256": "d965b236389a0a65c0de86e24f357e51043bc5e151e207a7d8f5706db05cb157",
+      "closed_components": 44,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 560,
+          "meshes": 2,
+          "materials": 2,
+          "bounds_min": [
+            -0.30346164107322693,
+            0,
+            -0.30273813009262085
+          ],
+          "bounds_max": [
+            0.29800355434417725,
+            0.7773889899253845,
+            0.3265399634838104
+          ],
+          "dimensions": [
+            0.6014651954174042,
+            0.7773889899253845,
+            0.6292780935764313
+          ],
+          "normal_length_min": 0.9999999409147088,
+          "normal_length_max": 1.0000000957593396,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 560,
+          "meshes": 2,
+          "materials": 2,
+          "bounds_min": [
+            -0.29800355434417725,
+            0,
+            -0.30273813009262085
+          ],
+          "bounds_max": [
+            0.30346164107322693,
+            0.7773889899253845,
+            0.3265399634838104
+          ],
+          "dimensions": [
+            0.6014651954174042,
+            0.7773889899253845,
+            0.6292780935764313
+          ],
+          "normal_length_min": 0.9999999409147088,
+          "normal_length_max": 1.0000000957593396,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rubble-cluster",
+      "sha256": "bb42e37d03f3af40812abe15c967da7cc067524ec1bd60cd716c270f4b1cc17c",
+      "closed_components": 11,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 260,
+          "meshes": 3,
+          "materials": 3,
+          "bounds_min": [
+            -0.4587749242782593,
+            0,
+            -0.3177758455276489
+          ],
+          "bounds_max": [
+            0.30245843529701233,
+            0.13899999856948853,
+            0.34703031182289124
+          ],
+          "dimensions": [
+            0.7612333595752716,
+            0.13899999856948853,
+            0.6648061573505402
+          ],
+          "normal_length_min": 0.9999999803783892,
+          "normal_length_max": 1.0000000955913082,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 260,
+          "meshes": 3,
+          "materials": 3,
+          "bounds_min": [
+            -0.30245843529701233,
+            0,
+            -0.3177758455276489
+          ],
+          "bounds_max": [
+            0.4587749242782593,
+            0.13899999856948853,
+            0.34703031182289124
+          ],
+          "dimensions": [
+            0.7612333595752716,
+            0.13899999856948853,
+            0.6648061573505402
+          ],
+          "normal_length_min": 0.9999999803783892,
+          "normal_length_max": 1.0000000955913082,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "maintenance-shed",
+      "sha256": "5483bafdb14199f1fc26f194ce710e2bd4d614b70fc81271fa69c193b900ce17",
+      "closed_components": 23,
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 296,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -1.1699999570846558,
+            0,
+            -1.3799999952316284
+          ],
+          "bounds_max": [
+            1.159999966621399,
+            2.549999952316284,
+            1.3799999952316284
+          ],
+          "dimensions": [
+            2.3299999237060547,
+            2.549999952316284,
+            2.759999990463257
+          ],
+          "normal_length_min": 0.9999999803783892,
+          "normal_length_max": 1.000000074601117,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 296,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -1.159999966621399,
+            0,
+            -1.3799999952316284
+          ],
+          "bounds_max": [
+            1.1699999570846558,
+            2.549999952316284,
+            1.3799999952316284
+          ],
+          "dimensions": [
+            2.3299999237060547,
+            2.549999952316284,
+            2.759999990463257
+          ],
+          "normal_length_min": 0.9999999803783892,
+          "normal_length_max": 1.000000074601117,
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

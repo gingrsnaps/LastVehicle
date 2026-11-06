@@ -1,4 +1,4 @@
-import { blocked, AGENT_RADIUS } from './navigation.js?v=1.14.0';
+import { blocked, AGENT_RADIUS } from './navigation.js?v=1.19.0';
 const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
 
 /** Learns a repeated circle only from sampled, visible positions. Memory expires

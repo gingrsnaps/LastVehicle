@@ -12,6 +12,7 @@ export function surfaceAt(p,extra=[]){const inside=w=>w.enabled!==false&&((p.x-w
 // This record also places the raised drain cover and its dark inset.
 export const DRAIN_COVERS=Object.freeze([{x:27.5,z:100,halfWidth:.26,halfDepth:.35}]);
 export function groundKind(p){
+  if(p.z<-58 || (p.z<0&&p.x<16))return 'gravel';
   if(DRAIN_COVERS.some(d=>Math.abs(p.x-d.x)<=d.halfWidth&&Math.abs(p.z-d.z)<=d.halfDepth))return 'grate';
   for(const x of [-15.1,15.1])for(let z=14;z<106;z+=12)
     if(Math.abs(p.x-x)<.115&&Math.abs(p.z-z)<1.2)return 'grate';

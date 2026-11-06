@@ -1,0 +1,591 @@
+{
+  "game_release": "Last Vehicle 1.19",
+  "assets": [
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-worn-pallet-stack",
+      "file": "models/lv119-worn-pallet-stack.glb",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.59,
+        0.0,
+        -0.47800000000000004
+      ],
+      "bounds_max": [
+        0.614,
+        0.5740000009536743,
+        0.45
+      ],
+      "dimensions": [
+        1.204,
+        0.5740000009536743,
+        0.928
+      ],
+      "triangles": 736,
+      "vertices_authored": 484,
+      "closed_components": 58,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "worn-pallet-stack__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Keep clear of pedestrian strips, controls and vehicle swept paths; footprint 1.22 x .92 m.",
+      "bytes": 54228,
+      "sha256": "38e7354f3e568a688133f55e8331afc09e6cd00ba765b0882e36cd46248ac1fd"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-dented-bin",
+      "file": "models/lv119-dented-bin.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.32,
+        0.0,
+        -0.3370199632644653
+      ],
+      "bounds_max": [
+        0.36967031478881834,
+        1.145,
+        0.281
+      ],
+      "dimensions": [
+        0.6896703147888184,
+        1.145,
+        0.6180199632644654
+      ],
+      "triangles": 348,
+      "vertices_authored": 208,
+      "closed_components": 18,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dented-bin__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Open cavity and canted lid make the outline readable; no animation or implied interaction.",
+      "bytes": 27948,
+      "sha256": "0e35667f7c423e9a4d5c09f903cae2081c334910adf7e8162e22efae810de180"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-damaged-road-barrier",
+      "file": "models/lv119-damaged-road-barrier.glb",
+      "draw_calls_max": 5,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.1800000000000002,
+        0,
+        -0.285
+      ],
+      "bounds_max": [
+        1.05,
+        0.7074494957923889,
+        0.41
+      ],
+      "dimensions": [
+        2.2300000000000004,
+        0.7074494957923889,
+        0.695
+      ],
+      "triangles": 204,
+      "vertices_authored": 126,
+      "closed_components": 12,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "damaged-road-barrier__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery or an explicitly authored blocker. Use outside the driveable route; 2.25 m wide with a broad stable base.",
+      "bytes": 18520,
+      "sha256": "eacc01d30f8580d55a19d40c2a1487a967930c565806ccc57fd1c1b47d8126ab"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-tire-stack",
+      "file": "models/lv119-tire-stack.glb",
+      "draw_calls_max": 2,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.3449999988079071,
+        0.0,
+        -0.35999998450279236
+      ],
+      "bounds_max": [
+        0.3700000047683716,
+        0.46765372157096863,
+        0.3449999988079071
+      ],
+      "dimensions": [
+        0.7150000035762787,
+        0.46765372157096863,
+        0.7049999833106995
+      ],
+      "triangles": 864,
+      "vertices_authored": 480,
+      "closed_components": 27,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "tire-stack__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Three supported tires, 0.70 m diameter; allow clearance around the entire footprint.",
+      "bytes": 56748,
+      "sha256": "fc6aada1ded6f709404ce372bffd8600435415b6c71040a1bb250f9ddaf9894b"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-abandoned-hand-truck",
+      "file": "models/lv119-abandoned-hand-truck.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.29600000381469727,
+        0.0,
+        -0.4099999964237213
+      ],
+      "bounds_max": [
+        0.29600000381469727,
+        1.1799999475479126,
+        0.45
+      ],
+      "dimensions": [
+        0.5920000076293945,
+        1.1799999475479126,
+        0.8599999964237213
+      ],
+      "triangles": 440,
+      "vertices_authored": 256,
+      "closed_components": 18,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "abandoned-hand-truck__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Tip rests at floor level and wheels touch the floor. Do not place in front of a task or shelter.",
+      "bytes": 33204,
+      "sha256": "90a50ac87ad3f5f453eef2bc5489b529f7e9ce4c75f85f58a07c54c3b12fba1d"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-wall-vent",
+      "file": "models/lv119-wall-vent.glb",
+      "draw_calls_max": 4,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.45999999999999996,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.45999999999999996,
+        0.88,
+        0.17237123265862464
+      ],
+      "dimensions": [
+        0.9199999999999999,
+        0.88,
+        0.17237123265862464
+      ],
+      "triangles": 224,
+      "vertices_authored": 144,
+      "closed_components": 16,
+      "anchors": {
+        "front_center": {
+          "position": [
+            0,
+            0.44,
+            0.17
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-vent__front_center"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "wall-vent__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.44,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-vent__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Wall-mounted lower-edge origin with rear Z=0. Front +Z, 0.90 m wide. Mount against a real wall at 0.45\u20132.3 m lower-edge height.",
+      "bytes": 19664,
+      "sha256": "3ec69d63d6d5bcd4f53f3eef6c85a92cc7c4e0bbf1348e850604f4a82b255154"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-timber-bundle",
+      "file": "models/lv119-timber-bundle.glb",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.11,
+        0.0,
+        -0.382
+      ],
+      "bounds_max": [
+        1.11,
+        0.34800000000000003,
+        0.382
+      ],
+      "dimensions": [
+        2.22,
+        0.34800000000000003,
+        0.764
+      ],
+      "triangles": 204,
+      "vertices_authored": 136,
+      "closed_components": 17,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "timber-bundle__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Broad 2.25 x 0.75 m stack; use along walls or outside fences, never across a walking lane.",
+      "bytes": 17580,
+      "sha256": "d9b663d0c216a54f2c45db18c1da8a75e2ac08fc3c7e6ec4b708be12bc572f20"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-drain-reeds",
+      "file": "models/lv119-drain-reeds.glb",
+      "draw_calls_max": 2,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.30346164107322693,
+        0.0,
+        -0.30273813009262085
+      ],
+      "bounds_max": [
+        0.29800355434417725,
+        0.7773889899253845,
+        0.3265399634838104
+      ],
+      "dimensions": [
+        0.6014651954174042,
+        0.7773889899253845,
+        0.6292780935764313
+      ],
+      "triangles": 560,
+      "vertices_authored": 368,
+      "closed_components": 44,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drain-reeds__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Grounded opaque foliage. Repeat at damp wall/fence bases outside clear task approaches. 0.6\u20130.8 m tall; no collision needed.",
+      "bytes": 41040,
+      "sha256": "d965b236389a0a65c0de86e24f357e51043bc5e151e207a7d8f5706db05cb157"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-rubble-cluster",
+      "file": "models/lv119-rubble-cluster.glb",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.45877491378137014,
+        0,
+        -0.31777584151663185
+      ],
+      "bounds_max": [
+        0.30245842307870974,
+        0.139,
+        0.34703032249994537
+      ],
+      "dimensions": [
+        0.7612333368600799,
+        0.139,
+        0.6648061640165772
+      ],
+      "triangles": 260,
+      "vertices_authored": 152,
+      "closed_components": 11,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "rubble-cluster__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Small grounded rubble patch. Place at damaged wall bases or beyond fences; decorative only unless a real blocker is authored.",
+      "bytes": 19464,
+      "sha256": "bb42e37d03f3af40812abe15c967da7cc067524ec1bd60cd716c270f4b1cc17c"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-maintenance-shed",
+      "file": "models/lv119-maintenance-shed.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.1699999570846558,
+        0,
+        -1.38
+      ],
+      "bounds_max": [
+        1.16,
+        2.55,
+        1.38
+      ],
+      "dimensions": [
+        2.329999957084656,
+        2.55,
+        2.76
+      ],
+      "triangles": 296,
+      "vertices_authored": 194,
+      "closed_components": 23,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "maintenance-shed__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Background-only suggested. Ground origin, 2.3 x 2.7 m footprint. Use outside playable fence, no interior or runtime door interaction.",
+      "bytes": 26492,
+      "sha256": "5483bafdb14199f1fc26f194ce710e2bd4d614b70fc81271fa69c193b900ce17"
+    }
+  ]
+}

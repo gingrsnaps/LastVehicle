@@ -1,6 +1,6 @@
 /** Application entry: keep fatal startup errors readable instead of a black canvas. */
-import { Game } from "./game.js?v=1.14.0";
-import { $ } from "./ui.js?v=1.14.0";
+import { Game } from "./game.js?v=1.19.0";
+import { $ } from "./ui.js?v=1.19.0";
 const game = new Game();
 // Event-handler failures must produce a recovery screen, not an inert menu.
 // Reports remain local; no telemetry or personal data is sent anywhere.

@@ -1,22 +1,24 @@
-import { Footwear } from "./surfaces.js?v=1.14.0";
-import { RecoveryLog } from "./recovery.js?v=1.14.0";
-import { footContact, stepProfile } from "./surfaces.js?v=1.14.0";
-import { CreatureScenes } from "./creature-scenes.js?v=1.14.0";
-import { ControllerInput } from "./controller.js?v=1.14.0";
-import { EncounterDirector, MAJOR_ENCOUNTERS } from "./encounters.js?v=1.14.0";
-import { lineClear, sightClear } from "./navigation.js?v=1.14.0";
-import { yieldTask } from "./preparation.js?v=1.14.0";
-import { PRESETS } from "./preferences.js?v=1.14.0";
-import { FrameStats, AdaptiveScale, nextFrameDeadline, HitchRecorder, PerformanceSetup, renderSizing } from "./performance.js?v=1.14.0";
-import { GraphicsPreview } from "./preferences.js?v=1.14.0";
-import { playIntro } from "./presentation.js?v=1.14.0";
-import { availability, Guidance, destination, roomAt } from "./guidance.js?v=1.14.0";
-import { prepareNavigationAsync } from "./navigation.js?v=1.14.0";
-import { difficultyRules } from "./difficulty.js?v=1.14.0";
-import { World } from "./world.js?v=1.14.0";
-import { Player } from "./player.js?v=1.14.0";
-import { AudioMixer } from "./audio.js?v=1.14.0";
-import { UI, $, keyName, escapeHTML } from "./ui.js?v=1.14.0";
+import { currentTask } from './tasks.js?v=1.19.0';
+import { YARD } from './campaign.js?v=1.19.0';
+import { Footwear } from "./surfaces.js?v=1.19.0";
+import { RecoveryLog } from "./recovery.js?v=1.19.0";
+import { footContact, stepProfile } from "./surfaces.js?v=1.19.0";
+import { CreatureScenes } from "./creature-scenes.js?v=1.19.0";
+import { ControllerInput } from "./controller.js?v=1.19.0";
+import { EncounterDirector, MAJOR_ENCOUNTERS } from "./encounters.js?v=1.19.0";
+import { lineClear, sightClear } from "./navigation.js?v=1.19.0";
+import { yieldTask } from "./preparation.js?v=1.19.0";
+import { PRESETS } from "./preferences.js?v=1.19.0";
+import { FrameStats, AdaptiveScale, nextFrameDeadline, HitchRecorder, PerformanceSetup, renderSizing, AreaTimings } from "./performance.js?v=1.19.0";
+import { GraphicsPreview } from "./preferences.js?v=1.19.0";
+import { playIntro } from "./presentation.js?v=1.19.0";
+import { availability, Guidance, destination, roomAt } from "./guidance.js?v=1.19.0";
+import { prepareNavigationAsync } from "./navigation.js?v=1.19.0";
+import { difficultyRules } from "./difficulty.js?v=1.19.0";
+import { World } from "./world.js?v=1.19.0";
+import { Player } from "./player.js?v=1.19.0";
+import { AudioMixer } from "./audio.js?v=1.19.0";
+import { UI, $, keyName, escapeHTML } from "./ui.js?v=1.19.0";
 import {
   newGame,
   has,
@@ -28,8 +30,8 @@ import {
   validateSave,
   checkpointSave,
   safeCheckpoint,
-} from "./state.js?v=1.14.0";
-import { Threat } from "./threat.js?v=1.14.0";
+} from "./state.js?v=1.19.0";
+import { Threat } from "./threat.js?v=1.19.0";
 const B = globalThis.BABYLON;
 /** The game owns progression; the scene only displays its state. This separation
  * makes checkpoints deterministic and keeps all story locks in one place. */
@@ -55,6 +57,7 @@ export class Game {
     this.graphics = new GraphicsPreview();
     this.stats = new FrameStats();
     this.hitches = new HitchRecorder();
+    this.areaTimings = new AreaTimings();
     this.adaptive = new AdaptiveScale();
     this.state = newGame();
     this.recoveryLog = new RecoveryLog();
@@ -117,6 +120,8 @@ export class Game {
     await this.world.loadAssets(p=>this.loadingProgress("Loading vehicle assets", .22+p*.2));
     this.loadingProgress("Preparing weathered surfaces", .43);
     await this.world.decay.load();
+    this.loadingProgress("Preparing correctly scaled surface materials", .435);
+    await this.world.surfaceLibrary.load();
     this.loadingProgress("Loading character animations", .44); await yieldTask();
     await this.world.visuals.loadActor();
     this.loadingProgress("Preparing static geometry", .5); await yieldTask();
@@ -129,9 +134,9 @@ export class Game {
     this.bindEvents();
     this.resize();
     await this.world.warmup((label,p)=>this.loadingProgress(label,p));
-    if(this.contextLost)throw new Error("Graphics interrupted during preparation. Reload in Low mode to retry.");
+    if(this.contextLost||this.bootInterrupted)throw new Error("Graphics interrupted during preparation. Reload in Low mode to retry.");
     this.world.sync(this.state);
-    this.loadingProgress("Ready", 1); await yieldTask();
+    await yieldTask(); this.loadingProgress("Ready", 1);
     this.loadingReady=true;
     $("loading").classList.add("hidden");
     this.engine.runRenderLoop(() => {
@@ -152,14 +157,19 @@ export class Game {
       );
   }
   loadingProgress(label, progress) {
+    if(this.bootInterrupted)throw new Error('Preparation was interrupted. Reload to rebuild a clean scene.');
+    this.loadingStage=label;
     $("load-label").textContent=label;
     $("load-fill").style.width=Math.round(progress*100)+"%";
     $("load-percent").textContent=Math.round(progress*100)+"%";
   }
   loadingFailed(error) {
-    this.loadingReady=false;
+    this.loadingReady=false;this.bootInterrupted=true;this.renderFault=true;this.lastError=error?.message||String(error);
+    this.recoveryLog.capture(error,{stage:this.loadingStage||'Starting graphics',failedAssets:this.world?.failedAssets||[]});
+    this.store.set('lastCrash',JSON.stringify({version:'1.19.0',...this.recoveryLog.error}));
+    const report=$('load-report');if(report)report.onclick=()=>this.ui.downloadDiagnostics();
     $("loading").classList.remove("hidden");
-    $("load-label").textContent=error.message;
+    $("load-label").textContent=this.lastError;
     $("load-actions").classList.remove("hidden");
     $("load-retry").onclick=()=>window.location.reload();
     $("load-simple").onclick=()=>{
@@ -264,7 +274,7 @@ export class Game {
     if(this.graphicsRecoveryBound||!this.engine?.onContextLostObservable)return;
     this.graphicsRecoveryBound=true;
     this.engine.onContextLostObservable.add(()=>{
-      this.contextLost=true;
+      this.contextLost=true;this.bootInterrupted=true;
       const error=new Error('Graphics context lost. Reload with Low graphics to reduce GPU memory use.');
       if(this.loadingReady)this.ui.recovery(error);else this.loadingFailed(error);
     });
@@ -352,7 +362,7 @@ export class Game {
     document.documentElement.classList.remove("driving");
     this.stats?.reset(); this.adaptive?.reset();
     this.autosaveTime = 0;
-    this.nextScareCue=0;this.ambientCueTime=18;
+    this.nextScareCue=0;this.ambientCueTime=18;this.yardEncounter=null;
     this.scareTime = 0;this.impactTime=0;
     $("action-progress").classList.add("hidden");
     $("danger").style.opacity = "0";
@@ -388,7 +398,7 @@ export class Game {
     if(!has(this.state,"key") || (!has(this.state,"fuse")&&!this.state.scares.includes("securityBreach"))){
       this.threat.pos={...this.world.atmosphere.securityActor};this.threat.yaw=0;this.threat.mode="dormant";
     }
-    this.threat.pressure=has(this.state,"gate");
+    this.threat.pressure=has(this.state,"gate");this.threat.setPatrolChapter(this.state);
     if(has(this.state,"gate")&&!this.state.scares.includes("pursuit"))this.scare("pursuit");
     this.scareActorTime = 0;
     this.crossing = false;
@@ -396,6 +406,7 @@ export class Game {
     this.world.worker.setEnabled(false);
     this.world.worker.position.set(this.threat.pos.x, 0, this.threat.pos.z);
     this.world.sync(this.state);
+    this.world.updateRoomVisibility(this.player.pos,1);
     // The loading tour/title camera may have left the reusable lights in a
     // different room. Prime their positions before the first playable frame.
     this.world.updateLights(this.player.pos, this.gameTime, false, 0, true);
@@ -584,6 +595,7 @@ export class Game {
   complete(id, caption) {
     this.recoveryLog?.record("objective",{id});
     mark(this.state, id);
+    this.threat?.setPatrolChapter?.(this.state);
     if(id==='car'){this.audio.play('lv114-electric-cutoff',{volume:.38,position:{x:0,y:3.7,z:80}});caption="The overhead lights cut out. "+this.ui.actionKey('flashlight')+" raises your flashlight. Recover the battery beside the hood.";}
     this.guidance?.progress(this.state);
     this.world.sync(this.state, false);
@@ -599,9 +611,9 @@ export class Game {
     const token = this.runToken;
     this.pendingAction = { id, token, duration, elapsed: 0 };
     // Machinery can require standing still; picking up an item never does.
-    this.player.movementLocked = ["valve","repair"].includes(id);
-    if (["valve","repair"].includes(id) && this.player.velocity) this.player.velocity.x = this.player.velocity.z = 0;
-    $("action-label").textContent = label + (["valve","repair"].includes(id) ? ` · ${this.ui.actionKey('interact')} to cancel` : "");
+    this.player.movementLocked = ["valve","repair",'barrier','route'].includes(id);
+    if (["valve","repair",'barrier','route'].includes(id) && this.player.velocity) this.player.velocity.x = this.player.velocity.z = 0;
+    $("action-label").textContent = label + (["valve","repair",'barrier','route'].includes(id) ? ` · ${this.ui.actionKey('interact')} to cancel` : "");
     $("action-progress").classList.remove("hidden");
     this.world.visuals.action(
       id,
@@ -639,7 +651,7 @@ export class Game {
     this.world.visuals.animator?.channels.delete("interaction");
     this.world.visuals.actionId = "";
     this.world.visuals.actionPhase = 0;
-    this.world.sync(this.state, false);
+    this.world.sync(this.state, false);this.world.yard?.sync(this.state,true);
     $("action-progress").classList.add("hidden");
     this.ui.toast("Action cancelled. You can try again.");
   }
@@ -664,7 +676,7 @@ export class Game {
       if (d.room === "workshop" && this.player.pos.z < 62) d = {...d, portal:[-24,62]};
       if (d.room === "security" && this.player.pos.z > 29) d = {...d, portal:[-24,29]};
     }
-    this.world.showWaypoint(d, this.player, this.guidance.markerSeconds, this.gameTime, room === d?.room);
+    this.world.requestGuide(currentTask(this.state),this.player,this.guidance.markerSeconds);
     this.ui.tutorial("");
   }
   refreshObjectiveVisibility(){
@@ -689,7 +701,7 @@ export class Game {
     this.ui.text("bolt-status",this.ui.actionKey("throw")+" · BOLTS "+(this.state.bolts??3));
     this.refreshObjectiveVisibility();
     $("chapter").textContent = has(this.state, "gate")
-      ? "03 / SOMEONE STAYED"
+      ? has(this.state,'route')?'04 / THE LAST DEPARTURE':'03 / THE SERVICE YARD'
       : has(this.state, "repair")
         ? "02 / THE OTHER SHIFT"
         : "01 / THE LAST TICKET";
@@ -698,7 +710,11 @@ export class Game {
     $("interact-key").textContent = keyName(this.settings.bindings.interact);
   }
   action(action) {
-    if (!this.playing || this.player.vehicle) return;
+    if (!this.playing) return;
+    if(this.player.vehicle){
+      if(action==='interact'){if(this.world.stage.exitDrive(this.player)){this.audio.stopEngine();this.state.driving=false;this.state.carPosition={x:this.world.stage.driverHandle.x,z:this.world.stage.driverHandle.z};document.documentElement.classList.remove('driving');this.updateHUD();}else this.ui.toast('Stop the car and leave space beside the left driver door.');}
+      if(action==='journal')this.ui.journal();return;
+    }
     if(this.shelterTransition&&!["journal","hint"].includes(action))return;
     if (action === "flashlight" && !this.player.hiding) {
       this.player.flashlight = !this.player.flashlight;
@@ -707,13 +723,13 @@ export class Game {
     }
     if(action==='objective'){this.objectiveSeconds=8;this.refreshObjectiveVisibility();}
     if(action==='throw'&&!this.pendingAction){
-      if(this.world.distractions?.throw(this.player,this.state)){this.updateHUD();this.save(false);}
-      else if(!this.state.bolts)this.ui.toast('No bolts left. Use cover, the siren or the valve.');
+      if(this.world.distractions?.throw(this.player,this.state)){this.audio.play('tool-handling',{volume:.18,reverb:false,priority:1});this.updateHUD();this.save(false);}
+      else if(!this.state.bolts)this.ui.toast('No bolts left. Look for a spare-bolt tray, or use cover and machinery.');
     }
     if (action === "journal") this.ui.journal();
     if (action === "hint") this.requestHint();
     if (action === "interact") {
-      if (["valve","repair"].includes(this.pendingAction?.id)) { this.cancelAction(); return; }
+      if (["valve","repair",'barrier','route'].includes(this.pendingAction?.id)) { this.cancelAction(); return; }
       if (this.pendingAction) return;
       if(this.player.hiding){this.leaveShelter();return;}
       const hint = this.player.interactionHint(id => this.getAvailability(id));
@@ -735,6 +751,19 @@ export class Game {
       if (alreadyRead) this.ui.note(id); else this.ui.previewNote(id);
       return;
     }
+    if(id.startsWith('refill-')){
+      this.state.bolts=3;this.state.refills??=[];this.state.refills.push(id);this.world.yard?.sync(this.state,false);this.audio.play('lv115-bolt-metal',{volume:.25});this.updateHUD();this.save();this.ui.toast('Three bolts ready. This tray is now empty.');return;
+    }
+    if(id==='yard'){
+      this.performAction('yard','CHECKING STREET INTERLOCK',.75,()=>{collectNote(s,'yard-log');this.complete('yard','Flooded loading supply. Use the selector under the generator awning.');this.yardEncounter={id:'yardFence',time:0};});return;
+    }
+    if(id==='isolate'){this.yardPuzzle();return;}
+    if(id==='barrier'){
+      this.performAction('barrier','TURNING MECHANICAL RELEASE',2.8,()=>{this.complete('barrier','Barrier released. The cargo dolly still blocks the lane; use the dock winch.');this.yardEncounter={id:'gatehouseBreach',time:0};this.threat.hear(YARD.release,55);});return;
+    }
+    if(id==='route'){
+      this.performAction('route','WINCHING CARGO CLEAR',3.2,()=>{this.complete('route','Lane clear. Return to bay 042, enter the left driver door and drive to the street.');this.threat.hear(YARD.route,80);this.scare('carReturn');});return;
+    }
     if(id.startsWith("hide-")){this.enterShelter(id);return;}
     if(id==="car"){
       if(has(s,"car")){this.beginEscape();return;}
@@ -746,7 +775,7 @@ export class Game {
     }
     if(id==="key"){
       this.performAction("key","TAKING MAINTENANCE KEY",.45,()=>{
-        collectNote(s,"log");this.complete("key",`Someone is still in the garage. Break its sight before using ${this.ui.actionKey('interact')} at a SHELTER locker. The same key lets you leave.`);
+        collectNote(s,"log");this.complete("key",'');
         this.scare("securityBreach");
       });return;
     }
@@ -778,7 +807,7 @@ export class Game {
     if(id==="gate"){
       this.audio.play("rattle",{volume:.48,rate:.7,position:{x:0,y:2,z:1},refDistance:5});
       this.performAction("gate","RAISING EXIT SHUTTER",2.4,()=>{
-        this.complete("gate","The exit is open. Get back to your car in bay 042.");
+        this.complete("gate","The shutter opens into a fenced service yard. Inspect its street barrier on foot.");this.threat.outsideUnlocked=true;
         this.threat.pressure=true;this.threat.hear({x:0,z:5},90);this.scare("pursuit");
       });return;
     }
@@ -827,11 +856,38 @@ export class Game {
     },()=>{spot.door.rotation.y=0;v.contactNode=null;this.shelterTransition=null;p.movementLocked=false;this.updateHUD();},"linear");
   }
   beginEscape(){
-    if(!has(this.state,"repair")||!has(this.state,"gate")||this.player.vehicle)return;
+    if(!has(this.state,"repair")||!has(this.state,"route")||this.player.vehicle)return;
     this.threat.hear(this.world.stage.driverHandle,200);
-    this.world.stage.beginDrive(this.player);this.audio.play("switch",{volume:.2});
+    this.world.stage.beginDrive(this.player);this.state.driving=true;this.updateHUD();this.audio.play("switch",{volume:.2});
     this.world.visuals.setFlash(false);document.documentElement.classList.add("driving");
     this.ui.subtitle("Getting in. Keep your head down.",2);
+  }
+  yardPuzzle(){
+    const token=this.runToken;let disconnected=false;
+    this.ui.show('yard-power',this.ui.head('GENERATOR AWNING / UTILITY SELECTOR','Choose the dry supply')+'<p>Water has reached the loading supply. The plate reads: <strong>1 · LOADING OFF. 2 · GATEHOUSE ON.</strong></p><div class="button-row"><button class="btn" id="loading-off">LOADING OFF</button><button class="btn" id="gatehouse-on">GATEHOUSE ON</button></div><p id="yard-circuit-status">Disconnect the flooded circuit first.</p>');
+    $('loading-off').onclick=()=>{disconnected=true;$('yard-circuit-status').textContent='Loading circuit isolated. Select GATEHOUSE ON.';this.audio.play('switch',{bus:'ui',volume:.35});};
+    $('gatehouse-on').onclick=()=>{if(!disconnected){$('yard-circuit-status').textContent='Disconnect LOADING first. No damage; try again.';return;}if(token!==this.runToken)return;this.ui.hide();this.complete('isolate','Dry supply selected. Turn the yellow release in the gatehouse.');this.resume();};
+  }
+  tickYardEncounters(dt){
+    const a=this.yardEncounter;if(!a||this.player.vehicle||this.player.hiding||this.pendingAction)return;
+    if(this.state.scares.includes(a.id)&&!a.hit){this.yardEncounter=null;return;}
+    a.time+=dt;
+    const yard=this.world.yard,point=a.id==='yardFence'?YARD.fence:{x:16.62,y:1.4,z:-44.7};
+    // Environment reacts at its own contact point. The one creature may make
+    // the strike only if it physically reached the opposite side; never spawn
+    // a second monster to satisfy a cinematic cue.
+    const readable=this.visualReadable(point,.5,a.id==='yardFence'?24:12);
+    if(!a.hit&&readable&&a.time>.18){
+      a.hit=true;a.after=0;yard.impact(a.id);this.audio.prepareBeat(.9);this.recordEncounter(a.id);
+      this.audio.play(a.id==='yardFence'?'lv115-fence-strike':'lv115-door-breach',{volume:.65,position:point,refDistance:6});
+      const near=Math.hypot(this.threat.pos.x-point.x,this.threat.pos.z-point.z)<2.2;
+      if(near&&this.threat.canStage()){this.threat.stageRoute([{...this.threat.pos}],'Strike');this.actorStrike=.55;this.threat.yaw=Math.atan2(point.x-this.threat.pos.x,point.z-this.threat.pos.z);}
+      else this.threat.hear(point,70);
+      this.ui.subtitle(a.id==='yardFence'?'[The loose steel sheet slams against the fence.]':near?'[A long hand forces the side door. The latch tears loose.]':'[The side-door latch tears free. The damaged panel slams inward.]',2.5);
+    }
+    if(a.hit){a.after+=dt;if(a.after>1.8){if(this.threat.mode==='staged')this.threat.releaseStage(point,this.state.difficulty==='easy'?2.8:1.6);this.yardEncounter=null;}}
+    // An unseen pending beat expires. It never ambushes a later unrelated visit.
+    if(a.time>12&&!a.hit)this.yardEncounter=null;
   }
   powerPuzzle() {
     let sequence = [];this.circuitPending=false;
@@ -922,7 +978,14 @@ export class Game {
   }
   scare(id){
     this.director ||= new EncounterDirector(this.state);
+    if(id==='powerSurge'&&!this.state.scares.includes(id)&&!this.creatureScenes?.active&&this.world.atmosphere?.playSurge){
+      // Electrical contact belongs to the power action. The real hunter keeps
+      // its pursuit; the relay never waits for it to pose in a doorway.
+      const token=this.runToken;this.director.active=id;this.audio.prepareBeat?.(.8);
+      this.world.atmosphere.playSurge(()=>{if(token!==this.runToken)return;this.recordEncounter(id);this.audio.play('surge',{volume:.52,position:this.world.atmosphere.surgePosition,refDistance:4});this.threat.hear(this.world.atmosphere.surgePosition,100);this.ui.subtitle('[The relay cover bursts. The exit supply stays on.]',3);});return;
+    }
     this.director.request(id);
+    if(id==="securityBreach"){this.director.recovery=0;this.director.quiet=0;}
   }
   visualReadable(p,min=5,max=23){
     const dx=p.x-this.player.pos.x,dz=p.z-this.player.pos.z,d=Math.hypot(dx,dz);
@@ -952,7 +1015,7 @@ export class Game {
       this.threat.releaseStage({x:-23.25,z:18},3);
     const id=this.director.next({mode:this.threat.mode,hiding:!!this.player.hiding,vehicle:!!this.player.vehicle,busy:!!this.pendingAction,ready:id=>{
       if(id==="securityBreach")return Math.hypot(this.threat.pos.x-a.securityActor.x,this.threat.pos.z-a.securityActor.z)<1
-        ?this.visualReadable({...a.securityPosition,z:16.58},.3,7)
+        ?near(a.securityPosition)<7
         :this.visualReadable({...this.threat.pos,y:1.5},3,15);
       if(id==="workshopBreach")return (typeof this.threat.stageRoute!=='function'||this.creatureScenes.fallbackReady('workshopBreach'))&&this.visualReadable(a.hatchPosition,.3,8);
       if(id==="powerSurge")return (typeof this.threat.stageRoute!=='function'||this.creatureScenes.fallbackReady('powerSurge'))&&this.visualReadable(a.surgePosition,.3,8);
@@ -960,16 +1023,7 @@ export class Game {
       if(id==='pressureBurst')return equipment&&this.visualReadable(equipment.source,.8,8);
       return false;
     }});
-    if(!id){
-      const queued=this.director.queue.find(k=>["securityBreach","workshopBreach","powerSurge"].includes(k));
-      const point=queued==="securityBreach"?a.securityPosition:queued==="workshopBreach"?a.hatchPosition:a.surgePosition;
-      if(queued&&near(point)<8&&!this.player.hiding&&!this.director.chasing&&!this.pendingAction&&(this.nextScareCue??0)<this.gameTime){
-        this.nextScareCue=this.gameTime+9;
-        this.audio.play("metal-stress",{volume:.18,position:point,refDistance:3});
-        this.ui.subtitle(queued==="securityBreach"?"[A latch shifts behind the desk.]":queued==="workshopBreach"?"[The loose service hatch strains.]":"[The relay housing begins to vibrate.]",2.8);
-      }
-      return;
-    }
+    if(!id)return; // No advance caption announces an unseen scare.
     const token=this.runToken;this.encounterPending=id;this.audio.prepareBeat?.();
     const impact=(position,caption,sound="hatch-impact")=>{
       if(token!==this.runToken)return;
@@ -1016,6 +1070,23 @@ export class Game {
     },cue=cues[room];
     if(cue){const [name,x,y,z]=cue;this.audio.play(name,{volume:.13,position:{x,y,z},refDistance:2});}
   }
+  boltImpact(point){
+    const direct=point.surface==='enemy';
+    const outcome=direct?this.threat.receiveBolt(point):this.threat.hearBolt(point)?'investigating':'ignored';
+    const file=point.surface==='water'?'lv115-bolt-water':point.surface==='glass'?'lv115-bolt-glass':point.surface==='metal'||direct?'lv115-bolt-metal':'lv114-bolt-impact';
+    // Gameplay-critical clatter has priority over ordinary footsteps, while
+    // preserving spatial distance, user volume and the existing voice limit.
+    this.audio.play(file,{volume:direct?.62:.68,position:point,refDistance:6,maxDistance:48,priority:2});
+    if(direct){
+      this.audio.play('creature-recover',{volume:.38,position:{...this.threat.pos,y:1.5},refDistance:4,priority:2});
+      this.ui.subtitle(outcome==='staggered'?'[The bolt strikes. It staggers — move!]':'[The bolt hits, but it braces against another stagger.]',2);
+    }else{
+      this.ui.subtitle(point.surface==='water'?'[The bolt splashes into water.]':point.surface==='metal'?'[The bolt rings against metal.]':'[The bolt clatters.]',1.5);
+      if(outcome==='investigating'&&Math.hypot(this.player.pos.x-this.threat.pos.x,this.player.pos.z-this.threat.pos.z)<12)
+        this.audio.play('lv113-cloth-shift',{volume:.26,position:{...this.threat.pos,y:1.3},refDistance:3,priority:1});
+    }
+    this.queueAutosave();return outcome;
+  }
   tickThreat(dt){
     const actor=this.world.worker;
     if(this.captureTime!==null&&this.captureTime!==undefined){
@@ -1030,10 +1101,13 @@ export class Game {
     actor.position.set(this.threat.pos.x,0,this.threat.pos.z);actor.rotation.y=this.threat.yaw;
     this.actorStrike=Math.max(0,(this.actorStrike||0)-dt);
     let clip=result.animation||(this.threat.speed>2.3?"Run":this.threat.speed>.1?"Walk":"Idle"),phase=result.phase;
-    if(this.world.atmosphere.securityActive){
+    if(result.staggered){
+      // A physical hit takes visual precedence over a leftover cinematic pose.
+      clip='Recover';phase=result.phase;this.actorStrike=0;
+    } else if(this.world.atmosphere.securityActive){
       clip="Strike";const t=this.world.atmosphere.securityPhase;
       // The rig's strike contacts at normalized phase .50; match the glass cue.
-      if(t<.2){clip='Listen';phase=t*2.5;}else phase=t<.58?(t-.2)/.38*.5:.5+(t-.58)/.42*.5;
+      phase=t<.1913?t/.1913*.5:t<.70?.5:.5+(t-.70)/.30*.5;
     } else if(this.escapeStrike){clip='Strike';phase=Math.min(1,this.escapeStrike.time/1.2);}
     else if(this.actorStrike>0){clip="Strike";phase=.5;}
     else if(this.creatureScenes?.pose){clip=this.creatureScenes.pose.clip;phase=this.creatureScenes.pose.phase;}
@@ -1216,24 +1290,34 @@ export class Game {
               ? "PUMP ROOM"
               : "ELECTRICAL"
             : "MERIDIAN / B2";
-      this.ui.text("location", location);
+      this.ui.text("location",p.z<0?({yard:'MERIDIAN / SERVICE YARD',gatehouse:'GATEHOUSE',road:'SERVICE ROAD'}[roomAt(p)]):location);
 
       this.hitches.section("interactionAndHUD");
       this.threat.observeTracks?.(this.world.surfaces.traces);
+      // Resolve projectile contact before this frame's attack damage. A real
+      // timely hit can interrupt a windup; a bolt behind a wall cannot.
+      this.world.distractions?.updateGuide(this.player,this.state);
+      this.world.distractions?.tick(dt,point=>this.boltImpact(point),this.threat);
+      if(this.world.yard?.hunterDoor(dt,this.threat)==='contact'){this.audio.prepareBeat(.8);this.audio.play('lv115-door-breach',{volume:.6,position:{x:16.5,y:1.4,z:-44},refDistance:5});this.recordEncounter('gatehouseBreach');}
       this.tickThreat(dt);this.hitches.section("threat");
       if(this.playing){this.tickEncounters(dt);this.hitches.section("encounters");this.tickAmbient(dt);this.hitches.section("environment");}
       this.world.atmosphere.tick(dt,this.gameTime,this.player,true);
       this.world.surfaces.tick(dt);
       this.world.equipment?.tick(dt,this.gameTime,this.player,this.settings);
-      this.world.distractions?.tick(dt,point=>{
-        this.audio.play('lv114-bolt-impact',{volume:.46,position:point,refDistance:4});
-        this.threat.hearBolt?.(point);this.save(false);
-      });
+      this.world.yard?.tick(dt,this.gameTime,this.player,this.settings);this.tickYardEncounters(dt);
+      this.world.sky?.tick(this.gameTime,this.player.pos);
       this.world.richDetails?.tick(dt,this.gameTime,this.player);
       this.world.updateRoomVisibility?.(this.player.pos,dt);
       this.hitches.section("surfaceEffects");
       this.guidanceTick=(this.guidanceTick || 0)+dt;
       if(this.guidanceTick>=.1) {this.tickGuidance(this.guidanceTick);this.guidanceTick=0;}
+      const route=this.world.tickGuide(this.player,dt),directionLabel=$('direction-hint');
+      if(directionLabel){
+        const usable=route?.kind==='object'&&this.nearbyHint?.usable&&this.nearbyHint.item.id===route.controlId;
+        const text=route?(route.kind==='route'?'FOLLOW ARROW · ':usable?this.ui.actionKey('interact')+' · ':'LOOK AT OBJECT · ')+route.name:'';
+        if(directionLabel.textContent!==text)directionLabel.textContent=text;
+        directionLabel.classList.toggle('hidden',!route);
+      }
       this.scareTime = Math.max(0, this.scareTime - dt * 0.55);
       this.world.updateLights(
         this.player.pos,
@@ -1246,7 +1330,7 @@ export class Game {
         const stage=this.world.stage,finished=stage.tickDrive(dt,this.player);
         if(stage.driveTime>=1.5&&!stage.engineStarted){
           stage.engineStarted=true;this.audio.play("door-close",{volume:.48});this.audio.startEngine?.();
-          this.ui.subtitle("Door latched. Engine running. You're leaving Meridian.",4);
+          this.ui.subtitle('Drive: '+this.ui.actionKey('forward')+'/'+this.ui.actionKey('back')+' accelerate, brake/reverse · '+this.ui.actionKey('left')+'/'+this.ui.actionKey('right')+' steer · '+this.ui.actionKey('interact')+' exit when stopped',8);
         }
         const window=this.threat.mode==="chase"?stage.nearbyWindow(this.threat.pos):null;
         if(window&&!this.escapeStrike&&lineClear(this.threat.pos,window.position,this.world.rects,.02)){
@@ -1266,7 +1350,8 @@ export class Game {
           if(strike.hit)strike.window.door.node.rotation.y+=Math.sin((strike.time-.6)*45)*.014*Math.exp(-(strike.time-.6)*9);
           if(strike.time>=1.2){this.threat.releaseStage({...this.player.pos},.5);this.escapeStrike=null;}
         }
-        this.audio.updateEngine?.(stage.driveTime);
+        this.audio.updateEngine?.(stage.driveTime,stage.vehicle.speed);
+        this.ui.text('bolt-status',Math.round(Math.abs(stage.vehicle.speed)*3.6)+' KM/H · '+this.ui.actionKey('interact')+' EXIT WHEN STOPPED');
         if(finished){mark(this.state,"escaped");this.save(false);this.showEnding();}
       }
       this.autosaveTime += dt;
@@ -1290,7 +1375,7 @@ export class Game {
       this.impactTime=Math.max(0,(this.impactTime||0)-dt);
       const impact=this.impactTime/.42;
       $('impact-edge').style.opacity=String(impact*(this.settings.scareScreenEffects??.65)*.45);
-      if(!this.player.vehicle&&!this.settings.reducedMotion&&impact){
+      if(!this.player.vehicle&&!this.settings.reducedMotion&&!this.settings.stableHorizon&&impact){
         this.world.camera.rotation.z=Math.sin(this.gameTime*46)*impact*(this.settings.cameraShake??.5)*.012;
         this.world.camera.getViewMatrix(true);
       }
@@ -1313,9 +1398,10 @@ export class Game {
     // Do not allocate a diagnostic context on normal frames, or treat time in
     // menus as a hitch. This is CPU submission time, not GPU completion time.
     if(sampledGameplay && !skipTelemetry && (elapsed>=50 || this.cpuMs>=35))
-      this.hitches.finish(elapsed,{x:Math.round(this.player.pos.x),z:Math.round(this.player.pos.z),flashlight:this.player.flashlight,drawCalls:this.sceneInstrumentation?.drawCallsCounter.current ?? null});
+      this.hitches.finish(elapsed,{x:Math.round(this.player.pos.x),z:Math.round(this.player.pos.z),area:roomAt(this.player.pos),task:currentTask(this.state)?.id||'done',pass:this.profilePass||'Normal play',weather:this.settings.weatherEffects,flashlight:this.player.flashlight,gpuMs:this.gpuMs,drawCalls:this.sceneInstrumentation?.drawCallsCounter.current ?? null});
     const gpu = this.instrumentation?.gpuFrameTimeCounter;
     this.gpuMs = gpu?.count && gpu.current > 0 ? gpu.current * 0.000001 : null;
+    if(sampledGameplay&&!skipTelemetry)this.areaTimings?.sample(roomAt(this.player.pos),elapsed,this.cpuMs,this.gpuMs);
     if(sampledGameplay&&!skipTelemetry&&this.calibration&&!this.calibration.done){
       this.calibration.sample(dt,elapsed,this.player,roomAt(this.player.pos),this.cpuMs,this.gpuMs);
       if(this.calibration.done)this.ui.toast('Performance sample ready. Review it in Settings → Performance.',6500);

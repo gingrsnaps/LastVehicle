@@ -1,6 +1,6 @@
-import { has, NOTES } from "./state.js?v=1.14.0";
-import { TASKS, TASK_BY_ID, currentTask, taskText } from "./tasks.js?v=1.14.0";
-import { objective } from "./state.js?v=1.14.0";
+import { has, NOTES } from "./state.js?v=1.19.0";
+import { TASKS, TASK_BY_ID, currentTask, taskText } from "./tasks.js?v=1.19.0";
+import { objective } from "./state.js?v=1.19.0";
 
 /** Prompts and the actual action share the same prerequisite check. A car's
  * hood/passenger side offer inspection first, never a premature repair task. */
@@ -12,7 +12,8 @@ export function availability(id,state,player={},threat={}) {
   if(id.startsWith("hide-"))return result(!player.vehicle,"Hide");
   if(["car","repair","car-passenger"].includes(id)&&!done("car"))return result(true,TASK_BY_ID.car.label,"",false,"car");
   if(id==="car-passenger")return result(false,"", "",true);
-  if(id==="car"&&done("car"))return result(done("gate")&&done("repair"),TASK_BY_ID.escaped.label, next?"Next: "+next.instruction:"");
+  if(id.startsWith('refill-'))return result(!state.refills?.includes(id)&&(state.bolts??3)<3,'Take spare bolts',state.refills?.includes(id)?'Tray empty':'You can carry three bolts');
+  if(id==="car"&&done("car"))return result(done("route")&&done("repair"),TASK_BY_ID.escaped.label, next?"Next: "+next.instruction:"");
   const task=TASK_BY_ID[id];
   if(task) {
     if(done(id))return result(false,task.label,"Completed",true);
@@ -30,8 +31,10 @@ export function availability(id,state,player={},threat={}) {
   return result(id in optional,optional[id]||"Inspect");
 }
 
-export const ROOMS = ["security", "storage", "workshop", "electrical", "pump"];
+export const ROOMS = ["security", "storage", "workshop", "electrical", "pump",'yard','gatehouse','road'];
 export function roomAt(p) {
+  if(p.z<-58)return 'road';
+  if(p.z<0){if(p.x>16.3&&p.z<=-36&&p.z>=-52.2)return 'gatehouse';return 'yard';}
   if (p.x < -17) {
     if (p.z >= 7 && p.z <= 29) return "security";
     if (p.z >= 33 && p.z <= 57) return "storage";
@@ -62,7 +65,7 @@ export class Guidance {
   request(state) {
     if (this.id !== objective(state)[0]) this.reset(state);
     this.level = Math.min(3, this.level + 1);
-    this.markerSeconds = 10; this.idle = 0; this.reminded = false;
+    this.markerSeconds = 60; this.idle = 0; this.reminded = false;
     return { level: this.level, text: hintText(state, this.level), destination: destination(state) };
   }
   tick(dt, state, busy, reminders = true) {

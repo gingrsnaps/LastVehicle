@@ -1,5 +1,5 @@
 {
-  "verified_on": "2026-11-03",
+  "verified_on": "2026-11-05",
   "scope": "Enumerated runtime art and audio; the new Attendant is original procedural art with its own CC0 dedication. Game code and branding retain their separate terms.",
   "license_note": "All enumerated source assets explicitly declare CC0. Credit is retained as courtesy.",
   "assets": [
@@ -5987,6 +5987,3088 @@
       "processing": "Original unvoiced filtered-noise inhale/exhale synthesis, three soft breath pairs; no sampled voice, heartbeat or creature cue. Mono 24 kHz, bounded peak/RMS, faded edges, Vorbis quality 3.",
       "integration_cue": "6 s centered SFX loop; fade with player sprint/stamina only, suggested gain .20-.45; mute on pause and never infer hidden enemy proximity.",
       "verification": "Full decoded sample/level/loop-seam inspection. Listening and browser mix review remain required."
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-dock-cluster",
+      "file": "models/v115-yard-dock-cluster.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.72,
+        0.0,
+        -0.6
+      ],
+      "bounds_max": [
+        0.83094054043293,
+        1.1465000017881395,
+        0.7252365946769714
+      ],
+      "dimensions": [
+        1.55094054043293,
+        1.1465000017881395,
+        1.3252365946769715
+      ],
+      "triangles": 464,
+      "vertices_authored": 314,
+      "anchors": {
+        "crate_top": {
+          "position": [
+            0,
+            1.1460000017881393,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dock-cluster__crate_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dock-cluster__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Floor-supported pallet and strapped freight. Suggested blocker: 1.6 by 1.25 m; never place across a doorway.",
+      "bytes": 29988,
+      "sha256": "fe8cdee8e71e9e3fb09cddc3ec6eb6ed724000c7487630e141831ca80e711f9f"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-dumpster-refuse",
+      "file": "models/v115-yard-dumpster-refuse.glb",
+      "draw_calls_max": 8,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -1.2513946622610093,
+        0.0,
+        -0.54
+      ],
+      "bounds_max": [
+        0.975,
+        1.6334999799728394,
+        0.54
+      ],
+      "dimensions": [
+        2.226394662261009,
+        1.6334999799728394,
+        1.08
+      ],
+      "triangles": 448,
+      "vertices_authored": 294,
+      "anchors": {
+        "lid_contact": {
+          "position": [
+            0,
+            1.35,
+            -0.24
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dumpster-refuse__lid_contact"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dumpster-refuse__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Floor origin includes caster wheels. Use a broad body blocker; do not collide every refuse detail.",
+      "bytes": 29252,
+      "sha256": "db18e152fe63778a1d75caff7bc53b6a08f642757e3b2a7fa44d5e935972c84e"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-cable-reel",
+      "file": "models/v115-yard-cable-reel.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.3840000033378601,
+        0.0,
+        -0.38999998569488525
+      ],
+      "bounds_max": [
+        1.065,
+        0.7799999713897705,
+        0.6215586066246033
+      ],
+      "dimensions": [
+        1.44900000333786,
+        0.7799999713897705,
+        1.0115585923194885
+      ],
+      "triangles": 1156,
+      "vertices_authored": 608,
+      "anchors": {
+        "toolcase_lid": {
+          "position": [
+            0.78,
+            0.34,
+            0.1
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cable-reel__toolcase_lid"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "cable-reel__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Grounded spool and toolcase; keep outside narrow routes.",
+      "bytes": 66072,
+      "sha256": "21771482cd8d71ad2f99f8490659aa4181f2085dd67732585c5e67d8d1114c07"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-drain-weeds",
+      "file": "models/v115-yard-drain-weeds.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.5566312074661255,
+        0.0,
+        -0.32
+      ],
+      "bounds_max": [
+        0.54,
+        0.23209949547890574,
+        0.5565739870071411
+      ],
+      "dimensions": [
+        1.0966312074661255,
+        0.23209949547890574,
+        0.8765739870071412
+      ],
+      "triangles": 539,
+      "vertices_authored": 375,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drain-weeds__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Decorative ground cover, no blocker. Set origin to terrain support; drain frame is only 25 mm high.",
+      "bytes": 33932,
+      "sha256": "63d365aaf0549e708666921b56d9425e506e9686a701a3cc8486b8277e7f4c6b"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-road-barrier",
+      "file": "models/v115-yard-road-barrier.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -1.2,
+        0,
+        -0.315
+      ],
+      "bounds_max": [
+        1.2,
+        1.0236228704452515,
+        0.315
+      ],
+      "dimensions": [
+        2.4,
+        1.0236228704452515,
+        0.63
+      ],
+      "triangles": 384,
+      "vertices_authored": 230,
+      "anchors": {
+        "top": {
+          "position": [
+            0,
+            0.92,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "road-barrier__top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "road-barrier__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Solid barrier: use 2.4 by .58 m navigation/collision footprint; do not mark as breakable unless implemented.",
+      "bytes": 24948,
+      "sha256": "b8ca01cf474c3acde8edb65310ea6740346cbfde4b4b0d8515b608f967771888"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-gatehouse-desk",
+      "file": "models/v115-yard-gatehouse-desk.glb",
+      "draw_calls_max": 8,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.84,
+        0.0,
+        -0.38
+      ],
+      "bounds_max": [
+        0.84,
+        1.570759892463684,
+        0.386
+      ],
+      "dimensions": [
+        1.68,
+        1.570759892463684,
+        0.766
+      ],
+      "triangles": 612,
+      "vertices_authored": 392,
+      "anchors": {
+        "work_surface": {
+          "position": [
+            0,
+            0.831,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-desk__work_surface"
+        },
+        "radio": {
+          "position": [
+            -0.4,
+            0.98,
+            0.04
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "gatehouse-desk__radio"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-desk__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Floor-supported workstation. Front is +Z. Interactable control should use radio or work_surface anchor; avoid vague prompts for every prop.",
+      "bytes": 38940,
+      "sha256": "66466fb79e42f360ee16600057cc1c1015f428abf56a4691d8eb1370644ff22a"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-coat-noticeboard",
+      "file": "models/v115-yard-coat-noticeboard.glb",
+      "draw_calls_max": 7,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.5706936898827553,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.55,
+        1.3800000000000001,
+        0.19899998605251312
+      ],
+      "dimensions": [
+        1.1206936898827553,
+        1.3800000000000001,
+        0.19899998605251312
+      ],
+      "triangles": 336,
+      "vertices_authored": 222,
+      "anchors": {
+        "paper": {
+          "position": [
+            0.27,
+            0.9,
+            0.074
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "coat-noticeboard__paper"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "coat-noticeboard__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.6900000000000001,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "coat-noticeboard__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear mounting plane Z=0. Set origin on the lower edge of a wall mount, usually 1.0 m above floor; +Z faces room.",
+      "bytes": 24012,
+      "sha256": "5097643d9e9da4a8c1e77c2c1c7ff865bfc6c2e9393723e8e4876a8d1bbaf519"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-utility-transformer",
+      "file": "models/v115-yard-utility-transformer.glb",
+      "draw_calls_max": 9,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.8143083453178406,
+        0.0,
+        -0.525
+      ],
+      "bounds_max": [
+        0.75,
+        2.129999876022339,
+        0.525
+      ],
+      "dimensions": [
+        1.5643083453178406,
+        2.129999876022339,
+        1.05
+      ],
+      "triangles": 680,
+      "vertices_authored": 430,
+      "anchors": {
+        "control": {
+          "position": [
+            0,
+            0.95,
+            0.45
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "utility-transformer__control"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "utility-transformer__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Grounded concrete plinth with cabinet. Use 1.50 by 1.05 m body blocker; the top bushings and wires are decorative.",
+      "bytes": 41236,
+      "sha256": "edd38843365c6666212a4dcd1a6b570605bc1d1630ed749435766f4bc410b2f3"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-fence-panel",
+      "file": "models/v115-yard-fence-panel.glb",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -1.55,
+        0.0,
+        -0.12
+      ],
+      "bounds_max": [
+        1.55,
+        2.2300000190734863,
+        0.12
+      ],
+      "dimensions": [
+        3.1,
+        2.2300000190734863,
+        0.24
+      ],
+      "triangles": 608,
+      "vertices_authored": 392,
+      "anchors": {
+        "strike": {
+          "position": [
+            0,
+            1.35,
+            -0.07
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "fence-panel__strike"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "fence-panel__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "3.10 m wide open panel. Ground origin at concrete feet. Collision can block walking, but line-of-sight should pass through the wire openings.",
+      "bytes": 34936,
+      "sha256": "4d6a540dbb8a68ec5d1e966ae814e6be0ed2c230d4bdc3d1b2e76cb1276ea7c9"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v115.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v115/",
+      "verified": "2026-11-03",
+      "type": "model",
+      "source_file": "source-assets/yard-v115/build_props.py",
+      "editable_source": "source-assets/yard-v115/Meridian_Service_Yard_v115.blend",
+      "id": "v115-yard-drum-store",
+      "file": "models/v115-yard-drum-store.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall models rear plane at Z=0",
+      "bounds_min": [
+        -0.75,
+        0.0,
+        -0.56
+      ],
+      "bounds_max": [
+        0.75,
+        1.1785000562667847,
+        0.94456822514534
+      ],
+      "dimensions": [
+        1.5,
+        1.1785000562667847,
+        1.50456822514534
+      ],
+      "triangles": 640,
+      "vertices_authored": 376,
+      "anchors": {
+        "drum_top": {
+          "position": [
+            -0.38,
+            1.18,
+            -0.2
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drum-store__drum_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drum-store__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Floor support pallet with drums; ideal for a loading corner. Suggested blocker 1.55 by 1.2 m.",
+      "bytes": 35840,
+      "sha256": "f898f34916dfb21bb9f631db8b0c1b996fb3d03f19365a58208dff3f25a31099"
+    },
+    {
+      "file": "audio/lv115-roof-rain.ogg",
+      "bytes": 66476,
+      "sha256": "d924146a72669cf9d675dbd0f0100a4fd88e6c5dff8443caa46f074aa982687f",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 12.0,
+      "container_duration_seconds": 12.0,
+      "decoded_float32_bytes": 1152000,
+      "decoded_float32_bytes_at_48000_hz": 2304000,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -18.293,
+      "rms_dbfs": -32.632,
+      "onset_seconds_at_3_5_percent_peak": 0.0005,
+      "peak_time_seconds": 5.092125,
+      "loop": true,
+      "loop_boundary_jump": 0.00014743051724508405,
+      "adjacent_sample_p99_delta": 0.06360109381377702,
+      "loop_seam_check": true,
+      "kind": "audio",
+      "name": "lv115-roof-rain",
+      "title": "Roof Rain",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "drip",
+          "immediate_file": "dist/assets/audio/drip.ogg",
+          "immediate_sha256": "43effd7ac2b9f28e5bc9ed650224c362a8b485996793532986f13bf03036de97",
+          "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+          "original_provenance": {
+            "file": "audio/drip.ogg",
+            "bytes": 168606,
+            "sha256": "43effd7ac2b9f28e5bc9ed650224c362a8b485996793532986f13bf03036de97",
+            "title": "Dripping water loop",
+            "author": "Independent.nu",
+            "uploader": "qubodup",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source_page": "https://opengameart.org/content/dripping-water-loop",
+            "download_url": "https://opengameart.org/sites/default/files/atmosbasement.mp3_.flac",
+            "original_file": "atmosbasement.mp3_.flac",
+            "source_file_sha256": "247c0ef181c8ba8d190a6194f6ea02d9defb23b70194c52c7f9187b5b7b1cc61",
+            "source_page_sha256": "d9a5c6f8bc3dfb19daca0916b0ae360326cd20552ef89c0aacecd46960c2a2f5",
+            "license_proof": "licenses/Dripping-Water-Loop.txt",
+            "processing": "FFmpeg 7.1.5: downmixed source stereo FLAC to mono 44100Hz Vorbis quality 4 for positional ambience. Original duration retained.",
+            "duration_seconds": 20.063107,
+            "channels": 1,
+            "sample_rate": 44100,
+            "loop": true
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.3,
+      "integration_cue": "Rain on corrugated awning with a gutter-water texture. Fade by shelter/exterior position.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-yard-wind.ogg",
+      "bytes": 43582,
+      "sha256": "fa42c69d857df6e5de7dbd23f309a71d2dae96ca0a8fdffac786d8ea9947e9b5",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 12.0,
+      "container_duration_seconds": 12.0,
+      "decoded_float32_bytes": 1152000,
+      "decoded_float32_bytes_at_48000_hz": 2304000,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -23.924,
+      "rms_dbfs": -38.514,
+      "onset_seconds_at_3_5_percent_peak": 0.000375,
+      "peak_time_seconds": 11.590042,
+      "loop": true,
+      "loop_boundary_jump": 0.0028040543547831476,
+      "adjacent_sample_p99_delta": 0.005273961778730156,
+      "loop_seam_check": true,
+      "kind": "audio",
+      "name": "lv115-yard-wind",
+      "title": "Yard Wind",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "ambience",
+          "immediate_file": "dist/assets/audio/ambience.ogg",
+          "immediate_sha256": "5703a7f7bc3749312ba35694bdec44ade83dcf6bae81a9d01f8bb0bfd560f718",
+          "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+          "original_provenance": {
+            "file": "audio/ambience.ogg",
+            "bytes": 24470,
+            "sha256": "5703a7f7bc3749312ba35694bdec44ade83dcf6bae81a9d01f8bb0bfd560f718",
+            "author": "qubodup",
+            "title": "(defect) motor loop",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source_page": "https://opengameart.org/content/defect-motor-loop",
+            "download_url": "https://opengameart.org/sites/default/files/fan_interval.wav",
+            "original_file": "fan_interval.wav",
+            "processing": "Mono 48 kHz PCM16 source edit; high/low-pass filtering; 120 ms seam crossfade; peak target -12 dBFS; then Ogg Vorbis quality 4.",
+            "original_sha256": "4c0287ffdad82a7001403c82ab77e2a04475fb30c9919938b311f644f429c531",
+            "prepared_wav_sha256": "f0f4728a4247c83d1670b2db57e11273c1dff684112ec8473d0ce030abfcad1c",
+            "loop": true,
+            "audio": {
+              "duration_seconds": 2.89075,
+              "codec_name": "vorbis",
+              "sample_rate": "48000",
+              "channels": 1
+            }
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.25,
+      "integration_cue": "Exterior wind, distant motor wash and quiet fence wire tone. Do not encode enemy proximity.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-gravel-step-1.ogg",
+      "bytes": 6972,
+      "sha256": "7f066839fe2326c5bf1bd0da7644f5903536010a24b73a294ab53c093b430663",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 0.6346666666666667,
+      "container_duration_seconds": 0.62,
+      "decoded_float32_bytes": 60928,
+      "decoded_float32_bytes_at_48000_hz": 121856,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -15.562,
+      "rms_dbfs": -40.086,
+      "onset_seconds_at_3_5_percent_peak": 0.000833,
+      "peak_time_seconds": 0.022833,
+      "loop": false,
+      "loop_boundary_jump": null,
+      "adjacent_sample_p99_delta": 0.016850627306848845,
+      "loop_seam_check": null,
+      "kind": "audio",
+      "name": "lv115-gravel-step-1",
+      "title": "Gravel Step 1",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "debris-step-1",
+          "immediate_file": "dist/assets/audio/debris-step-1.ogg",
+          "immediate_sha256": "bcba1b8b74b9528e52dd320bde72af902fb5396341b6d36f7d9d062916ca974c",
+          "verified_from": "Bundled runtime asset manifest, hash verified; no new download",
+          "original_provenance": {
+            "file": "audio/debris-step-1.ogg",
+            "title": "Footsteps on gravels #1 (0510)",
+            "author": "Joseph Sardin / BigSoundBank",
+            "source_url": "https://bigsoundbank.com/steps-on-gravels-s0510.html",
+            "download_url": "https://bigsoundbank.com/UPLOAD/bwf-en/0510.wav",
+            "original_file": "0510.wav",
+            "original_archive": null,
+            "source_sha256": "346f52d1529a960a849d480aba5de9fb0819936aeb85238c58cdb90a504bdbb8",
+            "download_sha256": "346f52d1529a960a849d480aba5de9fb0819936aeb85238c58cdb90a504bdbb8",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "license_proof": "licenses/Contact-Foley-Sardin.txt",
+            "bytes": 9467,
+            "sha256": "bcba1b8b74b9528e52dd320bde72af902fb5396341b6d36f7d9d062916ca974c",
+            "format": "Ogg Vorbis; mono",
+            "sample_rate": 32000,
+            "duration_seconds": 0.641,
+            "source_window_seconds": [
+              0.385,
+              1.03
+            ],
+            "processing": "Mono 32000 Hz; 70 Hz high-pass / 11000 Hz low-pass; DC removal; -12 dBFS sample peak before 3 ms onset / 45 ms tail fades; Vorbis quality 4.",
+            "additional_sources": []
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.45,
+      "integration_cue": "Left gravel shoe contact. Play only at a foot contact; alternate variants.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-gravel-step-2.ogg",
+      "bytes": 6992,
+      "sha256": "8390b9221027c6b5a1f357d6bc44ea0ce368bac0e26c59818c14bdbb5db06b7b",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 0.6346666666666667,
+      "container_duration_seconds": 0.62,
+      "decoded_float32_bytes": 60928,
+      "decoded_float32_bytes_at_48000_hz": 121856,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -15.753,
+      "rms_dbfs": -43.984,
+      "onset_seconds_at_3_5_percent_peak": 0.0005,
+      "peak_time_seconds": 0.025917,
+      "loop": false,
+      "loop_boundary_jump": null,
+      "adjacent_sample_p99_delta": 0.011037262319587182,
+      "loop_seam_check": null,
+      "kind": "audio",
+      "name": "lv115-gravel-step-2",
+      "title": "Gravel Step 2",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "debris-step-2",
+          "immediate_file": "dist/assets/audio/debris-step-2.ogg",
+          "immediate_sha256": "e5065948a3978fa976250b890bda383923143163e1b3eac623485ebe3c981ac0",
+          "verified_from": "Bundled runtime asset manifest, hash verified; no new download",
+          "original_provenance": {
+            "file": "audio/debris-step-2.ogg",
+            "title": "Footsteps on gravels #1 (0510)",
+            "author": "Joseph Sardin / BigSoundBank",
+            "source_url": "https://bigsoundbank.com/steps-on-gravels-s0510.html",
+            "download_url": "https://bigsoundbank.com/UPLOAD/bwf-en/0510.wav",
+            "original_file": "0510.wav",
+            "original_archive": null,
+            "source_sha256": "346f52d1529a960a849d480aba5de9fb0819936aeb85238c58cdb90a504bdbb8",
+            "download_sha256": "346f52d1529a960a849d480aba5de9fb0819936aeb85238c58cdb90a504bdbb8",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "license_proof": "licenses/Contact-Foley-Sardin.txt",
+            "bytes": 9311,
+            "sha256": "e5065948a3978fa976250b890bda383923143163e1b3eac623485ebe3c981ac0",
+            "format": "Ogg Vorbis; mono",
+            "sample_rate": 32000,
+            "duration_seconds": 0.641,
+            "source_window_seconds": [
+              3.295,
+              3.94
+            ],
+            "processing": "Mono 32000 Hz; 70 Hz high-pass / 11000 Hz low-pass; DC removal; -12 dBFS sample peak before 3 ms onset / 45 ms tail fades; Vorbis quality 4.",
+            "additional_sources": []
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.45,
+      "integration_cue": "Right gravel shoe contact. Reuses a different real CC0 gravel recording window.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-bolt-metal.ogg",
+      "bytes": 6965,
+      "sha256": "29b88b592a69823aa164665acee46971ac4a445dc8296025369586eab524b481",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 0.7093333333333334,
+      "container_duration_seconds": 0.72,
+      "decoded_float32_bytes": 68096,
+      "decoded_float32_bytes_at_48000_hz": 136192,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -12.782,
+      "rms_dbfs": -36.068,
+      "onset_seconds_at_3_5_percent_peak": 0.000333,
+      "peak_time_seconds": 0.085417,
+      "loop": false,
+      "loop_boundary_jump": null,
+      "adjacent_sample_p99_delta": 0.0805775687843549,
+      "loop_seam_check": null,
+      "kind": "audio",
+      "name": "lv115-bolt-metal",
+      "title": "Bolt Metal",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "metal",
+          "immediate_file": "dist/assets/audio/metal.ogg",
+          "immediate_sha256": "b9d7ea28288628583bf1e679537a4b5297adbea54eeb2344df51dd2b970a4960",
+          "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+          "original_provenance": {
+            "file": "audio/metal.ogg",
+            "bytes": 9246,
+            "sha256": "b9d7ea28288628583bf1e679537a4b5297adbea54eeb2344df51dd2b970a4960",
+            "author": "Brian MacIntosh / BMacZero",
+            "title": "Mechanical Sounds",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source_page": "https://opengameart.org/content/mechanical-sounds",
+            "download_url": "https://opengameart.org/sites/default/files/clank1.wav",
+            "original_file": "clank1.wav",
+            "processing": "Band limiting; short edge fades; peak target -7 dBFS; then Ogg Vorbis quality 4.",
+            "original_sha256": "899a46a8423fa0ca349b3c70a07a422d1eaa3a58695ce6facfbae074dd70226f",
+            "prepared_wav_sha256": "60db5fa7790ad8060668687493771dd39ef1cebf107f4e3e5460470c4407be0b",
+            "loop": false,
+            "audio": {
+              "duration_seconds": 0.673396,
+              "codec_name": "vorbis",
+              "sample_rate": "48000",
+              "channels": 1
+            }
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.4,
+      "integration_cue": "Small steel contact with diminishing bounces. One event at first physical bolt contact.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-bolt-glass.ogg",
+      "bytes": 5095,
+      "sha256": "d8bbea757aafae14c498bc6820321bf075c1760add88356dddb60e582d3be158",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 0.8393333333333334,
+      "container_duration_seconds": 0.85,
+      "decoded_float32_bytes": 80576,
+      "decoded_float32_bytes_at_48000_hz": 161152,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -16.554,
+      "rms_dbfs": -34.947,
+      "onset_seconds_at_3_5_percent_peak": 0.0,
+      "peak_time_seconds": 0.000792,
+      "loop": false,
+      "loop_boundary_jump": null,
+      "adjacent_sample_p99_delta": 0.04522212613373977,
+      "loop_seam_check": null,
+      "kind": "audio",
+      "name": "lv115-bolt-glass",
+      "title": "Bolt Glass",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "Original procedural synthesis",
+      "source_files": [],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.4,
+      "integration_cue": "Original pane tick and glass resonance; does not imply glass shattering.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-bolt-water.ogg",
+      "bytes": 6205,
+      "sha256": "f8ddc0308ad80a7d846c4186abc808a0f24280a509972ffe8872a8c72aae4bf0",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 0.752,
+      "container_duration_seconds": 0.74,
+      "decoded_float32_bytes": 72192,
+      "decoded_float32_bytes_at_48000_hz": 144384,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -16.547,
+      "rms_dbfs": -37.747,
+      "onset_seconds_at_3_5_percent_peak": 0.0,
+      "peak_time_seconds": 0.01775,
+      "loop": false,
+      "loop_boundary_jump": null,
+      "adjacent_sample_p99_delta": 0.06914126969873925,
+      "loop_seam_check": null,
+      "kind": "audio",
+      "name": "lv115-bolt-water",
+      "title": "Bolt Water",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "footstep-wet",
+          "immediate_file": "dist/assets/audio/footstep-wet.ogg",
+          "immediate_sha256": "f206ebdfd26b6e948a610a818d2e4803815ea33c98f821ff56f538a36cdcdbb0",
+          "verified_from": "Bundled runtime asset manifest, hash verified; no new download",
+          "original_provenance": {
+            "file": "audio/footstep-wet.ogg",
+            "bytes": 6299,
+            "sha256": "f206ebdfd26b6e948a610a818d2e4803815ea33c98f821ff56f538a36cdcdbb0",
+            "author": "rubberduck",
+            "title": "100 CC0 SFX #2",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source_page": "https://opengameart.org/content/100-cc0-sfx-2",
+            "download_url": "https://opengameart.org/sites/default/files/sfx_100_v2.zip",
+            "original_file": "sfx100v2_footstep_wet_01.ogg",
+            "source_archive_sha256": "0fc61b4494e2e893c0c015ced4877b3f689c7d84a48cb61daecd7ddb52db797b",
+            "processing": "Downmixed to mono, resampled to 32 kHz, gain 6.40 dB toward -9 dBFS peak; 3 ms onset fade. Vorbis quality 4."
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.45,
+      "integration_cue": "Small shallow-water plop and splash. One event at physical bolt water contact.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-fence-strike.ogg",
+      "bytes": 8994,
+      "sha256": "1b8c4bd1d534df6792517dfefde6ffd3180ab8c0520127a6b349bece8cefd965",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 1.7,
+      "container_duration_seconds": 1.7,
+      "decoded_float32_bytes": 163200,
+      "decoded_float32_bytes_at_48000_hz": 326400,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -11.017,
+      "rms_dbfs": -35.566,
+      "onset_seconds_at_3_5_percent_peak": 0.000375,
+      "peak_time_seconds": 0.022083,
+      "loop": false,
+      "loop_boundary_jump": null,
+      "adjacent_sample_p99_delta": 0.02790626928210257,
+      "loop_seam_check": null,
+      "kind": "audio",
+      "name": "lv115-fence-strike",
+      "title": "Fence Strike",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "door-strike",
+          "immediate_file": "dist/assets/audio/door-strike.ogg",
+          "immediate_sha256": "21f6b0522a9069933940314e15f699f8ec1cf98d1993160f68fee0c3b1c334f0",
+          "verified_from": "Bundled runtime asset manifest, hash verified; no new download",
+          "original_provenance": {
+            "file": "audio/door-strike.ogg",
+            "name": "door-strike",
+            "kind": "audio",
+            "bytes": 7577,
+            "sha256": "21f6b0522a9069933940314e15f699f8ec1cf98d1993160f68fee0c3b1c334f0",
+            "duration_seconds": 0.572875,
+            "decoded_duration_seconds": 0.568875,
+            "channels": 1,
+            "sample_rate": 32000,
+            "codec": "vorbis",
+            "loop": false,
+            "peak_dbfs": -10.499,
+            "rms_dbfs": -32.502,
+            "clipped_sample_count": 0,
+            "nonfinite_sample_count": 0,
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "gain_db": -11.913,
+            "processing": "Mono 32000 Hz; 90 Hz high-pass, 9500 Hz low-pass; 3 ms onset / 25 ms end fades; gain -11.913 dB to peak target -10 dBFS; Vorbis quality 4.",
+            "verification": "Complete FFmpeg decode, finite-sample and clipping checks, waveform inspection and documented source provenance. No subjective listening or browser playback claimed.",
+            "author": "rubberduck",
+            "title": "100 CC0 metal and wood SFX",
+            "source_page": "https://opengameart.org/content/100-cc0-metal-and-wood-sfx",
+            "download_url": "https://opengameart.org/sites/default/files/100-CC0-wood-metal-SFX.zip",
+            "original_file": "metal_slam_01.ogg",
+            "original_sha256": "a335ccf202578bd740f930f0648a4dcbbbce3ebb2519335be023532578f56176",
+            "source_archive_sha256": "be6eba63b03409ac0c77787a956b1503a7c186403d04aef9725c52644a4b7878",
+            "source_page_sha256": "af2eb811c8cdb323cf5f429a57a8b61efa2c861e689f6dc04718cdb6d9d6f862",
+            "license_proof": "licenses/Surface-Metal-Foley.txt",
+            "integration_role": "Solid metal slam at the exact creature hand or shoulder contact frame."
+          }
+        },
+        {
+          "id": "metal",
+          "immediate_file": "dist/assets/audio/metal.ogg",
+          "immediate_sha256": "b9d7ea28288628583bf1e679537a4b5297adbea54eeb2344df51dd2b970a4960",
+          "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+          "original_provenance": {
+            "file": "audio/metal.ogg",
+            "bytes": 9246,
+            "sha256": "b9d7ea28288628583bf1e679537a4b5297adbea54eeb2344df51dd2b970a4960",
+            "author": "Brian MacIntosh / BMacZero",
+            "title": "Mechanical Sounds",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source_page": "https://opengameart.org/content/mechanical-sounds",
+            "download_url": "https://opengameart.org/sites/default/files/clank1.wav",
+            "original_file": "clank1.wav",
+            "processing": "Band limiting; short edge fades; peak target -7 dBFS; then Ogg Vorbis quality 4.",
+            "original_sha256": "899a46a8423fa0ca349b3c70a07a422d1eaa3a58695ce6facfbae074dd70226f",
+            "prepared_wav_sha256": "60db5fa7790ad8060668687493771dd39ef1cebf107f4e3e5460470c4407be0b",
+            "loop": false,
+            "audio": {
+              "duration_seconds": 0.673396,
+              "codec_name": "vorbis",
+              "sample_rate": "48000",
+              "channels": 1
+            }
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.55,
+      "integration_cue": "Fence impact and settling links. Synchronize first contact with creature hand collision.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-door-breach.ogg",
+      "bytes": 9216,
+      "sha256": "eb4a965d1135cfbc382ca96fb54544f344ce2b8fc027936e6c9f9246b97198a8",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 1.95,
+      "container_duration_seconds": 1.95,
+      "decoded_float32_bytes": 187200,
+      "decoded_float32_bytes_at_48000_hz": 374400,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -10.779,
+      "rms_dbfs": -36.12,
+      "onset_seconds_at_3_5_percent_peak": 0.000375,
+      "peak_time_seconds": 0.023167,
+      "loop": false,
+      "loop_boundary_jump": null,
+      "adjacent_sample_p99_delta": 0.022513928366824844,
+      "loop_seam_check": null,
+      "kind": "audio",
+      "name": "lv115-door-breach",
+      "title": "Door Breach",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "door-strike",
+          "immediate_file": "dist/assets/audio/door-strike.ogg",
+          "immediate_sha256": "21f6b0522a9069933940314e15f699f8ec1cf98d1993160f68fee0c3b1c334f0",
+          "verified_from": "Bundled runtime asset manifest, hash verified; no new download",
+          "original_provenance": {
+            "file": "audio/door-strike.ogg",
+            "name": "door-strike",
+            "kind": "audio",
+            "bytes": 7577,
+            "sha256": "21f6b0522a9069933940314e15f699f8ec1cf98d1993160f68fee0c3b1c334f0",
+            "duration_seconds": 0.572875,
+            "decoded_duration_seconds": 0.568875,
+            "channels": 1,
+            "sample_rate": 32000,
+            "codec": "vorbis",
+            "loop": false,
+            "peak_dbfs": -10.499,
+            "rms_dbfs": -32.502,
+            "clipped_sample_count": 0,
+            "nonfinite_sample_count": 0,
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "gain_db": -11.913,
+            "processing": "Mono 32000 Hz; 90 Hz high-pass, 9500 Hz low-pass; 3 ms onset / 25 ms end fades; gain -11.913 dB to peak target -10 dBFS; Vorbis quality 4.",
+            "verification": "Complete FFmpeg decode, finite-sample and clipping checks, waveform inspection and documented source provenance. No subjective listening or browser playback claimed.",
+            "author": "rubberduck",
+            "title": "100 CC0 metal and wood SFX",
+            "source_page": "https://opengameart.org/content/100-cc0-metal-and-wood-sfx",
+            "download_url": "https://opengameart.org/sites/default/files/100-CC0-wood-metal-SFX.zip",
+            "original_file": "metal_slam_01.ogg",
+            "original_sha256": "a335ccf202578bd740f930f0648a4dcbbbce3ebb2519335be023532578f56176",
+            "source_archive_sha256": "be6eba63b03409ac0c77787a956b1503a7c186403d04aef9725c52644a4b7878",
+            "source_page_sha256": "af2eb811c8cdb323cf5f429a57a8b61efa2c861e689f6dc04718cdb6d9d6f862",
+            "license_proof": "licenses/Surface-Metal-Foley.txt",
+            "integration_role": "Solid metal slam at the exact creature hand or shoulder contact frame."
+          }
+        },
+        {
+          "id": "wood-crack",
+          "immediate_file": "dist/assets/audio/wood-crack.ogg",
+          "immediate_sha256": "2ac470d74a395e2adec66af1fd1e6cdf519aebfe0b9425fa176b5ace9d88604c",
+          "verified_from": "Bundled runtime asset manifest, hash verified; no new download",
+          "original_provenance": {
+            "file": "audio/wood-crack.ogg",
+            "bytes": 5355,
+            "sha256": "2ac470d74a395e2adec66af1fd1e6cdf519aebfe0b9425fa176b5ace9d88604c",
+            "duration": 0.250813,
+            "duration_seconds": 0.250813,
+            "decoded_duration_seconds": 0.2468125,
+            "channels": 1,
+            "sample_rate": 32000,
+            "codec": "vorbis",
+            "peak_dbfs": -12.578,
+            "rms_dbfs": -39.416,
+            "clipped_sample_count": 0,
+            "nonfinite_sample_count": 0,
+            "decode_check": "Passed complete ffmpeg -xerror decode.",
+            "loop": false,
+            "true_peak_dbfs": -12.6,
+            "integrated_lufs": -70.0,
+            "name": "wood-crack",
+            "kind": "audio",
+            "title": "100 CC0 metal and wood SFX",
+            "author": "rubberduck",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source_page": "https://opengameart.org/content/100-cc0-metal-and-wood-sfx",
+            "download_url": "https://opengameart.org/sites/default/files/100-CC0-wood-metal-SFX.zip",
+            "original_file": "wood_cracking_02.ogg",
+            "original_sha256": "128a798ebb92958c9bee5a71c420c3f61f59c241ecaca75f0bbde780bb086abd",
+            "source_archive_sha256": "be6eba63b03409ac0c77787a956b1503a7c186403d04aef9725c52644a4b7878",
+            "source_page_sha256": "af2eb811c8cdb323cf5f429a57a8b61efa2c861e689f6dc04718cdb6d9d6f862",
+            "license_proof": "licenses/Rubberduck-Metal-Wood.txt",
+            "gain_db": -12.219,
+            "processing": "Complete source recording; downmixed mono 32000 Hz; 65 Hz high-pass and 9500 Hz low-pass. 4 ms leading / 25 ms trailing fade. Gain -12.219 dB to peak ceiling -12 dBFS. Vorbis quality 3.",
+            "integration_role": "Short structural wood crack",
+            "verification": "Complete FFmpeg decode, numerical peak/finite-sample checks, licensing and duplicate-source audit. No subjective listening audition or real browser playback is claimed."
+          }
+        },
+        {
+          "id": "metal",
+          "immediate_file": "dist/assets/audio/metal.ogg",
+          "immediate_sha256": "b9d7ea28288628583bf1e679537a4b5297adbea54eeb2344df51dd2b970a4960",
+          "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+          "original_provenance": {
+            "file": "audio/metal.ogg",
+            "bytes": 9246,
+            "sha256": "b9d7ea28288628583bf1e679537a4b5297adbea54eeb2344df51dd2b970a4960",
+            "author": "Brian MacIntosh / BMacZero",
+            "title": "Mechanical Sounds",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source_page": "https://opengameart.org/content/mechanical-sounds",
+            "download_url": "https://opengameart.org/sites/default/files/clank1.wav",
+            "original_file": "clank1.wav",
+            "processing": "Band limiting; short edge fades; peak target -7 dBFS; then Ogg Vorbis quality 4.",
+            "original_sha256": "899a46a8423fa0ca349b3c70a07a422d1eaa3a58695ce6facfbae074dd70226f",
+            "prepared_wav_sha256": "60db5fa7790ad8060668687493771dd39ef1cebf107f4e3e5460470c4407be0b",
+            "loop": false,
+            "audio": {
+              "duration_seconds": 0.673396,
+              "codec_name": "vorbis",
+              "sample_rate": "48000",
+              "channels": 1
+            }
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.55,
+      "integration_cue": "Door shoulder impact, latch crack and dragging tail. Sync initial hit with door movement.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-road-gravel.ogg",
+      "bytes": 23370,
+      "sha256": "76618efd2b45de867f619fe8b434e392f0605aa0a428843a53faaa2b15f35e4f",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 4.0,
+      "container_duration_seconds": 4.0,
+      "decoded_float32_bytes": 384000,
+      "decoded_float32_bytes_at_48000_hz": 768000,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -21.633,
+      "rms_dbfs": -35.672,
+      "onset_seconds_at_3_5_percent_peak": 0.000583,
+      "peak_time_seconds": 2.030125,
+      "loop": true,
+      "loop_boundary_jump": 0.00033039291156455874,
+      "adjacent_sample_p99_delta": 0.021507393820211315,
+      "loop_seam_check": true,
+      "kind": "audio",
+      "name": "lv115-road-gravel",
+      "title": "Road Gravel",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "debris-step-1",
+          "immediate_file": "dist/assets/audio/debris-step-1.ogg",
+          "immediate_sha256": "bcba1b8b74b9528e52dd320bde72af902fb5396341b6d36f7d9d062916ca974c",
+          "verified_from": "Bundled runtime asset manifest, hash verified; no new download",
+          "original_provenance": {
+            "file": "audio/debris-step-1.ogg",
+            "title": "Footsteps on gravels #1 (0510)",
+            "author": "Joseph Sardin / BigSoundBank",
+            "source_url": "https://bigsoundbank.com/steps-on-gravels-s0510.html",
+            "download_url": "https://bigsoundbank.com/UPLOAD/bwf-en/0510.wav",
+            "original_file": "0510.wav",
+            "original_archive": null,
+            "source_sha256": "346f52d1529a960a849d480aba5de9fb0819936aeb85238c58cdb90a504bdbb8",
+            "download_sha256": "346f52d1529a960a849d480aba5de9fb0819936aeb85238c58cdb90a504bdbb8",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "license_proof": "licenses/Contact-Foley-Sardin.txt",
+            "bytes": 9467,
+            "sha256": "bcba1b8b74b9528e52dd320bde72af902fb5396341b6d36f7d9d062916ca974c",
+            "format": "Ogg Vorbis; mono",
+            "sample_rate": 32000,
+            "duration_seconds": 0.641,
+            "source_window_seconds": [
+              0.385,
+              1.03
+            ],
+            "processing": "Mono 32000 Hz; 70 Hz high-pass / 11000 Hz low-pass; DC removal; -12 dBFS sample peak before 3 ms onset / 45 ms tail fades; Vorbis quality 4.",
+            "additional_sources": []
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.3,
+      "integration_cue": "Rolling rough road texture. Fade from zero with vehicle speed; stop when parked.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-engine-idle.ogg",
+      "bytes": 13683,
+      "sha256": "0d0535563f0202239e159faa9dfb03d11efb4442dd4271a8daa94d792ec4fc6a",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 4.0,
+      "container_duration_seconds": 4.0,
+      "decoded_float32_bytes": 384000,
+      "decoded_float32_bytes_at_48000_hz": 768000,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -25.046,
+      "rms_dbfs": -31.996,
+      "onset_seconds_at_3_5_percent_peak": 0.000375,
+      "peak_time_seconds": 3.665542,
+      "loop": true,
+      "loop_boundary_jump": 0.0003945048956666142,
+      "adjacent_sample_p99_delta": 0.0014538355916738515,
+      "loop_seam_check": true,
+      "kind": "audio",
+      "name": "lv115-engine-idle",
+      "title": "Engine Idle",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "CC0-recording derivative plus original synthesis",
+      "source_files": [
+        {
+          "id": "ambience",
+          "immediate_file": "dist/assets/audio/ambience.ogg",
+          "immediate_sha256": "5703a7f7bc3749312ba35694bdec44ade83dcf6bae81a9d01f8bb0bfd560f718",
+          "verified_from": "Bundled v1.13 runtime asset manifest; no new source recording downloaded",
+          "original_provenance": {
+            "file": "audio/ambience.ogg",
+            "bytes": 24470,
+            "sha256": "5703a7f7bc3749312ba35694bdec44ade83dcf6bae81a9d01f8bb0bfd560f718",
+            "author": "qubodup",
+            "title": "(defect) motor loop",
+            "license": "CC0-1.0",
+            "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source_page": "https://opengameart.org/content/defect-motor-loop",
+            "download_url": "https://opengameart.org/sites/default/files/fan_interval.wav",
+            "original_file": "fan_interval.wav",
+            "processing": "Mono 48 kHz PCM16 source edit; high/low-pass filtering; 120 ms seam crossfade; peak target -12 dBFS; then Ogg Vorbis quality 4.",
+            "original_sha256": "4c0287ffdad82a7001403c82ab77e2a04475fb30c9919938b311f644f429c531",
+            "prepared_wav_sha256": "f0f4728a4247c83d1670b2db57e11273c1dff684112ec8473d0ce030abfcad1c",
+            "loop": true,
+            "audio": {
+              "duration_seconds": 2.89075,
+              "codec_name": "vorbis",
+              "sample_rate": "48000",
+              "channels": 1
+            }
+          }
+        }
+      ],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.34,
+      "integration_cue": "Four-cylinder low engine texture. Suggested playbackRate .85\u20131.65 with throttle/RPM; fade on enter/exit.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "file": "audio/lv115-yard-tension.ogg",
+      "bytes": 40496,
+      "sha256": "0e7041c94166bfc8cdd3f0bc22bf9badb8b6640c73a4c56626eac4a9dea81867",
+      "codec": "vorbis",
+      "sample_rate": 24000,
+      "channels": 1,
+      "duration_seconds": 12.0,
+      "container_duration_seconds": 12.0,
+      "decoded_float32_bytes": 1152000,
+      "decoded_float32_bytes_at_48000_hz": 2304000,
+      "nonfinite_sample_count": 0,
+      "clipped_sample_count": 0,
+      "peak_dbfs": -27.482,
+      "rms_dbfs": -39.98,
+      "onset_seconds_at_3_5_percent_peak": 0.000583,
+      "peak_time_seconds": 6.557333,
+      "loop": true,
+      "loop_boundary_jump": 0.0008022868423722684,
+      "adjacent_sample_p99_delta": 0.0014721946977078915,
+      "loop_seam_check": true,
+      "kind": "audio",
+      "name": "lv115-yard-tension",
+      "title": "Yard Tension",
+      "author": "Last Vehicle original synthesis and edits; source recording authors preserved below",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Audio-v115.txt",
+      "source_type": "Original procedural synthesis",
+      "source_files": [],
+      "authoring_source": "source-assets/audio-v115/prepare_audio.py",
+      "processing": "Mono 24 kHz, bounded peak/RMS, source hash check, contact onset alignment, source/loop wrap crossfades where applicable, Vorbis quality 3.",
+      "recommended_gain": 0.35,
+      "integration_cue": "Original low-register exterior tension texture. Music bus; crossfade with existing score, never stack at full gain.",
+      "verification": "Complete decode and numerical finite/clipping/loop-seam inspection. No subjective listening or browser mix approval claimed."
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-loading-trolley",
+      "file": "models/v116-yard-loading-trolley.glb",
+      "draw_calls_max": 8,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.6,
+        0.0,
+        -0.5
+      ],
+      "bounds_max": [
+        0.6,
+        1.100000023841858,
+        0.5
+      ],
+      "dimensions": [
+        1.2,
+        1.100000023841858,
+        1.0
+      ],
+      "triangles": 796,
+      "vertices_authored": 496,
+      "closed_components": 49,
+      "anchors": {
+        "handle": {
+          "position": [
+            0,
+            1.075,
+            -0.475
+          ],
+          "normal": [
+            0,
+            0,
+            -1
+          ],
+          "node": "loading-trolley__handle"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "loading-trolley__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.46,
+          0.0,
+          -0.31
+        ],
+        [
+          -0.46,
+          0.0,
+          0.34
+        ],
+        [
+          0.46,
+          0.0,
+          -0.31
+        ],
+        [
+          0.46,
+          0.0,
+          0.34
+        ]
+      ],
+      "notes": "1.20 by 1.00 m overall footprint. Fixed scenery; wheels do not imply push interaction. Place beside the loading wall, outside the vehicle lane.",
+      "bytes": 45920,
+      "sha256": "18b1aec732cf3af3992fa099492011fd65f862c560cd4647eacd0f6cf3b134c3"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-bollard-chain",
+      "file": "models/v116-yard-bollard-chain.glb",
+      "draw_calls_max": 7,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.7999999999999999,
+        0,
+        -0.3
+      ],
+      "bounds_max": [
+        0.7999999999999999,
+        0.9860000014305115,
+        0.303
+      ],
+      "dimensions": [
+        1.5999999999999999,
+        0.9860000014305115,
+        0.603
+      ],
+      "triangles": 1600,
+      "vertices_authored": 832,
+      "closed_components": 31,
+      "anchors": {
+        "chain_midpoint": {
+          "position": [
+            0,
+            0.585,
+            0.095
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "bollard-chain__chain_midpoint"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "bollard-chain__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.73,
+          0,
+          -0.23
+        ],
+        [
+          -0.42999999999999994,
+          0,
+          0.23
+        ],
+        [
+          0.42999999999999994,
+          0,
+          -0.23
+        ],
+        [
+          0.73,
+          0,
+          0.23
+        ]
+      ],
+      "notes": "1.60 by .60 m feet. Use post blockers and an explicit chain crossing rule if required. Do not treat the entire open gap as an opaque AI sight blocker.",
+      "bytes": 88624,
+      "sha256": "54cfce240307412a98f3edbdcac1ef8e954399b116f172b719b4bb19bc52f5ca"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-freight-tarp",
+      "file": "models/v116-yard-freight-tarp.glb",
+      "draw_calls_max": 5,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.25,
+        0.0,
+        -0.75
+      ],
+      "bounds_max": [
+        1.2500000000000004,
+        1.2,
+        0.75
+      ],
+      "dimensions": [
+        2.5000000000000004,
+        1.2,
+        1.5
+      ],
+      "triangles": 572,
+      "vertices_authored": 362,
+      "closed_components": 38,
+      "anchors": {
+        "cover_top": {
+          "position": [
+            0.27,
+            1.2,
+            -0.02
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "freight-tarp__cover_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "freight-tarp__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -1.12,
+          0.0,
+          -0.65
+        ],
+        [
+          -1.12,
+          0.0,
+          0.65
+        ],
+        [
+          1.12,
+          0.0,
+          -0.65
+        ],
+        [
+          1.12,
+          0.0,
+          0.65
+        ]
+      ],
+      "notes": "2.50 by 1.50 m footprint, about 1.20 m tall. Coarse opaque cover blocker may use the body bounds. Keep a clear passage around the cluster.",
+      "bytes": 34992,
+      "sha256": "31ac78bc628266cf36ae20a2480e84739091243976a7fc57d2d531f3dee8803c"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-wall-services",
+      "file": "models/v116-yard-wall-services.glb",
+      "draw_calls_max": 5,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.65,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.65,
+        2.4,
+        0.2919999957084656
+      ],
+      "dimensions": [
+        1.3,
+        2.4,
+        0.2919999957084656
+      ],
+      "triangles": 728,
+      "vertices_authored": 444,
+      "closed_components": 40,
+      "anchors": {
+        "junction_face": {
+          "position": [
+            0.29,
+            1.57,
+            0.175
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-services__junction_face"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "wall-services__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            1.2,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-services__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear mounting plane Z=0; +Z faces away from wall. Lower origin is the bottom of the wall service set, not terrain. Place 0.08\u20130.20 m above grade so outlet clears it.",
+      "bytes": 41016,
+      "sha256": "36bce94c1f76dc48786c5babde28fbd43368fd495f71a47fc03ebb2494ddbce5"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-gatehouse-chair",
+      "file": "models/v116-yard-gatehouse-chair.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.32499998807907104,
+        0.0,
+        -0.32499998807907104
+      ],
+      "bounds_max": [
+        0.32499998807907104,
+        0.9764099717140198,
+        0.32499998807907104
+      ],
+      "dimensions": [
+        0.6499999761581421,
+        0.9764099717140198,
+        0.6499999761581421
+      ],
+      "triangles": 436,
+      "vertices_authored": 256,
+      "closed_components": 19,
+      "anchors": {
+        "seat_top": {
+          "position": [
+            0,
+            0.524,
+            0.005
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-chair__seat_top"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "gatehouse-chair__support_bottom"
+        }
+      },
+      "contact_points": [
+        [
+          -0.29,
+          0.0,
+          -0.29
+        ],
+        [
+          -0.29,
+          0.0,
+          0.29
+        ],
+        [
+          0.29,
+          0.0,
+          -0.29
+        ],
+        [
+          0.29,
+          0.0,
+          0.29
+        ]
+      ],
+      "notes": ".65 by .65 m footprint. Seat anchor is at the top of its cushion. Static scenery; keep the chair outside gatehouse doors and interaction approach zones.",
+      "bytes": 26096,
+      "sha256": "28a83c317816c54912ada41d4659114ca3e5b665e89a157de80ee128ca87ec47"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Yard-v116.txt",
+      "source_type": "Original numeric geometry and palette materials; no external asset inputs",
+      "source": "source-assets/yard-v116/",
+      "verified": "2026-11-04",
+      "type": "model",
+      "source_file": "source-assets/yard-v116/build_props.py",
+      "editable_source": "source-assets/yard-v116/Meridian_Yard_Details_v116.blend",
+      "id": "v116-yard-calendar-coat",
+      "file": "models/v116-yard-calendar-coat.glb",
+      "draw_calls_max": 8,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.55,
+        0,
+        0.0
+      ],
+      "bounds_max": [
+        0.55,
+        1.2,
+        0.21799999475479126
+      ],
+      "dimensions": [
+        1.1,
+        1.2,
+        0.21799999475479126
+      ],
+      "triangles": 996,
+      "vertices_authored": 636,
+      "closed_components": 69,
+      "anchors": {
+        "calendar_face": {
+          "position": [
+            0.315,
+            0.715,
+            0.065
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "calendar-coat__calendar_face"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "calendar-coat__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.6,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "calendar-coat__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Rear plane Z=0; lower origin is the hanging coat hem. Mount about .85\u20131.05 m above floor; +Z faces the room. Calendar is decorative, not a readable puzzle or promised interaction.",
+      "bytes": 58416,
+      "sha256": "df611781e579dfd43a48c7d7d557a6664789b9bfd1f2e00df6f31b433e44f17d"
+    },
+    {
+      "file": "textures/v117-asphalt-albedo.jpg",
+      "bytes": 36980,
+      "sha256": "b45bab43ca44b0fd4aef61d26669c863724c3acd860d170b2dca7c46927ded32",
+      "title": "Asphalt 01 \u2014 Diffuse",
+      "author": "Dario Barresi, Charlotte Baglioni",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/asphalt_01",
+      "source_metadata_url": "https://api.polyhaven.com/info/asphalt_01",
+      "source_files_url": "https://api.polyhaven.com/files/asphalt_01",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_01/asphalt_01_diff_1k.jpg",
+      "source_file": "originals/asphalt_01_diff_1k.jpg",
+      "source_sha256": "99b6f6bdfbd09279f3f550ac9593336df541aa2319537566eeb3e737d8512010",
+      "source_md5": "43c88946c38109d77a24456686a376f9",
+      "source_bytes": 739513,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        2.08,
+        2.08
+      ],
+      "role": "albedo",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-asphalt-roughness.jpg",
+      "bytes": 6213,
+      "sha256": "b172f1b9c74f317adeb17b4c8d823eef2b76704ff7a5925506eddc33ec479a80",
+      "title": "Asphalt 01 \u2014 Rough",
+      "author": "Dario Barresi, Charlotte Baglioni",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/asphalt_01",
+      "source_metadata_url": "https://api.polyhaven.com/info/asphalt_01",
+      "source_files_url": "https://api.polyhaven.com/files/asphalt_01",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_01/asphalt_01_rough_1k.jpg",
+      "source_file": "originals/asphalt_01_rough_1k.jpg",
+      "source_sha256": "147891957807bb03cc565c9daa8a16a4af7713449a0f475c638f78f833ad0646",
+      "source_md5": "92ffad35bc543f59ffd9860c53a98214",
+      "source_bytes": 344964,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        2.08,
+        2.08
+      ],
+      "role": "roughness",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-concrete-albedo.jpg",
+      "bytes": 80067,
+      "sha256": "9bf8922c5ae9266b253f4e22499e26fb88084f36e5b6fd5763f83cba5d82ac30",
+      "title": "Rough Concrete \u2014 Diffuse",
+      "author": "Dimitrios Savva",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/rough_concrete",
+      "source_metadata_url": "https://api.polyhaven.com/info/rough_concrete",
+      "source_files_url": "https://api.polyhaven.com/files/rough_concrete",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rough_concrete/rough_concrete_diff_1k.jpg",
+      "source_file": "originals/rough_concrete_diff_1k.jpg",
+      "source_sha256": "dd7fc03e152eb8c2fd511248aa2e9bf7428a645bd0e0b74ac1d887ad136cb0bc",
+      "source_md5": "82909f2db1e0453500703ae54e806f5c",
+      "source_bytes": 1042065,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        1.23,
+        1.23
+      ],
+      "role": "albedo",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-concrete-roughness.jpg",
+      "bytes": 31916,
+      "sha256": "5d6f2f7ee98aa356fa95b078463363356996d5a6c7fddb76da28a4b2d7414e53",
+      "title": "Rough Concrete \u2014 Rough",
+      "author": "Dimitrios Savva",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/rough_concrete",
+      "source_metadata_url": "https://api.polyhaven.com/info/rough_concrete",
+      "source_files_url": "https://api.polyhaven.com/files/rough_concrete",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rough_concrete/rough_concrete_rough_1k.jpg",
+      "source_file": "originals/rough_concrete_rough_1k.jpg",
+      "source_sha256": "2d392a3e0d44087ddecc0cd3fd27367a6cc0c16f94bbba2e8fbfbdf77eb105be",
+      "source_md5": "4b530c64e200c3190f527ccc04a4c919",
+      "source_bytes": 566436,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        1.23,
+        1.23
+      ],
+      "role": "roughness",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-brick-albedo.jpg",
+      "bytes": 80237,
+      "sha256": "4e8707e1ad5a6bcb686cb54566122a285d82695dbd18a7e6c79a052542f277ac",
+      "title": "Brick Wall 001 \u2014 Diffuse",
+      "author": "Rob Tuytel, Dimitrios Savva",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/brick_wall_001",
+      "source_metadata_url": "https://api.polyhaven.com/info/brick_wall_001",
+      "source_files_url": "https://api.polyhaven.com/files/brick_wall_001",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brick_wall_001/brick_wall_001_diffuse_1k.jpg",
+      "source_file": "originals/brick_wall_001_diffuse_1k.jpg",
+      "source_sha256": "6a1233ec0186703de830354d89f122991e61e67fb67e0846c7eaf6c5aefea902",
+      "source_md5": "955d2d4500eb549be0f2873305782798",
+      "source_bytes": 574381,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        3.0,
+        3.0
+      ],
+      "role": "albedo",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-brick-roughness.jpg",
+      "bytes": 32948,
+      "sha256": "29892d36b72d3cecb251fa63ff7ee68fff88d9cd14dc803235d4be79d57ceb62",
+      "title": "Brick Wall 001 \u2014 Rough",
+      "author": "Rob Tuytel, Dimitrios Savva",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/brick_wall_001",
+      "source_metadata_url": "https://api.polyhaven.com/info/brick_wall_001",
+      "source_files_url": "https://api.polyhaven.com/files/brick_wall_001",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/brick_wall_001/brick_wall_001_rough_1k.jpg",
+      "source_file": "originals/brick_wall_001_rough_1k.jpg",
+      "source_sha256": "a23342b02e6c5af106aaece16130aa9153a801cb1a84d5f3e0d06ce248677f38",
+      "source_md5": "618ceca60a4321aecc6d61eebe53d551",
+      "source_bytes": 211093,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        3.0,
+        3.0
+      ],
+      "role": "roughness",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-wood-albedo.jpg",
+      "bytes": 59417,
+      "sha256": "e8ca74855f7da2c29734cac1997d727b4a579cee15b375860cdc1a88e86a1200",
+      "title": "Weathered Brown Planks \u2014 Diffuse",
+      "author": "Dimitrios Savva, Rico Cilliers",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/weathered_brown_planks",
+      "source_metadata_url": "https://api.polyhaven.com/info/weathered_brown_planks",
+      "source_files_url": "https://api.polyhaven.com/files/weathered_brown_planks",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/weathered_brown_planks/weathered_brown_planks_diff_1k.jpg",
+      "source_file": "originals/weathered_brown_planks_diff_1k.jpg",
+      "source_sha256": "94833feda44e025a9139f7b5723ea84e4f0258d3b54939a79e1013c133085e29",
+      "source_md5": "e2fbdf7ed402e272e33e3f7ba707cf69",
+      "source_bytes": 226049,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        1.8,
+        1.8
+      ],
+      "role": "albedo",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-wood-roughness.jpg",
+      "bytes": 56328,
+      "sha256": "1df6123f44f42481e0558ba428a18dbcba46cc85c91fc883c589c8533ed0d7e4",
+      "title": "Weathered Brown Planks \u2014 Rough",
+      "author": "Dimitrios Savva, Rico Cilliers",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/weathered_brown_planks",
+      "source_metadata_url": "https://api.polyhaven.com/info/weathered_brown_planks",
+      "source_files_url": "https://api.polyhaven.com/files/weathered_brown_planks",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/weathered_brown_planks/weathered_brown_planks_rough_1k.jpg",
+      "source_file": "originals/weathered_brown_planks_rough_1k.jpg",
+      "source_sha256": "b80c45969d8299ca5f21de969f0269138a5e3e78e51fc911af809683d99c5bc9",
+      "source_md5": "4893f3ee360a4e1e30b96a157e65e50a",
+      "source_bytes": 234672,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        1.8,
+        1.8
+      ],
+      "role": "roughness",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-metal-albedo.jpg",
+      "bytes": 42991,
+      "sha256": "ad675b702b44c1393f2dd406c3a26dbf8c8fae9266d8cbabc5605b22d7426a25",
+      "title": "Painted Metal Shutter \u2014 Diffuse",
+      "author": "Dario Barresi, Rico Cilliers, Charlotte Baglioni",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/painted_metal_shutter",
+      "source_metadata_url": "https://api.polyhaven.com/info/painted_metal_shutter",
+      "source_files_url": "https://api.polyhaven.com/files/painted_metal_shutter",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/painted_metal_shutter/painted_metal_shutter_diff_1k.jpg",
+      "source_file": "originals/painted_metal_shutter_diff_1k.jpg",
+      "source_sha256": "278394aabcb5a5bd560d9904358682acc5af23666b22bd1f12558789da4aa4d2",
+      "source_md5": "b2b648a56ca737d51999525e857f499a",
+      "source_bytes": 627333,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        2.0,
+        2.0
+      ],
+      "role": "albedo",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-metal-roughness.jpg",
+      "bytes": 36064,
+      "sha256": "4e52caaa0444522310d8a5f67f2275c4f3e184c233efd8847cd5190928489564",
+      "title": "Painted Metal Shutter \u2014 Rough",
+      "author": "Dario Barresi, Rico Cilliers, Charlotte Baglioni",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/painted_metal_shutter",
+      "source_metadata_url": "https://api.polyhaven.com/info/painted_metal_shutter",
+      "source_files_url": "https://api.polyhaven.com/files/painted_metal_shutter",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/painted_metal_shutter/painted_metal_shutter_rough_1k.jpg",
+      "source_file": "originals/painted_metal_shutter_rough_1k.jpg",
+      "source_sha256": "bb32b8783a96b33e5807ecfdc242b69a08f0aeec4e0609f5dc9be62890ed88f2",
+      "source_md5": "b593747ca3057c79815e485be57e5ff7",
+      "source_bytes": 547880,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        2.0,
+        2.0
+      ],
+      "role": "roughness",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-leaf-litter-albedo.jpg",
+      "bytes": 130680,
+      "sha256": "99d7deb9509d7c792cd05873157d1d4e38997ec3110d99b0250f02e385357619",
+      "title": "Forest Leaves 02 \u2014 Diffuse",
+      "author": "Rob Tuytel",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/forest_leaves_02",
+      "source_metadata_url": "https://api.polyhaven.com/info/forest_leaves_02",
+      "source_files_url": "https://api.polyhaven.com/files/forest_leaves_02",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_leaves_02/forest_leaves_02_diffuse_1k.jpg",
+      "source_file": "originals/forest_leaves_02_diffuse_1k.jpg",
+      "source_sha256": "2bac85cdc76927fa7dc311037bbbc4dfa2633ea56eb0a24c9cabe163a68c9aa5",
+      "source_md5": "13e9bfac07cb72ca143e153cc2f589a8",
+      "source_bytes": 437891,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        3.001,
+        3.001
+      ],
+      "role": "albedo",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v117-leaf-litter-roughness.jpg",
+      "bytes": 50075,
+      "sha256": "08ae3ca96ef41170cdf2fb4fcaaa406ccae7297e38da1fa4e3280d3531b41b22",
+      "title": "Forest Leaves 02 \u2014 Rough",
+      "author": "Rob Tuytel",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_proof": "licenses/Surfaces-v117.txt",
+      "source_license_page": "https://polyhaven.com/license",
+      "source_page": "https://polyhaven.com/a/forest_leaves_02",
+      "source_metadata_url": "https://api.polyhaven.com/info/forest_leaves_02",
+      "source_files_url": "https://api.polyhaven.com/files/forest_leaves_02",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_leaves_02/forest_leaves_02_rough_1k.jpg",
+      "source_file": "originals/forest_leaves_02_rough_1k.jpg",
+      "source_sha256": "3d2163acb9e22801caa4d34cb3e9bb443dfd0e6f2bebbd559c61e9b14f945dd4",
+      "source_md5": "578e637510d8fdd7acf97afc6f329e9d",
+      "source_bytes": 192523,
+      "source_dimensions": [
+        1024,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "tile_metres": [
+        3.001,
+        3.001
+      ],
+      "role": "roughness",
+      "processing": "Official 1K map resized to 512\u00d7512 with Lanczos, RGB JPEG quality 84 with no chroma subsampling. No color edits or generated imagery.",
+      "verified_on": "2026-11-05"
+    },
+    {
+      "file": "textures/v118-fabric-albedo.jpg",
+      "title": "Book Pattern",
+      "author": "Rob Tuytel",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "source_md5": "4f9551b538201ee44ba2f4d5c9492110",
+      "source_sha256": "30661c007bd43e5fda5c11a8edb49e0949e19b1b55fdbe3baf7139fb3a0f8a70",
+      "bytes": 83092,
+      "sha256": "1eb13850dd00ebbf3a2315ed97436b0ca5d748d39efeb43a37a7cc817fa7e96c",
+      "processing": "Resized from 1024 to 512 px; JPEG quality 88",
+      "retrieved": "2026-11-05",
+      "source_page": "https://polyhaven.com/a/book_pattern",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/book_pattern/book_pattern_col1_1k.jpg"
+    },
+    {
+      "file": "textures/v118-fabric-roughness.jpg",
+      "title": "Book Pattern",
+      "author": "Rob Tuytel",
+      "license": "CC0-1.0",
+      "license_url": "https://polyhaven.com/license",
+      "source_md5": "e73a3decc3fc793db0dbe9671fa434f3",
+      "source_sha256": "f6e0fa087ba7003ad5c3884e360303e71688d0bbb3d5e01f085bfffa976bee3a",
+      "bytes": 127996,
+      "sha256": "4cbedcf2959afe07fb005c837cda3cbb579a1b0122b404388ed97c7ba71d8719",
+      "processing": "Resized from 1024 to 512 px; JPEG quality 88",
+      "retrieved": "2026-11-05",
+      "source_page": "https://polyhaven.com/a/book_pattern",
+      "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/book_pattern/book_pattern_rough_1k.jpg"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-worn-pallet-stack",
+      "file": "models/lv119-worn-pallet-stack.glb",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.59,
+        0.0,
+        -0.47800000000000004
+      ],
+      "bounds_max": [
+        0.614,
+        0.5740000009536743,
+        0.45
+      ],
+      "dimensions": [
+        1.204,
+        0.5740000009536743,
+        0.928
+      ],
+      "triangles": 736,
+      "vertices_authored": 484,
+      "closed_components": 58,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "worn-pallet-stack__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Keep clear of pedestrian strips, controls and vehicle swept paths; footprint 1.22 x .92 m.",
+      "bytes": 54228,
+      "sha256": "38e7354f3e568a688133f55e8331afc09e6cd00ba765b0882e36cd46248ac1fd"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-dented-bin",
+      "file": "models/lv119-dented-bin.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.32,
+        0.0,
+        -0.3370199632644653
+      ],
+      "bounds_max": [
+        0.36967031478881834,
+        1.145,
+        0.281
+      ],
+      "dimensions": [
+        0.6896703147888184,
+        1.145,
+        0.6180199632644654
+      ],
+      "triangles": 348,
+      "vertices_authored": 208,
+      "closed_components": 18,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "dented-bin__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Open cavity and canted lid make the outline readable; no animation or implied interaction.",
+      "bytes": 27948,
+      "sha256": "0e35667f7c423e9a4d5c09f903cae2081c334910adf7e8162e22efae810de180"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-damaged-road-barrier",
+      "file": "models/lv119-damaged-road-barrier.glb",
+      "draw_calls_max": 5,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.1800000000000002,
+        0,
+        -0.285
+      ],
+      "bounds_max": [
+        1.05,
+        0.7074494957923889,
+        0.41
+      ],
+      "dimensions": [
+        2.2300000000000004,
+        0.7074494957923889,
+        0.695
+      ],
+      "triangles": 204,
+      "vertices_authored": 126,
+      "closed_components": 12,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "damaged-road-barrier__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery or an explicitly authored blocker. Use outside the driveable route; 2.25 m wide with a broad stable base.",
+      "bytes": 18520,
+      "sha256": "eacc01d30f8580d55a19d40c2a1487a967930c565806ccc57fd1c1b47d8126ab"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-tire-stack",
+      "file": "models/lv119-tire-stack.glb",
+      "draw_calls_max": 2,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.3449999988079071,
+        0.0,
+        -0.35999998450279236
+      ],
+      "bounds_max": [
+        0.3700000047683716,
+        0.46765372157096863,
+        0.3449999988079071
+      ],
+      "dimensions": [
+        0.7150000035762787,
+        0.46765372157096863,
+        0.7049999833106995
+      ],
+      "triangles": 864,
+      "vertices_authored": 480,
+      "closed_components": 27,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "tire-stack__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Three supported tires, 0.70 m diameter; allow clearance around the entire footprint.",
+      "bytes": 56748,
+      "sha256": "fc6aada1ded6f709404ce372bffd8600435415b6c71040a1bb250f9ddaf9894b"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-abandoned-hand-truck",
+      "file": "models/lv119-abandoned-hand-truck.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.29600000381469727,
+        0.0,
+        -0.4099999964237213
+      ],
+      "bounds_max": [
+        0.29600000381469727,
+        1.1799999475479126,
+        0.45
+      ],
+      "dimensions": [
+        0.5920000076293945,
+        1.1799999475479126,
+        0.8599999964237213
+      ],
+      "triangles": 440,
+      "vertices_authored": 256,
+      "closed_components": 18,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "abandoned-hand-truck__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Tip rests at floor level and wheels touch the floor. Do not place in front of a task or shelter.",
+      "bytes": 33204,
+      "sha256": "90a50ac87ad3f5f453eef2bc5489b529f7e9ce4c75f85f58a07c54c3b12fba1d"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-wall-vent",
+      "file": "models/lv119-wall-vent.glb",
+      "draw_calls_max": 4,
+      "support_type": "wall",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.45999999999999996,
+        0.0,
+        0.0
+      ],
+      "bounds_max": [
+        0.45999999999999996,
+        0.88,
+        0.17237123265862464
+      ],
+      "dimensions": [
+        0.9199999999999999,
+        0.88,
+        0.17237123265862464
+      ],
+      "triangles": 224,
+      "vertices_authored": 144,
+      "closed_components": 16,
+      "anchors": {
+        "front_center": {
+          "position": [
+            0,
+            0.44,
+            0.17
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-vent__front_center"
+        },
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "wall-vent__support_bottom"
+        },
+        "rear_mount": {
+          "position": [
+            0,
+            0.44,
+            0.0
+          ],
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "node": "wall-vent__rear_mount"
+        }
+      },
+      "contact_points": [],
+      "notes": "Wall-mounted lower-edge origin with rear Z=0. Front +Z, 0.90 m wide. Mount against a real wall at 0.45\u20132.3 m lower-edge height.",
+      "bytes": 19664,
+      "sha256": "3ec69d63d6d5bcd4f53f3eef6c85a92cc7c4e0bbf1348e850604f4a82b255154"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-timber-bundle",
+      "file": "models/lv119-timber-bundle.glb",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.11,
+        0.0,
+        -0.382
+      ],
+      "bounds_max": [
+        1.11,
+        0.34800000000000003,
+        0.382
+      ],
+      "dimensions": [
+        2.22,
+        0.34800000000000003,
+        0.764
+      ],
+      "triangles": 204,
+      "vertices_authored": 136,
+      "closed_components": 17,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "timber-bundle__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Ground scenery. Broad 2.25 x 0.75 m stack; use along walls or outside fences, never across a walking lane.",
+      "bytes": 17580,
+      "sha256": "d9b663d0c216a54f2c45db18c1da8a75e2ac08fc3c7e6ec4b708be12bc572f20"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-drain-reeds",
+      "file": "models/lv119-drain-reeds.glb",
+      "draw_calls_max": 2,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.30346164107322693,
+        0.0,
+        -0.30273813009262085
+      ],
+      "bounds_max": [
+        0.29800355434417725,
+        0.7773889899253845,
+        0.3265399634838104
+      ],
+      "dimensions": [
+        0.6014651954174042,
+        0.7773889899253845,
+        0.6292780935764313
+      ],
+      "triangles": 560,
+      "vertices_authored": 368,
+      "closed_components": 44,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0.0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "drain-reeds__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Grounded opaque foliage. Repeat at damp wall/fence bases outside clear task approaches. 0.6\u20130.8 m tall; no collision needed.",
+      "bytes": 41040,
+      "sha256": "d965b236389a0a65c0de86e24f357e51043bc5e151e207a7d8f5706db05cb157"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-rubble-cluster",
+      "file": "models/lv119-rubble-cluster.glb",
+      "draw_calls_max": 3,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -0.45877491378137014,
+        0,
+        -0.31777584151663185
+      ],
+      "bounds_max": [
+        0.30245842307870974,
+        0.139,
+        0.34703032249994537
+      ],
+      "dimensions": [
+        0.7612333368600799,
+        0.139,
+        0.6648061640165772
+      ],
+      "triangles": 260,
+      "vertices_authored": 152,
+      "closed_components": 11,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "rubble-cluster__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Small grounded rubble patch. Place at damaged wall bases or beyond fences; decorative only unless a real blocker is authored.",
+      "bytes": 19464,
+      "sha256": "bb42e37d03f3af40812abe15c967da7cc067524ec1bd60cd716c270f4b1cc17c"
+    },
+    {
+      "author": "Original artwork created for A GingrSnaps Project",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "license_file": "licenses/Scenery-v119.txt",
+      "source_type": "Original numeric geometry and palette materials; no external inputs",
+      "source": "source-assets/scenery-v119/",
+      "verified": "2026-11-05",
+      "type": "model",
+      "source_file": "source-assets/scenery-v119/build_props.py",
+      "editable_source": "source-assets/scenery-v119/Meridian_Scenery_v119.blend",
+      "id": "lv119-maintenance-shed",
+      "file": "models/lv119-maintenance-shed.glb",
+      "draw_calls_max": 6,
+      "support_type": "ground",
+      "front_axis": "+Z",
+      "units": "metres",
+      "origin": "support-bottom centre; wall rear mounting plane Z=0",
+      "bounds_min": [
+        -1.1699999570846558,
+        0,
+        -1.38
+      ],
+      "bounds_max": [
+        1.16,
+        2.55,
+        1.38
+      ],
+      "dimensions": [
+        2.329999957084656,
+        2.55,
+        2.76
+      ],
+      "triangles": 296,
+      "vertices_authored": 194,
+      "closed_components": 23,
+      "anchors": {
+        "support_bottom": {
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "node": "maintenance-shed__support_bottom"
+        }
+      },
+      "contact_points": [],
+      "notes": "Background-only suggested. Ground origin, 2.3 x 2.7 m footprint. Use outside playable fence, no interior or runtime door interaction.",
+      "bytes": 26492,
+      "sha256": "5483bafdb14199f1fc26f194ce710e2bd4d614b70fc81271fa69c193b900ce17"
     }
-  ]
+  ],
+  "updated_on": "2026-11-05"
 }

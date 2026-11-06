@@ -1,9 +1,10 @@
-import { consumeSteps } from "./preparation.js?v=1.14.0";
+import { consumeSteps } from "./preparation.js?v=1.19.0";
+import { anyNearby, indexSpatial, isMovingBlocker } from './spatial.js?v=1.19.0';
 /** A small deterministic navigation/collision layer for a single flat floor.
  * Avoiding a physics engine keeps downloads and CPU costs small. All distances
  * are in metres; walls/cars are axis-aligned collision rectangles. */
 export function blocked(x, z, rects, r = 0.28) {
-  return rects.some(
+  return anyNearby(rects,x-r,z-r,x+r,z+r,
     (b) =>
       b.enabled !== false &&
       x > b.x - b.w / 2 - r &&
@@ -40,10 +41,10 @@ export function segmentHits(a, b, box, radius = 0, height = false) {
   return leave > 0.0001 && enter < 0.9999;
 }
 export function lineClear(a, b, rects, radius = 0) {
-  return !rects.some((box) => segmentHits(a, b, box, radius));
+  return !anyNearby(rects,Math.min(a.x,b.x)-radius,Math.min(a.z,b.z)-radius,Math.max(a.x,b.x)+radius,Math.max(a.z,b.z)+radius,(box) => segmentHits(a, b, box, radius));
 }
 export function sightClear(a, b, rects) {
-  return !rects.some((box) => segmentHits(a, b, box, 0, true));
+  return !anyNearby(rects,Math.min(a.x,b.x),Math.min(a.z,b.z),Math.max(a.x,b.x),Math.max(a.z,b.z),(box) => !box.seeThrough && segmentHits(a, b, box, 0, true));
 }
 
 // Static walkability is compiled while loading. Moving doors are checked live,
@@ -52,11 +53,11 @@ const grids = new WeakMap();
 // One body clearance is used by planning, steering and recovery. The former
 // coarse grid could omit the only usable point beside a vehicle or door jamb.
 export const AGENT_RADIUS = .34;
-const CELL = .625, WIDTH = 97, HEIGHT = 177;
+const CELL = .625, WIDTH = 97, HEIGHT = 341, MIN_Z=-101.5;
 const DIRECTIONS = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
-const points = Array.from({length: WIDTH * HEIGHT}, (_,k) => ({ x: -30 + (k % WIDTH) * CELL, z: 1 + Math.floor(k / WIDTH) * CELL }));
+const points = Array.from({length: WIDTH * HEIGHT}, (_,k) => ({ x: -30 + (k % WIDTH) * CELL, z: MIN_Z + Math.floor(k / WIDTH) * CELL }));
 const worldPoint = (k) => points[k];
-const indexOf = (p) => Math.max(0, Math.min(HEIGHT - 1, Math.round((p.z - 1) / CELL))) * WIDTH + Math.max(0, Math.min(WIDTH - 1, Math.round((p.x + 30) / CELL)));
+const indexOf = (p) => Math.max(0, Math.min(HEIGHT - 1, Math.round((p.z - MIN_Z) / CELL))) * WIDTH + Math.max(0, Math.min(WIDTH - 1, Math.round((p.x + 30) / CELL)));
 export function prepareNavigation(rects) {
   const it=navigationSteps(rects); let step; do {step=it.next();} while(!step.done); return step.value;
 }
@@ -64,8 +65,10 @@ export async function prepareNavigationAsync(rects) { await consumeSteps(navigat
 function* navigationSteps(rects) {
   let grid = grids.get(rects);
   if (grid && grid.count === rects.length) return grid;
-  const dynamic = rects.filter((r) => r.dynamic || /gate|grille|shortcut/.test(r.name || ""));
+  indexSpatial(rects);
+  const dynamic = rects.filter(isMovingBlocker);
   const statics = rects.filter((r) => !dynamic.includes(r));
+  indexSpatial(statics);
   const walkable = new Uint8Array(WIDTH * HEIGHT);
   for (let k = 0; k < walkable.length; k++) {
     const p = worldPoint(k); walkable[k] = !blocked(p.x, p.z, statics, AGENT_RADIUS);

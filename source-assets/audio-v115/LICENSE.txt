@@ -1,0 +1,18 @@
+Last Vehicle 1.15 exterior and contact audio — CC0 1.0 Universal
+
+The original procedural synthesis, arrangements, edits and authoring code in this folder and the twelve lv115-* Ogg outputs are dedicated under CC0 1.0 Universal, to the extent copyright applies. This does not relicense any unrelated project code or dependency.
+
+Reused source recordings retain their existing CC0 dedications:
+- qubodup — (defect) motor loop / fan_interval.wav: filtered texture in yard wind and engine idle.
+- Independent.nu, uploaded by qubodup — Dripping water loop: roof/gutter water texture.
+- Brian MacIntosh / BMacZero — Mechanical Sounds / clank1.wav: bolt and fence contact, settling latch tail.
+- Joseph Sardin / BigSoundBank — Footsteps on gravels #1 (0510): gravel shoe contact and rough-road texture.
+- rubberduck — 100 CC0 metal and wood SFX: door-strike metal slam and wood crack in fence/door impacts.
+- rubberduck — 100 CC0 SFX #2: wet contact used in small bolt splash.
+
+The glass tick and yard-tension texture are entirely original procedural synthesis. The designed weather/engine beds are sound design, not claimed field recordings. No voice, commercial song, or new self-recording is used.
+
+Exact source filenames, URLs, authors, license proofs and input hashes are recorded in source-lock.json and manifest-fragment.json. The runtime-only package includes Audio-v115-source-lock.json and Audio-v115-provenance.json beside this notice.
+
+CC0 summary: https://creativecommons.org/publicdomain/zero/1.0/
+CC0 legal code: dist/assets/licenses/CC0-1.0.txt

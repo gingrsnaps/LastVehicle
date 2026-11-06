@@ -1,4 +1,4 @@
-import { roomAt } from "./guidance.js?v=1.14.0";
+import { roomAt } from "./guidance.js?v=1.19.0";
 const B=globalThis.BABYLON;
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 
@@ -144,12 +144,12 @@ export class Atmosphere {
   }
   playSecurity(onImpact=()=>{},onDone=()=>{}){
     let struck=false;this.securityActive=true;this.securityPhase=0;
-    this.v.animator.to("security-breach",0,1,3.2,t=>{
+    this.v.animator.to("security-breach",0,1,1.15,t=>{
       this.securityPhase=t;
       // The slats lift first, revealing the actual actor winding up behind glass.
-      this.securityShutter.position.y=1.78+1.45*smooth(t/.36);
-      if(t>=.58&&!struck){struck=true;this.windowDamage.setEnabled(true);onImpact();}
-      if(struck)this.securityShutter.rotation.x=Math.sin(t*75)*Math.exp(-(t-.58)*13)*.025;
+      this.securityShutter.position.y=1.78+1.45*smooth(t/.16);
+      if(t>=.1913&&!struck){struck=true;this.windowDamage.setEnabled(true);onImpact();}
+      if(struck)this.securityShutter.rotation.x=Math.sin(t*75)*Math.exp(-(t-.1913)*13)*.025;
     },()=>{this.securityActive=false;this.securityShutter.rotation.x=0;onDone();},"linear");
   }
   playSurge(onImpact=()=>{}){

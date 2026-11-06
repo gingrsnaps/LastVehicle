@@ -1,3 +1,47 @@
+# Version 1.18.0 candidate · 5 November 2026
+
+- Filled imported dark/ochre/cloth/dust/rubber and native prop material gaps; added a shared 512px woven fabric pair with verified CC0 provenance. Original image atlases remain intact.
+- Material-aware GLB tests now cover actual non-image PBR materials. The fixture reports 163 assignments and 2,618 projected meshes; 123 identical imported palette objects share render state before batching.
+- Fresh heard evidence cancels old peek/cover/cutoff intent; witnessed locker inspections retain priority. Bounded gatehouse-door approach survives chase ticks and yields to stronger evidence, stun or an open door.
+- Story and yard staging respect bolt stuns at both eligibility and state-mutation boundaries.
+- Deferred failed-texture disposal, bounded retry/deadline, explicit required-map errors and loading diagnostics. Interrupted startup cannot resume merely because a graphics context restores.
+- Room visibility follows warmup cameras and restores on failure. Sign texture allocations obey fixed/device caps.
+- 209 automated checks pass; startup/recovery rerun after the final loading guard. Hardware/browser approval and the exact reported crash remain unresolved. Full downloadable candidates and saved source; no live deployment.
+
+# Version 1.17.0 candidate · 5 November 2026
+
+- Twelve 512 px CC0 color/roughness maps across six materials, world-scale UV projection and reused decay textures; provenance, originals and conversion script included.
+- Twenty-four opaque low-poly shrubs, eight trees, leaf litter, mounted mold/paint and soft water edges; existing skyline, sky and 55 imported exterior placements retained.
+- Removed overlapping apron; supported utility conduit and generator/selector drops; continuous steel winch cable follows the moving cargo dolly. Numbered 01–04 exterior landmarks match map/journal directions.
+- Swept direct bolt hits interrupt attacks and stagger for 2.10/1.55/1.05 seconds on Easy/Medium/Hard; rapid repeat resistance prevents stun locking. Surface impacts retain material-specific positional audio with voice priority.
+- Lost-sight bolt investigation commits to heard evidence; bounded corner continuation, recent-evidence patrol locality and clear-body corner blending improve pursuit. Hidden coordinates remain unavailable to decisions.
+- Fixed incompatible vertex-layout batching discovered during testing; preserve vertex alpha on merged water. Stagger animation takes precedence over leftover cinematic poses.
+- 197 passing automated tests; actual geometry/UV/cable and gatehouse routes checked. WebGL remains unavailable in the QA browser; rendered/audio/hardware acceptance is outstanding. No live deployment.
+
+# Version 1.16.0 candidate · 4 November 2026
+
+- Unified outdoor control names, real interaction anchors and usable approaches; amber BARRIER CONTROL panel and corrected brake-wheel instructions.
+- Requested route arrows follow clear geometry; upright diamonds identify objects, accurate use prompts remain separate, and the map shows facing direction. Guidance lasts up to one minute of active play.
+- Fixed gatehouse doorway lookahead and current-sector visibility after progress/reset.
+- Six original CC0 prop types, 25 additional exterior placements, measured grounding/mounts, clear pedestrian and driving routes, gutters, drains, worn paving and a distant skyline.
+- Three-mesh unlit night sky with moon/clouds, independent brightness, sheltered pooled rain, weather choices and optional nearby scenery motion.
+- Spatial collision/sight broad phase with live moving bodies and ordered bolt contacts; tighter exterior sector eligibility, deferred impact saves and local per-area timing diagnostics.
+- Outdoor cover retained in hunter searches instead of being omitted by a garage-first cache cap.
+- 189 passing automated checks; 210 registered placements with zero unresolved supports; nine guidance approaches and continuous driving route verified in NullEngine.
+- Complete source and HTML5 candidate archives. Actual preview reports WebGL unavailable, including on Low; final rendered/audio/performance review remains outstanding and live 1.12 is unchanged.
+
+# Version 1.15.0 candidate · 3 November 2026
+
+- Continuous service yard, sheltered utility route, gatehouse and road; four new tasks, checkpoints and matching maps/hints.
+- Actual controllable car with full-footprint swept checks, brake/reverse, steering, safe left exit and speed-driven sound.
+- Stable horizon by default; key impact at 0.22 seconds, shorter workshop contact, action-timed relay and two exterior contact beats.
+- Outdoor evidence/search graph, quicker pursuit and physically approached weak-door breach; grace no longer freezes hearing or movement.
+- Heard-only bolt habits, held guide, material impacts, saved finite tray refills and visible empty trays.
+- Ten original CC0 prop types at thirty anchors, supported signage, grounded vans, loading structures, decay, drains and bounded weather.
+- Twelve local sound additions with repeatable source-locked generation; prepared scene variants and stable resource caps.
+- Schema-3 migration preserves old completed endings and original local save backups.
+- Complete source and HTML5 candidates. Preview WebGL unavailable; no live deployment pending accepted browser playthrough gate.
+
 # Version 1.14.0 candidate · 3 November 2026
 
 - Guarded lazy controller polling; a denied API no longer aborts the game frame, and retries require an explicit request.

@@ -34,7 +34,10 @@ test("Prediction follows observed direction and expires without reading hidden c
   p.hiding={id:"unseen"};p.pos={x:50,z:50};t.tick(.1,p);
   assert.deepEqual(t.lastKnown,evidence);assert.deepEqual(t.destination,evidence,"first approach the last observed corner");
   const predicted=t.prediction();assert.ok(predicted.x>evidence.x&&predicted.x<10);
-  t.pos={...evidence};t.tick(.1,p);assert.equal(t.mode,'listen',"listen at the last corner before a cover search");
+  t.pos={...evidence};t.tick(.1,p);assert.equal(t.mode,'chase',"briefly continue along observed movement");
+  const probe={...t.cornerProbe};assert.ok(probe.x>evidence.x&&probe.x<10);
+  p.pos={x:-70,z:-70};t.tick(.1,p);assert.deepEqual(t.cornerProbe,probe,"the probe never follows hidden coordinates");
+  t.pos={...probe};t.tick(.1,p);assert.equal(t.mode,'listen',"listen after the bounded probe before a cover search");
   t.evidenceAge=t.rules.predictTime+.1;assert.deepEqual(t.prediction(),evidence);
 });
 test("A recently cleared locker is skipped, but becomes eligible after memory expires",()=>{

@@ -1,6 +1,6 @@
-# Last Vehicle 1.14 — complete commented source
+# Last Vehicle 1.19 — complete commented source
 
-Edit the actual files. This is a reading copy of the runtime, launchers, packaging tools and tests. Vendor libraries, models, music and sound recordings are supplied separately with their notices. Read UPDATE_1_14.md and BUILD_AND_EDIT_GUIDE.md for the walkthrough.
+Edit the actual files. This is a reading copy of the runtime, launchers, packaging tools and tests. Vendor libraries, models, music and sound recordings are supplied separately with their notices. Read UPDATE_1_19.md and BUILD_AND_EDIT_GUIDE.md for the walkthrough.
 
 ## dist/index.html
 
@@ -20,7 +20,7 @@ Edit the actual files. This is a reading copy of the runtime, launchers, packagi
     />
     <title>Last Vehicle — A GingrSnaps Project</title>
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="style.css?v=1.14.0" />
+    <link rel="stylesheet" href="style.css?v=1.19.0" />
   </head>
   <body>
     <canvas id="game" aria-label="Last Vehicle game view" tabindex="0"></canvas>
@@ -31,7 +31,7 @@ Edit the actual files. This is a reading copy of the runtime, launchers, packagi
       <p class="eyebrow">A GingrSnaps Project</p>
       <div class="load-track"><i id="load-fill"></i></div>
       <p id="load-label" role="status">Opening Meridian…</p><span id="load-percent">0%</span>
-      <div id="load-actions" class="hidden button-row"><button id="load-retry" class="btn">Retry loading</button><button id="load-simple" class="btn accent">Retry with simpler graphics</button></div>
+      <div id="load-actions" class="hidden button-row"><button id="load-retry" class="btn">Retry loading</button><button id="load-simple" class="btn accent">Retry with simpler graphics</button><button id="load-report" class="btn">Download diagnostic report</button></div>
     </div>
     <div id="intro" class="hidden" aria-hidden="true">
       <div id="intro-content" class="intro-content">
@@ -74,7 +74,7 @@ Edit the actual files. This is a reading copy of the runtime, launchers, packagi
       </div>
       <footer>
         <span>HEADPHONES RECOMMENDED</span
-        ><span>EXPLORATION <b>·</b> SURVIVAL</span><span>v1.13 · CANDIDATE</span>
+        ><span>EXPLORATION <b>·</b> SURVIVAL</span><span>v1.19 · CANDIDATE</span>
       </footer>
     </main>
     <div id="hud" class="hidden">
@@ -87,6 +87,7 @@ Edit the actual files. This is a reading copy of the runtime, launchers, packagi
         <button id="pause-button" aria-label="Pause game">Ⅱ</button>
       </div>
       <div id="tutorial" class="hidden"></div>
+      <div id="direction-hint" class="hidden" role="status"></div>
       <button id="journal-button" class="journal-indicator"><kbd id="journal-key">J</kbd> Journal <i id="journal-dot" class="unread-dot hidden"></i></button>
       <div id="hint-card" class="hidden" role="status"></div>
       <div id="note-preview" class="hidden" role="status"></div>
@@ -140,7 +141,7 @@ Edit the actual files. This is a reading copy of the runtime, launchers, packagi
     >
     <script src="vendor/babylon.js"></script>
     <script src="vendor/babylonjs.loaders.min.js"></script>
-    <script type="module" src="js/main.js?v=1.14.0"></script>
+    <script type="module" src="js/main.js?v=1.19.0"></script>
   </body>
 </html>
 ```
@@ -1295,8 +1296,12 @@ button:disabled {
 #stamina-label{position:absolute;bottom:12px;left:0;white-space:nowrap;font:9px monospace;color:#c5ccba;letter-spacing:.08em}
 #stamina-meter.low #stamina-fill{background:#d59263}
 #bolt-status{font:10px monospace;color:#bac4b5}
-.driving #bolt-status,.driving #objective-block{visibility:hidden}
+.driving #objective-block{visibility:hidden}
+.driving #bolt-status{visibility:visible;color:#e0cf9f;font-size:12px}
 @media(max-width:600px){#stamina-meter{width:85px}#stamina-label{font-size:8px}#bolt-status{font-size:9px}.hud-bottom{gap:10px}.touch-actions{flex-wrap:wrap;max-width:180px}}
+
+/* Requested route help stays separate from the nearby use prompt. */
+#direction-hint{position:absolute;left:50%;top:18%;transform:translateX(-50%);max-width:min(90vw,38rem);padding:.45rem .7rem;background:rgba(9,19,20,.82);border:1px solid #8e895f;color:#e7d7ac;letter-spacing:.06em;text-align:center;font-size:.8rem;pointer-events:none}
 ```
 
 ## dist/js/acoustics.js
@@ -1304,7 +1309,7 @@ button:disabled {
 ```javascript
 // These are real openings, not synthetic sound sources. Obstructed sounds can
 // arrive via a visible doorway; closed doors are checked against live geometry.
-const PORTALS=[[-17,18],[-17,45],[-17,76],[-17,98],[17,39],[17,98],[-24,29],[-24,33],[-24,57],[-24,62]].map(([x,z])=>({x,y:1.3,z}));
+const PORTALS=[[0,0],[20,-36],[16.5,-44],[0,-58],[-17,18],[-17,45],[-17,76],[-17,98],[17,39],[17,98],[-24,29],[-24,33],[-24,57],[-24,62]].map(([x,z])=>({x,y:1.3,z}));
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 export function acousticRoute(listener,source,occluded){
  if(!occluded(listener,source))return {gain:1,frequency:18000,point:source,kind:'direct',distance:distance(listener,source)};
@@ -1439,7 +1444,7 @@ export function dampAngle(current, target, rate, dt) {
 ## dist/js/atmosphere.js
 
 ```javascript
-import { roomAt } from "./guidance.js?v=1.14.0";
+import { roomAt } from "./guidance.js?v=1.19.0";
 const B=globalThis.BABYLON;
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 
@@ -1585,12 +1590,12 @@ export class Atmosphere {
   }
   playSecurity(onImpact=()=>{},onDone=()=>{}){
     let struck=false;this.securityActive=true;this.securityPhase=0;
-    this.v.animator.to("security-breach",0,1,3.2,t=>{
+    this.v.animator.to("security-breach",0,1,1.15,t=>{
       this.securityPhase=t;
       // The slats lift first, revealing the actual actor winding up behind glass.
-      this.securityShutter.position.y=1.78+1.45*smooth(t/.36);
-      if(t>=.58&&!struck){struck=true;this.windowDamage.setEnabled(true);onImpact();}
-      if(struck)this.securityShutter.rotation.x=Math.sin(t*75)*Math.exp(-(t-.58)*13)*.025;
+      this.securityShutter.position.y=1.78+1.45*smooth(t/.16);
+      if(t>=.1913&&!struck){struck=true;this.windowDamage.setEnabled(true);onImpact();}
+      if(struck)this.securityShutter.rotation.x=Math.sin(t*75)*Math.exp(-(t-.1913)*13)*.025;
     },()=>{this.securityActive=false;this.securityShutter.rotation.x=0;onDone();},"linear");
   }
   playSurge(onImpact=()=>{}){
@@ -1722,9 +1727,9 @@ export class AttentionOverlay {
 ## dist/js/audio.js
 
 ```javascript
-import { snapshotPosition, setSpatialPosition } from "./spatial-audio.js?v=1.14.0";
-import { acousticRoute } from "./acoustics.js?v=1.14.0";
-import { segmentHits } from "./navigation.js?v=1.14.0";
+import { snapshotPosition, setSpatialPosition } from "./spatial-audio.js?v=1.19.0";
+import { acousticRoute } from "./acoustics.js?v=1.19.0";
+import { segmentHits } from "./navigation.js?v=1.19.0";
 
 /** Local, licensed recordings through a Web Audio mixer. World effects use real
  * 3D emitters; headphones, distance and walls all affect their perceived source. */
@@ -1826,6 +1831,7 @@ export class AudioMixer {
     names.push("concrete-step-1","concrete-step-2","concrete-step-3","debris-step-1","debris-step-2","debris-step-3","grate-step-1","grate-step-2","hinge-creak-1","hinge-creak-2");
     names.push('lv113-motif','lv113-return','lv113-cloth-shift','lv113-cart-wheel','lv113-cart-impact','lv113-pressure-burst','lv113-fan-stop','lv113-exit-rain');
     names.push('lv114-city-night','lv114-entrance-rain','lv114-distant-thunder','lv114-bolt-impact','lv114-electric-cutoff','lv114-player-breath');
+    names.push('lv115-roof-rain','lv115-yard-wind','lv115-gravel-step-1','lv115-gravel-step-2','lv115-bolt-metal','lv115-bolt-glass','lv115-bolt-water','lv115-fence-strike','lv115-door-breach','lv115-road-gravel','lv115-engine-idle','lv115-yard-tension');
     this.loadAbort=new AbortController();const signal=this.loadAbort.signal;
     let next=0;
     const worker=async()=>{
@@ -1883,6 +1889,7 @@ export class AudioMixer {
       refDistance = 2,
       maxDistance = 45,
       reverb = true,
+      priority = 0,
     } = {},
   ) {
     if (!this.ctx || !this.buffers[name]) return null;
@@ -1893,12 +1900,15 @@ export class AudioMixer {
     let src,gain,filter,panner,send=null,voice=null;
     try {
     if(this.voices.size>=this.maxVoices){
-      const oldest=[...this.voices].find(v=>!v.loop);
+      // A footstep must not immediately evict the bolt impact that explains a
+      // distraction. Important one-shots remain inside the same voice ceiling.
+      let oldest;
+      for(const v of this.voices)if(!v.loop&&(v.priority||0)<=priority&&(!oldest||(v.priority||0)<(oldest.priority||0)))oldest=v;
       if(!oldest)return null;this.releaseVoice(oldest);
     }
     // The separate loud-effects control scales authored stingers and metal/alarm
     // events before spatialization. Night mode additionally compresses the mix.
-    const baseVolume = volume, loud = ["scare", "metal", "alarm", "rattle", "hatch-impact", "creature-attack", "surge", "metal-stress", "wood-crack",'door-strike','lv113-cart-impact','lv113-pressure-burst','lv114-distant-thunder','lv114-electric-cutoff'].includes(name);
+    const baseVolume = volume, loud = ["scare", "metal", "alarm", "rattle", "hatch-impact", "creature-attack", "surge", "metal-stress", "wood-crack",'door-strike','lv113-cart-impact','lv113-pressure-burst','lv114-distant-thunder','lv114-electric-cutoff','lv115-fence-strike','lv115-door-breach'].includes(name);
     if (loud) volume *= this.settings?.loudEffects ?? 1;
     src = this.ctx.createBufferSource();
     gain = this.ctx.createGain();
@@ -1940,6 +1950,7 @@ export class AudioMixer {
       volume, baseVolume, loud,
       bus,
       loop,
+      priority,
       send,
     };
     this.voices.add(voice);
@@ -1996,9 +2007,9 @@ export class AudioMixer {
       this.lastWater=this.waterBag.pop();name='water-step-'+this.lastWater;
     }
     if(!profile.water&&!creature){
-      const kind=profile.kind||'concrete',count=kind==='grate'?2:3;
+      const kind=profile.kind||'concrete',count=['grate','gravel'].includes(kind)?2:3;
       this.stepLast ||= {};let n=1+Math.floor(Math.random()*count);if(n===this.stepLast[kind])n=n%count+1;this.stepLast[kind]=n;
-      name=profile.wetness>.2?'footstep-wet':`${kind}-step-${n}`;
+      name=profile.wetness>.2?'footstep-wet':kind==='gravel'?`lv115-gravel-step-${n}`:`${kind}-step-${n}`;
     }
     return this.play(name,{volume:profile.volume*(profile.water?1.3:1),rate:profile.rate*(.96+Math.random()*.08),position:creature?point:null,refDistance:3,reverb:creature});
   }
@@ -2018,6 +2029,7 @@ export class AudioMixer {
     for(const name of ["service","tension","unease","aftermath"])if(!this.loops[name])this.loops[name]=this.play(name,{bus:name==="service"?"ambience":"music",volume:0,loop:true,reverb:false});
     for(const [key,file,bus] of [['motif','lv113-motif','music'],['returnTheme','lv113-return','music'],['exitRain','lv113-exit-rain','ambience']])if(!this.loops[key])this.loops[key]=this.play(file,{bus,volume:0,loop:true,reverb:false});
     for(const [key,file,bus] of [['city','lv114-city-night','ambience'],['entranceRain','lv114-entrance-rain','ambience'],['breath','lv114-player-breath','sfx']])if(!this.loops[key])this.loops[key]=this.play(file,{bus,volume:0,loop:true,reverb:false});
+    for(const [key,file,bus] of [['yardWind','lv115-yard-wind','ambience'],['roofRain','lv115-roof-rain','ambience'],['yardTension','lv115-yard-tension','music']])if(!this.loops[key])this.loops[key]=this.play(file,{bus,volume:0,loop:true,reverb:false});
     this.thunderTimer=65;this.mixDirty=true;
     if (!this.worldLoops.length) {
       this.worldLoops.push(
@@ -2109,6 +2121,8 @@ export class AudioMixer {
       filter.connect(gain);gain.connect(this.buses.sfx);
       for(const harmonic of [1,2,3]){const o=this.ctx.createOscillator();oscillators.push(o);o.type=harmonic===1?"triangle":"sine";o.frequency.value=34*harmonic;o.connect(filter);o.start();}
       this.engineNodes={gain,filter,oscillators};this.engineNext=0;
+      this.engineIdle=this.play('lv115-engine-idle',{volume:.24,loop:true,reverb:false});
+      this.engineRoad=this.play('lv115-road-gravel',{volume:0,loop:true,reverb:false});
     }catch(error){
       this.reportFault("car engine",error.message);
       for(const o of oscillators)try{o.stop();}catch{}
@@ -2116,12 +2130,14 @@ export class AudioMixer {
     }
   }
 
-  updateEngine(seconds){
+  updateEngine(seconds,speed=0){
     if(!this.engineNodes || seconds<this.engineNext)return;this.engineNext=seconds+.08;
-    const rpm=34+Math.min(1,Math.max(0,(seconds-2.2)/5))*34;
+    const rpm=34+Math.min(1,Math.abs(speed)/6.2)*34;
+    this.setVoiceGain(this.engineRoad,Math.min(.28,Math.abs(speed)*.045),.2);
     this.engineNodes.oscillators.forEach((o,i)=>o.frequency.setTargetAtTime(rpm*(i+1),this.ctx.currentTime,.12));
   }
   stopEngine(){
+    if(this.engineIdle)this.releaseVoice(this.engineIdle);if(this.engineRoad)this.releaseVoice(this.engineRoad);this.engineIdle=this.engineRoad=null;
     if(!this.engineNodes)return;
     for(const o of this.engineNodes.oscillators){try{o.stop();o.disconnect();}catch{}}
     this.engineNodes.filter.disconnect();this.engineNodes.gain.disconnect();this.engineNodes=null;
@@ -2162,11 +2178,15 @@ export class AudioMixer {
     levels.motif=calm*(this.returning?0:(this.carProximity||0)*.4);
     levels.returnTheme=calm*(this.returning?(this.carProximity||0)*.45:0);
     levels.exitRain=(this.mixPaused?0:1)*(this.exitProximity||0)*.65;
+    const outside=['yard','road','gatehouse'].includes(this.musicRoom),sheltered=this.musicRoom==='gatehouse',audible=this.mixPaused?0:this.duckTimer>0?.25:1;
+    levels.yardWind=outside?(sheltered?.10:.42)*audible:0;levels.roofRain=outside?(sheltered?.5:.18)*audible:0;
+    levels.yardTension=outside?(['chase','attack','recover'].includes(this.musicMode)?.05:.22)*audible:0;
+    if(outside){levels.music*=.2;levels.service=0;}
     const weather=this.weatherProximity||0;
     levels.city=this.mixPaused?0:.1+weather*.18;
     levels.entranceRain=this.mixPaused?0:weather*.34*(1-(this.exitProximity||0));
     levels.breath=this.mixPaused?0:(this.breathLevel||0)*.9;
-    levels.ambience=this.fansStopped?.07:.17;
+    levels.ambience=outside?0:this.fansStopped?.07:.17;
     for(const [name,level] of Object.entries(levels)){
       const voice=this.loops[name];if(!voice)continue;
       voice.volume=level;this.setVoiceGain(voice,level,this.duckTimer>0?.08:.8);
@@ -2188,7 +2208,7 @@ export class AudioMixer {
     const t = this.ctx.currentTime;
     this.worldGain.gain.setTargetAtTime(0, t, .45);
     this.loops.music?.gain.gain.setTargetAtTime(.12, t, .65);
-    for(const name of ["service","tension","unease","aftermath","motif","returnTheme","exitRain","city","entranceRain","breath"])this.loops[name]?.gain.gain.setTargetAtTime(0,t,.45);
+    for(const name of ["service","tension","unease","aftermath","motif","returnTheme","exitRain","city","entranceRain","breath","yardWind","roofRain","yardTension"])this.loops[name]?.gain.gain.setTargetAtTime(0,t,.45);
   }
   async soundTest() {
     if (!await this.unlock()) return false;
@@ -2221,6 +2241,7 @@ export class AudioMixer {
 /** Source geometry containing an emitter must not muffle its own sound. */
 export function audioOccluded(listener,source,rects) {
   for(const b of rects) {
+    if(b.seeThrough)continue;
     if(Math.abs(source.x-b.x)<b.w/2 && Math.abs(source.z-b.z)<b.d/2)continue;
     if(segmentHits(listener,source,b,.05))return true;
   }
@@ -2236,6 +2257,53 @@ export function sceneMix(room,mode,duck=false,paused=false,relief=false){
     service:(service?.13:.025)*gain,tension:(chase?.27:search?.07:.008)*gain,
     unease:(chase||relief?0:search?.11:service?.065:.025)*gain,aftermath:(relief&&!chase?.12:0)*gain};
 }
+```
+
+## dist/js/campaign.js
+
+```javascript
+/** Outdoor controls have one source of truth. Visuals, prompts, the map and
+ * safe approach markers use the same object; the marker never means "stand
+ * inside the mesh". Coordinates are metres, Y up, north negative Z. */
+const control=(id,name,x,y,z,ax,az,room='yard')=>Object.freeze({id,name,x,y,z,approach:{x:ax,z:az},room});
+export const YARD=Object.freeze({
+ inspect:control('yard','BARRIER CONTROL',-10,1.28,-49.4,-10,-47.5),
+ isolate:control('isolate','UTILITY SELECTOR',25.62,1.35,-22,23.8,-22),
+ release:control('barrier','BARRIER BRAKE',17.02,1.1,-45.9,18.5,-45.7,'gatehouse'),
+ route:control('route','DOCK WINCH',-18,1.2,-34,-16.5,-33.7),
+ fence:{x:-10,y:1.9,z:-51.5},gatehouseDoor:{x:20,y:1.4,z:-36},
+});
+const task=(c,title,instruction,why,hints)=>({
+ id:c.id,title,label:c.id==='yard'?'Inspect BARRIER CONTROL':c.id==='isolate'?'Use UTILITY SELECTOR':c.id==='barrier'?'Turn BARRIER BRAKE':'Use DOCK WINCH',
+ instruction,why,destination:{...c,controlId:c.id,name:c.name,portal:[c.approach.x,c.approach.z]},hints,
+});
+export const EXPANSION_TASKS=[
+ task(YARD.inspect,'Inspect BARRIER CONTROL',
+ 'Walk through the raised garage shutter. Follow the paved strip beside the loading dock to 01 BARRIER CONTROL, before the cargo dolly. Use its amber front panel.',
+ 'The garage shutter opens into a service yard. Its street barrier has a separate control.',
+ ['Follow the paved strip and 01 BARRIER CONTROL signs beside the loading dock. The cabinet stands before the cargo dolly, under an amber lamp.',
+ 'Face the amber panel labelled BARRIER CONTROL, approach until the use prompt appears, then press {use}. The barrier arm itself is not the control.']),
+ task(YARD.isolate,'Use the UTILITY SELECTOR',
+ 'Go to the generator awning opposite the loading dock. At UTILITY SELECTOR choose LOADING OFF, then GATEHOUSE ON.',
+ 'The wet loading circuit must be isolated before the dry gatehouse supply can power the barrier.',
+ ['Look for 02 UTILITY SELECTOR under the generator awning. Its handle is on the cabinet facing the open yard, beside the generator.',
+ 'Approach the yellow selector handle from the open side of the awning. Press {use}, choose LOADING OFF, then GATEHOUSE ON.']),
+ task(YARD.release,'Release the BARRIER BRAKE',
+ 'Enter the GATEHOUSE through its front doorway. Turn the yellow wheel beside the damaged side door, labelled BARRIER BRAKE.',
+ 'Power is restored; the barrier motor still needs its mechanical brake released.',
+ ['The gatehouse is the small building beyond the generator awning. Its front door faces the garage.',
+ 'Inside, find the yellow wheel beside the damaged side door. Press {use} to crank; use again to cancel if threatened.']),
+ task(YARD.route,'Clear the road with the DOCK WINCH',
+ 'Go to 04 DOCK WINCH beside the loading shutters. It pulls the cargo dolly along the covered tow channel. Pull it aside, then return to bay 042.',
+ 'The barrier is open, but freight blocks the driving lane.',
+ ['Find 04 DOCK WINCH at the loading dock; the dolly moves along the ground channel. The winch stands beside the closed loading shutters.',
+ 'Approach the labelled winch beside the loading shutters and press {use}. Let it finish, then return to the driver door of your repaired car.']),
+];
+export const REFILLS=[
+ {id:'refill-workshop',x:-25,y:1.63,z:82.8,label:'Workshop bolt tray'},
+ {id:'refill-yard',x:-16.8,y:.99,z:-23,label:'Loading dock bolt tray'},
+ {id:'refill-gatehouse',x:21.9,y:.88,z:-44.7,label:'Gatehouse bolt tray'},
+];
 ```
 
 ## dist/js/capture.js
@@ -2421,15 +2489,15 @@ export class ControllerInput {
 ## dist/js/creature-scenes.js
 
 ```javascript
-import { reachableGoal } from './navigation.js?v=1.14.0';
-import { dampAngle } from './animation.js?v=1.14.0';
-import { roomAt } from './guidance.js?v=1.14.0';
+import { reachableGoal } from './navigation.js?v=1.19.0';
+import { dampAngle } from './animation.js?v=1.19.0';
+import { roomAt } from './guidance.js?v=1.19.0';
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 export const CREATURE_SCENES={
   cartPush:{room:'storage',goal:{x:-24,z:42.65},yaw:Math.PI,duration:2.6,impact:.72},
   carReturn:{room:'garage',goal:{x:9,z:67.4},yaw:Math.PI,duration:1.6,impact:.65,retreat:[{x:15,z:67.2},{x:15,z:72}]},
-  workshopBreach:{room:'workshop',goal:{x:-15.85,z:76},yaw:-Math.PI/2,duration:3.4,impact:1.6},
+  workshopBreach:{room:'workshop',goal:{x:-15.85,z:76},yaw:-Math.PI/2,duration:1.55,impact:.24},
   powerSurge:{room:'electrical',goal:{x:16.05,z:39},yaw:Math.PI/2,duration:2.7,impact:.85},
   closePass:{room:'storage',goal:{x:-22,z:60},yaw:Math.PI,duration:2.2,impact:.65},
 };
@@ -2441,7 +2509,7 @@ export const CREATURE_SCENES={
 export class CreatureScenes {
   constructor(game){this.g=game;this.reset();}
   reset(){this.active=null;this.cooldown=0;this.pose=null;this.waiting=new Map();}
-  fallbackReady(id){return (this.waiting.get(id)||0)>=12;}
+  fallbackReady(id){return (this.waiting.get(id)||0)>=4;}
   cancel(requeue=true){
     const g=this.g,a=this.active;if(!a)return;
     if(a.wheelVoice)g.audio.releaseVoice?.(a.wheelVoice);
@@ -2459,7 +2527,7 @@ export class CreatureScenes {
     }
     if(typeof t.stageRoute!=='function')return false;
     if(!this.active){
-      if(this.cooldown||d.quiet>0||d.recovery>0||d.active||p.hiding||p.vehicle||g.pendingAction||['dormant','waiting','reveal','attack','recover','chase','inspect','trapped','lured'].includes(t.mode))return false;
+      if(t.doorApproach||this.cooldown||d.quiet>0||d.recovery>0||d.active||p.hiding||p.vehicle||g.pendingAction||['dormant','waiting','reveal','attack','recover','stunned','chase','inspect','trapped','lured'].includes(t.mode))return false;
       const room=roomAt(p.pos);
       let id=d.queue.find(id=>CREATURE_SCENES[id]?.room===room);
       if(!id&&g.state.flags.includes('key')&&!g.state.scares.includes('closePass')&&p.pos.x<-18&&p.pos.z>51&&p.pos.z<68&&dist(t.pos,CREATURE_SCENES.closePass.goal)<14){id='closePass';d.request(id);}
@@ -2479,10 +2547,9 @@ export class CreatureScenes {
       d.queue=d.queue.filter(x=>x!==id);d.active=id;
       t.stageRoute([spec.goal],id==='workshopBreach'?'Brace':'Listen');
       if(id!=='carReturn')g.audio.play(id==='closePass'?'panel-scrape':'handle-strain',{volume:.25,position:{...t.pos,y:1.4},refDistance:4});
-      if(id!=='carReturn')g.ui.subtitle(id==='cartPush'?'[A hand closes around the storage cart.]':id==='closePass'?'[Metal scrapes in the service passage.]':id==='workshopBreach'?'[The workshop grille strains.]':'[Something moves at the Electrical doorway.]',3);
     }
     const a=this.active;a.time+=dt;
-    if(p.vehicle||p.hiding||dist(p.pos,a.spec.goal)>19||t.mode!=='staged'||(a.phase==='approach'&&a.time>15)){
+    if(p.vehicle||p.hiding||dist(p.pos,a.spec.goal)>19||t.mode!=='staged'||(a.phase==='approach'&&a.time>7)){
       this.cancel();return false;
     }
     if(a.phase==='withdraw'){
@@ -2495,7 +2562,7 @@ export class CreatureScenes {
       t.yaw=dampAngle(t.yaw,a.spec.yaw,8,dt);
       a.cue+=dt;
       if(a.cue>3){a.cue=0;g.audio.play('creature-breath',{volume:.3,position:{...t.pos,y:1.7},refDistance:4});}
-      if(!g.visualReadable({...t.pos,y:1.5},1.8,18))return true;
+      if(!g.visualReadable({...t.pos,y:1.5},1.8,18)){if(a.time>7)this.cancel(false);return true;}
       a.phase='beat';a.time=0;g.audio.prepareBeat?.(a.spec.impact+.3);
       if(a.id==='workshopBreach'&&Math.abs(p.pos.x+17)>1.1)g.world.visuals.setGrille(1);
       if(a.id==='powerSurge')g.world.atmosphere.playSurge(()=>{g.audio.play('lv113-fan-stop',{volume:.38,position:{x:23,y:3.73,z:42},refDistance:4});});
@@ -2507,9 +2574,9 @@ export class CreatureScenes {
     }
     t.yaw=dampAngle(t.yaw,a.spec.yaw,10,dt);
     if(a.id==='workshopBreach'){
-      this.pose=time<1?{clip:'Brace',phase:.5*smooth(time)}:{clip:'Strike',phase:Math.min(1,(time-1)/1.2)};
+      this.pose={clip:'Strike',phase:time<.24?time/.24*.5:.5+Math.min(1,(time-.24)/.8)*.5};
       // Actual palm at phase .5: (-.20,1.44,+1.10), rotated to the grille.
-      if(time>2.4)g.world.visuals.setGrille(1-smooth((time-2.4)/1));
+      if(time>.8)g.world.visuals.setGrille(1-smooth((time-.8)/.75));
     }else if(a.id==='cartPush'){
       this.pose={clip:'DoorPush',phase:Math.min(1,time/1.8)};
       if(time>=a.spec.impact){
@@ -2549,8 +2616,9 @@ export class CreatureScenes {
 ## dist/js/decay.js
 
 ```javascript
-import { groundModel } from "./placement.js?v=1.14.0";
-import { PUDDLES } from "./surfaces.js?v=1.14.0";
+import { groundModel } from "./placement.js?v=1.19.0";
+import { PUDDLES } from "./surfaces.js?v=1.19.0";
+import { loadSurfaceTexture } from './texture-loader.js?v=1.19.0';
 const B=globalThis.BABYLON;
 
 /** Authored decay follows water, gravity and room function. These meshes are
@@ -2567,14 +2635,7 @@ export class Decay {
   }
   async load(){
     const w=this.w;
-    const texture=file=>new Promise(resolve=>{
-      // A failed optional surface map falls back to its subdued base material.
-      // The explicit timeout prevents a stalled request from blocking Start.
-      let timer,settled=false,t;
-      const finish=ok=>{if(settled)return;settled=true;clearTimeout(timer);if(!ok){t?.dispose();w.failedAssets??=[];w.failedAssets.push(file);}resolve(ok?t:null);};
-      t=new B.Texture("assets/textures/"+file,w.scene,false,false,B.Texture.TRILINEAR_SAMPLINGMODE,()=>finish(true),()=>finish(false));
-      t.anisotropicFilteringLevel=2;timer=setTimeout(()=>finish(false),7000);
-    });
+    const texture=file=>loadSurfaceTexture(w,file);
     for(const [prefix,names] of [["moss",["decayMoss","decayMold"]],["rust",["decayRust"]],["peeling",["decayPeel"]]]){
       const [color,rough]=await Promise.all([texture(prefix+"-albedo.jpg"),texture(prefix+"-roughness.jpg")]);
       if(rough)rough.gammaSpace=false;
@@ -2811,9 +2872,9 @@ export const RICH_LAYOUT=[
 ## dist/js/details.js
 
 ```javascript
-import { groundModel, PARKED_CARS } from './placement.js?v=1.14.0';
-import { DRAIN_COVERS } from './surfaces.js?v=1.14.0';
-import { yieldTask } from './preparation.js?v=1.14.0';
+import { groundModel, PARKED_CARS } from './placement.js?v=1.19.0';
+import { DRAIN_COVERS } from './surfaces.js?v=1.19.0';
+import { yieldTask } from './preparation.js?v=1.19.0';
 const B=globalThis.BABYLON;
 // Ground/support Y and wall back planes are explicit, in metres. The same
 // measured instance supplies its collider and its placement-audit record.
@@ -2888,11 +2949,12 @@ export class Details {
 export const DIFFICULTIES = Object.freeze({
   easy: Object.freeze({
     id: "easy", intercept:false,
+    boltStun:2.1,boltSightDelay:.4,
     label: "Easy",
     description:
       "More breathing room. Slower pursuit, quieter footsteps, and generous stamina.",
     attackWindup: .9, attackRecovery: 1.2, listen: 1.5, searchRadius: 5, searchChecks: 3, predictDistance: 1.8, predictTime: 1.2, lureRetention: .88,
-    chase: 3.05,
+    chase: 3.25,
     investigate: 1.5,
     lure: 2.35,
     standingVision: 16,
@@ -2909,12 +2971,13 @@ export const DIFFICULTIES = Object.freeze({
   }),
   medium: Object.freeze({
     id: "medium", intercept:true,
+    boltStun:1.55,boltSightDelay:.7,
     label: "Medium",
     description:
       "The intended balance. Listen, break line of sight, and plan your escape.",
     attackWindup: .72, attackRecovery: .95, listen: 1.1, searchRadius: 8, searchChecks: 5, predictDistance: 3.4, predictTime: 2, lureRetention: .7,
-    chase: 3.7,
-    investigate: 1.85,
+    chase: 4.05,
+    investigate: 2.05,
     lure: 2.7,
     standingVision: 21,
     crouchVision: 13,
@@ -2930,12 +2993,13 @@ export const DIFFICULTIES = Object.freeze({
   }),
   hard: Object.freeze({
     id: "hard", intercept:true,
+    boltStun:1.05,boltSightDelay:1,
     label: "Hard",
     description:
       "A faster, more alert Attendant. Longer searches and less sprint endurance.",
     attackWindup: .58, attackRecovery: .75, listen: .8, searchRadius: 11, searchChecks: 7, predictDistance: 5, predictTime: 2.6, lureRetention: .55,
-    chase: 4.25,
-    investigate: 2.1,
+    chase: 4.6,
+    investigate: 2.35,
     lure: 3.05,
     standingVision: 25,
     crouchVision: 16,
@@ -2963,11 +3027,25 @@ export function difficultyRules(value) {
 ## dist/js/distractions.js
 
 ```javascript
-import { segmentHits } from './navigation.js?v=1.14.0';
+import { anyNearby } from './spatial.js?v=1.19.0';
+import { surfaceAt } from './surfaces.js?v=1.19.0';
 const B=globalThis.BABYLON;
+/** Earliest intersection, in normalized segment time. Height and enabled state
+ * matter: a bolt cannot hit the monster through a wall or an open gate. */
+export function boltHitTime(a,b,r,radius=.025){
+ if(r.enabled===false||![r.x,r.y,r.z,r.w,r.h,r.d].every(Number.isFinite))return Infinity;
+ let enter=0,leave=1;
+ for(const [axis,size] of [['x','w'],['y','h'],['z','d']]){
+   const delta=b[axis]-a[axis],lo=r[axis]-r[size]/2-radius,hi=r[axis]+r[size]/2+radius;
+   if(Math.abs(delta)<1e-9){if(a[axis]<lo||a[axis]>hi)return Infinity;continue;}
+   const t0=(lo-a[axis])/delta,t1=(hi-a[axis])/delta;enter=Math.max(enter,Math.min(t0,t1));leave=Math.min(leave,Math.max(t0,t1));
+   if(enter>leave)return Infinity;
+ }
+ return enter;
+}
 /** Swept movement prevents a low frame rate from throwing a bolt through a
  * wall. First contact is one sound/event; the supplied cue contains its tail. */
-export function stepBolt(body,dt,rects){
+export function stepBolt(body,dt,rects,target=null){
  if(!body.active)return false;
  let contact=false;
  const steps=Math.max(1,Math.ceil(Math.min(.1,dt)/.012));
@@ -2975,16 +3053,25 @@ export function stepBolt(body,dt,rects){
   const h=Math.min(.1,dt)/steps,from={x:body.x,y:body.y,z:body.z};
   body.vy-=9.8*h;
   const to={x:body.x+body.vx*h,y:body.y+body.vy*h,z:body.z+body.vz*h};
-  const wall=rects.find(r=>Number.isFinite(r.y)&&Number.isFinite(r.h)&&segmentHits(from,to,r,.025,true));
+  let wall,wallTime=Infinity;
+  anyNearby(rects,Math.min(from.x,to.x)-.025,Math.min(from.z,to.z)-.025,Math.max(from.x,to.x)+.025,Math.max(from.z,to.z)+.025,r=>{const t=boltHitTime(from,to,r);if(t<wallTime){wallTime=t;wall=r;}return false;});
+  const enemyTime=!body.contacted&&target?boltHitTime(from,to,target,.035):Infinity;
+  if(Number.isFinite(enemyTime)&&enemyTime<wallTime){
+    body.contacted=true;body.surface='enemy';contact=true;
+    body.impact={x:from.x+(to.x-from.x)*enemyTime,y:from.y+(to.y-from.y)*enemyTime,z:from.z+(to.z-from.z)*enemyTime,surface:'enemy',incoming:{x:body.vx,z:body.vz}};
+    Object.assign(body,{x:body.impact.x,y:body.impact.y,z:body.impact.z});body.vx*=-.12;body.vz*=-.12;body.vy=-.4;
+    return true;
+  }
   if(wall){
-   if(!body.contacted){contact=true;body.contacted=true;}
+   if(!body.contacted){contact=true;body.contacted=true;body.surface=wall.surface||(/window|glass/.test(wall.name||'')?'glass':/steel|car|van|fence|cabinet|dolly|barrier|grille/.test(wall.name||'')?'metal':'concrete');
+    body.impact={x:from.x+(to.x-from.x)*wallTime,y:from.y+(to.y-from.y)*wallTime,z:from.z+(to.z-from.z)*wallTime,surface:body.surface};}
    // Slide down after a wall strike. Never leave a prop suspended at impact.
    body.vx*=-.18;body.vz*=-.18;to.x=from.x;to.z=from.z;
    const top=wall.y+wall.h/2+.026;
    if(from.y>=top&&to.y<=top){to.y=top;body.active=false;}
   }
   if(to.y<=.025){
-   if(!body.contacted){contact=true;body.contacted=true;}
+   if(!body.contacted){contact=true;body.contacted=true;body.surface='floor';body.impact={x:to.x,y:.025,z:to.z,surface:'floor'};}
    to.y=.025;body.active=false;body.vx=body.vy=body.vz=0;
   }
   Object.assign(body,to);
@@ -2996,7 +3083,12 @@ export function stepBolt(body,dt,rects){
  * by reloading; no physics engine, mesh creation or asset fetch during play. */
 export class Distractions {
  constructor(w){
-  this.w=w;this.slots=[];this.cooldown=0;this.handTime=0;
+    this.w=w;this.slots=[];this.cooldown=0;this.handTime=0;
+  this.enemyBody={x:0,z:0,y:1.3,w:.68,d:.68,h:2.1,enabled:true};
+  this.guide=[];this.guideBody={};
+  for(let i=0;i<12;i++){
+    const m=B.MeshBuilder.CreateSphere('bolt aim dot',{diameter:.04,segments:2},w.scene);m.material=w.materials.warm;m.isPickable=false;m.setEnabled(false);w.visuals.dynamicRoots.add(m);this.guide.push(m);
+  }
   for(let i=0;i<3;i++){
    const root=w.visuals.root('throwable bolt '+i);
    const shaft=w.visuals.cylinder('bolt shaft',root,0,0,0,.018,.11,'steel',6);shaft.rotation.z=Math.PI/2;
@@ -3004,20 +3096,35 @@ export class Distractions {
    root.setEnabled(false);this.slots.push({root,active:false,life:0});
   }
  }
- reset(){this.cooldown=0;this.handTime=0;for(const b of this.slots){b.active=false;b.life=0;b.root.setEnabled(false);}}
+ reset(){this.cooldown=0;this.handTime=0;for(const m of this.guide)m.setEnabled(false);for(const b of this.slots){b.active=false;b.life=0;b.root.setEnabled(false);}}
+ updateGuide(player,state){
+  const on=!!(player.throwAiming&&player.active&&!player.hiding&&!player.vehicle&&state.bolts&&player.settings.throwGuide);
+  const pitch=Math.max(-1,Math.min(.8,player.pitch)),c=Math.cos(pitch),b=this.guideBody;
+  if(on)Object.assign(b,{x:player.pos.x,y:player.height-.12,z:player.pos.z,vx:Math.sin(player.yaw)*c*8,vz:Math.cos(player.yaw)*c*8,vy:-Math.sin(pitch)*8+2,active:true,contacted:false});
+  for(const m of this.guide){m.setEnabled(on&&b.active);if(on&&b.active){stepBolt(b,.07,this.w.rects);m.position.set(b.x,b.y,b.z);}}
+ }
  throw(player,state){
   if(this.cooldown||player.hiding||player.vehicle||!state.bolts)return false;
   const body=this.slots.find(b=>!b.active&&b.life<=0)||this.slots.find(b=>!b.active);if(!body)return false;
   const pitch=Math.max(-1,Math.min(.8,player.pitch)),c=Math.cos(pitch);
-  Object.assign(body,{x:player.pos.x,y:player.height-.12,z:player.pos.z,vx:Math.sin(player.yaw)*c*8,vz:Math.cos(player.yaw)*c*8,vy:-Math.sin(pitch)*8+2.0,active:true,contacted:false,life:6});
+  Object.assign(body,{x:player.pos.x,y:player.height-.12,z:player.pos.z,vx:Math.sin(player.yaw)*c*8,vz:Math.cos(player.yaw)*c*8,vy:-Math.sin(pitch)*8+2.0,active:true,contacted:false,impact:null,life:6});
   body.root.position.set(body.x,body.y,body.z);body.root.setEnabled(true);
   state.bolts--;this.cooldown=.7;this.handTime=.38;return true;
  }
- tick(dt,onImpact){
+ tick(dt,onImpact,threat=null){
   this.cooldown=Math.max(0,this.cooldown-dt);this.handTime=Math.max(0,this.handTime-dt);
+  const target=threat?.canReceiveBolt?.()?this.enemyBody:null;
+  if(target){target.x=threat.pos.x;target.z=threat.pos.z;}
   for(const b of this.slots){
    if(b.life<=0)continue;b.life-=dt;
-   if(b.active){if(stepBolt(b,dt,this.w.rects))onImpact({x:b.x,y:b.y,z:b.z});b.root.position.set(b.x,b.y,b.z);b.root.rotation.z+=dt*12;}
+   if(b.active){
+     if(stepBolt(b,dt,this.w.rects,target)){
+       const hit=b.impact||{x:b.x,y:b.y,z:b.z,surface:b.surface};
+       if(hit.surface==='floor'&&surfaceAt(hit,this.w.extraWater))hit.surface='water';
+       onImpact(hit);
+     }
+     b.root.position.set(b.x,b.y,b.z);b.root.rotation.z+=dt*12;
+   }
    if(b.life<=0){b.active=false;b.root.setEnabled(false);}
   }
  }
@@ -3031,7 +3138,7 @@ export class Distractions {
  * this controller. Required-task beats have priority over optional ambience;
  * close attacks and witnessed locker inspections always win the frame. */
 export const MAJOR_ENCOUNTERS = ["securityBreach", "workshopBreach", "powerSurge"];
-export const QUALITY_ENCOUNTERS=[...MAJOR_ENCOUNTERS,'closePass','shelterInspection','carReturn','cartPush','pressureBurst'];
+export const QUALITY_ENCOUNTERS=[...MAJOR_ENCOUNTERS,'closePass','shelterInspection','carReturn','cartPush','pressureBurst','yardFence','gatehouseBreach'];
 export const ENCOUNTER_IDS = [...QUALITY_ENCOUNTERS,"watcher","cabinet","crossing","pursuit","locker","window"];
 export class EncounterDirector {
   constructor(state) { this.reset(state); }
@@ -3050,11 +3157,11 @@ export class EncounterDirector {
     if(chase)this.chaseDuration+=dt;
     if(this.chasing&&!chase){this.recovery=Math.max(this.recovery,6+Math.min(18,this.chaseDuration*.6));this.chaseDuration=0;}
     if(failures>this.failures){this.recovery=Math.max(this.recovery,Math.min(36,12+failures*6));this.failures=failures;}
-    if(this.state.flags.length!==this.progress){this.progress=this.state.flags.length;this.recovery=Math.max(this.recovery,3);}
+    if(this.state.flags.length!==this.progress){this.progress=this.state.flags.length;if(!this.queue.includes('securityBreach'))this.recovery=Math.max(this.recovery,3);}
     this.chasing=chase;
   }
   next({mode,hiding=false,vehicle=false,busy=false,ready=()=>true}) {
-    if(this.active||hiding||vehicle||busy||this.chasing||this.recovery>0||["chase","attack","recover","inspect"].includes(mode))return null;
+    if(this.active||hiding||vehicle||busy||this.chasing||this.recovery>0||["chase","attack","recover","inspect","stunned"].includes(mode))return null;
     const index=this.queue.findIndex(id=>ready(id)&&(MAJOR_ENCOUNTERS.includes(id)?this.quiet<=0:this.quiet<=0&&this.recovery<=0&&!this.chasing));
     if(index<0)return null;return this.active=this.queue.splice(index,1)[0];
   }
@@ -3065,7 +3172,7 @@ export class EncounterDirector {
 ## dist/js/equipment-scenes.js
 
 ```javascript
-import { moveCircle } from './navigation.js?v=1.14.0';
+import { moveCircle } from './navigation.js?v=1.19.0';
 const B=globalThis.BABYLON;
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 /** Prebuilt physical aftermath. The cart has one dynamic collider, and the
@@ -3186,25 +3293,27 @@ export class DecisionPolicy {
 ## dist/js/game.js
 
 ```javascript
-import { Footwear } from "./surfaces.js?v=1.14.0";
-import { RecoveryLog } from "./recovery.js?v=1.14.0";
-import { footContact, stepProfile } from "./surfaces.js?v=1.14.0";
-import { CreatureScenes } from "./creature-scenes.js?v=1.14.0";
-import { ControllerInput } from "./controller.js?v=1.14.0";
-import { EncounterDirector, MAJOR_ENCOUNTERS } from "./encounters.js?v=1.14.0";
-import { lineClear, sightClear } from "./navigation.js?v=1.14.0";
-import { yieldTask } from "./preparation.js?v=1.14.0";
-import { PRESETS } from "./preferences.js?v=1.14.0";
-import { FrameStats, AdaptiveScale, nextFrameDeadline, HitchRecorder, PerformanceSetup, renderSizing } from "./performance.js?v=1.14.0";
-import { GraphicsPreview } from "./preferences.js?v=1.14.0";
-import { playIntro } from "./presentation.js?v=1.14.0";
-import { availability, Guidance, destination, roomAt } from "./guidance.js?v=1.14.0";
-import { prepareNavigationAsync } from "./navigation.js?v=1.14.0";
-import { difficultyRules } from "./difficulty.js?v=1.14.0";
-import { World } from "./world.js?v=1.14.0";
-import { Player } from "./player.js?v=1.14.0";
-import { AudioMixer } from "./audio.js?v=1.14.0";
-import { UI, $, keyName, escapeHTML } from "./ui.js?v=1.14.0";
+import { currentTask } from './tasks.js?v=1.19.0';
+import { YARD } from './campaign.js?v=1.19.0';
+import { Footwear } from "./surfaces.js?v=1.19.0";
+import { RecoveryLog } from "./recovery.js?v=1.19.0";
+import { footContact, stepProfile } from "./surfaces.js?v=1.19.0";
+import { CreatureScenes } from "./creature-scenes.js?v=1.19.0";
+import { ControllerInput } from "./controller.js?v=1.19.0";
+import { EncounterDirector, MAJOR_ENCOUNTERS } from "./encounters.js?v=1.19.0";
+import { lineClear, sightClear } from "./navigation.js?v=1.19.0";
+import { yieldTask } from "./preparation.js?v=1.19.0";
+import { PRESETS } from "./preferences.js?v=1.19.0";
+import { FrameStats, AdaptiveScale, nextFrameDeadline, HitchRecorder, PerformanceSetup, renderSizing, AreaTimings } from "./performance.js?v=1.19.0";
+import { GraphicsPreview } from "./preferences.js?v=1.19.0";
+import { playIntro } from "./presentation.js?v=1.19.0";
+import { availability, Guidance, destination, roomAt } from "./guidance.js?v=1.19.0";
+import { prepareNavigationAsync } from "./navigation.js?v=1.19.0";
+import { difficultyRules } from "./difficulty.js?v=1.19.0";
+import { World } from "./world.js?v=1.19.0";
+import { Player } from "./player.js?v=1.19.0";
+import { AudioMixer } from "./audio.js?v=1.19.0";
+import { UI, $, keyName, escapeHTML } from "./ui.js?v=1.19.0";
 import {
   newGame,
   has,
@@ -3216,8 +3325,8 @@ import {
   validateSave,
   checkpointSave,
   safeCheckpoint,
-} from "./state.js?v=1.14.0";
-import { Threat } from "./threat.js?v=1.14.0";
+} from "./state.js?v=1.19.0";
+import { Threat } from "./threat.js?v=1.19.0";
 const B = globalThis.BABYLON;
 /** The game owns progression; the scene only displays its state. This separation
  * makes checkpoints deterministic and keeps all story locks in one place. */
@@ -3243,6 +3352,7 @@ export class Game {
     this.graphics = new GraphicsPreview();
     this.stats = new FrameStats();
     this.hitches = new HitchRecorder();
+    this.areaTimings = new AreaTimings();
     this.adaptive = new AdaptiveScale();
     this.state = newGame();
     this.recoveryLog = new RecoveryLog();
@@ -3305,6 +3415,8 @@ export class Game {
     await this.world.loadAssets(p=>this.loadingProgress("Loading vehicle assets", .22+p*.2));
     this.loadingProgress("Preparing weathered surfaces", .43);
     await this.world.decay.load();
+    this.loadingProgress("Preparing correctly scaled surface materials", .435);
+    await this.world.surfaceLibrary.load();
     this.loadingProgress("Loading character animations", .44); await yieldTask();
     await this.world.visuals.loadActor();
     this.loadingProgress("Preparing static geometry", .5); await yieldTask();
@@ -3317,9 +3429,9 @@ export class Game {
     this.bindEvents();
     this.resize();
     await this.world.warmup((label,p)=>this.loadingProgress(label,p));
-    if(this.contextLost)throw new Error("Graphics interrupted during preparation. Reload in Low mode to retry.");
+    if(this.contextLost||this.bootInterrupted)throw new Error("Graphics interrupted during preparation. Reload in Low mode to retry.");
     this.world.sync(this.state);
-    this.loadingProgress("Ready", 1); await yieldTask();
+    await yieldTask(); this.loadingProgress("Ready", 1);
     this.loadingReady=true;
     $("loading").classList.add("hidden");
     this.engine.runRenderLoop(() => {
@@ -3340,14 +3452,19 @@ export class Game {
       );
   }
   loadingProgress(label, progress) {
+    if(this.bootInterrupted)throw new Error('Preparation was interrupted. Reload to rebuild a clean scene.');
+    this.loadingStage=label;
     $("load-label").textContent=label;
     $("load-fill").style.width=Math.round(progress*100)+"%";
     $("load-percent").textContent=Math.round(progress*100)+"%";
   }
   loadingFailed(error) {
-    this.loadingReady=false;
+    this.loadingReady=false;this.bootInterrupted=true;this.renderFault=true;this.lastError=error?.message||String(error);
+    this.recoveryLog.capture(error,{stage:this.loadingStage||'Starting graphics',failedAssets:this.world?.failedAssets||[]});
+    this.store.set('lastCrash',JSON.stringify({version:'1.19.0',...this.recoveryLog.error}));
+    const report=$('load-report');if(report)report.onclick=()=>this.ui.downloadDiagnostics();
     $("loading").classList.remove("hidden");
-    $("load-label").textContent=error.message;
+    $("load-label").textContent=this.lastError;
     $("load-actions").classList.remove("hidden");
     $("load-retry").onclick=()=>window.location.reload();
     $("load-simple").onclick=()=>{
@@ -3452,7 +3569,7 @@ export class Game {
     if(this.graphicsRecoveryBound||!this.engine?.onContextLostObservable)return;
     this.graphicsRecoveryBound=true;
     this.engine.onContextLostObservable.add(()=>{
-      this.contextLost=true;
+      this.contextLost=true;this.bootInterrupted=true;
       const error=new Error('Graphics context lost. Reload with Low graphics to reduce GPU memory use.');
       if(this.loadingReady)this.ui.recovery(error);else this.loadingFailed(error);
     });
@@ -3540,7 +3657,7 @@ export class Game {
     document.documentElement.classList.remove("driving");
     this.stats?.reset(); this.adaptive?.reset();
     this.autosaveTime = 0;
-    this.nextScareCue=0;this.ambientCueTime=18;
+    this.nextScareCue=0;this.ambientCueTime=18;this.yardEncounter=null;
     this.scareTime = 0;this.impactTime=0;
     $("action-progress").classList.add("hidden");
     $("danger").style.opacity = "0";
@@ -3576,7 +3693,7 @@ export class Game {
     if(!has(this.state,"key") || (!has(this.state,"fuse")&&!this.state.scares.includes("securityBreach"))){
       this.threat.pos={...this.world.atmosphere.securityActor};this.threat.yaw=0;this.threat.mode="dormant";
     }
-    this.threat.pressure=has(this.state,"gate");
+    this.threat.pressure=has(this.state,"gate");this.threat.setPatrolChapter(this.state);
     if(has(this.state,"gate")&&!this.state.scares.includes("pursuit"))this.scare("pursuit");
     this.scareActorTime = 0;
     this.crossing = false;
@@ -3584,6 +3701,7 @@ export class Game {
     this.world.worker.setEnabled(false);
     this.world.worker.position.set(this.threat.pos.x, 0, this.threat.pos.z);
     this.world.sync(this.state);
+    this.world.updateRoomVisibility(this.player.pos,1);
     // The loading tour/title camera may have left the reusable lights in a
     // different room. Prime their positions before the first playable frame.
     this.world.updateLights(this.player.pos, this.gameTime, false, 0, true);
@@ -3772,6 +3890,7 @@ export class Game {
   complete(id, caption) {
     this.recoveryLog?.record("objective",{id});
     mark(this.state, id);
+    this.threat?.setPatrolChapter?.(this.state);
     if(id==='car'){this.audio.play('lv114-electric-cutoff',{volume:.38,position:{x:0,y:3.7,z:80}});caption="The overhead lights cut out. "+this.ui.actionKey('flashlight')+" raises your flashlight. Recover the battery beside the hood.";}
     this.guidance?.progress(this.state);
     this.world.sync(this.state, false);
@@ -3787,9 +3906,9 @@ export class Game {
     const token = this.runToken;
     this.pendingAction = { id, token, duration, elapsed: 0 };
     // Machinery can require standing still; picking up an item never does.
-    this.player.movementLocked = ["valve","repair"].includes(id);
-    if (["valve","repair"].includes(id) && this.player.velocity) this.player.velocity.x = this.player.velocity.z = 0;
-    $("action-label").textContent = label + (["valve","repair"].includes(id) ? ` · ${this.ui.actionKey('interact')} to cancel` : "");
+    this.player.movementLocked = ["valve","repair",'barrier','route'].includes(id);
+    if (["valve","repair",'barrier','route'].includes(id) && this.player.velocity) this.player.velocity.x = this.player.velocity.z = 0;
+    $("action-label").textContent = label + (["valve","repair",'barrier','route'].includes(id) ? ` · ${this.ui.actionKey('interact')} to cancel` : "");
     $("action-progress").classList.remove("hidden");
     this.world.visuals.action(
       id,
@@ -3827,7 +3946,7 @@ export class Game {
     this.world.visuals.animator?.channels.delete("interaction");
     this.world.visuals.actionId = "";
     this.world.visuals.actionPhase = 0;
-    this.world.sync(this.state, false);
+    this.world.sync(this.state, false);this.world.yard?.sync(this.state,true);
     $("action-progress").classList.add("hidden");
     this.ui.toast("Action cancelled. You can try again.");
   }
@@ -3852,7 +3971,7 @@ export class Game {
       if (d.room === "workshop" && this.player.pos.z < 62) d = {...d, portal:[-24,62]};
       if (d.room === "security" && this.player.pos.z > 29) d = {...d, portal:[-24,29]};
     }
-    this.world.showWaypoint(d, this.player, this.guidance.markerSeconds, this.gameTime, room === d?.room);
+    this.world.requestGuide(currentTask(this.state),this.player,this.guidance.markerSeconds);
     this.ui.tutorial("");
   }
   refreshObjectiveVisibility(){
@@ -3877,7 +3996,7 @@ export class Game {
     this.ui.text("bolt-status",this.ui.actionKey("throw")+" · BOLTS "+(this.state.bolts??3));
     this.refreshObjectiveVisibility();
     $("chapter").textContent = has(this.state, "gate")
-      ? "03 / SOMEONE STAYED"
+      ? has(this.state,'route')?'04 / THE LAST DEPARTURE':'03 / THE SERVICE YARD'
       : has(this.state, "repair")
         ? "02 / THE OTHER SHIFT"
         : "01 / THE LAST TICKET";
@@ -3886,7 +4005,11 @@ export class Game {
     $("interact-key").textContent = keyName(this.settings.bindings.interact);
   }
   action(action) {
-    if (!this.playing || this.player.vehicle) return;
+    if (!this.playing) return;
+    if(this.player.vehicle){
+      if(action==='interact'){if(this.world.stage.exitDrive(this.player)){this.audio.stopEngine();this.state.driving=false;this.state.carPosition={x:this.world.stage.driverHandle.x,z:this.world.stage.driverHandle.z};document.documentElement.classList.remove('driving');this.updateHUD();}else this.ui.toast('Stop the car and leave space beside the left driver door.');}
+      if(action==='journal')this.ui.journal();return;
+    }
     if(this.shelterTransition&&!["journal","hint"].includes(action))return;
     if (action === "flashlight" && !this.player.hiding) {
       this.player.flashlight = !this.player.flashlight;
@@ -3895,13 +4018,13 @@ export class Game {
     }
     if(action==='objective'){this.objectiveSeconds=8;this.refreshObjectiveVisibility();}
     if(action==='throw'&&!this.pendingAction){
-      if(this.world.distractions?.throw(this.player,this.state)){this.updateHUD();this.save(false);}
-      else if(!this.state.bolts)this.ui.toast('No bolts left. Use cover, the siren or the valve.');
+      if(this.world.distractions?.throw(this.player,this.state)){this.audio.play('tool-handling',{volume:.18,reverb:false,priority:1});this.updateHUD();this.save(false);}
+      else if(!this.state.bolts)this.ui.toast('No bolts left. Look for a spare-bolt tray, or use cover and machinery.');
     }
     if (action === "journal") this.ui.journal();
     if (action === "hint") this.requestHint();
     if (action === "interact") {
-      if (["valve","repair"].includes(this.pendingAction?.id)) { this.cancelAction(); return; }
+      if (["valve","repair",'barrier','route'].includes(this.pendingAction?.id)) { this.cancelAction(); return; }
       if (this.pendingAction) return;
       if(this.player.hiding){this.leaveShelter();return;}
       const hint = this.player.interactionHint(id => this.getAvailability(id));
@@ -3923,6 +4046,19 @@ export class Game {
       if (alreadyRead) this.ui.note(id); else this.ui.previewNote(id);
       return;
     }
+    if(id.startsWith('refill-')){
+      this.state.bolts=3;this.state.refills??=[];this.state.refills.push(id);this.world.yard?.sync(this.state,false);this.audio.play('lv115-bolt-metal',{volume:.25});this.updateHUD();this.save();this.ui.toast('Three bolts ready. This tray is now empty.');return;
+    }
+    if(id==='yard'){
+      this.performAction('yard','CHECKING STREET INTERLOCK',.75,()=>{collectNote(s,'yard-log');this.complete('yard','Flooded loading supply. Use the selector under the generator awning.');this.yardEncounter={id:'yardFence',time:0};});return;
+    }
+    if(id==='isolate'){this.yardPuzzle();return;}
+    if(id==='barrier'){
+      this.performAction('barrier','TURNING MECHANICAL RELEASE',2.8,()=>{this.complete('barrier','Barrier released. The cargo dolly still blocks the lane; use the dock winch.');this.yardEncounter={id:'gatehouseBreach',time:0};this.threat.hear(YARD.release,55);});return;
+    }
+    if(id==='route'){
+      this.performAction('route','WINCHING CARGO CLEAR',3.2,()=>{this.complete('route','Lane clear. Return to bay 042, enter the left driver door and drive to the street.');this.threat.hear(YARD.route,80);this.scare('carReturn');});return;
+    }
     if(id.startsWith("hide-")){this.enterShelter(id);return;}
     if(id==="car"){
       if(has(s,"car")){this.beginEscape();return;}
@@ -3934,7 +4070,7 @@ export class Game {
     }
     if(id==="key"){
       this.performAction("key","TAKING MAINTENANCE KEY",.45,()=>{
-        collectNote(s,"log");this.complete("key",`Someone is still in the garage. Break its sight before using ${this.ui.actionKey('interact')} at a SHELTER locker. The same key lets you leave.`);
+        collectNote(s,"log");this.complete("key",'');
         this.scare("securityBreach");
       });return;
     }
@@ -3966,7 +4102,7 @@ export class Game {
     if(id==="gate"){
       this.audio.play("rattle",{volume:.48,rate:.7,position:{x:0,y:2,z:1},refDistance:5});
       this.performAction("gate","RAISING EXIT SHUTTER",2.4,()=>{
-        this.complete("gate","The exit is open. Get back to your car in bay 042.");
+        this.complete("gate","The shutter opens into a fenced service yard. Inspect its street barrier on foot.");this.threat.outsideUnlocked=true;
         this.threat.pressure=true;this.threat.hear({x:0,z:5},90);this.scare("pursuit");
       });return;
     }
@@ -4015,11 +4151,38 @@ export class Game {
     },()=>{spot.door.rotation.y=0;v.contactNode=null;this.shelterTransition=null;p.movementLocked=false;this.updateHUD();},"linear");
   }
   beginEscape(){
-    if(!has(this.state,"repair")||!has(this.state,"gate")||this.player.vehicle)return;
+    if(!has(this.state,"repair")||!has(this.state,"route")||this.player.vehicle)return;
     this.threat.hear(this.world.stage.driverHandle,200);
-    this.world.stage.beginDrive(this.player);this.audio.play("switch",{volume:.2});
+    this.world.stage.beginDrive(this.player);this.state.driving=true;this.updateHUD();this.audio.play("switch",{volume:.2});
     this.world.visuals.setFlash(false);document.documentElement.classList.add("driving");
     this.ui.subtitle("Getting in. Keep your head down.",2);
+  }
+  yardPuzzle(){
+    const token=this.runToken;let disconnected=false;
+    this.ui.show('yard-power',this.ui.head('GENERATOR AWNING / UTILITY SELECTOR','Choose the dry supply')+'<p>Water has reached the loading supply. The plate reads: <strong>1 · LOADING OFF. 2 · GATEHOUSE ON.</strong></p><div class="button-row"><button class="btn" id="loading-off">LOADING OFF</button><button class="btn" id="gatehouse-on">GATEHOUSE ON</button></div><p id="yard-circuit-status">Disconnect the flooded circuit first.</p>');
+    $('loading-off').onclick=()=>{disconnected=true;$('yard-circuit-status').textContent='Loading circuit isolated. Select GATEHOUSE ON.';this.audio.play('switch',{bus:'ui',volume:.35});};
+    $('gatehouse-on').onclick=()=>{if(!disconnected){$('yard-circuit-status').textContent='Disconnect LOADING first. No damage; try again.';return;}if(token!==this.runToken)return;this.ui.hide();this.complete('isolate','Dry supply selected. Turn the yellow release in the gatehouse.');this.resume();};
+  }
+  tickYardEncounters(dt){
+    const a=this.yardEncounter;if(!a||this.player.vehicle||this.player.hiding||this.pendingAction)return;
+    if(this.state.scares.includes(a.id)&&!a.hit){this.yardEncounter=null;return;}
+    a.time+=dt;
+    const yard=this.world.yard,point=a.id==='yardFence'?YARD.fence:{x:16.62,y:1.4,z:-44.7};
+    // Environment reacts at its own contact point. The one creature may make
+    // the strike only if it physically reached the opposite side; never spawn
+    // a second monster to satisfy a cinematic cue.
+    const readable=this.visualReadable(point,.5,a.id==='yardFence'?24:12);
+    if(!a.hit&&readable&&a.time>.18){
+      a.hit=true;a.after=0;yard.impact(a.id);this.audio.prepareBeat(.9);this.recordEncounter(a.id);
+      this.audio.play(a.id==='yardFence'?'lv115-fence-strike':'lv115-door-breach',{volume:.65,position:point,refDistance:6});
+      const near=Math.hypot(this.threat.pos.x-point.x,this.threat.pos.z-point.z)<2.2;
+      if(near&&this.threat.canStage()){this.threat.stageRoute([{...this.threat.pos}],'Strike');this.actorStrike=.55;this.threat.yaw=Math.atan2(point.x-this.threat.pos.x,point.z-this.threat.pos.z);}
+      else this.threat.hear(point,70);
+      this.ui.subtitle(a.id==='yardFence'?'[The loose steel sheet slams against the fence.]':near?'[A long hand forces the side door. The latch tears loose.]':'[The side-door latch tears free. The damaged panel slams inward.]',2.5);
+    }
+    if(a.hit){a.after+=dt;if(a.after>1.8){if(this.threat.mode==='staged')this.threat.releaseStage(point,this.state.difficulty==='easy'?2.8:1.6);this.yardEncounter=null;}}
+    // An unseen pending beat expires. It never ambushes a later unrelated visit.
+    if(a.time>12&&!a.hit)this.yardEncounter=null;
   }
   powerPuzzle() {
     let sequence = [];this.circuitPending=false;
@@ -4110,7 +4273,14 @@ export class Game {
   }
   scare(id){
     this.director ||= new EncounterDirector(this.state);
+    if(id==='powerSurge'&&!this.state.scares.includes(id)&&!this.creatureScenes?.active&&this.world.atmosphere?.playSurge){
+      // Electrical contact belongs to the power action. The real hunter keeps
+      // its pursuit; the relay never waits for it to pose in a doorway.
+      const token=this.runToken;this.director.active=id;this.audio.prepareBeat?.(.8);
+      this.world.atmosphere.playSurge(()=>{if(token!==this.runToken)return;this.recordEncounter(id);this.audio.play('surge',{volume:.52,position:this.world.atmosphere.surgePosition,refDistance:4});this.threat.hear(this.world.atmosphere.surgePosition,100);this.ui.subtitle('[The relay cover bursts. The exit supply stays on.]',3);});return;
+    }
     this.director.request(id);
+    if(id==="securityBreach"){this.director.recovery=0;this.director.quiet=0;}
   }
   visualReadable(p,min=5,max=23){
     const dx=p.x-this.player.pos.x,dz=p.z-this.player.pos.z,d=Math.hypot(dx,dz);
@@ -4140,7 +4310,7 @@ export class Game {
       this.threat.releaseStage({x:-23.25,z:18},3);
     const id=this.director.next({mode:this.threat.mode,hiding:!!this.player.hiding,vehicle:!!this.player.vehicle,busy:!!this.pendingAction,ready:id=>{
       if(id==="securityBreach")return Math.hypot(this.threat.pos.x-a.securityActor.x,this.threat.pos.z-a.securityActor.z)<1
-        ?this.visualReadable({...a.securityPosition,z:16.58},.3,7)
+        ?near(a.securityPosition)<7
         :this.visualReadable({...this.threat.pos,y:1.5},3,15);
       if(id==="workshopBreach")return (typeof this.threat.stageRoute!=='function'||this.creatureScenes.fallbackReady('workshopBreach'))&&this.visualReadable(a.hatchPosition,.3,8);
       if(id==="powerSurge")return (typeof this.threat.stageRoute!=='function'||this.creatureScenes.fallbackReady('powerSurge'))&&this.visualReadable(a.surgePosition,.3,8);
@@ -4148,16 +4318,7 @@ export class Game {
       if(id==='pressureBurst')return equipment&&this.visualReadable(equipment.source,.8,8);
       return false;
     }});
-    if(!id){
-      const queued=this.director.queue.find(k=>["securityBreach","workshopBreach","powerSurge"].includes(k));
-      const point=queued==="securityBreach"?a.securityPosition:queued==="workshopBreach"?a.hatchPosition:a.surgePosition;
-      if(queued&&near(point)<8&&!this.player.hiding&&!this.director.chasing&&!this.pendingAction&&(this.nextScareCue??0)<this.gameTime){
-        this.nextScareCue=this.gameTime+9;
-        this.audio.play("metal-stress",{volume:.18,position:point,refDistance:3});
-        this.ui.subtitle(queued==="securityBreach"?"[A latch shifts behind the desk.]":queued==="workshopBreach"?"[The loose service hatch strains.]":"[The relay housing begins to vibrate.]",2.8);
-      }
-      return;
-    }
+    if(!id)return; // No advance caption announces an unseen scare.
     const token=this.runToken;this.encounterPending=id;this.audio.prepareBeat?.();
     const impact=(position,caption,sound="hatch-impact")=>{
       if(token!==this.runToken)return;
@@ -4204,6 +4365,23 @@ export class Game {
     },cue=cues[room];
     if(cue){const [name,x,y,z]=cue;this.audio.play(name,{volume:.13,position:{x,y,z},refDistance:2});}
   }
+  boltImpact(point){
+    const direct=point.surface==='enemy';
+    const outcome=direct?this.threat.receiveBolt(point):this.threat.hearBolt(point)?'investigating':'ignored';
+    const file=point.surface==='water'?'lv115-bolt-water':point.surface==='glass'?'lv115-bolt-glass':point.surface==='metal'||direct?'lv115-bolt-metal':'lv114-bolt-impact';
+    // Gameplay-critical clatter has priority over ordinary footsteps, while
+    // preserving spatial distance, user volume and the existing voice limit.
+    this.audio.play(file,{volume:direct?.62:.68,position:point,refDistance:6,maxDistance:48,priority:2});
+    if(direct){
+      this.audio.play('creature-recover',{volume:.38,position:{...this.threat.pos,y:1.5},refDistance:4,priority:2});
+      this.ui.subtitle(outcome==='staggered'?'[The bolt strikes. It staggers — move!]':'[The bolt hits, but it braces against another stagger.]',2);
+    }else{
+      this.ui.subtitle(point.surface==='water'?'[The bolt splashes into water.]':point.surface==='metal'?'[The bolt rings against metal.]':'[The bolt clatters.]',1.5);
+      if(outcome==='investigating'&&Math.hypot(this.player.pos.x-this.threat.pos.x,this.player.pos.z-this.threat.pos.z)<12)
+        this.audio.play('lv113-cloth-shift',{volume:.26,position:{...this.threat.pos,y:1.3},refDistance:3,priority:1});
+    }
+    this.queueAutosave();return outcome;
+  }
   tickThreat(dt){
     const actor=this.world.worker;
     if(this.captureTime!==null&&this.captureTime!==undefined){
@@ -4218,10 +4396,13 @@ export class Game {
     actor.position.set(this.threat.pos.x,0,this.threat.pos.z);actor.rotation.y=this.threat.yaw;
     this.actorStrike=Math.max(0,(this.actorStrike||0)-dt);
     let clip=result.animation||(this.threat.speed>2.3?"Run":this.threat.speed>.1?"Walk":"Idle"),phase=result.phase;
-    if(this.world.atmosphere.securityActive){
+    if(result.staggered){
+      // A physical hit takes visual precedence over a leftover cinematic pose.
+      clip='Recover';phase=result.phase;this.actorStrike=0;
+    } else if(this.world.atmosphere.securityActive){
       clip="Strike";const t=this.world.atmosphere.securityPhase;
       // The rig's strike contacts at normalized phase .50; match the glass cue.
-      if(t<.2){clip='Listen';phase=t*2.5;}else phase=t<.58?(t-.2)/.38*.5:.5+(t-.58)/.42*.5;
+      phase=t<.1913?t/.1913*.5:t<.70?.5:.5+(t-.70)/.30*.5;
     } else if(this.escapeStrike){clip='Strike';phase=Math.min(1,this.escapeStrike.time/1.2);}
     else if(this.actorStrike>0){clip="Strike";phase=.5;}
     else if(this.creatureScenes?.pose){clip=this.creatureScenes.pose.clip;phase=this.creatureScenes.pose.phase;}
@@ -4404,24 +4585,34 @@ export class Game {
               ? "PUMP ROOM"
               : "ELECTRICAL"
             : "MERIDIAN / B2";
-      this.ui.text("location", location);
+      this.ui.text("location",p.z<0?({yard:'MERIDIAN / SERVICE YARD',gatehouse:'GATEHOUSE',road:'SERVICE ROAD'}[roomAt(p)]):location);
 
       this.hitches.section("interactionAndHUD");
       this.threat.observeTracks?.(this.world.surfaces.traces);
+      // Resolve projectile contact before this frame's attack damage. A real
+      // timely hit can interrupt a windup; a bolt behind a wall cannot.
+      this.world.distractions?.updateGuide(this.player,this.state);
+      this.world.distractions?.tick(dt,point=>this.boltImpact(point),this.threat);
+      if(this.world.yard?.hunterDoor(dt,this.threat)==='contact'){this.audio.prepareBeat(.8);this.audio.play('lv115-door-breach',{volume:.6,position:{x:16.5,y:1.4,z:-44},refDistance:5});this.recordEncounter('gatehouseBreach');}
       this.tickThreat(dt);this.hitches.section("threat");
       if(this.playing){this.tickEncounters(dt);this.hitches.section("encounters");this.tickAmbient(dt);this.hitches.section("environment");}
       this.world.atmosphere.tick(dt,this.gameTime,this.player,true);
       this.world.surfaces.tick(dt);
       this.world.equipment?.tick(dt,this.gameTime,this.player,this.settings);
-      this.world.distractions?.tick(dt,point=>{
-        this.audio.play('lv114-bolt-impact',{volume:.46,position:point,refDistance:4});
-        this.threat.hearBolt?.(point);this.save(false);
-      });
+      this.world.yard?.tick(dt,this.gameTime,this.player,this.settings);this.tickYardEncounters(dt);
+      this.world.sky?.tick(this.gameTime,this.player.pos);
       this.world.richDetails?.tick(dt,this.gameTime,this.player);
       this.world.updateRoomVisibility?.(this.player.pos,dt);
       this.hitches.section("surfaceEffects");
       this.guidanceTick=(this.guidanceTick || 0)+dt;
       if(this.guidanceTick>=.1) {this.tickGuidance(this.guidanceTick);this.guidanceTick=0;}
+      const route=this.world.tickGuide(this.player,dt),directionLabel=$('direction-hint');
+      if(directionLabel){
+        const usable=route?.kind==='object'&&this.nearbyHint?.usable&&this.nearbyHint.item.id===route.controlId;
+        const text=route?(route.kind==='route'?'FOLLOW ARROW · ':usable?this.ui.actionKey('interact')+' · ':'LOOK AT OBJECT · ')+route.name:'';
+        if(directionLabel.textContent!==text)directionLabel.textContent=text;
+        directionLabel.classList.toggle('hidden',!route);
+      }
       this.scareTime = Math.max(0, this.scareTime - dt * 0.55);
       this.world.updateLights(
         this.player.pos,
@@ -4434,7 +4625,7 @@ export class Game {
         const stage=this.world.stage,finished=stage.tickDrive(dt,this.player);
         if(stage.driveTime>=1.5&&!stage.engineStarted){
           stage.engineStarted=true;this.audio.play("door-close",{volume:.48});this.audio.startEngine?.();
-          this.ui.subtitle("Door latched. Engine running. You're leaving Meridian.",4);
+          this.ui.subtitle('Drive: '+this.ui.actionKey('forward')+'/'+this.ui.actionKey('back')+' accelerate, brake/reverse · '+this.ui.actionKey('left')+'/'+this.ui.actionKey('right')+' steer · '+this.ui.actionKey('interact')+' exit when stopped',8);
         }
         const window=this.threat.mode==="chase"?stage.nearbyWindow(this.threat.pos):null;
         if(window&&!this.escapeStrike&&lineClear(this.threat.pos,window.position,this.world.rects,.02)){
@@ -4454,7 +4645,8 @@ export class Game {
           if(strike.hit)strike.window.door.node.rotation.y+=Math.sin((strike.time-.6)*45)*.014*Math.exp(-(strike.time-.6)*9);
           if(strike.time>=1.2){this.threat.releaseStage({...this.player.pos},.5);this.escapeStrike=null;}
         }
-        this.audio.updateEngine?.(stage.driveTime);
+        this.audio.updateEngine?.(stage.driveTime,stage.vehicle.speed);
+        this.ui.text('bolt-status',Math.round(Math.abs(stage.vehicle.speed)*3.6)+' KM/H · '+this.ui.actionKey('interact')+' EXIT WHEN STOPPED');
         if(finished){mark(this.state,"escaped");this.save(false);this.showEnding();}
       }
       this.autosaveTime += dt;
@@ -4478,7 +4670,7 @@ export class Game {
       this.impactTime=Math.max(0,(this.impactTime||0)-dt);
       const impact=this.impactTime/.42;
       $('impact-edge').style.opacity=String(impact*(this.settings.scareScreenEffects??.65)*.45);
-      if(!this.player.vehicle&&!this.settings.reducedMotion&&impact){
+      if(!this.player.vehicle&&!this.settings.reducedMotion&&!this.settings.stableHorizon&&impact){
         this.world.camera.rotation.z=Math.sin(this.gameTime*46)*impact*(this.settings.cameraShake??.5)*.012;
         this.world.camera.getViewMatrix(true);
       }
@@ -4501,9 +4693,10 @@ export class Game {
     // Do not allocate a diagnostic context on normal frames, or treat time in
     // menus as a hitch. This is CPU submission time, not GPU completion time.
     if(sampledGameplay && !skipTelemetry && (elapsed>=50 || this.cpuMs>=35))
-      this.hitches.finish(elapsed,{x:Math.round(this.player.pos.x),z:Math.round(this.player.pos.z),flashlight:this.player.flashlight,drawCalls:this.sceneInstrumentation?.drawCallsCounter.current ?? null});
+      this.hitches.finish(elapsed,{x:Math.round(this.player.pos.x),z:Math.round(this.player.pos.z),area:roomAt(this.player.pos),task:currentTask(this.state)?.id||'done',pass:this.profilePass||'Normal play',weather:this.settings.weatherEffects,flashlight:this.player.flashlight,gpuMs:this.gpuMs,drawCalls:this.sceneInstrumentation?.drawCallsCounter.current ?? null});
     const gpu = this.instrumentation?.gpuFrameTimeCounter;
     this.gpuMs = gpu?.count && gpu.current > 0 ? gpu.current * 0.000001 : null;
+    if(sampledGameplay&&!skipTelemetry)this.areaTimings?.sample(roomAt(this.player.pos),elapsed,this.cpuMs,this.gpuMs);
     if(sampledGameplay&&!skipTelemetry&&this.calibration&&!this.calibration.done){
       this.calibration.sample(dt,elapsed,this.player,roomAt(this.player.pos),this.cpuMs,this.gpuMs);
       if(this.calibration.done)this.ui.toast('Performance sample ready. Review it in Settings → Performance.',6500);
@@ -4562,9 +4755,9 @@ export class Game {
 ## dist/js/guidance.js
 
 ```javascript
-import { has, NOTES } from "./state.js?v=1.14.0";
-import { TASKS, TASK_BY_ID, currentTask, taskText } from "./tasks.js?v=1.14.0";
-import { objective } from "./state.js?v=1.14.0";
+import { has, NOTES } from "./state.js?v=1.19.0";
+import { TASKS, TASK_BY_ID, currentTask, taskText } from "./tasks.js?v=1.19.0";
+import { objective } from "./state.js?v=1.19.0";
 
 /** Prompts and the actual action share the same prerequisite check. A car's
  * hood/passenger side offer inspection first, never a premature repair task. */
@@ -4576,7 +4769,8 @@ export function availability(id,state,player={},threat={}) {
   if(id.startsWith("hide-"))return result(!player.vehicle,"Hide");
   if(["car","repair","car-passenger"].includes(id)&&!done("car"))return result(true,TASK_BY_ID.car.label,"",false,"car");
   if(id==="car-passenger")return result(false,"", "",true);
-  if(id==="car"&&done("car"))return result(done("gate")&&done("repair"),TASK_BY_ID.escaped.label, next?"Next: "+next.instruction:"");
+  if(id.startsWith('refill-'))return result(!state.refills?.includes(id)&&(state.bolts??3)<3,'Take spare bolts',state.refills?.includes(id)?'Tray empty':'You can carry three bolts');
+  if(id==="car"&&done("car"))return result(done("route")&&done("repair"),TASK_BY_ID.escaped.label, next?"Next: "+next.instruction:"");
   const task=TASK_BY_ID[id];
   if(task) {
     if(done(id))return result(false,task.label,"Completed",true);
@@ -4594,8 +4788,10 @@ export function availability(id,state,player={},threat={}) {
   return result(id in optional,optional[id]||"Inspect");
 }
 
-export const ROOMS = ["security", "storage", "workshop", "electrical", "pump"];
+export const ROOMS = ["security", "storage", "workshop", "electrical", "pump",'yard','gatehouse','road'];
 export function roomAt(p) {
+  if(p.z<-58)return 'road';
+  if(p.z<0){if(p.x>16.3&&p.z<=-36&&p.z>=-52.2)return 'gatehouse';return 'yard';}
   if (p.x < -17) {
     if (p.z >= 7 && p.z <= 29) return "security";
     if (p.z >= 33 && p.z <= 57) return "storage";
@@ -4626,7 +4822,7 @@ export class Guidance {
   request(state) {
     if (this.id !== objective(state)[0]) this.reset(state);
     this.level = Math.min(3, this.level + 1);
-    this.markerSeconds = 10; this.idle = 0; this.reminded = false;
+    this.markerSeconds = 60; this.idle = 0; this.reminded = false;
     return { level: this.level, text: hintText(state, this.level), destination: destination(state) };
   }
   tick(dt, state, busy, reminders = true) {
@@ -4643,7 +4839,7 @@ export class Guidance {
 ## dist/js/interaction.js
 
 ```javascript
-import { sightClear } from "./navigation.js?v=1.14.0";
+import { sightClear } from "./navigation.js?v=1.19.0";
 
 /** Target small authored interaction volumes on visible handles/items. Full 3D
  * occlusion reaches the object; table tops no longer behave like tall walls. */
@@ -4700,10 +4896,10 @@ export class InteractionFocus {
 ## dist/js/journal.js
 
 ```javascript
-import { currentTask, inventoryStatus } from "./tasks.js?v=1.14.0";
-import { OBJECTIVES, NOTES, objective } from "./state.js?v=1.14.0";
-import { hintText, destination } from "./guidance.js?v=1.14.0";
-import { renderMap } from "./map.js?v=1.14.0";
+import { currentTask, inventoryStatus } from "./tasks.js?v=1.19.0";
+import { OBJECTIVES, NOTES, objective } from "./state.js?v=1.19.0";
+import { hintText, destination } from "./guidance.js?v=1.19.0";
+import { renderMap } from "./map.js?v=1.19.0";
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
 export function journalTask(state) {
@@ -4718,7 +4914,7 @@ export function revealHint(state) {
 }
 export function returnSummary(state){
  const task=journalTask(state),last=OBJECTIVES.filter(([id])=>state.flags.includes(id)).at(-1);
- return {chapter:state.flags.includes('gate')?'03 / GET OUT':state.flags.includes('repair')?'02 / RESTORE THE EXIT':'01 / REPAIR YOUR CAR',completed:last?.[1]||'Arrived at Meridian',next:task.title,instruction:task.instruction,note:task.notes[0]||null};
+ return {chapter:state.flags.includes('route')?'04 / THE LAST DEPARTURE':state.flags.includes('gate')?'03 / THE SERVICE YARD':state.flags.includes('repair')?'02 / RESTORE THE EXIT':'01 / REPAIR YOUR CAR',completed:last?.[1]||'Arrived at Meridian',next:task.title,instruction:task.instruction,note:task.notes[0]||null};
 }
 
 /** Tasks are derived from authoritative progression. Reading can never complete
@@ -4727,14 +4923,14 @@ export function renderJournal(ui, tab = "tasks") {
   const g=ui.game, s=g.state, task=journalTask(s), j=s.journal;
   ui.journalTab=tab;
   j.lastObjective=task.id;
-  const chapter=s.flags.includes("gate")?"03 / GET OUT":s.flags.includes("repair")?"02 / RESTORE THE EXIT":"01 / REPAIR YOUR CAR";
+  const chapter=s.flags.includes("route")?"04 / THE LAST DEPARTURE":s.flags.includes("gate")?"03 / THE SERVICE YARD":s.flags.includes("repair")?"02 / RESTORE THE EXIT":"01 / REPAIR YOUR CAR";
   const noteLink=id=>`<button class="journal-note" data-note="${id}"><span>${j.readNotes.includes(id)?"":"<i class=\"unread-dot\"></i>"}${esc(NOTES[id].title)}</span><small>${esc(NOTES[id].tag)}</small></button>`;
   let body="";
   if(tab==="tasks") {
     body=`<article class="journal-task"><span class="eyebrow">${chapter}</span><h3>${esc(task.title)}</h3><p>${esc(task.instruction)}</p><p class="journal-reason">${esc(task.reason)}</p><div class="journal-inventory">${inventoryStatus(s).map(item=>`<span class="item-state ${item.status.toLowerCase()}"><b>${esc(item.name)}</b><small>${item.status}</small></span>`).join("")}</div></article>`;
     const recap=returnSummary(s);
     body+='<details class="journal-history"><summary>Where was I?</summary><p>✓ Completed · '+esc(recap.completed)+'.</p><p>Next · '+esc(recap.instruction)+'</p>'+(recap.note?noteLink(recap.note):'<p>No relevant document collected yet.</p>')+'</details>';
-    if(s.flags.includes("key"))body+='<details class="journal-history"><summary>Surviving the Attendant</summary><p>Keep a solid object between you and it. Running is loud. Crouching behind a vehicle hides you better; a flashlight shining around a corner can give it a clue. Break sight before entering a SHELTER locker. On Medium and Hard it can connect a nearby door sound with a recent sighting or visible wet footprints; give it space before hiding. A raised arm warns of a committed strike: move aside, then use its recovery to escape. Puddles and sprinting carry farther through doorways. Three bolts can draw it toward an impact; repeated throws into the same area become less convincing. Restored drive-lane lights make crossings easier for it to see. Repeated sirens distract it for less time. Your journal pauses the game.</p></details>';
+    if(s.flags.includes("key"))body+='<details class="journal-history"><summary>Surviving the Attendant</summary><p>Keep a solid object between you and it. Running is loud. Crouching behind a vehicle hides you better; a flashlight shining around a corner can give it a clue. Break sight before entering a SHELTER locker. On Medium and Hard it can connect a nearby door sound with a recent sighting or visible wet footprints; give it space before hiding. A raised arm warns of a committed strike: move aside, then use its recovery to escape. Puddles and sprinting carry farther through doorways. Throw a bolt at a hard surface after breaking sight: the clatter draws it to that spot. A direct body hit briefly staggers it and can interrupt a strike. It resists rapid repeat stuns; repeated throws into one area also become less convincing. Restored drive-lane lights make crossings easier for it to see. Repeated sirens distract it for less time. Your journal pauses the game.</p></details>';
     const changes=[];
     if(s.scares.includes("securityBreach"))changes.push("The wired glass held. The Attendant can walk around it. The key also unlocked the west service passage.");
     if(s.scares.includes("workshopBreach"))changes.push("The workshop impact was loud. Use the service passage or garage cover if something investigates.");
@@ -4753,14 +4949,14 @@ export function renderJournal(ui, tab = "tasks") {
     for(let n=1;n<=level;n++)body+=`<article class="journal-clue"><small>${["","A NUDGE","A CLEARER DIRECTION","THE SOLUTION"][n]}</small><p>${esc(hintText(s,n,g.settings.bindings))}</p></article>`;
     if(task.id!=="done" && level<3)body+=`<button id="journal-reveal" class="btn accent">${["Reveal a nudge","Reveal a clearer direction","Reveal the solution"][level]}</button>`;
     if(level===3)body+='<p class="settings-note">All hints for this task are revealed. They remain in your checkpoint save.</p>';
-    body+='<div class="button-row"><button id="journal-marker" class="btn">Request a temporary direction marker</button></div><p class="settings-note">The marker appears for 20 seconds of active play after you resume.</p>';
+    body+='<div class="button-row"><button id="journal-marker" class="btn">Request a temporary direction marker</button></div><p class="settings-note">Guidance lasts up to one minute of active play, or until you complete this task. A floor arrow follows the clear walking route; an upright diamond marks the object. Your use prompt appears only within reach.</p>';
   } else if(tab==="notes") {
     body='<p>Collected evidence and documents. Unread entries have a small dot.</p><div class="journal-notes">'+(s.notes.map(noteLink).join("") || '<p>No documents collected yet.</p>')+'</div>';
   } else if(tab==="map") {
-    body=renderMap(g.player.pos,task.destination,s.visited,s.flags,j.mechanisms)+'<div class="button-row"><button id="journal-marker" class="btn">Request a temporary direction marker</button></div>';
+    body=renderMap({...g.player.pos,yaw:g.player.yaw},task.destination,s.visited,s.flags,j.mechanisms)+'<div class="button-row"><button id="journal-marker" class="btn">Request a temporary direction marker</button></div>';
   } else {
     const key=a=>esc(safeKey(g.settings.bindings[a]));
-    body=`<h3>Your first minute</h3><ol class="journal-controls"><li>Click Enter game once, then move the mouse to look. Escape pauses.</li><li>Walk with ${key("forward")} ${key("left")} ${key("back")} ${key("right")}.</li><li>Press ${key("flashlight")} to raise or put away the flashlight.</li><li>Aim at an object and use ${key("interact")} when its nearby prompt appears.</li><li>${key("journal")} opens this journal. ${key("hint")} opens its optional hints. ${key("objective")} briefly shows the task when the objective display is set to On request.</li><li>${key("sprint")} sprints in short bursts; ${key("crouch")} crouches. Use cover and listen.</li></ol><p>${key("throw")} throws one of your three bolts toward your aim. They are distractions, not required tools. Repeated impacts in the same place lose effectiveness. Tools are used automatically. ${key("interact")} enters and leaves SHELTER lockers. Break its sight before hiding; it remembers a locker it watched you enter. On Medium and Hard, a nearby door sound plus a recent sighting or visible wet footprints can also lead it to the correct locker. Reading the journal pauses the Attendant. Completed objectives are saved at safe checkpoints.</p>`;
+    body=`<h3>Your first minute</h3><ol class="journal-controls"><li>Click Enter game once, then move the mouse to look. Escape pauses.</li><li>Walk with ${key("forward")} ${key("left")} ${key("back")} ${key("right")}.</li><li>Press ${key("flashlight")} to raise or put away the flashlight.</li><li>Aim at an object and use ${key("interact")} when its nearby prompt appears.</li><li>${key("journal")} opens this journal. ${key("hint")} opens its optional hints. ${key("objective")} briefly shows the task when the objective display is set to On request.</li><li>${key("sprint")} sprints in short bursts; ${key("crouch")} crouches. Use cover and listen.</li></ol><p>${key("throw")} throws one of your three bolts toward your aim (hold to preview the arc, release to throw). Spare-bolt trays in Workshop, the loading dock and gatehouse refill your stock once each. Throw toward a hard surface to distract it after breaking sight, or hit its body for a brief stagger. Easy grants a longer stagger; Hard grants less. Rapid repeat hits cannot keep it stunned. Repeated impacts in one place lose effectiveness. Bolts are optional, not required puzzle tools. Tools are used automatically. In the car, forward/back accelerates, brakes or reverses; left/right steers. Use the interaction key when stopped to exit on the left. Follow the OPEN LANE sign around the roadworks container to reach the street. ${key("interact")} enters and leaves SHELTER lockers. Break its sight before hiding; it remembers a locker it watched you enter. On Medium and Hard, a nearby door sound plus a recent sighting or visible wet footprints can also lead it to the correct locker. Reading the journal pauses the Attendant. Completed objectives are saved at safe checkpoints.</p>`;
     j.controlsSeen=true;
     body+='<p>Controller (enable in Settings): left stick moves, right looks; A uses/hides, X toggles the flashlight, Y opens the journal, B crouches, L3 sprints, RB throws a bolt, D-pad Up shows the task, Menu pauses. D-pad navigates menus; left/right adjusts sliders. A selects and B goes back. A disconnected pad pauses play.</p>';
   }
@@ -4770,7 +4966,7 @@ export function renderJournal(ui, tab = "tasks") {
   $("journal-hints")?.addEventListener("click",()=>ui.journal("hints"));
   $("floor-plan")?.addEventListener("click",()=>ui.journal("map"));
   $("journal-reveal")?.addEventListener("click",()=>{revealHint(s);ui.journal("hints");});
-  $("journal-marker")?.addEventListener("click",()=>{g.guidance.markerSeconds=20;ui.toast("Direction marker requested. Resume when you are ready.");});
+  $("journal-marker")?.addEventListener("click",()=>{g.guidance.markerSeconds=60;ui.toast("Route requested for one minute. Resume when ready.");});
   $("journal-resume").onclick=()=>{ui.hide();g.resume();};
   $("journal-pause").onclick=()=>ui.pause();
   g.save(false); g.updateHUD();
@@ -4778,13 +4974,97 @@ export function renderJournal(ui, tab = "tasks") {
 function safeKey(code) { return ({ArrowLeft:"←",ArrowRight:"→",ArrowUp:"↑",ArrowDown:"↓"})[code] || String(code).replace(/^(Key|Digit)/,"").replace(/(Left|Right)$/,"").replace("Control","Ctrl"); }
 ```
 
+## dist/js/landscape.js
+
+```javascript
+const B=globalThis.BABYLON;
+/** Authored border scenery. Leaves are opaque geometry (no transparent forest
+ * overdraw), share three materials, and are merged by the normal sector pass.
+ * Decoration never adds invisible collision or blocks a task approach. */
+export class Landscape {
+ constructor(w){this.w=w;this.records=[];this.roots=[];this.build();}
+ tag(mesh,backdrop=false){mesh.isPickable=false;mesh.receiveShadows=true;mesh.metadata={...mesh.metadata,lvCaster:false,backdrop};return mesh;}
+ patch(name,x,y,z,rx,rz,material,seed=0,yaw=0,wall=false){
+   const m=B.MeshBuilder.CreateDisc(name,{radius:1,tessellation:15,sideOrientation:B.Mesh.DOUBLESIDE},this.w.scene);
+   const p=m.getVerticesData(B.VertexBuffer.PositionKind);
+   for(let i=0;i<p.length;i+=3){const a=Math.atan2(p[i+1],p[i]),r=.84+.16*Math.sin(a*4+seed)**2;p[i]*=r*rx;p[i+1]*=r*rz;}
+   m.setVerticesData(B.VertexBuffer.PositionKind,p);m.position.set(x,y,z);m.material=this.w.materials[material];
+   if(wall)m.rotation.y=yaw;else m.rotation.x=Math.PI/2;this.tag(m);
+   return m;
+ }
+ shrub(x,z,size,seed,backdrop=true){
+   const w=this.w,positions=[],indices=[],normals=[],colors=[];
+   const leaf=(base,tip,width,color)=>{
+     const d=tip.subtract(base),side=new B.Vector3(-d.z,0,d.x).normalize().scale(width),mid=base.add(d.scale(.52));
+     const points=[base,mid.add(side),tip,mid.subtract(side),mid.add(new B.Vector3(0,.04*size,0))],i=positions.length/3;
+     for(const p of points){positions.push(p.x,p.y,p.z);colors.push(...color,1);}
+     indices.push(i,i+1,i+4,i+1,i+2,i+4,i+2,i+3,i+4,i+3,i,i+4);
+   };
+   // Each bush is an asymmetric group of branches, not a floating green ball.
+   for(let j=0;j<6;j++){
+     const a=j*2.399+seed,height=(.55+(j%3)*.16)*size;
+     const root=new B.Vector3(x,0,z),tip=new B.Vector3(x+Math.sin(a)*size*.4,height,z+Math.cos(a)*size*.4);
+     const stem=B.MeshBuilder.CreateTube('shrub grounded branch',{path:[root,tip],radius:.018*size,tessellation:4},w.scene);stem.material=w.materials.bark;this.tag(stem,backdrop);
+     for(let k=1;k<=5;k++)for(const side of [-1,1]){
+       const t=k/6,p=B.Vector3.Lerp(root,tip,t),angle=a+side*1.2+k*.3;
+       const end=p.add(new B.Vector3(Math.sin(angle)*.32*size,.12*size,Math.cos(angle)*.32*size));
+       leaf(p,end,.105*size,j%2?[.63,.8,.55]:[.78,.89,.64]);
+     }
+   }
+   const mesh=new B.Mesh('border shrub foliage',w.scene),data=new B.VertexData();data.positions=positions;data.indices=indices;data.colors=colors;B.VertexData.ComputeNormals(positions,indices,normals);data.normals=normals;data.applyToMesh(mesh);
+   mesh.material=w.materials.leaf;this.tag(mesh,backdrop);this.records.push({type:'shrub',x,z,size,baseY:0,triangles:indices.length/3,backdrop});
+ }
+ build(){
+   const w=this.w;
+   w.material('yardWood','#9a957d',.94);w.material('borderSoil','#727963',1);w.material('bark','#685c40',1);
+   const leaf=w.material('leaf','#5b7350',1);leaf.backFaceCulling=false;
+   for(const side of [-1,1]){
+     this.tag(w.box('land beyond boundary fence',side*46,-.15,-48,32,.3,110,'borderSoil'),true);
+     for(let i=0;i<9;i++)this.shrub(side*(32.2+(i%3)*1.2),-5-i*10.5,1+(i%3)*.2,i*.7);
+     for(let i=0;i<4;i++){
+       const x=side*(36+(i%2)*1.5),z=-17-i*23,h=5+(i%2)*1.2;
+       this.tag(w.cylinder('background tree grounded trunk',x,h/2,z,.26,h,'bark',6),true);
+       for(let j=0;j<3;j++){
+         const crown=B.MeshBuilder.CreateIcoSphere('background tree crown',{radius:1.5,subdivisions:1,flat:true},w.scene);
+         crown.position.set(x+Math.sin(j*2.4)*.6,h-.4+j*.4,z+Math.cos(j*2.4)*.6);crown.scaling.set(1,1.25,1);crown.material=leaf;this.tag(crown,true);
+       }
+       this.records.push({type:'tree',x,z,baseY:0,backdrop:true});
+     }
+   }
+   for(const side of [-1,1])for(let i=0;i<3;i++)this.shrub(side*(17.3+i*.6),-64-i*12,.85+i*.1,i+2);
+   // Growth follows wall bases, drain runoff and shade. Keep control faces,
+   // pavement arrows and every usable approach free of visual clutter.
+   for(const [x,z] of [[-28,-9],[-27,-13],[28,-10],[28,-32],[-26,-45],[-28,-53],[28,-55]]){
+     this.patch('leaf litter under fence growth',x,.006,z,.9,1.5,'borderSoil',z);
+     this.patch('moss at damp yard edge',x+.2,.011,z,.55,.95,'decayMoss',z+1);
+   }
+   for(const z of [-18,-26,-32])this.patch('loading wall damp growth',-18.373,.55,z,1.3,.51,'decayMold',z,-Math.PI/2,true);
+   for(const z of [-38,-43,-49])this.patch('gatehouse lower mold',29.266,.42,z,1.4,.4,'decayMold',z,Math.PI/2,true);
+   this.patch('gatehouse rear flaking paint',24.9,1.7,-51.873,2.1,1.15,'decayPeel',7,Math.PI,true);
+   // A few recognizably constructed wood surfaces make the utility area feel
+   // inhabited. Their edges sit on actual benches rather than in mid-air.
+   w.box('worn wooden gatehouse desktop',23,.864,-45.2,3.6,.025,1.4,'yardWood');
+   // The scene keeps the original puddle ellipses for sound/AI contact; vertex
+   // alpha softens their visible edge without changing that gameplay geometry.
+   for(const m of w.scene.meshes){
+     if(!['water','yard shallow rainwater','pressure burst puddle'].includes(m.name))continue;
+     const p=m.getVerticesData(B.VertexBuffer.PositionKind),c=[];
+     for(let i=0;i<p.length;i+=3){const r=Math.hypot(p[i],p[i+1]);c.push(1,1,1,r>.8?.12:.88);}
+     m.setVerticesData(B.VertexBuffer.ColorKind,c);m.hasVertexAlpha=true;
+     m.material=w.materials.puddle;m.material.roughness=.23;m.material.alpha=.68;
+   }
+ }
+}
+```
+
 ## dist/js/lighting.js
 
 ```javascript
-import { roomAt } from './guidance.js?v=1.14.0';
+import { roomAt } from './guidance.js?v=1.19.0';
 // Only real door openings connect rooms. Preselect the neighbouring fixture on
 // approach; proximity to a solid wall must never light the room behind it.
 export const LIGHT_PORTALS=[
+ {x:0,z:0,a:'garage',b:'yard'},{x:20,z:-36,a:'yard',b:'gatehouse'},{x:16.5,z:-44,a:'yard',b:'gatehouse'},{x:0,z:-58,a:'yard',b:'road'},
  {x:-17,z:18,a:'garage',b:'security'},{x:-17,z:45,a:'garage',b:'storage'},
  {x:-17,z:76,a:'garage',b:'workshop'},{x:17,z:39,a:'garage',b:'electrical'},
  {x:17,z:98,a:'garage',b:'pump'},{x:-24,z:29,a:'security',b:'garage'},
@@ -4812,13 +5092,14 @@ export function selectFixtures(fixtures,position,limit=4){
 export function lightingPhase(state){return state?.flags?.includes('power')?'restored':state?.flags?.includes('car')?'outage':'arrival';}
 export function fixturePower(fixture,phase){
  const room=roomAt(fixture);
+ if(['yard','gatehouse','road'].includes(room))return fixture.emergency?(room==='gatehouse'?.52:.42):.12;
  if(phase==='arrival')return .88;
  if(phase==='outage')return fixture.emergency?.3:.065;
  // Restored drive-lane and task lighting exposes crossings; peripheral cover
  // stays dark. Existing task/sign lamps are always usable at their positions.
  return room==='garage'&&Math.abs(fixture.x)<4||room==='electrical'||room==='security'?.95:fixture.emergency?.4:.25;
 }
-export function ambientPower(phase){return phase==='arrival'?.055:phase==='restored'?.026:.009;}
+export function ambientPower(phase){return phase==='arrival'?.035:phase==='restored'?.012:.004;}
 export function stealthVisibility(position,fixtures,phase='outage'){
  let value=phase==='arrival'?.38:phase==='restored'?.23:.18;
  const room=roomAt(position);
@@ -4834,8 +5115,8 @@ export function stealthVisibility(position,fixtures,phase='outage'){
 ## dist/js/locomotion.js
 
 ```javascript
-import { AGENT_RADIUS, blocked, lineClear, moveCircle, routeSteps, createPathWorkspace } from './navigation.js?v=1.14.0';
-import { dampAngle } from './animation.js?v=1.14.0';
+import { AGENT_RADIUS, blocked, lineClear, moveCircle, routeSteps, createPathWorkspace } from './navigation.js?v=1.19.0';
+import { dampAngle } from './animation.js?v=1.19.0';
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 
@@ -4850,10 +5131,12 @@ export class RouteFollower {
     this.avoid=new Map();this.lastNode=null;this.recovery=null;this.recoveries=0;
     this.lastSpeed=0;this.brake=0;this.lastTurn=0;this.routeFailed=false;this.turnAction=null;
     this.job=null;this.commitUntil=0;this.planCount=0;this.planSlices=0;this.maxPlanMs=0;
+    this.watchAnchor=null;this.watchAt=0;this.lastStepAt=-Infinity;
   }
   invalidate(){this.nextPlan=0;this.planned=null;this.path=[];this.goal=null;this.job=null;this.commitUntil=0;}
   planningReport(){return {plans:this.planCount,slices:this.planSlices,maxSliceMs:+this.maxPlanMs.toFixed(2),pending:!!this.job};}
   recover(pos,yaw,clock){
+    this.watchAnchor={...pos};this.watchAt=clock;
     const next=this.path[0];
     if(this.lastNode!==null&&next?.navIndex!==undefined)this.avoid.set(`${this.lastNode}:${next.navIndex}`,clock+7);
     // Back off first; if the back is blocked try a diagonal/side step. Recovery
@@ -4868,6 +5151,12 @@ export class RouteFollower {
   step(pos,yaw,evidence,speed,dt,clock,mode='search'){
     const before={...pos};let pose=null,phase=null,failed=false;
     if(!evidence||dt<=0)return {yaw,speed:0,pose,phase,failed};
+    // This watchdog survives successful replans. Previously each fresh path
+    // could reset the progress timer, leaving a stationary hunter planning the
+    // same obstructed first step forever. Pauses between intents are excluded.
+    if(!this.watchAnchor||clock-this.lastStepAt>.3||distance(pos,this.watchAnchor)>.15){this.watchAnchor={...pos};this.watchAt=clock;}
+    this.lastStepAt=clock;
+    if(!this.recovery&&clock-this.watchAt>3&&distance(pos,evidence)>.5)this.recover(pos,yaw,clock);
     for(const [key,until] of this.avoid)if(clock>=until)this.avoid.delete(key);
     if(this.recovery){
       const r=this.recovery;r.time+=dt;const blend=smooth((r.time/.9-.12)/.6);
@@ -4898,7 +5187,14 @@ export class RouteFollower {
     // A moving visible target can be followed directly between scheduled plans.
     const direct=!blocked(evidence.x,evidence.z,this.rects,AGENT_RADIUS)&&lineClear(pos,evidence,this.rects,AGENT_RADIUS);
     if(direct){this.goal={...evidence};this.routeFailed=false;}
-    while(this.path.length&&distance(pos,this.path[0])<.075){this.lastNode=this.path.shift().navIndex??null;this.windowTime=this.progress=0;}
+    // Being near a grid corner does not mean the body has cleared its pillar.
+    // Retain that last few centimetres unless the next swept segment is clear.
+    while(this.path.length&&distance(pos,this.path[0])<.075&&(!this.path[1]||lineClear(pos,this.path[1],this.rects,AGENT_RADIUS))){this.lastNode=this.path.shift().navIndex??null;this.windowTime=this.progress=0;}
+    // Blend a nearby corner only after the entire body has a clear shortcut.
+    // This removes stop/turn/accelerate beats without cutting through walls.
+    while(this.path.length>1&&distance(pos,this.path[0])<.65&&lineClear(pos,this.path[1],this.rects,AGENT_RADIUS)){
+      this.lastNode=this.path.shift().navIndex??null;this.windowTime=this.progress=0;
+    }
     const next=direct?evidence:this.path[0]||this.goal;
     if(!next||(!direct&&!lineClear(pos,next,this.rects,AGENT_RADIUS))){
       if(!this.job)this.windowTime+=dt;
@@ -4906,7 +5202,7 @@ export class RouteFollower {
       return {yaw,speed:0,pose:'Listen',phase:null,failed};
     }
     const d=distance(pos,next);
-    if(d<.06){
+    if(d<(direct||this.path.length<=1?.06:.001)){
       if(this.lastSpeed>1.5)this.brake=.8;
       this.brake=Math.max(0,this.brake-dt);this.lastSpeed=0;
       return {yaw,speed:0,pose:this.brake?'Brake':null,phase:this.brake?1-this.brake/.8:null,failed};
@@ -4943,8 +5239,8 @@ export class RouteFollower {
 
 ```javascript
 /** Application entry: keep fatal startup errors readable instead of a black canvas. */
-import { Game } from "./game.js?v=1.14.0";
-import { $ } from "./ui.js?v=1.14.0";
+import { Game } from "./game.js?v=1.19.0";
+import { $ } from "./ui.js?v=1.19.0";
 const game = new Game();
 // Event-handler failures must produce a recovery screen, not an inert menu.
 // Reports remain local; no telemetry or personal data is sent anywhere.
@@ -4974,9 +5270,10 @@ if(new URLSearchParams(location.search).has('inspect')){
 ## dist/js/map.js
 
 ```javascript
-import { TASKS } from './tasks.js?v=1.14.0';
+import { TASKS } from './tasks.js?v=1.19.0';
 /** Schematic floor plan. Discovered blockers disappear when their task is done. */
 export function renderMap(position = null, destination = null, visited = [], flags = [], mechanisms=[]) {
+  if((position?.z??1)<0||(destination?.z??1)<0)return renderYardMap(position,destination,flags)+`<details class="journal-history"><summary>Garage floor plan</summary>${renderMap(null,null,visited,flags,mechanisms)}</details>`;
   const rooms = [
     [-30, 7, 13, 22, "SECURITY"],
     [-30, 33, 13, 24, "STORAGE"],
@@ -4984,12 +5281,13 @@ export function renderMap(position = null, destination = null, visited = [], fla
     [17, 27, 13, 24, "ELECTRICAL"],
     [17, 86, 13, 24, "PUMP ROOM"],
   ];
-  const sx = (x) => (x + 31) * 7,
+  // Mirror X to agree with the actual north-facing Babylon view.
+  const sx = (x) => (31 - x) * 7,
     sz = (z) => z * 6 + 35;
   const roomSVG = rooms
     .map(
       ([x, z, w, d, label]) =>
-        `<rect x="${sx(x)}" y="${sz(z)}" width="${w * 7}" height="${d * 6}" fill="${visited.includes(label === "PUMP ROOM" ? "pump" : label.toLowerCase()) ? "#35534e" : "#1b2b2d"}" stroke="#799588" stroke-width="1"/><text x="${sx(x + w / 2)}" y="${sz(z + d / 2)}" text-anchor="middle" fill="#c5d3bd" font-size="11" letter-spacing=".4">${label}</text>`,
+        `<rect x="${sx(x + w)}" y="${sz(z)}" width="${w * 7}" height="${d * 6}" fill="${visited.includes(label === "PUMP ROOM" ? "pump" : label.toLowerCase()) ? "#35534e" : "#1b2b2d"}" stroke="#799588" stroke-width="1"/><text x="${sx(x + w / 2)}" y="${sz(z + d / 2)}" text-anchor="middle" fill="#c5d3bd" font-size="11" letter-spacing=".4">${label}</text>`,
     )
     .join("");
   const marker = position
@@ -4998,19 +5296,40 @@ export function renderMap(position = null, destination = null, visited = [], fla
   const destinationMarker = destination ? `<circle cx="${sx(destination.x)}" cy="${sz(destination.z)}" r="11" fill="none" stroke="#e6c585" stroke-width="3"/><circle cx="${sx(destination.x)}" cy="${sz(destination.z)}" r="3" fill="#e6c585"/>` : "";
   const shortcut = flags.includes("key") ? `<path d="M${sx(-24)} ${sz(29)}V${sz(62)}" fill="none" stroke="#e6c585" stroke-width="3" stroke-dasharray="5 4"/>` : "";
   const annotations=TASKS.filter(t=>mechanisms?.includes(t.id)&&!flags.includes(t.id)&&t.destination).map(t=>`<g><circle cx="${sx(t.destination.x)}" cy="${sz(t.destination.z)}" r="7" fill="#ad785c"/><text x="${sx(t.destination.x)}" y="${sz(t.destination.z)+4}" text-anchor="middle" fill="#fff2d6" font-size="11">!</text><title>Requires · ${t.title}</title></g>`).join('');
-  return `<p class="settings-note">${destination ? "DESTINATION · " + destination.name : "Service floor plan"}<br>Gold ring: current task · White dot: you · Green rooms: visited · Dashed gold: unlocked service passage · !: discovered blocked mechanism</p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 434 770" role="img" aria-label="Meridian B2 plan. North exit at top. Security, Storage and Workshop on west side. Electrical and Pump Room on east side." style="font-family:Arial,sans-serif;width:100%;max-height:60vh"><rect width="434" height="770" fill="#102023"/><rect x="7" y="41" width="420" height="654" fill="#192e31" stroke="#799588"/><rect x="98" y="41" width="238" height="654" fill="#15292c" stroke="#799588"/>${roomSVG}${shortcut}<path d="M217 650V65" fill="none" stroke="#6e8176" stroke-width="1" stroke-dasharray="5 8"/><path d="M210 76l7-12 7 12" fill="none" stroke="#c9b382"/><text x="217" y="22" text-anchor="middle" fill="#c9b382" font-size="12" letter-spacing="3">NORTH EXIT</text><rect x="${sx(10)}" y="${sz(76)}" width="32" height="25" fill="#788f85"/><text x="${sx(12.5)}" y="${sz(83)}" text-anchor="middle" fill="#cfddc9" font-size="10">BAY 042</text><text x="217" y="718" text-anchor="middle" fill="#aabdaf" font-size="10" letter-spacing="2">MERIDIAN / BASEMENT 2</text>${annotations}${destinationMarker}${marker}</svg>`;
+  return `<p class="settings-note">${destination ? "DESTINATION · " + destination.name : "Service floor plan"}<br>Gold ring: current task · White dot: you · Green rooms: visited · Dashed gold: unlocked service passage · !: discovered blocked mechanism</p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 434 770" role="img" aria-label="Meridian B2 plan. North exit at top. Security, Storage and Workshop on the service side. Electrical and Pump Room on the opposite side." style="font-family:Arial,sans-serif;width:100%;max-height:60vh"><rect width="434" height="770" fill="#102023"/><rect x="7" y="41" width="420" height="654" fill="#192e31" stroke="#799588"/><rect x="98" y="41" width="238" height="654" fill="#15292c" stroke="#799588"/>${roomSVG}${shortcut}<path d="M217 650V65" fill="none" stroke="#6e8176" stroke-width="1" stroke-dasharray="5 8"/><path d="M210 76l7-12 7 12" fill="none" stroke="#c9b382"/><text x="217" y="22" text-anchor="middle" fill="#c9b382" font-size="12" letter-spacing="3">NORTH EXIT</text><rect x="${sx(10)-32}" y="${sz(76)}" width="32" height="25" fill="#788f85"/><text x="${sx(12.5)}" y="${sz(83)}" text-anchor="middle" fill="#cfddc9" font-size="10">BAY 042</text><text x="217" y="718" text-anchor="middle" fill="#aabdaf" font-size="10" letter-spacing="2">MERIDIAN / BASEMENT 2</text>${annotations}${destinationMarker}${marker}</svg>`;
+}
+
+function renderYardMap(position,destination,flags){
+  const x=n=>(31-n)*6,z=n=>(n+102)*5.3+25;
+  const marker=(p,color,r)=>p&&p.z<0?`<circle cx="${x(p.x)}" cy="${z(p.z)}" r="${r}" fill="none" stroke="${color}" stroke-width="3"/>`:'';
+  const barrier=flags.includes('barrier')?'#6f967c':'#b98563';
+  return `<p class="settings-note">SERVICE YARD / STREET${destination?' · '+destination.name:''}<br>01 Barrier control · 02 Utility selector · 03 Gatehouse brake · 04 Dock winch<br>Gold ring: task · White arrow: your facing direction · North is up. Follow the OPEN LANE sign around the roadworks container.</p>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 630" role="img" aria-label="Service yard map with gatehouse beside the generator, loading dock opposite and street barrier at the far end" style="font-family:Arial,sans-serif;width:100%;max-height:64vh">
+  <rect width="372" height="630" fill="#102023"/><rect x="96" y="25" width="180" height="233" fill="#263936" stroke="#819080"/>
+  <rect x="7" y="258" width="358" height="318" fill="#1c3031" stroke="#819080"/>
+  <rect x="${x(11.5)}" y="${z(-76)}" width="66" height="42" fill="#596156"/><text x="154" y="${z(-70)}" fill="#eee1ba" font-size="9" text-anchor="middle">ROADWORKS</text>
+  <path d="M186 286 V242 L240 210 V135 L186 62" stroke="#bdaa72" stroke-width="3" fill="none" stroke-dasharray="7 5"/>
+  <text x="186" y="18" text-anchor="middle" fill="#e6c585" font-size="12">STREET / DEPARTURE</text>
+  <rect x="${x(29.5)}" y="${z(-52)}" width="78" height="85" fill="#3b524b" stroke="#91a28d"/><text x="${x(23)}" y="${z(-44)}" text-anchor="middle" fill="#e1debf" font-size="10">GATEHOUSE</text>
+  <rect x="${x(-18.5)}" y="${z(-35.5)}" width="66" height="111" fill="#3c4944"/><text x="${x(-24)}" y="${z(-24)}" text-anchor="middle" fill="#e1debf" font-size="10">LOADING</text>
+  <rect x="${x(29.1667)}" y="${z(-30)}" width="49" height="85" fill="#4b5140"/><text x="${x(25)}" y="${z(-22)}" text-anchor="middle" fill="#e1debf" font-size="9">SELECTOR</text>
+  <path d="M150 ${z(-58)}H222" stroke="${barrier}" stroke-width="4"/><text x="186" y="${z(-58)-9}" text-anchor="middle" fill="#e1debf" font-size="10">${flags.includes('barrier')?'BARRIER OPEN':'STREET BARRIER'}</text>
+  <text x="${x(-18)}" y="${z(-37)}" text-anchor="middle" fill="#e1debf" font-size="9">WINCH</text><path d="M${x(-12)} ${z(-39)}V${z(-25)}" stroke="#809486" stroke-width="3"/>
+  <text x="186" y="600" text-anchor="middle" fill="#e6c585" font-size="12">GARAGE SHUTTER / BAY 042 ↓</text>
+  ${marker(destination,'#e6c585',9)}${marker(position,'#fff0c6',5)}${position&&position.z<0?`<path d="M0 12 L-5 -5 L0 -2 L5 -5 Z" fill="#fff0c6" transform="translate(${x(position.x)} ${z(position.z)}) rotate(${(position.yaw||0)*180/Math.PI})"/>`:''}<text x="${x(-10)}" y="${z(-49.4)+17}" text-anchor="middle" fill="#e6c585" font-size="8">BARRIER CONTROL</text><text x="${x(18.5)}" y="${z(-45.9)-12}" text-anchor="middle" fill="#e6c585" font-size="8">BRAKE</text></svg>`;
 }
 ```
 
 ## dist/js/navigation.js
 
 ```javascript
-import { consumeSteps } from "./preparation.js?v=1.14.0";
+import { consumeSteps } from "./preparation.js?v=1.19.0";
+import { anyNearby, indexSpatial, isMovingBlocker } from './spatial.js?v=1.19.0';
 /** A small deterministic navigation/collision layer for a single flat floor.
  * Avoiding a physics engine keeps downloads and CPU costs small. All distances
  * are in metres; walls/cars are axis-aligned collision rectangles. */
 export function blocked(x, z, rects, r = 0.28) {
-  return rects.some(
+  return anyNearby(rects,x-r,z-r,x+r,z+r,
     (b) =>
       b.enabled !== false &&
       x > b.x - b.w / 2 - r &&
@@ -5047,10 +5366,10 @@ export function segmentHits(a, b, box, radius = 0, height = false) {
   return leave > 0.0001 && enter < 0.9999;
 }
 export function lineClear(a, b, rects, radius = 0) {
-  return !rects.some((box) => segmentHits(a, b, box, radius));
+  return !anyNearby(rects,Math.min(a.x,b.x)-radius,Math.min(a.z,b.z)-radius,Math.max(a.x,b.x)+radius,Math.max(a.z,b.z)+radius,(box) => segmentHits(a, b, box, radius));
 }
 export function sightClear(a, b, rects) {
-  return !rects.some((box) => segmentHits(a, b, box, 0, true));
+  return !anyNearby(rects,Math.min(a.x,b.x),Math.min(a.z,b.z),Math.max(a.x,b.x),Math.max(a.z,b.z),(box) => !box.seeThrough && segmentHits(a, b, box, 0, true));
 }
 
 // Static walkability is compiled while loading. Moving doors are checked live,
@@ -5059,11 +5378,11 @@ const grids = new WeakMap();
 // One body clearance is used by planning, steering and recovery. The former
 // coarse grid could omit the only usable point beside a vehicle or door jamb.
 export const AGENT_RADIUS = .34;
-const CELL = .625, WIDTH = 97, HEIGHT = 177;
+const CELL = .625, WIDTH = 97, HEIGHT = 341, MIN_Z=-101.5;
 const DIRECTIONS = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
-const points = Array.from({length: WIDTH * HEIGHT}, (_,k) => ({ x: -30 + (k % WIDTH) * CELL, z: 1 + Math.floor(k / WIDTH) * CELL }));
+const points = Array.from({length: WIDTH * HEIGHT}, (_,k) => ({ x: -30 + (k % WIDTH) * CELL, z: MIN_Z + Math.floor(k / WIDTH) * CELL }));
 const worldPoint = (k) => points[k];
-const indexOf = (p) => Math.max(0, Math.min(HEIGHT - 1, Math.round((p.z - 1) / CELL))) * WIDTH + Math.max(0, Math.min(WIDTH - 1, Math.round((p.x + 30) / CELL)));
+const indexOf = (p) => Math.max(0, Math.min(HEIGHT - 1, Math.round((p.z - MIN_Z) / CELL))) * WIDTH + Math.max(0, Math.min(WIDTH - 1, Math.round((p.x + 30) / CELL)));
 export function prepareNavigation(rects) {
   const it=navigationSteps(rects); let step; do {step=it.next();} while(!step.done); return step.value;
 }
@@ -5071,8 +5390,10 @@ export async function prepareNavigationAsync(rects) { await consumeSteps(navigat
 function* navigationSteps(rects) {
   let grid = grids.get(rects);
   if (grid && grid.count === rects.length) return grid;
-  const dynamic = rects.filter((r) => r.dynamic || /gate|grille|shortcut/.test(r.name || ""));
+  indexSpatial(rects);
+  const dynamic = rects.filter(isMovingBlocker);
   const statics = rects.filter((r) => !dynamic.includes(r));
+  indexSpatial(statics);
   const walkable = new Uint8Array(WIDTH * HEIGHT);
   for (let k = 0; k < walkable.length; k++) {
     const p = worldPoint(k); walkable[k] = !blocked(p.x, p.z, statics, AGENT_RADIUS);
@@ -5221,6 +5542,146 @@ export function* routeSteps(start,goal,rects,avoided=new Set(),workspace=null) {
 }
 ```
 
+## dist/js/night-sky.js
+
+```javascript
+const B=globalThis.BABYLON;
+/** A local, stylized night sky: three unlit meshes, no image downloads, shadow
+ * passes, reflection capture or per-pixel cloud noise. Geometry is authored once
+ * during loading. infiniteDistance follows the camera without changing gameplay
+ * lighting or the hunter's visibility model. */
+export class NightSky {
+  constructor(w){
+    this.w=w;this.meshes=[];this.material=new B.StandardMaterial('night sky vertex palette',w.scene);
+    Object.assign(this.material,{disableLighting:true,backFaceCulling:false,fogEnabled:false});
+    this.material.diffuseColor=B.Color3.White();this.material.emissiveColor=new B.Color3(.7,.7,.7);this.material.specularColor=B.Color3.Black();
+    const dome=B.MeshBuilder.CreateSphere('night skybox dome',{diameter:220,segments:16},w.scene);
+    const p=dome.getVerticesData(B.VertexBuffer.PositionKind),colors=[];
+    for(let i=0;i<p.length;i+=3){
+      const elevation=Math.max(0,p[i+1]/110),h=Math.pow(1-elevation,3);
+      // Quiet urban horizon; the yard itself remains dark and needs the torch.
+      colors.push(.006+h*.018,.010+h*.022,.024+h*.025,1);
+    }
+    dome.setVerticesData(B.VertexBuffer.ColorKind,colors);this.adopt(dome);
+    const cloud={positions:[],indices:[],colors:[]},stars={positions:[],indices:[],colors:[]};
+    const direction=(yaw,elevation,r)=>new B.Vector3(Math.sin(yaw)*Math.cos(elevation)*r,Math.sin(elevation)*r,Math.cos(yaw)*Math.cos(elevation)*r);
+    const triangle=(data,points,color)=>{const base=data.positions.length/3;for(const v of points){data.positions.push(v.x,v.y,v.z);data.colors.push(...color,1);}data.indices.push(base,base+1,base+2);};
+    // Broken cloud banks near the horizon, not repeated rings over the whole
+    // dome. These are opaque silhouettes: no alpha overdraw or noise shader.
+    for(let patch=0;patch<7;patch++)for(let i=0;i<8;i++){
+      const yaw=patch*.93+i*.067,spread=.10,e=.07+(patch%3)*.075+Math.sin(i*.7)*.028;
+      triangle(cloud,[direction(yaw-spread,e,101),direction(yaw+spread,e,101),direction(yaw,e+.055+(i%3)*.012,101)],[.006,.011,.019]);
+    }
+    const yaw=-.65,e=.48,center=direction(yaw,e,106),right=new B.Vector3(Math.cos(yaw),0,-Math.sin(yaw)),up=B.Vector3.Cross(center.normalizeToNew(),right).normalize();
+    for(let i=0;i<20;i++){
+      const a=i*Math.PI/10,b=(i+1)*Math.PI/10;
+      triangle(stars,[center,center.add(right.scale(Math.cos(a)*1.35)).add(up.scale(Math.sin(a)*1.35)),center.add(right.scale(Math.cos(b)*1.35)).add(up.scale(Math.sin(b)*1.35))],[.40,.43,.46]);
+    }
+    // Equal-area Fibonacci distribution across the upper hemisphere. All stars
+    // live in ONE mesh and never twinkle or allocate anything during gameplay.
+    // Diameters are large enough to survive Low render scale without noisy bloom.
+    this.starCount=640;this.starRecords=[];
+    for(let i=0;i<this.starCount;i++){
+      const y=i*2.3999632297,e=Math.asin(.09+.9*(i+.5)/this.starCount),c=direction(y,e,108);
+      // Leave the moon face uncluttered.
+      if(B.Vector3.Distance(c,center)<2.6)continue;
+      const r=new B.Vector3(Math.cos(y),0,-Math.sin(y)),u=B.Vector3.Cross(c.normalizeToNew(),r).normalize();
+      const bright=i%17===0,size=bright?.16:.065+(i%7)*.009,l=bright?.85:.32+(i%5)*.075;
+      const a=c.add(r.scale(-size)),b=c.add(u.scale(size)),d=c.add(r.scale(size)),f=c.add(u.scale(-size));
+      const color=i%5===0?[l,l*.92,l*.8]:[l*.85,l*.93,l];
+      triangle(stars,[a,b,d],color);triangle(stars,[a,d,f],color);
+      this.starRecords.push({x:c.x,y:c.y,z:c.z,radius:size});
+    }
+    this.starCount=this.starRecords.length;
+    for(const [name,data] of [['low cloud silhouettes',cloud],['veiled moon and stars',stars]]){
+      const m=new B.Mesh(name,w.scene),v=new B.VertexData();v.positions=data.positions;v.indices=data.indices;v.colors=data.colors;v.normals=[];B.VertexData.ComputeNormals(v.positions,v.indices,v.normals);v.applyToMesh(m);this.adopt(m);
+    }
+    this.clouds=this.meshes[1];this.setSettings({skyBrightness:.8});
+  }
+  adopt(m){m.material=this.material;m.infiniteDistance=true;m.isPickable=false;m.applyFog=false;m.receiveShadows=false;m.alwaysSelectAsActiveMesh=true;m.metadata={sky:true,lvCaster:false};this.meshes.push(m);this.w.visuals.dynamicRoots.add(m);this.w.glow.addExcludedMesh(m);}
+  setSettings(s){this.settings=s;this.material.emissiveColor.setAll(s.skyBrightness??.8);}
+  tick(time,position){
+    const visible=position.z<28||!!this.preparing;
+    if(this.visible!==visible){this.visible=visible;for(const m of this.meshes)m.setEnabled(visible);}
+    // Static cloud shapes drift extremely slowly; reduced motion freezes them.
+    if(visible)this.clouds.rotation.y=this.settings?.reducedMotion||this.settings?.sceneryMotion===false?0:time*.0007;
+  }
+  prepare(on){this.preparing=on;this.visible=null;this.tick(0,this.w.camera.position);}
+}
+```
+
+## dist/js/patrol.js
+
+```javascript
+import { AGENT_RADIUS, blocked } from './navigation.js?v=1.19.0';
+const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
+/** Named patrol stops are ordinary walkable floor positions, NOT player targets.
+ * Two nearby arrivals make a sweep; then an overdue section wins. The public
+ * shutter/winch state changes the area being guarded without reading a hidden
+ * player's coordinates. All route costs use the prebuilt visibility graph. */
+export const PATROL_STOPS=[
+ ['entrance','apron',0,8],['entrance','security aisle',-8.2,18],['entrance','ticket aisle',8.2,25],['entrance','security room',-21,18],
+ ['middle','west car aisle',-8.2,42],['middle','east car aisle',8.2,54],['middle','store room',-22,45],['middle','electrical room',23,39],
+ ['rear','workshop approach',-8.2,73],['rear','workshop room',-22,76],['rear','bay 042 approach',3,85],['rear','pump room',23,98],['rear','rear crossover',0,102],
+ ['yard-west','shutter threshold',0,-8],['yard-west','loading approach',-8,-20],['yard-west','loading dock',-14,-39],['yard-west','barrier approach',-6,-48],
+ ['yard-east','utility approach',8,-28],['yard-east','generator awning',23,-22],['yard-east','gatehouse room',20,-40],['yard-east','outer crossover',8,-48],
+].map(([section,name,x,z],i)=>Object.freeze({id:'patrol:'+i,section,name,x,z}));
+
+export class PatrolPlanner {
+ constructor(rects){this.rects=rects;this.visits=new Map();this.sectionVisits=new Map();this.failed=new Map();this.arrivals=[];this.resetSweep();}
+ resetSweep(){this.section=null;this.sweep=0;this.target=null;this.since=0;}
+ prepare(routes){this.routes=routes;}
+ setChapter(chapter){
+  if(this.chapter===chapter)return;
+  this.chapter=chapter;this.resetSweep();
+  // The open shutter is a public mechanical cue. It does not teleport or cancel
+  // pursuit, a stagger, an inspection or an already heard distraction.
+  this.priority=chapter==='yard'?'yard-west':chapter==='return'?'entrance':null;
+ }
+ choose(origin,clock,seed,{outsideUnlocked=false}={}){
+  if(!this.chapter)this.setChapter(outsideUnlocked?'yard':'interior');
+  const sections=this.chapter==='yard'?['entrance','yard-west','yard-east']:
+   this.chapter==='return'&&outsideUnlocked?['entrance','middle','rear','yard-west','yard-east']:['entrance','middle','rear'];
+  const costs=this.routes?.costsFrom(origin);
+  const candidates=PATROL_STOPS.filter(p=>sections.includes(p.section)&&
+    (outsideUnlocked||p.z>=0)&&!blocked(p.x,p.z,this.rects,AGENT_RADIUS)&&clock>=(this.failed.get(p.id)||0))
+    .map((p,i)=>({p,cost:this.routes?this.routes.distance(origin,p,costs):distance(origin,p),jitter:Math.sin(i*2.399+seed/4294967296*6.28)*2}))
+    .filter(c=>Number.isFinite(c.cost));
+  if(!candidates.length){this.target=null;return null;}
+  const groups=sections.map(section=>{
+    const points=candidates.filter(c=>c.p.section===section);
+    const age=Math.min(110,clock-(this.sectionVisits.get(section)??-110));
+    return {section,points,age,cost:Math.min(...points.map(c=>c.cost))};
+  }).filter(g=>g.points.length);
+  let group=groups.find(g=>g.section===this.priority);
+  if(group)this.priority=null;
+  // Finish only two destinations in a section. The age cap prevents selection
+  // time from growing forever and dictating the same four-minute circuit.
+  if(!group&&this.sweep<2)group=groups.find(g=>g.section===this.section);
+  if(!group){
+    const alternatives=groups.filter(g=>g.section!==this.section);
+    const pool=alternatives.length?alternatives:groups;
+    pool.sort((a,b)=>(b.age*.3-Math.min(80,b.cost)*.16)-(a.age*.3-Math.min(80,a.cost)*.16));
+    group=pool[0];
+  }
+  if(group.section!==this.section){this.section=group.section;this.sweep=0;}
+  const points=group.points.filter(c=>distance(origin,c.p)>1.1);
+  const pool=points.length?points:group.points;
+  pool.sort((a,b)=>this.score(b,clock)-this.score(a,clock));
+  this.target=pool[0].p;this.since=clock;return this.target;
+ }
+ score(c,clock){return Math.min(100,clock-(this.visits.get(c.p.id)??-100))*.22-Math.min(20,c.cost)*.22+c.jitter;}
+ arrive(position,clock){
+  if(!this.target||distance(position,this.target)>.8)return false;
+  const p=this.target;this.visits.set(p.id,clock);this.sectionVisits.set(p.section,clock);this.sweep++;
+  this.arrivals.push({id:p.id,section:p.section,time:clock});if(this.arrivals.length>48)this.arrivals.shift();
+  this.target=null;return true;
+ }
+ fail(clock){if(this.target)this.failed.set(this.target.id,clock+20);this.target=null;this.sweep=2;}
+ report(){return {chapter:this.chapter,section:this.section,target:this.target?.name||null,arrivals:this.arrivals.slice(-12),visitedStops:this.visits.size};}
+}
+```
+
 ## dist/js/performance.js
 
 ```javascript
@@ -5308,6 +5769,26 @@ export class HitchRecorder {
   report() { return {sectionMaximaMs:{...this.maxima},recentEvents:[...this.events]}; }
 }
 
+/** Area histograms supplement the rolling FPS counter. All bins are allocated
+ * before play; samples do not allocate or sort frame arrays. P95 is rounded to
+ * a millisecond and the last bucket means 127 ms or longer. */
+export class AreaTimings {
+  constructor(){this.names=['garage','security','storage','workshop','electrical','pump','yard','gatehouse','road'];this.rows=Object.fromEntries(this.names.map(n=>[n,{bins:new Uint32Array(128)}]));this.reset();}
+  reset(){for(const r of Object.values(this.rows)){r.bins.fill(0);Object.assign(r,{frames:0,total:0,cpu:0,gpu:0,gpuSamples:0,over50:0,over100:0,worst:0});}}
+  sample(area,ms,cpu,gpu){
+    const r=this.rows[area];if(!r||!Number.isFinite(ms)||ms<=0)return;
+    r.frames++;r.total+=ms;r.cpu+=Number.isFinite(cpu)?cpu:0;r.worst=Math.max(r.worst,ms);
+    r.bins[Math.min(127,Math.floor(ms))]++;if(ms>=50)r.over50++;if(ms>=100)r.over100++;
+    if(Number.isFinite(gpu)&&gpu>0){r.gpu+=gpu;r.gpuSamples++;}
+  }
+  report(){
+    return Object.fromEntries(this.names.filter(n=>this.rows[n].frames).map(n=>{
+      const r=this.rows[n];let count=0,p95=0;for(;p95<127;p95++){count+=r.bins[p95];if(count>=Math.ceil(r.frames*.95))break;}
+      return [n,{frames:r.frames,seconds:r.total/1000,averageMs:r.total/r.frames,p95BucketMs:p95,worstMs:r.worst,over50:r.over50,over100:r.over100,cpuSubmissionMs:r.cpu/r.frames,gpuMs:r.gpuSamples?r.gpu/r.gpuSamples:null}];
+    }));
+  }
+}
+
 /** Optional guided sample: only real gameplay counts. Recommendations are a
  * graphics draft, never an automatic quality change or a hardware guarantee. */
 export class PerformanceSetup {
@@ -5393,10 +5874,10 @@ export function groundModel(root,x,z,supportY=0) {
 ## dist/js/player.js
 
 ```javascript
-import { InteractionFocus } from "./interaction.js?v=1.14.0";
-import { MouseCapture } from "./capture.js?v=1.14.0";
-import { difficultyRules } from "./difficulty.js?v=1.14.0";
-import { moveCircle } from "./navigation.js?v=1.14.0";
+import { InteractionFocus } from "./interaction.js?v=1.19.0";
+import { MouseCapture } from "./capture.js?v=1.19.0";
+import { difficultyRules } from "./difficulty.js?v=1.19.0";
+import { moveCircle } from "./navigation.js?v=1.19.0";
 
 /** A single input owner. Mouse deltas represent angles, so never multiply them by
  * frame time or devicePixelRatio. Translation and interpolation DO use seconds. */
@@ -5458,9 +5939,9 @@ export class Player {
       }
       if (!e.repeat)
         for (const action of ["interact", "flashlight", "journal", "hint", "objective", "throw"])
-          if (e.code === this.settings.bindings[action]) this.onAction(action);
+          if (e.code === this.settings.bindings[action]) {if(action==='throw'&&this.settings.throwGuide)this.throwAiming=true;else this.onAction(action);}
     });
-    window.addEventListener("keyup", (e) => this.keys.delete(e.code));
+    window.addEventListener("keyup", (e) => {this.keys.delete(e.code);if(e.code===this.settings.bindings.throw&&this.throwAiming){this.throwAiming=false;if(this.active)this.onAction('throw');}});
     window.addEventListener("blur", () => this.clear());
     canvas.addEventListener("pointerdown", (e) => {
       if (!this.active || e.pointerType === "touch" || e.button !== 0) return;
@@ -5503,6 +5984,7 @@ export class Player {
     });
   }
   clear() {
+    this.throwAiming=false;
     this.keys.clear();
     this.focus?.reset();
     this.touchMove = { x: 0, y: 0 };
@@ -5614,7 +6096,7 @@ export class Player {
             dt,
       ),
     );
-    const speed = this.crouched ? 1.3 : this.sprinting ? 4.5 : 2.6;
+    const speed = this.crouched ? 1.4 : this.sprinting ? 4.9 : 2.95;
     const desiredX =
       (Math.sin(this.yaw) * forward + Math.cos(this.yaw) * right) * speed;
     const desiredZ =
@@ -5689,9 +6171,9 @@ export class Player {
 ## dist/js/preferences.js
 
 ```javascript
-import { DEFAULT_SETTINGS, validateSettings } from "./state.js?v=1.14.0";
+import { DEFAULT_SETTINGS, validateSettings } from "./state.js?v=1.19.0";
 
-export const GRAPHICS_KEYS = ["quality", "shadows", "glow", "fxaa", "resolution", "scale", "adaptive", "adaptiveFloor"];
+export const GRAPHICS_KEYS = ["quality", "shadows", "glow", "fxaa", "resolution", "scale", "adaptive", "adaptiveFloor", "weatherEffects"];
 export const PRESETS = {
   low: { shadows: "off", glow: false, fxaa: false },
   medium: { shadows: "medium", glow: true, fxaa: false },
@@ -5699,11 +6181,11 @@ export const PRESETS = {
 };
 export const CATEGORIES = {
   gameplay: ["difficulty", "skipIntro", "objectiveHUD", "objectiveMode", "journalNotify", "hintReminders", "easyAdrenaline", "staminaMode"],
-  display: [...GRAPHICS_KEYS, "brightness"],
+  display: [...GRAPHICS_KEYS, "brightness", "skyBrightness"],
   performance: ["fpsCap", "menuFPS", "fpsMode", "fpsCorner", "fpsSize"],
   audio: ["master", "music", "ambience", "sfx", "uiVolume", "loudEffects", "dynamicRange", "soundCaptions","monoAudio"],
-  comfort: ["reducedMotion", "cinematicMotion", "fov", "bob", "sway", "uiScale", "subtitleSize", "promptScale", "crosshair", "crosshairSize", "crosshairContrast", "subtitles", "reducedFlashes", "interactionHighlight","cameraShake","scareScreenEffects","sprintFOV","subtitleBackground","speakerLabels"],
-  controls: ["mouseMode", "sensitivity", "separateAxes", "sensitivityY", "invertY", "lookSmoothing", "sprintMode", "crouchMode", "bindings","controllerEnabled","controllerDeadzone","controllerCurve","controllerLook"],
+  comfort: ['sceneryMotion','stableHorizon',"reducedMotion", "cinematicMotion", "fov", "bob", "sway", "uiScale", "subtitleSize", "promptScale", "crosshair", "crosshairSize", "crosshairContrast", "subtitles", "reducedFlashes", "interactionHighlight","cameraShake","scareScreenEffects","sprintFOV","subtitleBackground","speakerLabels"],
+  controls: ['throwGuide',"mouseMode", "sensitivity", "separateAxes", "sensitivityY", "invertY", "lookSmoothing", "sprintMode", "crouchMode", "bindings","controllerEnabled","controllerDeadzone","controllerCurve","controllerLook"],
 };
 const pick = s => Object.fromEntries(GRAPHICS_KEYS.map(k => [k, s[k]]));
 
@@ -5877,9 +6359,10 @@ export function propCollider(name,x,z,yaw,scale,y=0){
 ## dist/js/pursuit.js
 
 ```javascript
-import { AGENT_RADIUS, lineClear, blocked } from "./navigation.js?v=1.14.0";
+import { AGENT_RADIUS, lineClear, blocked } from "./navigation.js?v=1.19.0";
 const dist=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 export const ROUTE_NODES=[
+ [0,-5],[0,-12],[-8,-20],[12,-24],[-15,-40],[-8,-44],[8,-48],[20,-34],[20,-40],[23,-48],[15,-44],[23,-22],[-10,-60],[-8,-78],[0,-92],
   [-22,18],[-22,28],[-22,35],[-22,45],[-22,55],[-22,65],[-22,76],[-22,85],[-22,98],
   [-15,18],[-15,45],[-15,76],[-15,98], [0,18],[0,39],[0,60],[0,76],[0,98],
   [15,39],[15,98],[23,39],[23,98],
@@ -5949,9 +6432,9 @@ export class RecoveryLog {
 ## dist/js/rich-details.js
 
 ```javascript
-import { RICH_LAYOUT } from './detail-layout.js?v=1.14.0';
-import { groundModel } from './placement.js?v=1.14.0';
-import { yieldTask } from './preparation.js?v=1.14.0';
+import { RICH_LAYOUT } from './detail-layout.js?v=1.19.0';
+import { groundModel } from './placement.js?v=1.19.0';
+import { yieldTask } from './preparation.js?v=1.19.0';
 const B=globalThis.BABYLON;
 export class RichDetails {
  constructor(w){this.w=w;this.instances=[];this.visor=null;this.quality='low';}
@@ -6014,11 +6497,94 @@ export class RichDetails {
 }
 ```
 
+## dist/js/scenery.js
+
+```javascript
+import { groundModel } from './placement.js?v=1.19.0';
+import { loadInBatches, yieldTask } from './preparation.js?v=1.19.0';
+const B=globalThis.BABYLON;
+// Deliberate service-area clusters, in metres. Large props receive their measured
+// physical footprint. Small debris/reeds and scenery beyond fences do not impede
+// movement. No prop is spawned during play, and every copy uses shared materials.
+export const SCENERY_LAYOUT=[
+ // Loading apron: store supplies against boundaries, leaving the paved strip.
+ ['worn-pallet-stack',-27,-5,.1],['dented-bin',-28.4,-7.3,1.4],['abandoned-hand-truck',-24.5,-6,1.5],
+ ['timber-bundle',-26,-12,.05],['tire-stack',-28.6,-11,.2],['rubble-cluster',-28.5,-15,0],
+ ['worn-pallet-stack',-23,-11,0],['dented-bin',-17,-15,1.57],['abandoned-hand-truck',-17.95,-21.5,1.57],
+ ['tire-stack',-17,-29.6,0],['rubble-cluster',-28.4,-36.8,0],['dented-bin',-28,-45,1.2],
+ ['worn-pallet-stack',-28,-48,0],['timber-bundle',-23,-57,.05],['tire-stack',-28,-55,0],
+ // Utility side. Do not put a prop underneath the selector or front doorway.
+ ['dented-bin',28,-7,3.14],['worn-pallet-stack',27.6,-9.5,0],['tire-stack',28.4,-14,0],
+ ['abandoned-hand-truck',28.5,-20,0],['rubble-cluster',28.4,-24,0],['dented-bin',28.4,-29,3.14],
+ ['worn-pallet-stack',25,-33,0],['timber-bundle',28.1,-31.7,Math.PI/2],['tire-stack',28.5,-34.6,0],
+ ['dented-bin',28,-50.5,3.14],['rubble-cluster',28,-54,0],
+ // Garage and service rooms: clutter around the existing usable workstations.
+ ['tire-stack',-15,8,0],['dented-bin',15,8,3.14],['worn-pallet-stack',-26,11,0],
+ ['dented-bin',-28,26,0],['abandoned-hand-truck',-28,35,0],['tire-stack',-28,48,0],
+ ['worn-pallet-stack',-27,55,0],['timber-bundle',-27,64,0],['dented-bin',-26.8,85.3,0],
+ ['tire-stack',-26,90,0],['worn-pallet-stack',-27,108,0],['abandoned-hand-truck',-27,106,0],
+ ['dented-bin',28,29,3.14],['tire-stack',28,49,0],['worn-pallet-stack',28,57,0],
+ ['abandoned-hand-truck',28,65,3.14],['timber-bundle',28,83,Math.PI/2],['dented-bin',28,88,3.14],
+ ['tire-stack',28,107,0],['rubble-cluster',-15.8,56,0],['rubble-cluster',15.7,105,0],
+ // Background sheds break the skyline below the existing industrial buildings.
+ ['maintenance-shed',38.5,-28,Math.PI/2,0,true],['maintenance-shed',-38.5,-28,-Math.PI/2,0,true],
+ ['maintenance-shed',38.5,-73,Math.PI/2,0,true],['maintenance-shed',-38.5,-73,-Math.PI/2,0,true],
+ ['damaged-road-barrier',19,-65,.1,0,true],['damaged-road-barrier',-19,-65,-.1,0,true],
+ ['damaged-road-barrier',18.5,-93,0,0,true],['damaged-road-barrier',-18.5,-93,0,0,true],
+ // Mounted vents attach by their exported rear anchor, not their bounding centre.
+ ['wall-vent',-18.49,-20,Math.PI/2,2.75,false,true],['wall-vent',-18.49,-29,Math.PI/2,2.75,false,true],
+ ['wall-vent',29.27,-47,-Math.PI/2,2.1,false,true],
+];
+for(const side of [-1,1])for(let i=0;i<8;i++){
+ SCENERY_LAYOUT.push(['drain-reeds',side*(30.8+(i%2)*.4),-6-i*6.5,i*.7,0,true]);
+ if(i%2===0)SCENERY_LAYOUT.push(['rubble-cluster',side*31.5,-9-i*6.5,i*.3,0,true]);
+}
+for(const side of [-1,1])for(let i=0;i<4;i++)SCENERY_LAYOUT.push(['drain-reeds',side*16.4,-66-i*8,i,0,true]);
+
+export class Scenery {
+ constructor(w){this.w=w;this.records=[];}
+ async load(){
+  const w=this.w,cache={},names=[...new Set(SCENERY_LAYOUT.map(p=>p[0]))];
+  await loadInBatches(names,async id=>{
+   try{const c=await B.SceneLoader.LoadAssetContainerAsync('assets/models/','lv119-'+id+'.glb',w.scene);c.removeAllFromScene();cache[id]=c;}
+   catch{w.failedAssets??=[];w.failedAssets.push('lv119-'+id);}
+  },2);
+  this.containers=cache;
+  for(const [i,p] of SCENERY_LAYOUT.entries()){
+   const [id,x,z,yaw=0,y=0,backdrop=false,wall=false]=p,c=cache[id];if(!c)continue;
+   const root=new B.TransformNode('scenery '+id+' '+i,w.scene),inst=c.instantiateModelsToScene(n=>'scenery '+n,false,{doNotInstantiate:true});
+   for(const n of inst.rootNodes)n.parent=root;
+   root.rotation.y=yaw;groundModel(root,x,z,y);
+   const b=root.metadata.placement;
+   if(wall){
+    // Mount the actual rear plane; preserve authored bottom height and handedness.
+    const anchor=root.getDescendants().find(n=>n.name.endsWith('__rear_mount'));
+    if(anchor){anchor.computeWorldMatrix(true);const a=anchor.getAbsolutePosition(),dx=x-a.x,dz=z-a.z;root.position.x+=dx;root.position.z+=dz;b.x+=dx;b.z+=dz;root.computeWorldMatrix(true);}
+   }
+   const small=['rubble-cluster','drain-reeds'].includes(id);
+   for(const m of root.getChildMeshes()){
+    m.isPickable=false;m.receiveShadows=!backdrop;
+    // Small static props use existing lighting; no added lights, shadow passes,
+    // physics body, update callback or material allocation per gameplay frame.
+    m.metadata={lvCaster:false,backdrop,detailQuality:0};
+    if(m.material)m.material.maxSimultaneousLights=7;
+   }
+   if(!backdrop&&!wall&&!small)w.rects.push({...b,enabled:true,name:'scenery '+id});
+   w.placements.record('scenery119:'+i,root,{support:wall?'wall face':backdrop?'background ground':'floor',supportY:y});
+   this.records.push({id,root,backdrop,wall,small,...b});await yieldTask();
+  }
+ }
+}
+```
+
 ## dist/js/settings-help.js
 
 ```javascript
-import { CATEGORIES } from './preferences.js?v=1.14.0';
+import { CATEGORIES } from './preferences.js?v=1.19.0';
 export const SETTING_HELP={
+ weatherEffects:'Controls rain and steam density. Puddles, cover and important landmarks remain on every setting.',
+ skyBrightness:'Changes the background sky only; does not brighten the yard or change enemy detection.',
+ sceneryMotion:'Slow clouds and nearby chain/sign movement. Reduced motion also suppresses it.',
  objectiveMode:'Always shows a compact task; On request shows it for eight seconds with Tab; Journal only keeps the screen clear.',
  hintReminders:'After a quiet minute without progress, offers the journal without revealing a solution.',
  easyAdrenaline:'Easy only: one small stamina reserve when a visible chase begins. At least 35 seconds between assists.',
@@ -6033,6 +6599,8 @@ export const SETTING_HELP={
  scale:'Changes 3D pixel density. Interface text remains at the browser resolution.',
  resolution:'A render-height ceiling, not an operating-system screen-size change.',
  adaptive:'Reduces render resolution only after sustained measured GPU pressure.',
+ stableHorizon:'Enabled by default. Removes impact roll while keeping free mouse-look and separately adjustable hand sway.',
+ throwGuide:'Hold the keyboard throw key to preview its arc; release to throw. Controller RB throws directly.',
  cameraShake:'Short impact motion only. Zero keeps the view steady.',
  scareScreenEffects:'Brief edge darkening at impacts; never a full-screen image.',
  loudEffects:'Reduces abrupt sound peaks without changing enemy difficulty.',
@@ -6060,9 +6628,9 @@ export function searchSettings(query){
 ## dist/js/settings-ui.js
 
 ```javascript
-import { SETTING_HELP, searchSettings } from './settings-help.js?v=1.14.0';
-import { DEFAULT_SETTINGS, validateSettings } from "./state.js?v=1.14.0";
-import { CATEGORIES, GRAPHICS_KEYS, PRESETS, resetCategory, importPreferences } from "./preferences.js?v=1.14.0";
+import { SETTING_HELP, searchSettings } from './settings-help.js?v=1.19.0';
+import { DEFAULT_SETTINGS, validateSettings } from "./state.js?v=1.19.0";
+import { CATEGORIES, GRAPHICS_KEYS, PRESETS, resetCategory, importPreferences } from "./preferences.js?v=1.19.0";
 const $ = id => document.getElementById(id);
 const titles = { basics:"Quick setup", gameplay: "Gameplay", display: "Graphics", performance: "Performance", audio: "Audio", comfort: "Comfort", controls: "Controls" };
 const keyLabel = code => ({ArrowLeft:"←",ArrowRight:"→",ArrowUp:"↑",ArrowDown:"↓"})[code] || String(code).replace(/^(Key|Digit)/, "").replace(/(Left|Right)$/, "");
@@ -6097,13 +6665,16 @@ export function renderSettings(ui, tab) {
     body = range("master", "Master volume", 0,1,.05) + range("music", "Music",0,1,.05) + range("ambience", "Environment",0,1,.05) + range("sfx", "Effects & footsteps",0,1,.05) + range("uiVolume", "Interface sounds",0,1,.05) + range("loudEffects", "Loud effects · stingers, metal, alarms",.25,1,.05) + select("dynamicRange", "Dynamic range", [["full","Full"],["night","Night · softer peaks"]]) + check("soundCaptions", "Sound-effect captions · requires subtitles") + '<button id="sound-test" class="btn">Test interface and footstep sounds</button>';
     note = "Volume changes are immediate. Loud effects reduces those sound sources; Night mode compresses the overall mix. There is no surprise scare sound in the test. All story clues remain readable without audio.";
   } else if (tab === "comfort") {
-    body = check("reducedMotion", "Reduced motion preset") + range("fov", "Horizontal field of view",60,105) + check("cinematicMotion", "Cinematic interaction focus") + range("bob", "Head movement",0,1,.05) + range("sway", "Flashlight sway",0,1,.05) + range("uiScale", "Interface scale",.85,1.3,.05) + range("subtitleSize", "Subtitle scale",.8,1.5,.1) + range("promptScale", "Interaction prompt size",.85,1.5,.05) + check("crosshair", "Show aiming dot") + range("crosshairSize", "Aiming dot size",.5,2,.1) + check("crosshairContrast", "High-contrast aiming dot") + check("subtitles", "Subtitles & sound captions") + check("reducedFlashes", "Reduce light changes") + check("interactionHighlight", "Highlight nearby interactions");
+    body = check('stableHorizon','Stable horizon (no impact roll)') + check("reducedMotion", "Reduced motion preset") + range("fov", "Horizontal field of view",60,105) + check("cinematicMotion", "Cinematic interaction focus") + range("bob", "Head movement",0,1,.05) + range("sway", "Flashlight sway",0,1,.05) + range("uiScale", "Interface scale",.85,1.3,.05) + range("subtitleSize", "Subtitle scale",.8,1.5,.1) + range("promptScale", "Interaction prompt size",.85,1.5,.05) + check("crosshair", "Show aiming dot") + range("crosshairSize", "Aiming dot size",.5,2,.1) + check("crosshairContrast", "High-contrast aiming dot") + check("subtitles", "Subtitles & sound captions") + check("reducedFlashes", "Reduce light changes") + check("interactionHighlight", "Highlight nearby interactions");
     note = "Reduced motion temporarily disables head bob, hand sway, interaction FOV changes, and moving menu entrances without erasing your custom values. The intro keeps its three-second readable fade. Light changes have their own control.";
   } else {
     body = select("mouseMode", "Preferred look mode", [["locked","Free mouse-look · recommended"],["raw","Free mouse-look · raw input"],["drag","Hold left button to look"]]) + range("sensitivity", "Mouse sensitivity / horizontal",.25,3,.05) + check("separateAxes", "Separate vertical sensitivity") + range("sensitivityY", "Vertical sensitivity · when separated",.25,3,.05) + check("invertY", "Invert vertical look") + range("lookSmoothing", "Look smoothing · seconds, 0 = off",0,.12,.01) + select("sprintMode", "Sprint", [["hold","Hold"],["toggle","Toggle"]]) + select("crouchMode", "Crouch", [["hold","Hold"],["toggle","Toggle"]]) + '<div id="sensitivity-preview" tabindex="0" aria-label="Sensitivity preview: move the mouse here"><span id="preview-reticle">+</span><small>Move the mouse here to compare sensitivity · no click required</small></div>' + Object.keys(s.bindings).map(a => `<div class="setting"><label>${a[0].toUpperCase()+a.slice(1)}</label><button class="bind" data-bind="${a}">${({ArrowLeft:"←",ArrowRight:"→",ArrowUp:"↑",ArrowDown:"↓"})[s.bindings[a]] || s.bindings[a].replace(/^(Key|Digit)/,"").replace(/(Left|Right)$/ ,"")}</button></div>`).join("");
     note = "Enter game / Resume requests capture using a fresh click. Once captured, move the mouse freely; no button needs to be held. Escape pauses and releases capture. Raw input needs browser support. If an embed blocks capture, open the standalone tab. Toggle sprint/crouch reset on pause so movement cannot stick.";
   }
   if(tab==='basics'||tab==='comfort')body+='<button id="comfort-preset" class="btn">Apply calm-camera comfort preset</button>';
+  if(tab==='controls')body+=check('throwGuide','Hold throw to show bolt aim guide');
+  if(tab==='display')body+=select('weatherEffects','Rain and steam', [['off','Off'],['reduced','Reduced'],['full','Full']])+range('skyBrightness','Night sky brightness · live',.35,1.2,.05);
+  if(tab==='comfort')body+=check('sceneryMotion','Gentle wind animation');
   if(tab==='comfort')body+=range('cameraShake','Impact camera shake',0,1,.05)+range('scareScreenEffects','Scare edge effects',0,1,.05)+range('sprintFOV','Sprint field-of-view widening',0,8,.5)+range('subtitleBackground','Subtitle background opacity',0,1,.05)+check('speakerLabels','Caption speaker labels');
   if(tab==='audio')body+=check('monoAudio','Mono output')+'<button id="stereo-test" class="btn">Test left, then right channel</button><p class="settings-note">A gentle click plays left first, then right. Mono combines both positions.</p>';
   if(tab==='controls')body+=check('controllerEnabled','Enable standard gamepad')+range('controllerDeadzone','Controller deadzone',.05,.4,.01)+range('controllerCurve','Controller look curve',1,3,.1)+range('controllerLook','Controller sensitivity',.25,3,.05);
@@ -6188,6 +6759,21 @@ export function renderSettings(ui, tab) {
 }
 ```
 
+## dist/js/sign-sizing.js
+
+```javascript
+/** Keep long sign allocations within a fixed budget and device limits while
+ * preserving their aspect ratio. Real mesh dimensions remain unchanged. */
+export function signTextureSize(w,h,maxTextureSize=2048){
+ if(!Number.isFinite(w)||!Number.isFinite(h)||w<=0||h<=0)throw new Error('Invalid sign dimensions');
+ const cap=Math.max(1,Math.min(2048,Number.isFinite(maxTextureSize)?maxTextureSize:2048));
+ const desired=Math.max(w<2.6?512:1024,Math.ceil(64*w/h));
+ const scale=Math.min(1,cap/desired,Math.min(cap,1024)/(desired*h/w));
+ const width=Math.max(1,Math.floor(desired*scale));
+ return {width,height:Math.max(1,Math.min(Math.floor(Math.min(cap,1024)),Math.round(width*h/w)))};
+}
+```
+
 ## dist/js/spatial-audio.js
 
 ```javascript
@@ -6218,22 +6804,84 @@ export function setSpatialPosition(node, point, now, smooth = false) {
 }
 ```
 
+## dist/js/spatial.js
+
+```javascript
+/** Opt-in broad phase for authored collision arrays. Six-metre cells reject
+ * distant geometry before the existing exact intersection test. Moving bodies
+ * are deliberately checked live: a door, dolly or car never needs a grid rebuild.
+ * Registration happens during loading; unregistered/test arrays keep linear semantics. */
+const indices = new WeakMap();
+const CELL = 6;
+const key = (x,z) => (x + 32768) * 65536 + z + 32768;
+export const isMovingBlocker = b => !!b.dynamic || /gate|grille|shortcut/.test(b.name || '');
+export function indexSpatial(rects) {
+  const old=indices.get(rects);if(old?.length===rects.length)return old;
+  const data={length:rects.length,cells:new Map(),moving:[],fixed:[],seen:null,order:new Map(rects.map((b,i)=>[b,i])),stamp:0,queries:0,candidates:0,linearEquivalent:0};
+  for(const box of rects){
+    if(isMovingBlocker(box)){data.moving.push(box);continue;}
+    const i=data.fixed.push(box)-1;
+    for(let x=Math.floor((box.x-box.w/2)/CELL);x<=Math.floor((box.x+box.w/2)/CELL);x++)
+      for(let z=Math.floor((box.z-box.d/2)/CELL);z<=Math.floor((box.z+box.d/2)/CELL);z++){
+        const k=key(x,z);let bucket=data.cells.get(k);if(!bucket)data.cells.set(k,bucket=[]);bucket.push(i);
+      }
+  }
+  data.seen=new Uint32Array(data.fixed.length);indices.set(rects,data);return data;
+}
+/** Callback returns true to stop. No candidate arrays or Sets are allocated on
+ * gameplay queries. Stamp wrap is handled even during an unusually long run. */
+export function anyNearby(rects,minX,minZ,maxX,maxZ,test){
+  let d=indices.get(rects);if(!d)return rects.some(test);
+  if(d.length!==rects.length)d=indexSpatial(rects);
+  d.queries++;d.linearEquivalent+=rects.length;
+  const x0=Math.floor(minX/CELL),z0=Math.floor(minZ/CELL),x1=Math.floor(maxX/CELL),z1=Math.floor(maxZ/CELL);
+  // Out-of-bounds imported data must not create an unbounded cell loop.
+  if(!Number.isFinite(x0+z0+x1+z1)||(x1-x0+1)*(z1-z0+1)>2048){
+    return rects.some(b=>{d.candidates++;return test(b);});
+  }
+  d.stamp=(d.stamp+1)>>>0;if(!d.stamp){d.seen.fill(0);d.stamp=1;}
+  for(let x=x0;x<=x1;x++)for(let z=z0;z<=z1;z++){
+    const bucket=d.cells.get(key(x,z));if(!bucket)continue;
+    for(const i of bucket){if(d.seen[i]===d.stamp)continue;d.seen[i]=d.stamp;d.candidates++;if(test(d.fixed[i]))return true;}
+  }
+  for(const b of d.moving){d.candidates++;if(test(b))return true;}
+  return false;
+}
+export function spatialReport(rects){
+  const d=indices.get(rects);return d?{cellMetres:CELL,staticBodies:d.fixed.length,dynamicBodies:d.moving.length,cells:d.cells.size,queries:d.queries,candidates:d.candidates,linearEquivalent:d.linearEquivalent}:null;
+}
+/** Retain the authored first-hit ordering used by tiny swept bolt segments.
+ * Broad-phase bucket order must not change which overlapping surface wins. */
+export function firstNearby(rects,minX,minZ,maxX,maxZ,test){
+  if(!indices.has(rects))return rects.find(test);
+  if(indices.get(rects).length!==rects.length)indexSpatial(rects);
+  const d=indices.get(rects);let found,order=Infinity;
+  anyNearby(rects,minX,minZ,maxX,maxZ,b=>{const n=d.order.get(b);if(n<order&&test(b)){found=b;order=n;}return false;});
+  return found;
+}
+```
+
 ## dist/js/staging.js
 
 ```javascript
-import { stealthVisibility } from "./lighting.js?v=1.14.0";
-import { roomAt } from "./guidance.js?v=1.14.0";
+import { VehicleController } from './vehicle.js?v=1.19.0';
+import { stealthVisibility } from "./lighting.js?v=1.19.0";
+import { roomAt } from "./guidance.js?v=1.19.0";
 const B=globalThis.BABYLON;
 const smooth=t=>t*t*(3-2*t);
 export const DRIVE_START=2.2, DRIVE_END=14.6;
 export const SHELTERS=[
+ {id:'hide-yard',name:'Yard service locker',x:27,z:-33,entry:{x:27,z:-31.75},yaw:Math.PI},
+ {id:'hide-dock',name:'Dock shelter locker',x:-26,z:-51,entry:{x:-26,z:-49.75},yaw:Math.PI},
+ {id:'hide-gatehouse',name:'Gatehouse locker',x:27,z:-50,entry:{x:27,z:-48.75},yaw:Math.PI},
  {id:"hide-security",name:"Security locker",x:-28,z:10,entry:{x:-28,z:11.25},yaw:Math.PI},
  {id:"hide-storage",name:"Storage locker",x:-28,z:43,entry:{x:-28,z:44.25},yaw:Math.PI},
  {id:"hide-workshop",name:"Workshop locker",x:-28,z:85,entry:{x:-28,z:86.25},yaw:Math.PI},
  {id:"hide-electrical",name:"Electrical locker",x:25,z:48,entry:{x:25,z:49.25},yaw:Math.PI},
  {id:"hide-pump",name:"Pump-room locker",x:21,z:88,entry:{x:21,z:89.25},yaw:Math.PI},
 ];
-// Sample a curved bay exit once. Arc-length traversal gives one continuous speed
+// Legacy reference curve retained for clearance regression tests only.
+// Runtime driving is controlled by VehicleController. Sample a curved bay exit once. Arc-length traversal gives one continuous speed
 // profile through the turn and straight lane; the camera never jumps at a joint.
 const drivePath=[];
 for(let i=0;i<=50;i++){
@@ -6331,6 +6979,7 @@ export class Staging {
     mesh.metadata={...mesh.metadata,lvCaster:true};w.shadowMeshes.push(mesh);w.shadow.addShadowCaster(mesh);
   }
   this.carRect={x:13,z:78,w:4.1,d:1.85,enabled:true,name:"bay 042 car",y:.83,h:1.66,dynamic:true};w.rects.push(this.carRect);
+  this.vehicle=new VehicleController(w.rects,this.carRect);
   this.car.computeWorldMatrix(true);this.driverHandle=this.doors.find(d=>d.side===this.driverSide).handle.getAbsolutePosition().clone();
   // Aim at the handle's exterior face, clear of the simplified body collider.
   this.driverHandle.z-=.035;
@@ -6400,7 +7049,7 @@ export class Staging {
   this.kit.setEnabled(!has("fuse"));
   this.hood.rotation.x=has("repair")?0:has("car")?-.95:0;
   this.installedBattery.position.y=1.075;this.installedBattery.setEnabled(has("repair"));this.newCable.setEnabled(has("repair"));this.newCable.scaling.x=1;
-  if(immediate){this.setVehicleLighting(false);this.car.position.set(13,0,78);this.car.rotation.y=-Math.PI/2;this.carRect.enabled=true;this.cockpit.setEnabled(false);this.driving=false;for(const s of this.spots)s.door.rotation.y=0;for(const wheel of this.wheels)wheel.rotation.x=0;for(const door of this.doors)door.node.rotation.y=0;}
+  if(immediate){this.vehicle.reset();this.setVehicleLighting(false);this.car.position.set(13,0,78);this.car.rotation.y=-Math.PI/2;this.carRect.enabled=true;this.cockpit.setEnabled(false);this.driving=false;for(const s of this.spots)s.door.rotation.y=0;for(const wheel of this.wheels)wheel.rotation.x=0;for(const door of this.doors)door.node.rotation.y=0;this.carRect.x=13;this.carRect.z=78;this.carRect.w=4.1;this.carRect.d=1.85;this.car.computeWorldMatrix(true);this.driverHandle.copyFrom(this.doors.find(d=>d.side===-1).handle.getAbsolutePosition());this.driverHandle.x-=Math.cos(this.car.rotation.y)*.05;this.driverHandle.z+=Math.sin(this.car.rotation.y)*.05;this.w.interactives.find(i=>i.id==='car').pos.copyFrom(this.driverHandle);}
  }
  action(id,t){
   if(id==="car")this.hood.rotation.x=-smooth(t)*.95;
@@ -6423,6 +7072,7 @@ export class Staging {
  }
  beginDrive(player){
   this.entryEye=this.w.camera.position.clone();this.entryView=this.w.camera.rotation.clone();
+  this.vehicle.reset({x:this.car.position.x,z:this.car.position.z,yaw:this.car.rotation.y});
   this.driving=true;this.driveTime=0;this.engineStarted=false;this.windowHit=false;this.carRect.enabled=true;this.cockpit.setEnabled(true);this.hood.rotation.x=0;
   this.setVehicleLighting(true);
   player.vehicle=true;player.flashlight=false;player.vehicleHeading=this.car.rotation.y;player.yaw=player.targetYaw=this.car.rotation.y;player.pitch=player.targetPitch=0;
@@ -6434,10 +7084,12 @@ export class Staging {
   const open=t<.35?0:t<.65?smooth((t-.35)/.3):t<1.05?1:1-smooth(Math.min(1,(t-1.05)/.45));
   const driver=this.doors.find(d=>d.side===this.driverSide);driver.node.rotation.y=1.12*open;
   if(t>=DRIVE_START)this.carRect.enabled=false;
-  const pose=drivePose(t),travel=Math.hypot(pose.x-this.car.position.x,pose.z-this.car.position.z);
-  for(const wheel of this.wheels)wheel.rotation.x+=travel/.375;
+  const before=this.vehicle.distance;
+  const controls=t<DRIVE_START?{}:{throttle:(player.down?.('forward')?1:0)-(player.down?.('back')?1:0)-(player.padMove?.y||0)-(player.touchMove?.y||0),steer:(player.down?.('right')?1:0)-(player.down?.('left')?1:0)+(player.padMove?.x||0)+(player.touchMove?.x||0)};
+  const pose=this.vehicle.tick(dt,controls),travel=this.vehicle.distance-before;
+  for(const wheel of this.wheels)wheel.rotation.x+=travel/.375*Math.sign(pose.speed||1);
   this.car.position.set(pose.x,0,pose.z);this.car.rotation.y=pose.yaw;
-  this.steering.rotation.z=t<6?-.32*Math.sin(Math.min(1,t/6)*Math.PI):0;
+  this.steering.rotation.z=-this.vehicle.steer*.5;
   const turn=this.car.rotation.y-(player.vehicleHeading??this.car.rotation.y);player.vehicleHeading=this.car.rotation.y;player.yaw+=turn;player.targetYaw+=turn;
   this.car.computeWorldMatrix(true);
   const eye=B.Vector3.TransformCoordinates(this.driverEye,this.car.getWorldMatrix());
@@ -6452,7 +7104,22 @@ export class Staging {
   const yawDelta=Math.atan2(Math.sin(player.yaw-this.entryView.y),Math.cos(player.yaw-this.entryView.y));
   this.w.camera.position.copyFrom(eye);this.w.camera.rotation.set(this.entryView.x+(player.pitch-this.entryView.x)*entry,this.entryView.y+yawDelta*entry,0);
   this.w.camera.getViewMatrix(true);
-  return t>=DRIVE_END;
+  // A very short departure hold occurs only after the PLAYER clears the road.
+  if(pose.z<-94){this.vehicle.finishTime+=dt;this.vehicle.speed=Math.max(0,this.vehicle.speed-dt*3);}
+  return this.vehicle.finishTime>=1.5;
+ }
+ exitDrive(player){
+  if(!this.driving||this.driveTime<DRIVE_START)return false;
+  const exit=this.vehicle.exitPoint();if(!exit)return false;
+  this.driving=false;player.vehicle=false;this.cockpit.setEnabled(false);this.setVehicleLighting(false);
+  player.pos=exit;player.height=1.68;player.pitch=player.targetPitch=0;player.yaw=player.targetYaw=this.car.rotation.y;
+  player.clear();player.updateCamera();
+  this.carRect.x=this.car.position.x;this.carRect.z=this.car.position.z;
+  this.carRect.w=Math.abs(Math.sin(this.car.rotation.y))*4.5+Math.abs(Math.cos(this.car.rotation.y))*2;
+  this.carRect.d=Math.abs(Math.cos(this.car.rotation.y))*4.5+Math.abs(Math.sin(this.car.rotation.y))*2;this.carRect.enabled=true;
+  this.car.computeWorldMatrix(true);this.driverHandle.copyFrom(this.doors.find(d=>d.side===-1).handle.getAbsolutePosition());this.driverHandle.x-=Math.cos(this.car.rotation.y)*.05;this.driverHandle.z+=Math.sin(this.car.rotation.y)*.05;
+  this.w.interactives.find(i=>i.id==='car').pos.copyFrom(this.driverHandle);
+  return true;
  }
  /** Test the actual window exterior before playing the optional escape beat.
   * Coordinates are transformed to the moving car, so the bonnet/rear bumper
@@ -6474,15 +7141,15 @@ export class Staging {
 ## dist/js/state.js
 
 ```javascript
-import { ENCOUNTER_IDS } from "./encounters.js?v=1.14.0";
-import { TASKS } from "./tasks.js?v=1.14.0";
-import { difficultyId } from "./difficulty.js?v=1.14.0";
+import { ENCOUNTER_IDS } from "./encounters.js?v=1.19.0";
+import { TASKS, currentTask } from "./tasks.js?v=1.19.0";
+import { difficultyId } from "./difficulty.js?v=1.19.0";
 /**
  * Last Vehicle — pure game rules and persistence.
  * This module has no Babylon or DOM dependency, so the important save/progression
  * rules can be tested using Node. Never trust a JSON file just because we made it.
  */
-export const VERSION = 2;
+export const VERSION = 3;
 const LEGACY_FLAGS = ["car","key","fuse","power","terminal","release","valve","alarm","trapped","gate","escaped"];
 export const FLAG_IDS = TASKS.map(task=>task.id);
 export const NOTE_IDS = [
@@ -6492,6 +7159,7 @@ export const NOTE_IDS = [
   "plaque",
   "incident",
   "dispatch",
+  "yard-log",
 ];
 export const ACTIONS = {
   forward: "KeyW",
@@ -6522,12 +7190,17 @@ export const DEFAULT_SETTINGS = Object.freeze({
   sprintMode: "hold",
   crouchMode: "toggle",
   reducedMotion: false,
+  stableHorizon: true,
+  throwGuide: true,
   skipIntro: false,
   shadows: "off",
   glow: false,
   fxaa: false,
   adaptive: false,
   adaptiveFloor: 0.65,
+  weatherEffects: 'reduced',
+  skyBrightness: .8,
+  sceneryMotion: true,
   menuFPS: 30,
   fpsMode: "off",
   fpsCorner: "top-right",
@@ -6571,6 +7244,7 @@ export const DEFAULT_SETTINGS = Object.freeze({
   bindings: { ...ACTIONS },
 });
 export const NOTES = {
+  'yard-log':{title:'The gatehouse handover',tag:'GATEHOUSE · FINAL SHIFT',text:'The garage shutter opens into the service yard. The STREET BARRIER is a separate interlock.\n\n1. Disconnect LOADING at the utility selector beside the generator. The loading feed is flooded.\n2. Select GATEHOUSE. The dry supply operates the barrier motor.\n3. Turn the yellow BARRIER BRAKE wheel beside the damaged side door.\n4. Winch the cargo dolly aside from the loading dock.\n\nThe roadworks container leaves an open lane beside it. Follow the OPEN LANE arrow.\n\nVehicle 042 is underlined three times. The attached ticket is still warm.'},
   notice: {
     title: "A notice under the wiper",
     tag: "YOUR CAR · BAY 042",
@@ -6616,6 +7290,7 @@ export function newGame(difficulty = "medium") {
     journal: {hints:{}, observations:[], mechanisms:[], readNotes:[], lastObjective:"", controlsSeen:false},
     bolts:3,
     boltHistory:[],
+    refills:[],
     seconds: 0,
     checkpoint: { x: 10, z: 98, yaw: Math.PI },
     savedAt: 0,
@@ -6628,9 +7303,8 @@ export function mark(s, id) {
   if (FLAG_IDS.includes(id) && !has(s, id)) s.flags.push(id);
 }
 export function objective(s) {
-  return (
-    OBJECTIVES.find(([id]) => !has(s, id)) ?? ["done", "You made it out", ""]
-  );
+  const task=currentTask(s);
+  return task?[task.id,task.title,task.instruction]:["done", "You made it out", ""];
 }
 export function collectNote(s, id) {
   if (NOTE_IDS.includes(id) && !s.notes.includes(id)) s.notes.push(id);
@@ -6645,6 +7319,7 @@ export function validateSettings(raw = {}) {
     sensitivityY: [0.25, 3],
     uiVolume: [0, 1], loudEffects: [0.25, 1],
     adaptiveFloor: [0.5, 1], fpsSize: [0.8, 1.5],
+    skyBrightness: [.35,1.2],
     uiScale: [0.85, 1.3], crosshairSize: [0.5, 2],
     fov: [60, 105],
     master: [0, 1],
@@ -6665,8 +7340,8 @@ export function validateSettings(raw = {}) {
     out[key] = clamp(raw[key], a, b, out[key]);
   for (const key of [
     "objectiveHUD", "journalNotify", "easyAdrenaline",
-    "controllerEnabled","monoAudio","speakerLabels",
-    "separateAxes", "reducedMotion", "skipIntro", "glow", "fxaa", "adaptive", "crosshairContrast",
+    "controllerEnabled","monoAudio","speakerLabels","sceneryMotion",
+    "separateAxes", "reducedMotion", "stableHorizon", "throwGuide", "skipIntro", "glow", "fxaa", "adaptive", "crosshairContrast",
     "cinematicMotion",
     "invertY",
     "rawMouse",
@@ -6683,6 +7358,7 @@ export function validateSettings(raw = {}) {
     if (typeof raw[key] === "boolean") out[key] = raw[key];
   if (["full", "night"].includes(raw.dynamicRange))
     out.dynamicRange = raw.dynamicRange;
+  if(['off','reduced','full'].includes(raw.weatherEffects))out.weatherEffects=raw.weatherEffects;
   if (["low", "medium", "high", "custom"].includes(raw.quality))
     out.quality = raw.quality;
   if (["auto", "720", "1080", "1440"].includes(raw.resolution))
@@ -6725,7 +7401,7 @@ export function validateSettings(raw = {}) {
 export function validateSave(raw) {
   if (
     !raw ||
-    ![1, VERSION].includes(raw.version) ||
+    ![1, 2, VERSION].includes(raw.version) ||
     !Array.isArray(raw.flags) ||
     !Array.isArray(raw.notes)
   )
@@ -6738,8 +7414,12 @@ export function validateSave(raw) {
     // mutate the supplied backup, or infer a win from an unfinished old run.
     let n=0; while(n<LEGACY_FLAGS.length && flags.includes(LEGACY_FLAGS[n]))n++;
     const through=[-1,0,2,4,5,6,6,6,6,6,7,8][n];
-    flags=FLAG_IDS.slice(0,through+1);
+    flags=n===LEGACY_FLAGS.length?[...FLAG_IDS]:FLAG_IDS.slice(0,through+1);
   }
+  // A completed pre-expansion run stays complete. An unfinished v2 run resumes
+  // after its existing objectives and discovers the yard normally.
+  const oldOrder=['car','battery','key','fuse','repair','power','terminal','gate','escaped'];
+  if(raw.version===2 && oldOrder.every(id=>raw.flags.includes(id)))flags=[...FLAG_IDS];
   let gap = false;
   s.flags = FLAG_IDS.filter(id => { if(!flags.includes(id))gap=true;return !gap; });
   s.notes = [...new Set(raw.notes.filter((x) => NOTE_IDS.includes(x)))];
@@ -6750,7 +7430,7 @@ export function validateSave(raw) {
       ),
     ),
   ];
-  s.visited = [...new Set((Array.isArray(raw.visited) ? raw.visited : []).filter(x => ["security", "storage", "workshop", "electrical", "pump"].includes(x)))];
+  s.visited = [...new Set((Array.isArray(raw.visited) ? raw.visited : []).filter(x => ["security", "storage", "workshop", "electrical", "pump",'yard','gatehouse','road'].includes(x)))];
   s.tutorial = [...new Set((Array.isArray(raw.tutorial) ? raw.tutorial : []).filter(x => ["look", "move", "flashlight", "interact", "stealth"].includes(x)))];
   const journal=raw.journal && typeof raw.journal === "object" ? raw.journal : {};
   for(const id of FLAG_IDS.slice(0,s.flags.length+1)) {
@@ -6759,11 +7439,12 @@ export function validateSave(raw) {
   }
   s.journal.readNotes=[...new Set((Array.isArray(journal.readNotes)?journal.readNotes:[]).filter(id=>s.notes.includes(id)))];
   s.journal.observations=[...new Set((Array.isArray(journal.observations)?journal.observations:[]).filter(id=>["wetTracks","heardDoor"].includes(id)))];
-  s.journal.mechanisms=[...new Set((Array.isArray(journal.mechanisms)?journal.mechanisms:[]).filter(id=>['repair','fuse','power','terminal','gate'].includes(id)))];
+  s.journal.mechanisms=[...new Set((Array.isArray(journal.mechanisms)?journal.mechanisms:[]).filter(id=>['repair','fuse','power','terminal','gate','yard','isolate','barrier','route'].includes(id)))];
   s.journal.lastObjective=[...FLAG_IDS,"done"].includes(journal.lastObjective)?journal.lastObjective:"";
   s.journal.controlsSeen=journal.controlsSeen===true;
   s.bolts=Number.isInteger(raw.bolts)?clamp(raw.bolts,0,3,3):3;
-  s.boltHistory=(Array.isArray(raw.boltHistory)?raw.boltHistory:[]).filter(p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.z)&&Math.abs(p.x)<=31&&p.z>=-20&&p.z<=115&&Number.isInteger(p.uses)&&p.uses>0).slice(-3).map(p=>({x:p.x,z:p.z,uses:Math.min(3,p.uses)}));
+  s.boltHistory=(Array.isArray(raw.boltHistory)?raw.boltHistory:[]).filter(p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.z)&&Math.abs(p.x)<=31&&p.z>=-101&&p.z<=115&&Number.isInteger(p.uses)&&p.uses>0).slice(-3).map(p=>({x:p.x,z:p.z,uses:Math.min(3,p.uses)}));
+  s.refills=[...new Set((Array.isArray(raw.refills)?raw.refills:[]).filter(id=>['refill-workshop','refill-yard','refill-gatehouse'].includes(id)))];
   s.seconds = clamp(raw.seconds, 0, 864000, 0);
   s.savedAt = clamp(raw.savedAt, 0, 9999999999999, 0);
   // Restore only authored safe positions: arbitrary imported coordinates could put
@@ -6772,6 +7453,10 @@ export function validateSave(raw) {
   return s;
 }
 export function safeCheckpoint(s) {
+  if(has(s,'route'))return {x:-15,z:-32,yaw:Math.PI};
+  if(has(s,'barrier'))return {x:23,z:-42,yaw:Math.PI/2};
+  if(has(s,'isolate'))return {x:23,z:-22,yaw:Math.PI};
+  if(has(s,'yard'))return {x:-9,z:-47,yaw:Math.PI};
   if (has(s,"gate")) return {x:-6,z:8,yaw:0};
   if (has(s,"terminal")) return {x:-22,z:18,yaw:Math.PI/2};
   if (has(s,"power")) return {x:24,z:40,yaw:-Math.PI/2};
@@ -6783,6 +7468,7 @@ export function safeCheckpoint(s) {
 }
 export function checkpointSave(s) {
   const saved = structuredClone(s);
+  delete saved.driving;delete saved.carPosition; // Live guidance, never an unsafe vehicle checkpoint.
   saved.checkpoint=safeCheckpoint(saved); saved.savedAt=Date.now();
   // Enemy, locker occupancy, temporary lures and drive animation are deliberately
   // transient. Continuing rebuilds a safe world with a fresh grace period.
@@ -6817,7 +7503,7 @@ export class SaveStore {
       const s = this.get("save");
       if(!s)return null;
       const raw=JSON.parse(s),valid=validateSave(raw);
-      if(raw.version===1 && !this.get("save.v1.backup"))this.set("save.v1.backup",s);
+      if(raw.version<VERSION && !this.get('save.v'+raw.version+'.backup'))this.set('save.v'+raw.version+'.backup',s);
       return valid;
     } catch {
       return null;
@@ -6839,6 +7525,129 @@ export class SaveStore {
 }
 ```
 
+## dist/js/surface-library.js
+
+```javascript
+import { loadInBatches, consumeSteps } from './preparation.js?v=1.19.0';
+import { loadSurfaceTexture } from './texture-loader.js?v=1.19.0';
+const B=globalThis.BABYLON;
+
+// One shared image pair per surface, measured in metres per repeat. UVs belong
+// to geometry, not a per-object clone of the texture. This preserves batching.
+export const SURFACE_TILES=Object.freeze({asphalt:2.08,concrete:1.23,brick:3,wood:1.8,metal:2,fabric:.3,grain:.18,'leaf-litter':3,moss:1.5,rust:1.5,peeling:2});
+const native={
+ floor:['concrete',.78,.83,.81],concrete:['concrete',.86,.9,.87],ceiling:['concrete',.64,.7,.68],
+ teal:['metal',.47,.72,.67],steel:['metal',.82,.88,.86],yardAsphalt:['asphalt',.95,1,.98],
+ yardWall:['brick',.8,.87,.81],yardRust:['rust',.82,.82,.76],yardMoss:['moss',.74,.85,.68],
+ yardPavers:['concrete',.7,.77,.71],yardWood:['wood',.93,.92,.83],borderSoil:['leaf-litter',.8,.85,.73],
+ bark:['wood',.52,.6,.45],decayMoss:['moss',.84,.93,.77],decayMold:['moss',.42,.51,.4],
+ decayRust:['rust',.95,.95,.9],decayPeel:['peeling',.94,.98,.93],
+ dark:['grain',.15,.21,.22],yellow:['grain',.8,.69,.43],rubber:['grain',.12,.15,.14],
+ canvas:['fabric',.75,.81,.75],worker:['fabric',.36,.45,.43],glove:['fabric',.42,.5,.46],seatFabric:['fabric',.4,.49,.44],
+ torchBody:['grain',.24,.35,.37],torchRim:['metal',.8,.88,.83],carPaint:['grain',.25,.46,.43],
+ wood:['wood',.84,.81,.7],metalMedium:['metal',.7,.77,.74],metalDark:['grain',.23,.28,.27],carpet:['fabric',.6,.64,.59],
+};
+export function surfaceRecipe(name){
+ if(native[name])return native[name];
+ // Imported palettes keep their readable paper and glass. Existing Kenney color-map textures are deliberately preserved.
+ const color=/^(?:Yard115|Meridian)_(steel|teal|rust|concrete|moss|dark|ochre|cloth|dust|rubber|wood)(?:\.\d+)?$/.exec(name)?.[1];
+ const role={moss:'decayMoss',rust:'decayRust',ochre:'yellow',cloth:'canvas',dust:'concrete'}[color]||color;
+ return role?native[role]:null;
+}
+
+/** Planar projection on each actual face fixes the one-tile-per-box stretching
+ * that made a 100m floor and a small prop display the same-sized image. It also
+ * works after glTF's handedness/scale transforms. Run before static batching. */
+export function projectSurfaceUV(mesh,recipeForMaterial,onInvalid=()=>{}){
+ const positions=mesh.getVerticesData(B.VertexBuffer.PositionKind),normals=mesh.getVerticesData(B.VertexBuffer.NormalKind);
+ if(!positions||!normals)return 0;
+ const materials=mesh.material?.subMaterials||[mesh.material],recipes=materials.map(recipeForMaterial);
+ if(!recipes.some(Boolean))return 0;
+ if(positions.length!==normals.length||positions.some(n=>!Number.isFinite(n))||normals.some(n=>!Number.isFinite(n))){onInvalid(mesh.name,'non-finite or incomplete vertex data');return 0;}
+ mesh.computeWorldMatrix(true);
+ const determinant=mesh.getWorldMatrix().determinant();
+ if(!Number.isFinite(determinant)||Math.abs(determinant)<1e-12){onInvalid(mesh.name,'singular transform');return 0;}
+ mesh.makeGeometryUnique();
+ const world=mesh.getWorldMatrix(),normalMatrix=B.Matrix.Transpose(world.clone().invert()),indices=mesh.getIndices();
+ const uv=Array.from(mesh.getVerticesData(B.VertexBuffer.UVKind)||new Float32Array(positions.length/3*2));
+ const at=new B.Vector3(),normal=new B.Vector3(),p=new B.Vector3(),n=new B.Vector3();let written=0;
+ const write=(i,recipe)=>{
+   const scale=SURFACE_TILES[recipe[0]]||2;
+   at.set(positions[i*3],positions[i*3+1],positions[i*3+2]);normal.set(normals[i*3],normals[i*3+1],normals[i*3+2]);
+   B.Vector3.TransformCoordinatesToRef(at,world,p);B.Vector3.TransformNormalToRef(normal,normalMatrix,n);
+   const x=Math.abs(n.x),y=Math.abs(n.y),z=Math.abs(n.z);
+   if(y>=x&&y>=z){uv[i*2]=p.x/scale;uv[i*2+1]=p.z/scale;}
+   else if(x>=z){uv[i*2]=p.z/scale;uv[i*2+1]=p.y/scale;}
+   else {uv[i*2]=p.x/scale;uv[i*2+1]=p.y/scale;}
+   written++;
+ };
+ if(materials.length===1){if(recipes[0])for(let i=0;i<positions.length/3;i++)write(i,recipes[0]);}
+ else for(const sub of mesh.subMeshes||[]){const recipe=recipes[sub.materialIndex];if(recipe)for(let j=sub.indexStart;j<sub.indexStart+sub.indexCount;j++)write(indices[j],recipe);}
+ mesh.setVerticesData(B.VertexBuffer.UVKind,uv);return written;
+}
+
+export class SurfaceLibrary {
+ constructor(w){this.w=w;this.maps={};this.report={maps:0,materials:0,meshes:0,projectedVertices:0,invalidGeometry:[],missingMaterials:[],roles:{},reusedMaterials:0};}
+ async load(readTexture=null){
+   // Optional reader lets offline tests inspect real assignments without
+   // claiming that NullEngine decoded or rendered the JPEGs.
+   const texture=readTexture||(file=>loadSurfaceTexture(this.w,file));
+   const jobs=['asphalt','concrete','brick','wood','metal','leaf-litter','fabric'].flatMap(id=>['albedo','roughness'].map(channel=>({id,channel})));
+   // Two requests/decode preparations at a time. All finish behind loading UI.
+   await loadInBatches(jobs,async({id,channel})=>{
+     const t=await texture((id==='fabric'?'v118-':'v117-')+id+'-'+channel+'.jpg');
+     if(t){t.gammaSpace=channel==='albedo';(this.maps[id]??={})[channel]=t;this.report.maps++;}
+   },2);
+   // Reuse existing CC0 decay textures; do not fetch duplicate image buffers.
+   for(const [id,name] of [['moss','decayMoss'],['rust','decayRust'],['peeling','decayPeel']]){
+     const m=this.w.materials[name];this.maps[id]={albedo:m?.albedoTexture,roughness:m?.metallicTexture};
+   }
+   // Fine grayscale variation reuses a shared map, without another GPU image.
+   this.maps.grain={albedo:this.maps.metal?.roughness,roughness:this.maps.metal?.roughness};
+   const required=['asphalt','concrete','brick','wood','metal','leaf-litter','fabric','grain'];
+   if(!readTexture)required.push('moss','rust','peeling');
+   const missing=required.filter(id=>!this.maps[id]?.albedo);this.report.missingMaterials=missing;
+   if(missing.length)throw new Error('Required surface textures could not load: '+missing.join(', ')+'. Extract the complete package into a new folder and retry.');
+   await consumeSteps(this.applySteps());
+ }
+ *applySteps(){
+   const assigned=new Map();
+   for(const m of this.w.scene.materials){
+     const recipe=surfaceRecipe(m.name);if(!recipe||!('albedoColor' in m))continue;
+     const maps=this.maps[recipe[0]];if(!maps?.albedo)continue;
+     // Preserve image-bearing GLB atlases and their authored UVs.
+     if(m.albedoTexture&&!m.name.startsWith('decay'))continue;
+     // Only known solid palettes are eligible; signatures/icons retain their UVs.
+     m.albedoColor.set(recipe[1],recipe[2],recipe[3]);m.albedoTexture=maps.albedo;
+     m.metallicTexture=maps.roughness||null;m.useRoughnessFromMetallicTextureGreen=true;
+     m.useRoughnessFromMetallicTextureAlpha=false;m.useMetallnessFromMetallicTextureBlue=false;
+     m.roughness=1;assigned.set(m,recipe);this.report.materials++;this.report.roles[recipe[0]]=(this.report.roles[recipe[0]]||0)+1;yield;
+   }
+   for(const mesh of this.w.scene.meshes){
+     if(!mesh.geometry)continue;
+     const n=projectSurfaceUV(mesh,m=>assigned.get(m),(name,reason)=>{if(this.report.invalidGeometry.length<24)this.report.invalidGeometry.push({name,reason});});
+     if(n){this.report.meshes++;this.report.projectedVertices+=n;}yield;
+   }
+   // Separate GLBs repeat the same palette. Share only materials whose full
+   // serialized render state agrees; retain alpha, metalness and every flag.
+   // This lets the later sector merger combine props across model files.
+   const shared=new Map(),aliases=new Map();
+   for(const m of assigned.keys()){
+     if(!/^(Yard115|Meridian)_/.test(m.name)||m.animations?.length)continue;
+     const data=m.serialize();delete data.name;delete data.id;delete data.uniqueId;
+     const key=JSON.stringify(data),canonical=shared.get(key);
+     if(canonical){aliases.set(m,canonical);this.report.reusedMaterials++;}else shared.set(key,m);
+     yield;
+   }
+   for(const mesh of this.w.scene.meshes){
+     if(aliases.has(mesh.material))mesh.material=aliases.get(mesh.material);
+     else if(mesh.material?.subMaterials)mesh.material.subMaterials=mesh.material.subMaterials.map(m=>aliases.get(m)||m);
+     yield;
+   }
+ }
+}
+```
+
 ## dist/js/surfaces.js
 
 ```javascript
@@ -6856,6 +7665,7 @@ export function surfaceAt(p,extra=[]){const inside=w=>w.enabled!==false&&((p.x-w
 // This record also places the raised drain cover and its dark inset.
 export const DRAIN_COVERS=Object.freeze([{x:27.5,z:100,halfWidth:.26,halfDepth:.35}]);
 export function groundKind(p){
+  if(p.z<-58 || (p.z<0&&p.x<16))return 'gravel';
   if(DRAIN_COVERS.some(d=>Math.abs(p.x-d.x)<=d.halfWidth&&Math.abs(p.z-d.z)<=d.halfDepth))return 'grate';
   for(const x of [-15.1,15.1])for(let z=14;z<106;z+=12)
     if(Math.abs(p.x-x)<.115&&Math.abs(p.z-z)<1.2)return 'grate';
@@ -6948,7 +7758,7 @@ export class SurfaceEffects {
 ## dist/js/tactics.js
 
 ```javascript
-import { blocked, AGENT_RADIUS } from './navigation.js?v=1.14.0';
+import { blocked, AGENT_RADIUS } from './navigation.js?v=1.19.0';
 const wrap=a=>Math.atan2(Math.sin(a),Math.cos(a));
 
 /** Learns a repeated circle only from sampled, visible positions. Memory expires
@@ -6991,6 +7801,7 @@ export class LoopMemory {
 /** Authoritative task contract. The journal, map, prompts and save flag order
  * all derive from these records. Keep IDs stable so existing checkpoints survive.
  * Text may contain {use}; render it using the CURRENT binding, never a literal E. */
+import { EXPANSION_TASKS } from './campaign.js?v=1.19.0';
 export const TASKS = [
   {
     "id": "car",
@@ -7103,7 +7914,7 @@ export const TASKS = [
     },
     "hints": [
       "Follow the west service passage south to Workshop.",
-      "Aim at the labelled cabinet on the west wall and press {use}. Both parts are collected together."
+      "Aim at the labelled cabinet beside the damaged side door and press {use}. Both parts are collected together."
     ]
   },
   {
@@ -7208,7 +8019,7 @@ export const TASKS = [
     "id": "gate",
     "action": "gate",
     "title": "Raise the exit shutter",
-    "instruction": "Use the gate motor to the left of the north exit. Then return to your car.",
+    "instruction": "Use the gate motor to the left of the north exit. Walk outside and inspect the service-yard barrier.",
     "label": "Raise exit shutter",
     "requires": [
       "car",
@@ -7235,7 +8046,7 @@ export const TASKS = [
     },
     "hints": [
       "The motor is beside the north shutter, on its left.",
-      "Press {use} at the motor. You can move while the shutter rises. Return to bay 042 when it finishes."
+      "Press {use} at the motor. You can move while the shutter rises. Continue on foot into the service yard when it finishes."
     ]
   },
   {
@@ -7275,8 +8086,21 @@ export const TASKS = [
     ]
   }
 ];
+// Append the exterior chapter before the existing ending, keeping old IDs stable.
+const ending=TASKS.pop();
+for(const spec of EXPANSION_TASKS)TASKS.push({...spec,action:spec.id,requires:TASKS.map(t=>t.id),notes:['yard-log']});
+ending.requires=TASKS.map(t=>t.id);ending.title='Return to your car and drive out';ending.label='Enter driver seat';
+ending.instruction='Return to bay 042 and enter the left driver door. Drive through the garage shutter, across the yard and left around the roadworks container to the street.';
+ending.why='The street barrier and cargo lane are clear. You control the car all the way to the road.';
+ending.hints=['Use the unlocked service passage to return to bay 042.','Use the left driver handle. Move forward/back to accelerate/brake or reverse; left/right steers. Use again when stopped to exit. Follow the OPEN LANE arrow past the container.'];
+TASKS.push(ending);
 export const TASK_BY_ID = Object.fromEntries(TASKS.map(task=>[task.id,task]));
-export const currentTask = state => TASKS.find(task=>!state.flags.includes(task.id)) || null;
+export const currentTask = state => {
+  const task=TASKS.find(task=>!state.flags.includes(task.id))||null;
+  if(task?.id==='escaped'&&state.driving)return {...task,title:'Drive to the street',instruction:'Drive through the garage shutter and open street barrier. Use the open lane beside the roadworks container, then follow the lane to the street.',destination:{room:'road',name:'SERVICE ROAD · STREET',x:0,z:-95,portal:[0,-58]},hints:['Follow the amber road lights north.','Accelerate/brake with forward/back, steer with left/right. Follow the OPEN LANE sign beside the container. You can reverse and reposition.']};
+  if(task?.id==='escaped'&&state.carPosition)return {...task,title:'Return to your parked car',instruction:'Enter the left driver door of your parked car, then drive north to the street.',destination:{room:state.carPosition.z<0?'yard':'garage',name:'PARKED CAR · LEFT DRIVER DOOR',...state.carPosition,portal:[state.carPosition.x,state.carPosition.z]}};
+  return task;
+};
 export function keyLabel(code="KeyE") {
   return ({ArrowLeft:"←",ArrowRight:"→",ArrowUp:"↑",ArrowDown:"↓"})[code] || String(code).replace(/^(Key|Digit)/,"").replace(/(Left|Right)$/,"").replace("Control","Ctrl");
 }
@@ -7291,22 +8115,66 @@ export function inventoryStatus(state) {
 }
 ```
 
+## dist/js/texture-loader.js
+
+```javascript
+const B=globalThis.BABYLON;
+
+/** Allocate the handle before image/GPU work. Even a synchronous failure must
+ * leave no blocking Texture registered with the scene. Cleanup runs after the
+ * call stack, because an error callback can precede internal-texture assignment. */
+export function requestTexture(scene,url,{timeoutMs=4500,Texture=B.Texture}={}){
+ return new Promise(resolve=>{
+  let texture=null,timer=null,settled=false;
+  const finish=(ok,reason='')=>{
+   if(settled)return;settled=true;clearTimeout(timer);
+   queueMicrotask(()=>{
+    if(!ok){try{texture?.dispose();}catch{}resolve({texture:null,error:String(reason||'Image preparation failed').slice(0,240)});}
+    else resolve({texture,error:null});
+   });
+  };
+  try{
+   texture=new Texture(null,scene,false,false,B.Texture.TRILINEAR_SAMPLINGMODE,null,(message,error)=>finish(false,error?.message||message));
+   texture.wrapU=texture.wrapV=B.Texture.WRAP_ADDRESSMODE;texture.anisotropicFilteringLevel=2;
+   timer=setTimeout(()=>finish(false,'Image preparation timed out'),Math.max(1,timeoutMs));
+   texture.updateURL(url,null,()=>finish(true));
+  }catch(error){finish(false,error.message);}
+ });
+}
+
+/** Bounded retry, a shared loading deadline and local, exportable diagnostics.
+ * All these loads finish behind the loading screen, never during a chase. */
+export async function loadSurfaceTexture(world,file,{attempts=2,timeoutMs=4500,request=requestTexture}={}){
+ world.assetHealth??={textures:{}};world.textureDeadline??=performance.now()+20000;
+ const entry=world.assetHealth.textures[file]={state:'loading',attempts:0,error:null};
+ const began=performance.now();let result={texture:null,error:'Texture preparation budget exceeded'};
+ for(let n=0;n<attempts;n++){
+  const remaining=world.textureDeadline-performance.now();if(remaining<=0)break;
+  entry.attempts++;result=await request(world.scene,'assets/textures/'+file,{timeoutMs:Math.min(timeoutMs,remaining)});
+  if(result.texture)break;
+ }
+ entry.state=result.texture?'ready':'failed';entry.error=result.error;entry.milliseconds=Math.round(performance.now()-began);
+ if(!result.texture){world.failedAssets??=[];const name='textures/'+file;if(!world.failedAssets.includes(name))world.failedAssets.push(name);}
+ return result.texture;
+}
+```
+
 ## dist/js/threat.js
 
 ```javascript
-import { acousticRoute } from "./acoustics.js?v=1.14.0";
-import { EvidenceMemory, DecisionPolicy } from "./evidence.js?v=1.14.0";
-import { PursuitRoutes } from "./pursuit.js?v=1.14.0";
-import { difficultyRules } from "./difficulty.js?v=1.14.0";
-import { AGENT_RADIUS, lineClear, sightClear, moveCircle, blocked } from "./navigation.js?v=1.14.0";
-import { dampAngle } from "./animation.js?v=1.14.0";
-import { RouteFollower } from "./locomotion.js?v=1.14.0";
-import { LoopMemory } from "./tactics.js?v=1.14.0";
+import { acousticRoute } from "./acoustics.js?v=1.19.0";
+import { EvidenceMemory, DecisionPolicy } from "./evidence.js?v=1.19.0";
+import { PatrolPlanner, PATROL_STOPS } from "./patrol.js?v=1.19.0";
+import { PursuitRoutes, ROUTE_NODES } from "./pursuit.js?v=1.19.0";
+import { difficultyRules } from "./difficulty.js?v=1.19.0";
+import { AGENT_RADIUS, lineClear, sightClear, moveCircle, blocked } from "./navigation.js?v=1.19.0";
+import { dampAngle } from "./animation.js?v=1.19.0";
+import { RouteFollower } from "./locomotion.js?v=1.19.0";
+import { LoopMemory } from "./tactics.js?v=1.19.0";
 
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const copy=p=>({x:p.x,z:p.z});
-const PATROL=[{x:0,z:40},{x:1,z:85},{x:-21,z:18},{x:-22,z:45},{x:23,z:39},{x:0,z:67}];
-const JUNCTIONS=[{x:-22,z:28},{x:-22,z:35},{x:-22,z:55},{x:-22,z:65},{x:-15,z:18},{x:-15,z:45},{x:-15,z:76},{x:15,z:39},{x:15,z:98},{x:0,z:26},{x:0,z:60},{x:0,z:85}];
+const JUNCTIONS=[{x:0,z:-10},{x:-10,z:-22},{x:-14,z:-42},{x:20,z:-35},{x:20,z:-42},{x:23,z:-22},{x:0,z:-48},{x:-22,z:28},{x:-22,z:35},{x:-22,z:55},{x:-22,z:65},{x:-15,z:18},{x:-15,z:45},{x:-15,z:76},{x:15,z:39},{x:15,z:98},{x:0,z:26},{x:0,z:60},{x:0,z:85}];
 const passive=new Set(["dormant","waiting","reveal","staged","trapped"]);
 
 /** One evidence-driven opponent. Sensing is sampled at 10 Hz, movement at the
@@ -7320,7 +8188,7 @@ export class Threat {
     this.pos={x:0,z:63};this.yaw=Math.PI;this.mode="dormant";this.suspicion=0;this.clock=0;
     this.lastKnown=null;this.lastSeen=null;this.lastVelocity={x:0,z:0};this.evidenceAge=Infinity;
     this.destination=null;this.path=[];this.lastPlan=null;this.repath=0;this.memory=0;this.grace=0;
-    this.searchTime=0;this.searchPlan=[];this.cleared=new Map();this.patrolVisits=new Map();this.patrolIndex=0;
+    this.searchTime=0;this.searchPlan=[];this.cleared=new Map();this.patrol=new PatrolPlanner(this.rects);this.patrol.prepare(this.routes);this.patrolVisits=this.patrol.visits;this.patrolIndex=0;
     this.stepDistance=0;this.lastHeard=0;this.speed=0;this.lureTime=0;this.lureUses=new Map();this.trapTime=0;
     this.witness=null;this.inspectSpot=null;this.inspectTime=0;this.searchIndex=0;this.stuck=0;this.pressure=false;
     this.senseClock=0;this.seesPlayer=false;this.listenTime=0;this.attackTime=0;this.recoveryTime=0;this.attackHit=false;
@@ -7329,8 +8197,13 @@ export class Threat {
     this.mover=new RouteFollower(this.rects);this.motionPose=null;this.motionPhase=null;this.navigationCooldown=0;this.listenHeading=null;this.brakeTime=0;
     this.patrolSeed=(Math.random()*0xffffffff)>>>0;this.patrolPause=0;this.soundTurn=0;this.boltCheckUntil=0;
     this.loops=new LoopMemory(this.rects);this.lostCorner=false;this.bodyLean=0;
+    this.doorApproach=null;this.doorCooldown=0;this.investigation=null;this.cornerProbe=null;this.stunTime=0;this.stunDuration=0;this.stunResistUntil=0;this.stunHeading=null;this.lastBoltEvent=null;this.boltEvents={heard:0,ignored:0,hits:0,stuns:0};
   }
-  prepareRoutes(){this.routes=new PursuitRoutes(this.rects);}
+  prepareRoutes(){this.routes=new PursuitRoutes(this.rects,[...ROUTE_NODES,...PATROL_STOPS]);this.patrol.prepare(this.routes);}
+  setPatrolChapter(state){
+    this.outsideUnlocked=state.flags.includes("gate");
+    this.patrol.setChapter(state.flags.includes("route")?"return":this.outsideUnlocked?"yard":"interior");
+  }
   activate(noisePosition){
     const retain=["reveal","waiting","staged"].includes(this.mode),pos=copy(this.pos),yaw=this.yaw;
     this.reset();if(retain){this.pos=pos;this.yaw=yaw;}
@@ -7338,16 +8211,20 @@ export class Threat {
   }
   /** A story route still uses the same collider/path controller. Only a dormant,
    * unseen first appearance may be placed at its authored start position. */
+  canStage(){return !['stunned','attack','recover'].includes(this.mode)&&!(this.mode==='inspect'&&this.witness);}
   stageRoute(points,pose="Idle"){
+    if(!this.canStage())return false;
+    this.doorApproach=null;this.searchAction=null;
     this.mode="staged";this.scriptRoute=points.map(copy);this.scriptArrived=false;this.scriptPose=pose;
     this.destination=this.scriptRoute.shift()||copy(this.pos);this.path=[];this.lastPlan=null;this.repath=0;
-    this.mover.invalidate();
+    this.mover.invalidate();return true;
   }
   releaseStage(noisePosition,grace=1.6){
-    this.mode="investigate";this.scriptRoute=null;this.scriptArrived=false;
+    this.cancelDoorApproach();this.mode="investigate";this.scriptRoute=null;this.scriptArrived=false;
     this.destination=copy(noisePosition);this.lastKnown=copy(noisePosition);this.path=[];this.lastPlan=null;this.grace=grace;
   }
   pursueIfSeen(player,grace=.9){
+    if(this.mode==='stunned')return false;
     if(!this.canSee(player))return false;
     this.lastKnown=copy(player.pos);this.lastSeen={...this.lastKnown,time:this.clock};
     this.evidence.observe('sight',this.lastKnown,this.clock,{confidence:1,source:'player-sight'});
@@ -7360,42 +8237,90 @@ export class Threat {
     this.revealRoute=[{x:-8.4,z:56.5},{x:-8.4,z:61},{x:-8.4,z:56.5},{x:-12,z:56.5}];return true;
   }
   lure(position={x:-24,z:76},seconds=9){
-    if(["attack","recover","staged"].includes(this.mode)||(this.mode==="chase"&&this.memory>this.rules.memory-1))return false;
+    if(["attack","recover","staged","stunned"].includes(this.mode)||(this.mode==="chase"&&this.memory>this.rules.memory-1))return false;
     const key=`${Math.round(position.x)},${Math.round(position.z)}`,uses=this.lureUses.get(key)||0;
     this.lureUses.set(key,uses+1);
-    this.mode="lured";this.lureTime=Math.max(2.5,seconds*Math.pow(this.rules.lureRetention,Math.min(3,uses)));
+    this.cancelDoorApproach();this.mode="lured";this.lureTime=Math.max(2.5,seconds*Math.pow(this.rules.lureRetention,Math.min(3,uses)));
     this.lastKnown=copy(position);this.destination=copy(position);this.path=[];this.lastPlan=null;this.repath=0;
     this.lastVelocity={x:0,z:0};this.evidenceAge=0;return true;
   }
-  trap(seconds=12){this.mode="trapped";this.trapTime=seconds;this.trapContact=0;this.suspicion=0;this.speed=0;this.attackTime=0;}
-  hear(position,loudness,kind="sound",source=kind){
-    if(passive.has(this.mode)||["lured","attack","recover"].includes(this.mode)||this.grace>0)return;
-    const route=acousticRoute(this.pos,position,(a,b)=>!lineClear(a,b,this.rects,.05));
+  trap(seconds=12){this.cancelDoorApproach();this.mode="trapped";this.trapTime=seconds;this.trapContact=0;this.suspicion=0;this.speed=0;this.attackTime=0;}
+  /** An earned door target is a bounded movement intent. Ordinary chase logic
+   * must not overwrite it with an unreachable point behind the closed door. */
+  approachDoor(point,evidence){
+    if(this.doorApproach)return true;
+    if(this.clock<this.doorCooldown||this.seesPlayer||!this.canStage()||!['search','investigate','chase'].includes(this.mode))return false;
+    this.searchAction=null;this.searchPlan=[];
+    this.doorApproach={point:copy(point),evidence:copy(evidence),until:this.clock+8};
+    this.destination=copy(point);this.mover.invalidate();return true;
+  }
+  cancelDoorApproach(){
+    if(!this.doorApproach)return;
+    this.doorApproach=null;this.doorCooldown=this.clock+6;this.destination=this.lastKnown&&copy(this.lastKnown);this.mover.invalidate();
+  }
+  hear(position,loudness,kind="sound",source=kind,{lostChase=false}={}){
+    if(passive.has(this.mode)||["lured","attack","recover","stunned"].includes(this.mode) )return false;
+    // Seeing someone enter a locker beats an unrelated clatter.
+    if(this.mode==='inspect'&&this.witness)return false;
+    const route=acousticRoute(this.pos,position,(a,b)=>!sightClear({...a,y:1.3},{...b,y:1.3},this.rects));
     const audible=loudness*this.rules.hearing*route.gain;
     const strength=audible/(route.distance+1);
-    if(route.distance<audible&&(this.mode!=="chase"||this.memory<2)&&(this.clock-this.heardAt>1.4||strength>this.evidenceStrength*1.2)){
+    if(route.distance<audible&&(this.mode!=="chase"||this.memory<2||lostChase)&&(this.clock-this.heardAt>1.4||strength>this.evidenceStrength*1.2)){
       this.heardAt=this.clock;this.evidenceStrength=strength;
       const uncertainty=strength>1.5?0:strength>.7?.75:1.5;
       const heard=uncertainty?{x:Math.round(position.x/uncertainty)*uncertainty,z:Math.round(position.z/uncertainty)*uncertainty}:position;
       this.evidence.observe(kind,heard,this.clock,{confidence:Math.min(.9,.35+strength*.5),uncertainty,source});
       this.lastKnown=copy(heard);this.destination=copy(heard);this.lastHeard=3;this.evidenceAge=0;
-      this.lastVelocity={x:0,z:0};this.listenTime=0;if(this.mode!=="chase")this.mode="investigate";this.repath=0;
+      this.searchAction=null;this.searchPlan=[];this.searchTarget=null;
+      this.inspectSpot=null;this.inspectTime=0;this.inspectionAuthorized=false;this.witness=null;
+      this.cancelDoorApproach();this.destination=copy(heard);this.cornerProbe=null;
+      this.investigation={point:copy(heard),until:this.clock+Math.min(10,Math.max(2,distance(this.pos,heard)/this.rules.investigate+1.5))};
+      this.loops.commit=null;this.lastVelocity={x:0,z:0};this.listenTime=0;this.mode="investigate";this.repath=0;
       this.listenHeading=Math.atan2(heard.x-this.pos.x,heard.z-this.pos.z);
-      this.soundTurn=this.rules.id==='easy'?.55:.3;
+      this.soundTurn=this.rules.id==='easy'?.38:.18;this.mover.invalidate();
+      return true;
     }
+    return false;
   }
   hearBolt(position){
     this.boltHabits ||= [];
     let habit=this.boltHabits.find(p=>distance(p,position)<5);
+    const uses=habit?.uses||0;
+    // A fresh visible target wins. Once sight has genuinely been broken, a
+    // nearby impact is useful immediately instead of waiting out seven seconds
+    // of chase memory. No hidden player coordinates enter this decision.
+    const lostChase=!!this.lastSeen&&!this.seesPlayer&&this.clock-this.lastSeen.time>=this.rules.boltSightDelay;
+    const loudness=position.surface==='metal'?38:position.surface==='glass'?34:position.surface==='water'?23:31;
+    const heard=this.hear(position,loudness*Math.pow(this.rules.lureRetention,uses),'sound','bolt:'+Math.round(position.x/5)+':'+Math.round(position.z/5),{lostChase});
+    if(!heard){this.boltEvents.ignored++;this.lastBoltEvent={outcome:'ignored',time:this.clock,point:copy(position)};return false;}
+    this.boltEvents.heard++;this.lastBoltEvent={outcome:'investigating',time:this.clock,point:copy(position)};
+    this.mode='investigate';this.searchAction=null;this.inspectSpot=null;this.witness=null;this.inspectionAuthorized=false;
+    this.investigation={point:copy(this.destination),until:this.clock+Math.min(14,Math.max(3,distance(this.pos,this.destination)/this.rules.investigate+2))};
+    this.boltCheckUntil=this.investigation.until;
     if(!habit){habit={x:position.x,z:position.z,uses:0};this.boltHabits.push(habit);if(this.boltHabits.length>3)this.boltHabits.shift();}
     habit.uses=Math.min(3,habit.uses+1);
     // Habituation belongs to this area. It never overrides a fresh visual chase.
-    this.hear(position,28*Math.pow(this.rules.lureRetention,habit.uses-1),'sound','bolt:'+Math.round(position.x/5)+':'+Math.round(position.z/5));
+    // Hearing confirmed above; grace protects attacks, not the senses.
     if(habit.uses>=3&&['investigate','stalk'].includes(this.mode)&&this.lastKnown&&distance(this.lastKnown,position)<2){
       const cover=this.coverPoints().filter(p=>distance(p,position)<7).sort((a,b)=>distance(a,this.pos)-distance(b,this.pos))[0];
       if(cover){this.destination=copy(cover);this.boltCheckUntil=this.clock+6;this.mover.invalidate();} // Plausible cover, never hidden coordinates.
-      this.listenTime=.5;
+      this.listenTime=.35;
     }
+    return true;
+  }
+  canReceiveBolt(){return !passive.has(this.mode)&&this.mode!=='waiting';}
+  receiveBolt(hit){
+    if(!this.canReceiveBolt())return 'inactive';
+    this.boltEvents.hits++;
+    // Three finite bolts buy breathing room, not a permanent stun lock.
+    if(this.clock<this.stunResistUntil||this.mode==='stunned'){this.lastBoltEvent={outcome:'resisted',time:this.clock,point:copy(hit)};return 'resisted';}
+    this.stunDuration=this.rules.boltStun;this.stunTime=this.stunDuration;this.stunResistUntil=this.clock+this.stunDuration+4;
+    this.mode='stunned';this.speed=this.movingSpeed=0;this.attackTime=0;this.attackHit=false;this.searchAction=null;
+    this.cancelDoorApproach();this.investigation=null;this.cornerProbe=null;this.loops.commit=null;this.mover.invalidate();
+    const incoming=hit.incoming;
+    this.stunHeading=incoming?Math.atan2(-incoming.x,-incoming.z):this.yaw;
+    if(!this.lastKnown)this.lastKnown={x:this.pos.x+Math.sin(this.stunHeading)*3,z:this.pos.z+Math.cos(this.stunHeading)*3};
+    this.boltEvents.stuns++;this.lastBoltEvent={outcome:'staggered',time:this.clock,point:copy(hit)};return 'staggered';
   }
   canSee(player){
     if(player.hiding||player.vehicle)return false;
@@ -7422,17 +8347,20 @@ export class Threat {
     return sightClear({...this.pos,y:1.85},patch,this.rects)?copy(patch):null;
   }
   observeHide(spot,seen){
+    if(this.mode==='stunned')return; // Hiding cannot cancel the player's earned escape window.
     if(!seen&&this.rules.id!=="easy"&&!passive.has(this.mode)&&this.grace<=0){
       const audible=distance(this.pos,spot.entry)<7*this.rules.hearing&&lineClear(this.pos,spot.entry,this.rects,.05);
       if(audible){
         this.evidence.observe('door',spot.entry,this.clock,{confidence:.85,source:`door:${spot.id}`});
         if(this.evidence.lockerCase(spot,this.clock)){
+          this.cancelDoorApproach();
           this.inspectSpot=spot;this.inspectTime=0;this.destination=copy(spot.inspectEntry||spot.entry);
           this.mode='inspect';this.searchTime=Math.max(this.searchTime,this.rules.inspection+distance(this.pos,spot.entry)/this.rules.investigate+3);this.inspectionAuthorized=true;this.mover.invalidate();
         }
       }
     }
     if(seen&&this.grace<=0&&!passive.has(this.mode)){
+      this.cancelDoorApproach();
       this.inspectionAuthorized=true;this.witness=spot.id;this.inspectSpot=spot;this.inspectTime=0;this.lastKnown=copy(spot.entry);
       this.destination=copy(spot.inspectEntry||spot.entry);this.mode="inspect";this.path=[];this.lastPlan=null;this.mover.invalidate();
     }
@@ -7448,22 +8376,25 @@ export class Threat {
         this.evidence.observe('track',trace,this.clock,{confidence:.55,source:`track:${trace.serial}`});
     }
   }
-  diagnostics(){return {mode:this.mode,reason:this.policy.reason,evidence:this.evidence.report(this.clock),recoveries:this.mover.recoveries,planning:this.mover.planningReport?.()};}
+  diagnostics(){return {mode:this.mode,doorApproach:this.doorApproach,investigation:this.investigation,reason:this.policy.reason,evidence:this.evidence.report(this.clock),bolts:{...this.boltEvents,last:this.lastBoltEvent||null},recoveries:this.mover.recoveries,planning:this.mover.planningReport?.(),patrol:this.patrol.report()};}
   coverPoints(){
     if(this.coverCount===this.rects.length)return this.coverCache;
     const points=[];
     for(const r of this.rects){
-      if(r.dynamic||!/car|sedan|van|suv|hatchback|covered|equipment|machine|column|pillar/.test(r.name||""))continue;
+      if(r.dynamic||!/car|sedan|van|suv|hatchback|covered|equipment|machine|column|pillar|cabinet|dolly|dumpster|cargo|freight|trolley/.test(r.name||""))continue;
       for(const sx of [-1,1])for(const sz of [-1,1]){
         const p={x:r.x+sx*(r.w/2+.7),z:r.z+sz*(r.d/2+.7)};
         if(!blocked(p.x,p.z,this.rects,.34))points.push({...p,lookAt:{x:r.x,z:r.z},low:(r.h||1.3)<1.8,id:`cover:${r.x}:${r.z}:${sx}:${sz}`});
       }
     }
-    this.coverCount=this.rects.length;this.coverCache=points.slice(0,64);return this.coverCache;
+    // Do not discard exterior cover merely because garage cars were authored
+    // first. Search still filters by evidence radius before choosing a few stops.
+    this.coverCount=this.rects.length;this.coverCache=points.slice(0,512);return this.coverCache;
   }
   beginSearch(){
     this.searchAction=null;this.mode="search";this.searchTime=this.rules.search;this.searchIndex=0;this.inspectSpot=null;
-    const origin=this.evidence.best(this.clock)?.score>.25?this.evidence.best(this.clock):this.lastKnown||this.pos;this.destination=copy(origin);this.path=[];this.lastPlan=null;
+    const focus=this.investigation&&this.clock<this.investigation.until+2?this.investigation.point:null;
+    const origin=focus||(this.evidence.best(this.clock)?.score>.25?this.evidence.best(this.clock):this.lastKnown||this.pos);this.investigation=null;this.destination=copy(origin);this.path=[];this.lastPlan=null;
     for(const [key,time] of this.cleared)if(this.clock-time>45)this.cleared.delete(key);
     const options=[];
     for(const spot of this.spots){
@@ -7513,10 +8444,9 @@ export class Threat {
   }
   choosePatrol(){
     this.patrolSeed=(Math.imul(this.patrolSeed,1664525)+1013904223)>>>0;
-    const variation=this.patrolSeed/4294967296;
-    const scored=PATROL.map((p,i)=>({p,i,score:(this.clock-(this.patrolVisits.get(i)??-20))*1.2-distance(this.pos,p)*.32+Math.sin(i*2.399+variation*6.28)*7}));
-    scored.sort((a,b)=>b.score-a.score);const pick=scored.find(x=>distance(x.p,this.pos)>3)||scored[0];
-    this.patrolVisits.set(pick.i,this.clock);this.patrolIndex++;this.destination=copy(pick.p);this.path=[];this.lastPlan=null;
+    const pick=this.patrol.choose(this.pos,this.clock,this.patrolSeed,{outsideUnlocked:this.outsideUnlocked});
+    this.patrolIndex++;this.destination=pick?copy(pick):null;this.path=[];this.lastPlan=null;
+    if(!pick)this.patrolPause=1; // Retry a closed section later, not every frame.
   }
   attentionPoint(){
     // Derived only from evidence already earned by perception. Hidden players
@@ -7592,7 +8522,13 @@ export class Threat {
       if(!this.trapTime){this.mode="patrol";this.destination=null;}
       return {...base,escapingTrap:this.trapTime<3,trapContactCue:arrived&&before<.63&&this.trapContact>=.63,animation:arrived?"DoorPush":this.motionPose||"Walk",phase:arrived?Math.min(.68,this.trapContact/1.8):this.motionPhase};
     }
-    if(this.grace>0){this.grace=Math.max(0,this.grace-dt);return {...base,animation:"Listen"};}
+    this.grace=Math.max(0,this.grace-dt); // Protection blocks damage, not sensing or investigation.
+    if(this.mode==='stunned'){
+      this.stunTime=Math.max(0,this.stunTime-dt);this.yaw=dampAngle(this.yaw,this.stunHeading,4,dt);
+      const phase=1-this.stunTime/this.stunDuration;
+      if(!this.stunTime){this.mode='listen';this.listenTime=.15;this.afterListen='search';this.senseClock=0;this.seesPlayer=false;}
+      return {...base,animation:'Recover',phase,staggered:true};
+    }
     if(this.mode==="attack")return this.tickAttack(dt,player);
     if(this.mode==="recover"){
       this.recoveryTime=Math.max(0,this.recoveryTime-dt);const phase=1-this.recoveryTime/this.rules.attackRecovery;
@@ -7610,17 +8546,27 @@ export class Threat {
         this.predictionAt=-Infinity;
         this.evidence.observe('sight',player.pos,this.clock,{confidence:1,source:'player-sight'});
         this.lastKnown=copy(player.pos);this.lastSeen={...this.lastKnown,time:this.clock};this.memory=this.rules.memory;this.evidenceAge=0;
-        this.loops.observe(this.lastKnown,this.clock,this.rules,this.pos);this.lostCorner=false;
+        this.loops.observe(this.lastKnown,this.clock,this.rules,this.pos);this.lostCorner=false;this.cornerProbe=null;this.investigation=null;this.boltCheckUntil=0;this.cancelDoorApproach();
       }else if(!["chase","alert","lured","inspect"].includes(this.mode)){
         const beam=this.visibleBeam(player);
         if(beam){this.evidence.observe('beam',beam,this.clock,{confidence:.45});this.lastKnown=beam;this.destination=copy(beam);this.mode="investigate";this.evidenceAge=0;}
       }
     }
     const visible=this.seesPlayer&&!player.hiding&&!player.vehicle;
+    if(this.doorApproach&&!visible){
+      const intent=this.doorApproach;
+      if(this.clock>=intent.until){this.cancelDoorApproach();this.beginSearch();}
+      else{
+        this.destination=copy(intent.point);
+        if(distance(this.pos,intent.point)>.12)this.moveToward(intent.point,this.rules.investigate,dt);
+        const step=this.stepDistance>.88;if(step)this.stepDistance=0;
+        return {...base,step,animation:this.motionPose||(this.speed>.1?'Walk':'Listen'),phase:this.motionPhase};
+      }
+    }
     if(this.clock>=this.decisionAt){
       this.decisionAt=this.clock+.25;this.evidence.prune(this.clock);
       const decision=this.policy.choose(this.evidence,this.clock,{visible,suspicion:this.suspicion,origin:this.pos});
-      if(decision&&['patrol','investigate','stalk'].includes(this.mode)&&!visible&&this.clock>=(this.boltCheckUntil||0)){
+      if(decision&&['patrol','investigate','stalk'].includes(this.mode)&&!visible&&this.clock>=Math.max(this.boltCheckUntil||0,this.investigation?.until||0)){
         this.mode=decision.behavior==='stalk'?'stalk':'investigate';this.destination=copy(decision.goal);
       }
     }
@@ -7638,23 +8584,30 @@ export class Threat {
         if(this.memory===0)this.beginSearch();else{
           // First reach the last witnessed corner, then listen. A committed
           // observed-loop cutoff may finish, but never tracks hidden position.
-          this.destination=this.loops.goal(this.clock)||(!this.lostCorner?copy(this.lastKnown):this.prediction());
-          if(!this.lostCorner&&distance(this.pos,this.lastKnown)<.65){this.lostCorner=true;this.mode='listen';this.listenTime=this.rules.listen;this.afterListen='search';this.listenHeading=Math.atan2(this.lastVelocity.x,this.lastVelocity.z);}
+          this.destination=this.loops.goal(this.clock)||(!this.lostCorner?copy(this.lastKnown):this.cornerProbe||copy(this.lastKnown));
+          if(!this.lostCorner&&distance(this.pos,this.lastKnown)<.65){
+            this.lostCorner=true;const probe=this.prediction();
+            // One short continuation along observed movement, then a physical
+            // search. The target freezes here; it cannot follow unseen motion.
+            if(probe&&distance(probe,this.lastKnown)>.8){this.cornerProbe=copy(probe);this.destination=copy(probe);}
+          }
+          if(this.lostCorner&&distance(this.pos,this.destination)<.65){this.mode='listen';this.listenTime=this.rules.listen;this.afterListen='search';this.listenHeading=Math.atan2(this.lastVelocity.x,this.lastVelocity.z);}
           if(this.rules.intercept&&this.evidenceAge>1&&this.evidenceAge<3&&this.clock>this.watchCooldown&&this.predictionGoal&&distance(this.pos,this.predictionGoal)<1.2&&Math.hypot(this.lastVelocity.x,this.lastVelocity.z)>1){
             this.mode='watch';this.watchUntil=this.clock+(this.rules.id==='hard'?4:2.5);this.watchCooldown=this.clock+25;
           }
         }
       }
     }
-    if(this.mode==="chase"&&base.distance<1.8&&this.canSee(player)){
+    if(this.grace<=0&&this.mode==="chase"&&base.distance<1.8&&this.canSee(player)){
       this.beginAttack(player);return {...base,attackStarted:true,animation:"Attack",phase:0};
     }
+    if(this.grace>0&&visible&&base.distance<2.5){this.yaw=dampAngle(this.yaw,Math.atan2(player.pos.x-this.pos.x,player.pos.z-this.pos.z),6,dt);return {...base,animation:'Listen'};}
     if(this.mode==='watch'){
       this.yaw=dampAngle(this.yaw,Math.atan2(this.lastKnown.x-this.pos.x,this.lastKnown.z-this.pos.z),3,dt);
       if(this.clock>=this.watchUntil)this.beginSearch();
       return {...base,animation:'Listen',listening:true};
     }
-    if(this.searchAction&&!visible){
+    if(this.mode==="search"&&this.searchAction&&!visible){
       const action=this.searchAction;action.time+=dt;
       if(action.lookAt)this.yaw=dampAngle(this.yaw,Math.atan2(action.lookAt.x-this.pos.x,action.lookAt.z-this.pos.z),4,dt);
       if(action.time>=action.duration){this.searchAction=null;this.nextSearchPoint();}
@@ -7680,7 +8633,7 @@ export class Threat {
       const endpoint=this.mover.goal&&this.mover.planned&&distance(this.mover.planned,this.destination)<.85?this.mover.goal:this.destination;
       if(distance(this.pos,endpoint)<(this.mode==='inspect'?.08:.5)){
         if(previousSpeed>1.5)this.brakeTime=.8;
-        if(this.mode==="patrol"){this.destination=null;this.patrolPause=.35+(this.patrolSeed%600)/1000;}
+        if(this.mode==="patrol"){this.patrol.arrive(this.pos,this.clock);this.destination=null;this.patrolPause=.35+(this.patrolSeed%600)/1000;}
         else if(["investigate","stalk"].includes(this.mode)){this.mode="listen";this.listenTime=this.rules.listen;this.afterListen="search";}
         else if(this.mode==="search"){
           if(this.searchTarget)this.cleared.set(this.searchTarget.id,this.clock);
@@ -7701,7 +8654,7 @@ export class Threat {
         const speed=(this.mode==="chase"?this.rules.chase:this.mode==="lured"?this.rules.lure:this.mode==="alert"?1.9:this.mode==="stalk"?.9:this.rules.investigate)*(this.pressure?1.04:1);
         this.moveToward(this.destination,speed,dt);
         if(this.stuck>1.5&&["search","inspect","patrol","investigate","stalk","chase","alert"].includes(this.mode)){
-          if(this.mode==="patrol")this.destination=null;
+          if(this.mode==="patrol"){this.patrol.fail(this.clock);this.destination=null;}
           else if(["chase","alert","investigate","stalk"].includes(this.mode)){
             // Replan from the actual position; repeated failures become a finite
             // evidence-based search, never a teleport through the obstruction.
@@ -7715,7 +8668,7 @@ export class Threat {
     const inspecting=this.mode==="inspect"&&this.inspectTime>0;
     const animation=inspecting?'InspectClose':this.motionPose||(this.mode==='stalk'&&this.speed>.1?'Stalk':this.runStart>0?'StartRun':this.speed>2.3?'Run':this.speed>.1?'Walk':this.brakeTime?'Brake':this.mode==='search'?'Search':'Idle');
     const phase=inspecting?Math.min(1,this.inspectTime/this.rules.inspection):this.motionPose?this.motionPhase:animation==='StartRun'?1-this.runStart/.6:this.brakeTime&&this.speed<.1?1-this.brakeTime/.8:null;
-    return {caught:inspected,step,visible,distance:distance(this.pos,player.pos),inspecting,
+    return {caught:inspected&&this.grace<=0,step,visible,distance:distance(this.pos,player.pos),inspecting,
       animation,phase};
   }
 }
@@ -7724,13 +8677,13 @@ export class Threat {
 ## dist/js/ui.js
 
 ```javascript
-import { inventoryStatus } from "./tasks.js?v=1.14.0";
-import { renderJournal, returnSummary } from "./journal.js?v=1.14.0";
-import { destination } from "./guidance.js?v=1.14.0";
-import { DIFFICULTIES, difficultyRules } from "./difficulty.js?v=1.14.0";
-import { renderSettings } from "./settings-ui.js?v=1.14.0";
-import { PRESETS } from "./preferences.js?v=1.14.0";
-import { renderMap } from "./map.js?v=1.14.0";
+import { inventoryStatus } from "./tasks.js?v=1.19.0";
+import { renderJournal, returnSummary } from "./journal.js?v=1.19.0";
+import { destination } from "./guidance.js?v=1.19.0";
+import { DIFFICULTIES, difficultyRules } from "./difficulty.js?v=1.19.0";
+import { renderSettings } from "./settings-ui.js?v=1.19.0";
+import { PRESETS } from "./preferences.js?v=1.19.0";
+import { renderMap } from "./map.js?v=1.19.0";
 export const $ = (id) => document.getElementById(id);
 export const escapeHTML = (s) =>
   String(s).replace(
@@ -8127,12 +9080,18 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
     const times = (this.game.stats?.samples() || []).sort((a,b) => a-b);
     const capture = this.game.player?.mouseCapture;
     let previousCrash=null;try{previousCrash=JSON.parse(this.game.store.get("lastCrash")||"null");}catch{}
-    return { version: "1.14.0", pass:this.game.profilePass || "Normal play", metrics:this.game.stats?.summary() || null, browser: globalThis.navigator?.userAgent || "unknown", embedded: window.self !== window.top,
+    return { version: "1.19.0", pass:this.game.profilePass || "Normal play", metrics:this.game.stats?.summary() || null, browser: globalThis.navigator?.userAgent || "unknown", embedded: window.self !== window.top,
       playing: this.game.playing, started: this.game.started, inputMode: this.game.player?.captureMode,
       pointerLocked: document.pointerLockElement === this.game.canvas, captureState: capture?.state,
-      preparation: this.game.world?.preparation || null,
+      preparation: this.game.world?.preparation || null, loadingStage:this.game.loadingStage||null,
+      surfaceCoverage:this.game.world?.surfaceLibrary?.report||null,assetHealth:this.game.world?.assetHealth||null,
       ai:this.game.threat?.diagnostics?.()||null,placement:this.game.world?.placements?.report?.()||null,
       profiling: this.game.hitches?.report() || null,
+      areaTimings:this.game.areaTimings?.report()||{},
+      outdoorEffects:this.game.world?.yard?.effectCounts||{},
+      sky:{meshes:this.game.world?.sky?.meshes.length||0,visible:this.game.world?.sky?.visible||false},
+      guidance:this.game.world?.guideRoute?.result||null,
+      cpuActiveMeshEvaluationMs:this.game.sceneInstrumentation?.activeMeshesEvaluationTimeCounter.current??null,
       shaderCompilationMs: this.game.instrumentation?.shaderCompilationTimeCounter.total ?? null,
       drawCalls: this.game.sceneInstrumentation?.drawCallsCounter.current ?? null,
       shadowCasters: this.game.world?.shadowCasterCount ?? null,
@@ -8154,9 +9113,10 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
   }
   performanceRoute() {
     this.show("performance-route",this.head("OPTIONAL LOCAL TEST", "Check frame pacing")+
-      '<p>Use the same graphics and route for both passes. This records timings only; it does not move you, complete tasks, or upload data.</p><ol><li>Start a new Easy run by bay 042, before collecting the Security key.</li><li>Walk north to the exit and return south, entering Security, Storage, Workshop, Electrical and Pump Room.</li><li>Toggle the flashlight in each room without completing objectives. Open and close the journal once.</li><li>Return here and finish the pass. Repeat the same route without reloading.</li></ol><div class="button-row"><button id="profile-first" class="btn">Begin first pass</button><button id="profile-second" class="btn">Begin second pass</button><button id="profile-finish" class="btn accent">Finish pass & export</button></div><p class="settings-note">First-pass GPU work, repeated stalls and CPU-heavy sections can then be compared. Timings depend on this machine. Keep playtime and route similar.</p>');
+      '<p>Use the same graphics, weather setting and route for both passes. This records local timings; it does not move you or complete tasks.</p><p><b>Exterior route — after raising the garage shutter:</b></p><ol><li>Begin at the shutter. Follow BARRIER CONTROL into the yard.</li><li>Visit UTILITY SELECTOR under the generator awning, then enter GATEHOUSE through its front door.</li><li>Turn toward BARRIER BRAKE, then walk to DOCK WINCH and return to the shutter.</li><li>Toggle the flashlight, turn toward the sky and look back into the garage. Open and close the journal once.</li><li>Finish/export, then repeat without reloading. After clearing the road, also record a separate driving pass.</li></ol><p>Before the yard unlocks, use the garage loop: bay 042 → north exit → Security → Storage → Workshop → Electrical → Pump Room → bay 042.</p><div class="button-row"><button id="profile-first" class="btn">Begin first pass</button><button id="profile-second" class="btn">Begin second pass</button><button id="profile-finish" class="btn accent">Finish pass & export</button></div><p class="settings-note">Reports include area timings, slow-frame sections, visibility counts, nearby-collision candidates and current weather. GPU timing can be unavailable. First pass means first traversal after normal preparation; it is not an unprepared shader benchmark.</p>');
     const begin=label=>{
       this.game.stats.reset(); this.game.hitches.events.length=0; this.game.hitches.maxima={};
+      this.game.areaTimings?.reset();
       this.game.profilePass=label; this.toast(label+" started. Walk the route, then return here.",5000);
       this.hide();this.game.resume();
     };
@@ -8164,7 +9124,7 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
     $("profile-finish").onclick=()=>{
       const report=this.diagnostics();this.game.profileReports ||= [];
       this.game.profileReports.push(report);if(this.game.profileReports.length>2)this.game.profileReports.shift();
-      this.downloadJSON({version:"1.14.0",passes:this.game.profileReports},"LastVehicle-performance-route.json");
+      this.downloadJSON({version:"1.19.0",passes:this.game.profileReports},"LastVehicle-performance-route.json");
     };
   }
   actionKey(action){return this.game.player?.inputDevice==='controller'?({interact:'A',flashlight:'X',journal:'Y',hint:'View',sprint:'L3',crouch:'B',throw:'RB',objective:'D-pad ↑'}[action]||action):keyName(this.game.settings.bindings[action]);}
@@ -8188,7 +9148,7 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
     const g=this.game;g.renderFault=true;g.lastError=error?.message||"Unknown error";
     g.recoveryLog?.capture(error,{objective:g.currentObjective()?.[0],mode:g.threat?.mode,
       position:g.player?{...g.player.pos}:null});
-    g.store.set("lastCrash",JSON.stringify({version:"1.14.0",...g.recoveryLog?.error}));
+    g.store.set("lastCrash",JSON.stringify({version:"1.19.0",...g.recoveryLog?.error}));
     g.stopInput();g.audio.suspend();
     const previous=g.store.readGame(),saved=g.store.available&&!!previous;
     this.show("recovery",this.head("GAME PAUSED","Restore a clean checkpoint",false)+
@@ -8204,7 +9164,7 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
     this.show(
       "credits",
       this.head("A GINGRSNAPS PROJECT", "Last Vehicle") +
-        `<p>A short horror game about the people who are still here when everyone else goes home.</p><div class="credits-list"><strong>Created for GingrSnaps</strong><br>Babylon.js — Apache 2.0<br><br><strong>Public-domain / CC0 assets</strong><br>Vehicles & props — Kenney, Car Kit 3.1, Factory Kit and Furniture Kit<br>The Attendant — original creature, rig & animation<br>Meridian worn details, maintenance key, wall paint, weather and three-note score — original CC0 assets<br>Legacy optional human — Quaternius (2017 CC0 pack)<br>Interface & impact sounds — Kenney<br>Music — “Dream 2 Ambience” by TokyoGeisha; legacy “EmptyCity” by yd; “Horror Atmosphere” by Juhani Junkala / SubspaceAudio; horror ambience by congusbongus<br>Sound effects — qubodup, Brian MacIntosh / BMacZero, TinyWorlds, Independent.nu, Frenchyboy, congusbongus looneybits Ogrebane, rubberduck and Thimras.<br>Surface textures — Poly Haven: Rob Tuytel, Amal Kumar and Dimitrios Savva.<br><br>Original level geometry, interface, story, and game code were created for this project.<br><br><a href="assets/CREDITS.md" target="_blank" rel="noopener">Complete audio and model credits ↗</a><br><a href="assets/assets-manifest.json" target="_blank" rel="noopener">Asset sources and license manifest ↗</a></div><div class="button-row"><button id="credits-back" class="btn accent">Back</button><button id="credits-intro" class="btn">Replay studio intro</button></div>`,
+        `<p>A short horror game about the people who are still here when everyone else goes home.</p><div class="credits-list"><strong>Created for GingrSnaps</strong><br>Babylon.js — Apache 2.0<br><br><strong>Public-domain / CC0 assets</strong><br>Vehicles & props — Kenney, Car Kit 3.1, Factory Kit and Furniture Kit<br>The Attendant — original creature, rig & animation<br>Meridian worn details, service-yard props, maintenance key, wall paint, weather and three-note score — original CC0 assets<br>Legacy optional human — Quaternius (2017 CC0 pack)<br>Interface & impact sounds — Kenney<br>Music — “Dream 2 Ambience” by TokyoGeisha; legacy “EmptyCity” by yd; “Horror Atmosphere” by Juhani Junkala / SubspaceAudio; horror ambience by congusbongus<br>Sound effects — qubodup, Brian MacIntosh / BMacZero, TinyWorlds, Independent.nu, Frenchyboy, congusbongus looneybits Ogrebane, rubberduck and Thimras.<br>Surface textures — Poly Haven: Rob Tuytel, Amal Kumar, Dimitrios Savva, Dario Barresi, Charlotte Baglioni and Rico Cilliers.<br><br>Original level geometry, interface, story, and game code were created for this project.<br><br><a href="assets/CREDITS.md" target="_blank" rel="noopener">Complete audio and model credits ↗</a><br><a href="assets/assets-manifest.json" target="_blank" rel="noopener">Asset sources and license manifest ↗</a></div><div class="button-row"><button id="credits-back" class="btn accent">Back</button><button id="credits-intro" class="btn">Replay studio intro</button></div>`,
     );
     $("credits-intro").onclick = () => this.game.replayIntro();
     $("credits-back").onclick = () => this.back();
@@ -8212,13 +9172,96 @@ ${g.engine.getRenderWidth()} × ${g.engine.getRenderHeight()}${adaptive}`);
 }
 ```
 
+## dist/js/vehicle.js
+
+```javascript
+import { blocked, segmentHits } from './navigation.js?v=1.19.0';
+/** A deliberately slow kinematic car. Four corner probes and swept edge tests
+ * keep it on the ground and out of walls without a heavyweight physics engine.
+ * The mesh, camera, wheel rotation and sounds consume this one simulation. */
+export function carCorners(pose,pad=0){
+  const s=Math.sin(pose.yaw),c=Math.cos(pose.yaw);
+  return [[-1-pad,-2.25-pad],[1+pad,-2.25-pad],[1+pad,2.25+pad],[-1-pad,2.25+pad]].map(([x,z])=>({x:pose.x+x*c+z*s,z:pose.z-x*s+z*c}));
+}
+export function carBlocked(pose,rects,ignore=null){
+  const corners=carCorners(pose,.04);
+  for(const r of rects){
+    if(r===ignore||r.enabled===false)continue;
+    if(corners.some(p=>blocked(p.x,p.z,[r],0)))return true;
+    if(corners.some((p,i)=>segmentHits(p,corners[(i+1)%4],r)))return true;
+    // Also catch a small obstacle completely enclosed by the car footprint.
+    const dx=r.x-pose.x,dz=r.z-pose.z,c=Math.cos(pose.yaw),s=Math.sin(pose.yaw);
+    if(Math.abs(c*dx-s*dz)<1.04&&Math.abs(s*dx+c*dz)<2.29)return true;
+  }
+  return false;
+}
+export class VehicleController {
+  constructor(rects,body){this.rects=rects;this.body=body;this.reset();}
+  reset(pose={x:13,z:78,yaw:-Math.PI/2}){Object.assign(this,pose);this.speed=0;this.steer=0;this.distance=0;this.blocked=false;this.finishTime=0;}
+  tick(dt,{throttle=0,steer=0}={}){
+    dt=Math.max(0,Math.min(.075,Number.isFinite(dt)?dt:0));
+    throttle=Math.max(-1,Math.min(1,throttle));steer=Math.max(-1,Math.min(1,steer));
+    this.steer+=(steer-this.steer)*(1-Math.exp(-dt*9));
+    // S brakes while travelling forward, then smoothly becomes reverse.
+    const target=throttle>0?6.2:throttle<0?-2.6:0;
+    const rate=throttle<0&&this.speed>0?7.5:throttle?2.4:3.2;
+    this.speed+=Math.sign(target-this.speed)*Math.min(Math.abs(target-this.speed),rate*dt);
+    const count=Math.max(1,Math.ceil(Math.abs(this.speed*dt)/.10));this.blocked=false;
+    for(let i=0;i<count;i++){
+      const h=dt/count,turn=this.speed/2.9*Math.tan(this.steer*.52)*h;
+      const next={x:this.x+Math.sin(this.yaw+turn*.5)*this.speed*h,z:this.z+Math.cos(this.yaw+turn*.5)*this.speed*h,yaw:this.yaw+turn};
+      if(carBlocked(next,this.rects,this.body)){this.speed=0;this.blocked=true;break;}
+      this.distance+=Math.abs(this.speed*h);Object.assign(this,next);
+    }
+    return this;
+  }
+  exitPoint(){
+    if(Math.abs(this.speed)>.08)return null;
+    // Exit on the LEFT driver side; if blocked, ask the player to reposition.
+    for(const side of [-1.6,-2.0]){
+      const p={x:this.x+Math.cos(this.yaw)*side+Math.sin(this.yaw)*(-.45),z:this.z-Math.sin(this.yaw)*side+Math.cos(this.yaw)*(-.45)};
+      if(!blocked(p.x,p.z,this.rects.filter(r=>r!==this.body),.3))return p;
+    }
+    return null;
+  }
+}
+```
+
+## dist/js/visibility.js
+
+```javascript
+/** Conservative sector visibility, separate from camera-frustum culling.
+ * Outdoors retain the garage facade and entrance sectors. Deeper interior
+ * geometry is kept only near the open shutter, where it can actually be seen.
+ * Long meshes crossing a boundary remain enabled through their measured bounds. */
+const exterior=new Set(['yard','gatehouse','road']);
+export function sectorVisible(batch,position,room,gateOpen=true,detailLevel=0){
+  if(batch.detailQuality>detailLevel)return false;
+  const zone=batch.zone,b=batch.bounds;
+  const outside=exterior.has(room),external=exterior.has(zone);
+  if(!b)return true;
+  if(batch.backdrop)return position.z<0||(gateOpen&&position.z<26);
+  if(outside){
+    if(external)return true;
+    // The facade cannot disappear when looking back from the service road.
+    if(zone==='garage'&&b.minZ<=3)return true;
+    const depth=position.z>-12?32:position.z>-26?17:3;
+    return gateOpen&&b.minZ<depth&&(zone==='garage'||position.z>-10);
+  }
+  if(external)return gateOpen&&position.z<26&&(zone==='yard'||position.z<14);
+  if(room==='garage'||zone==='garage'||room===zone)return true;
+  const west=['security','storage','workshop'],a=west.indexOf(room),c=west.indexOf(zone);
+  return a>=0&&c>=0&&Math.abs(a-c)===1;
+}
+```
+
 ## dist/js/visuals.js
 
 ```javascript
-import { AttentionOverlay } from "./attention.js?v=1.14.0";
-import { yieldTask } from "./preparation.js?v=1.14.0";
-import { FootfallTracker } from "./presentation.js?v=1.14.0";
-import { Animator, ease } from "./animation.js?v=1.14.0";
+import { AttentionOverlay } from "./attention.js?v=1.19.0";
+import { yieldTask } from "./preparation.js?v=1.19.0";
+import { FootfallTracker } from "./presentation.js?v=1.19.0";
+import { Animator, ease } from "./animation.js?v=1.19.0";
 const B = globalThis.BABYLON;
 
 /** Dynamic presentation stays separate from static batching. Everything in
@@ -8471,7 +9514,7 @@ export class Visuals {
         10,
       );
     this.key = this.scene.getMeshByName("key on desk");
-    if (this.key) this.dynamicRoots.add(this.key);
+    if (this.key){this.dynamicRoots.add(this.key);this.keyHome=this.key.position.clone();}
     // Keep the authored collider, but give the locker a real open compartment.
     this.scene.getMeshByName("security locker")?.dispose();
     w.box("locker back", -28, 1.15, 22.65, 1.4, 2.3, 0.08, "teal");
@@ -8751,7 +9794,7 @@ export class Visuals {
     this.key=this.root('maintenance key on Security desk');
     const instance=container.instantiateModelsToScene(n=>'quest '+n,false,{doNotInstantiate:true});
     for(const n of instance.rootNodes)n.parent=this.key;
-    this.key.position.set(-23.4,.925,18);this.keyHome=this.key.position.clone();
+    this.key.position.set(-23.4,1.225,17.55);this.keyHome=this.key.position.clone();
     this.keyGrip=this.key.getDescendants().find(n=>n.name.endsWith('__grip'));
     let lo=new B.Vector3(Infinity,Infinity,Infinity),hi=new B.Vector3(-Infinity,-Infinity,-Infinity);
     for(const mesh of this.key.getChildMeshes()){
@@ -8760,8 +9803,8 @@ export class Visuals {
       if(!mesh.getTotalVertices())continue;mesh.computeWorldMatrix(true);
       const b=mesh.getBoundingInfo().boundingBox;lo=B.Vector3.Minimize(lo,b.minimumWorld);hi=B.Vector3.Maximize(hi,b.maximumWorld);
     }
-    this.key.metadata={supportY:.925,placement:{x:(lo.x+hi.x)/2,y:(lo.y+hi.y)/2,z:(lo.z+hi.z)/2,w:hi.x-lo.x,h:hi.y-lo.y,d:hi.z-lo.z,bottom:lo.y}};
-    this.w.placements.record('quest:maintenance-key',this.key,{support:'Security desk',supportY:.925});
+    this.key.metadata={supportY:1.225,placement:{x:(lo.x+hi.x)/2,y:(lo.y+hi.y)/2,z:(lo.z+hi.z)/2,w:hi.x-lo.x,h:hi.y-lo.y,d:hi.z-lo.z,bottom:lo.y}};
+    this.w.placements.record('quest:maintenance-key',this.key,{support:'raised key tray on Security desk',supportY:1.225});
   }
   actorFootstep() {
     const group = this.clips[this.actorClip];
@@ -8817,7 +9860,7 @@ export class Visuals {
       duration,
       (t) => {
         this.actionPhase = t;
-        this.w.stage?.action(id,t);
+        this.w.stage?.action(id,t);this.w.yard?.action(id,t);
         if (id === "fuse") {
           this.cabinetDoor.rotation.y = phase(t, 0.06, 0.68) * 1.48;
           const grab = phase(t, 0.58, 1);
@@ -9041,24 +10084,104 @@ export class Visuals {
 }
 ```
 
+## dist/js/wayfinding.js
+
+```javascript
+import { blocked, lineClear, sightClear, routeSteps, createPathWorkspace } from './navigation.js?v=1.19.0';
+/** Requested guidance follows actual walkable geometry. The arrow denotes a
+ * route; the upright diamond denotes an object. Neither completes a task or
+ * grants interaction through walls. Planning advances in bounded slices. */
+export class GuideRoute {
+  constructor(rects){this.rects=rects;this.workspace=createPathWorkspace();this.reset();}
+  reset(){this.key='';this.route=null;this.job=null;this.result=null;this.retry=0;this.target=null;this.progress=0;}
+  request(task,items,position){
+    if(!task){this.reset();return;}
+    const d=task.destination;
+    const item=items.find(i=>i.id===(d.controlId||task.action||task.id)&&!i.hidden);
+    const target=item?.pos||{x:d.x,y:1.2,z:d.z};
+    const key=task.id+':'+target.x.toFixed(1)+':'+target.z.toFixed(1);
+    if(key===this.key&&this.target){return;}
+    this.key=key;this.name=d.name;this.target={x:target.x,y:target.y,z:target.z};this.controlId=item?.id;
+    this.explicit=d.approach||item?.approach;this.radius=item?.radius??.38;
+    this.route=null;this.result=null;this.progress=0;this.begin(position);
+  }
+  begin(position){
+    const target=this.target;if(!target)return;
+    const candidates=[];
+    if(this.explicit)candidates.push({...this.explicit});
+    // Legacy objects get a reachable stand-off point instead of their solid
+    // centre. Authored outdoor approaches retain priority over nearest distance.
+    for(const r of [1.5,1.95,1.1])for(let i=0;i<12;i++){
+      const a=i*Math.PI/6;candidates.push({x:target.x+Math.sin(a)*r,z:target.z+Math.cos(a)*r});
+    }
+    const clear=candidates.filter(p=>!blocked(p.x,p.z,this.rects,.3)&&sightClear({...p,y:1.68},target,this.rects));
+    if(!this.explicit)clear.sort((a,b)=>Math.hypot(a.x-position.x,a.z-position.z)-Math.hypot(b.x-position.x,b.z-position.z));
+    this.candidates=clear;this.start={...position};this.retry=1.2;
+    this.tryCandidate(position);
+  }
+  tryCandidate(position){
+    this.goal=this.candidates.shift();
+    this.job=this.goal?routeSteps(position,this.goal,this.rects,new Set(),this.workspace):null;
+  }
+  tick(position,dt){
+    this.retry=Math.max(0,this.retry-dt);
+    if(!this.target)return null;
+    if(this.job){const step=this.job.next();if(step.done){
+      this.route=step.value;this.job=null;this.progress=0;
+      // A clear stand-off point can still be in a disconnected room. Try the
+      // remaining views incrementally; never run several A* searches in a frame.
+      if(!this.route&&this.candidates.length)this.tryCandidate(position);
+    }}
+    const close=Math.hypot(position.x-this.target.x,1.68-this.target.y,position.z-this.target.z)-this.radius<=2.35&&sightClear({...position,y:1.68},this.target,this.rects);
+    const atFront=!this.explicit||Math.hypot(position.x-this.goal?.x,position.z-this.goal?.z)<1.7;
+    // This is an AIM marker. Raising it above a handle made following the hint
+    // select empty space. The hollow diamond now surrounds the usable anchor.
+    if(close&&atFront)return this.result={kind:'object',point:{...this.target},name:this.name,controlId:this.controlId};
+    if(!this.route){if(!this.job&&!this.retry)this.begin(position);return this.result=null;}
+    const path=this.route.path?.length?this.route.path:[this.route.goal];
+    // Walk past close path nodes, then look ahead only through clear geometry.
+    while(this.progress<path.length-1&&Math.hypot(position.x-path[this.progress].x,position.z-path[this.progress].z)<1.25&&lineClear(position,path[this.progress+1],this.rects,.3))this.progress++;
+    let p=null;
+    for(let i=this.progress;i<path.length;i++){
+      const node=path[i],distance=Math.hypot(position.x-node.x,position.z-node.z);
+      if(distance>8&&p)break;
+      if(!lineClear(position,node,this.rects,.3))break;
+      p=node;this.progress=i;
+    }
+    if(!p){if(!this.job&&!this.retry)this.begin(position);return this.result=null;}
+    const dx=p.x-position.x,dz=p.z-position.z,d=Math.hypot(dx,dz),scale=Math.min(1,7/Math.max(.01,d));
+    return this.result={kind:'route',point:{x:position.x+dx*scale,y:.07,z:position.z+dz*scale},yaw:Math.atan2(dx,dz),name:this.name,controlId:this.controlId};
+  }
+}
+```
+
 ## dist/js/world.js
 
 ```javascript
-import { Distractions } from "./distractions.js?v=1.14.0";
-import { selectFixtures, lightingPhase, fixturePower, ambientPower } from "./lighting.js?v=1.14.0";
-import { Details } from "./details.js?v=1.14.0";
-import { RichDetails } from "./rich-details.js?v=1.14.0";
-import { EquipmentScenes } from "./equipment-scenes.js?v=1.14.0";
-import { PlacementRegistry } from "./anchors.js?v=1.14.0";
-import { Decay } from "./decay.js?v=1.14.0";
-import { PUDDLES, SurfaceEffects } from "./surfaces.js?v=1.14.0";
-import { PARKING_ROWS, PARKED_CARS, groundModel } from "./placement.js?v=1.14.0";
-import { PROP_LAYOUT, PROP_SIZES, propCollider } from "./props.js?v=1.14.0";
-import { Atmosphere } from "./atmosphere.js?v=1.14.0";
-import { Staging } from "./staging.js?v=1.14.0";
-import { roomAt } from "./guidance.js?v=1.14.0";
-import { consumeSteps, yieldTask, waitForReady, loadInBatches } from "./preparation.js?v=1.14.0";
-import { Visuals } from "./visuals.js?v=1.14.0";
+import { signTextureSize } from './sign-sizing.js?v=1.19.0';
+import { ServiceYard } from './yard.js?v=1.19.0';
+import { Scenery } from './scenery.js?v=1.19.0';
+import { Landscape } from './landscape.js?v=1.19.0';
+import { SurfaceLibrary } from './surface-library.js?v=1.19.0';
+import { NightSky } from './night-sky.js?v=1.19.0';
+import { GuideRoute } from './wayfinding.js?v=1.19.0';
+import { sectorVisible } from './visibility.js?v=1.19.0';
+import { indexSpatial, spatialReport } from './spatial.js?v=1.19.0';
+import { Distractions } from "./distractions.js?v=1.19.0";
+import { selectFixtures, lightingPhase, fixturePower, ambientPower } from "./lighting.js?v=1.19.0";
+import { Details } from "./details.js?v=1.19.0";
+import { RichDetails } from "./rich-details.js?v=1.19.0";
+import { EquipmentScenes } from "./equipment-scenes.js?v=1.19.0";
+import { PlacementRegistry } from "./anchors.js?v=1.19.0";
+import { Decay } from "./decay.js?v=1.19.0";
+import { PUDDLES, SurfaceEffects } from "./surfaces.js?v=1.19.0";
+import { PARKING_ROWS, PARKED_CARS, groundModel } from "./placement.js?v=1.19.0";
+import { PROP_LAYOUT, PROP_SIZES, propCollider } from "./props.js?v=1.19.0";
+import { Atmosphere } from "./atmosphere.js?v=1.19.0";
+import { Staging } from "./staging.js?v=1.19.0";
+import { roomAt } from "./guidance.js?v=1.19.0";
+import { consumeSteps, yieldTask, waitForReady, loadInBatches } from "./preparation.js?v=1.19.0";
+import { Visuals } from "./visuals.js?v=1.19.0";
 /**
  * Scene construction. Public CC0 cars are dressed with original modular geometry.
  * Units are metres; Y is up and the north exit is at Z=0. A flat, continuous floor
@@ -9072,8 +10195,8 @@ export class World {
     this.scene = new B.Scene(engine);
     this.scene.clearColor = new B.Color4(0.016, 0.025, 0.031, 1);
     this.scene.fogMode = B.Scene.FOGMODE_EXP2;
-    this.scene.fogDensity = 0.019;
-    this.scene.fogColor = C("#162126");
+    this.scene.fogDensity = 0.014;
+    this.scene.fogColor = C("#080e13");
     this.scene.imageProcessingConfiguration.toneMappingEnabled = true;
     this.scene.imageProcessingConfiguration.toneMappingType =
       B.ImageProcessingConfiguration.TONEMAPPING_ACES;
@@ -9172,16 +10295,20 @@ export class World {
     await consumeSteps(this.roomSteps(),()=>report("Preparing the rooms", .15));
     this.buildWorker(); await yieldTask();
     this.visuals = new Visuals(this, {defer:true});
-    await this.visuals.buildAsync(); this.finishConstruction();
+    await this.visuals.buildAsync(); this.finishConstruction({deferYard:true});
+    report('Constructing the service yard',.2);await this.yard.buildAsync();
     report("Garage constructed", .22);
   }
-  finishConstruction() {
+  finishConstruction({deferYard=false}={}) {
     this.stage = new Staging(this);
     this.atmosphere = new Atmosphere(this);
     this.decay = new Decay(this);
+    this.surfaceLibrary=new SurfaceLibrary(this);
     this.surfaces = new SurfaceEffects(this);
     this.equipment=new EquipmentScenes(this);
     this.distractions=new Distractions(this);
+    this.yard=new ServiceYard(this,{defer:deferYard});
+    this.sky=new NightSky(this);this.guideRoute=new GuideRoute(this.rects);
     for (const door of this.shortcuts) this.visuals.dynamicRoots.add(door.mesh);
     this.waypoint = B.MeshBuilder.CreateTorus("requested destination marker", { diameter: 1.15, thickness: 0.055, tessellation: 16 }, this.scene);
     this.waypoint.material = this.materials.warm;
@@ -9189,6 +10316,12 @@ export class World {
     this.waypoint.isPickable = false;
     this.waypoint.setEnabled(false);
     this.visuals.dynamicRoots.add(this.waypoint);
+    // A flat arrow means "walk this way"; an upright diamond means "object".
+    this.guideArrow=new B.Mesh('requested route arrow',this.scene);
+    const arrow=new B.VertexData();arrow.positions=[0,0,.7,-.38,0,.1,.38,0,.1,-.1,0,.1,.1,0,.1,-.1,0,-.5,.1,0,-.5];arrow.indices=[0,2,1,3,4,5,4,6,5];arrow.normals=Array.from({length:7},()=>[0,1,0]).flat();arrow.applyToMesh(this.guideArrow);
+    this.guideArrow.material=this.materials.warm;this.guideArrow.isPickable=false;this.guideArrow.setEnabled(false);this.visuals.dynamicRoots.add(this.guideArrow);
+    this.guideObject=B.MeshBuilder.CreateTorus('requested object diamond',{diameter:.38,thickness:.035,tessellation:4},this.scene);
+    this.guideObject.rotation.x=Math.PI/2;this.guideObject.material=this.materials.warm;this.guideObject.isPickable=false;this.guideObject.setEnabled(false);this.visuals.dynamicRoots.add(this.guideObject);
     this.scene.skipPointerMovePicking = true;
     this.beamDirection=B.Vector3.Zero();this.beamRight=B.Vector3.Zero();
     this.scene.onBeforeRenderObservable.add(() => {
@@ -9286,7 +10419,7 @@ export class World {
     bg = "#253c3a",
   ) {
     // Keep long, narrow labels proportional while retaining readable texel height.
-    const width=Math.max(w<2.6?512:1024,Math.ceil(64*w/h)),height=Math.round(width*h/w);
+    const {width,height}=signTextureSize(w,h,this.engine.getCaps().maxTextureSize);
     const tex = new B.DynamicTexture(
       "sign " + text,
       { width, height },
@@ -9308,7 +10441,7 @@ export class World {
     const mat = new B.StandardMaterial("print " + text, this.scene);
     mat.diffuseTexture = tex;
     mat.emissiveColor = new B.Color3(0.025, 0.025, 0.025);
-    const essential=/EXIT|SHELTER|SECURITY|WORKSHOP|STORAGE|ELECTRICAL|PUMP|SERVICE|POWER|VENT|REPAIR|GATE|RELEASE|ACCESS/.test(text);
+    const essential=/EXIT|SHELTER|SECURITY|WORKSHOP|STORAGE|ELECTRICAL|PUMP|SERVICE|POWER|VENT|REPAIR|GATE|RELEASE|ACCESS|BARRIER|CONTROL|UTILITY|WINCH/.test(text);
     if(essential){
       // Illuminate only the letters. The panel remains dark and receives the
       // actual room lights; there is no new point light or bloom halo per sign.
@@ -9352,7 +10485,7 @@ export class World {
     const circuit=roomAt({x,z})==='garage'?(Math.abs(x)<4?'lane':'edge'):roomAt({x,z}),key='fixture-'+circuit+(warm?'warm':'cool');
     if(!this.materials[key])this.materials[key]=diffuser.material.clone(key);
     diffuser.material=this.materials[key];
-    const fixture = { x, z, base:warm?5:7, color:C(warm ? "#ffd095" : "#a1c3c3"),diffuserMaterial:diffuser.material };
+    const fixture = { x, z, base:warm?2.1:2.8, range:8, color:C(warm ? "#ffd095" : "#a1c3c3"),diffuserMaterial:diffuser.material };
     this.lights.push(fixture);
     return fixture;
   }
@@ -9372,7 +10505,7 @@ export class World {
     // The north wall has a real opening, with a separate sliding exit gate collider.
     this.box("north wall left", -17, 2.1, 1, 26, 4.4, 0.5, "concrete", true);
     this.box("north wall right", 17, 2.1, 1, 26, 4.4, 0.5, "concrete", true);
-    this.box("outside floor", 0, -0.2, -4, 8, 0.4, 10, "floor");
+    // The yard slab meets this floor at Z=-1; no coplanar apron overlay.
     this.box("outside left", -4, 2, -4, 0.4, 4, 10, "dark", true);
     this.box("outside right", 4, 2, -4, 0.4, 4, 10, "dark", true);
     this.exitGate = this.box(
@@ -9600,8 +10733,9 @@ export class World {
   *roomSteps() {
     this.roomTitle("01  SECURITY", -16.75, 18, -1);
     this.desk(-24, 18);
-    this.box("key on desk", -23.4, 0.98, 18, 0.22, 0.06, 0.1, "yellow");
-    this.interactive("key", "Take maintenance key", -23.4, 1, 18);
+    this.box("key on desk", -23.4, 1.26, 17.55, 0.22, 0.06, 0.1, "yellow");
+    this.box('raised key tray support',-23.4,1.075,17.55,.6,.3,.35,'teal');
+    this.interactive("key", "Take maintenance key", -23.4, 1.28, 17.55);
     this.paper("log", -24.5, 18);
     this.desk(-25, 13);
     this.box("CRT case", -25, 1.3, 13, 0.9, 0.78, 0.8, "dark");
@@ -9790,6 +10924,9 @@ export class World {
     this.richDetails=new RichDetails(this);await this.richDetails.load();
     this.equipment.bindSource();
     for(const f of this.lights)if(f.range&&f.range<=5)f.emergency=true;
+    await this.yard.load();
+    this.landscape=new Landscape(this);
+    this.scenery=new Scenery(this);await this.scenery.load();
     this.placements.resolve();
   }
   placeModel(name, x, z, rotation = 0, scale = 1, y = 0) {
@@ -9822,7 +10959,7 @@ export class World {
     return root;
   }
   sync(state, immediate = true) {
-    this.visibleRoom=null;this.updateRoomVisibility({x:0,z:50},1);
+    this.visibleRoom=null;this.visibilityTimer=0;
     this.powered = state.flags.includes("power");
     this.lightingPhase=lightingPhase(state);
     this.hemi.intensity=ambientPower(this.lightingPhase);
@@ -9831,7 +10968,11 @@ export class World {
     this.grilleClosed = false;
     this.visuals.sync(state, immediate);
     this.stage.sync(state, immediate);
-    if(immediate){this.atmosphere.reset(state);this.surfaces?.reset();this.equipment?.reset(state);}
+    this.yard?.sync(state,immediate);
+    if(immediate){
+      this.atmosphere.reset(state);this.surfaces?.reset();this.equipment?.reset(state);
+      this.guideRoute?.reset();this.guideSeconds=0;this.guideArrow?.setEnabled(false);this.guideObject?.setEnabled(false);
+    }
     for (const [index, door] of this.shortcuts.entries()) {
       const open = state.flags.includes("key") ;
       const target = open ? 5.8 : 1.8;
@@ -9840,9 +10981,13 @@ export class World {
       else if (door.open !== open) this.visuals.animator.to("shortcut" + index, door.mesh.position.y, target, 0.8, apply);
       door.open = open;
     }
+    // A completed exterior task must not briefly select the title camera's
+    // garage sectors. Re-evaluate at the last actual player position instead.
+    this.updateRoomVisibility(this.visibilityPosition||{x:0,z:50},1);
   }
 
   setSettings(s) {
+    this.sky?.setSettings(s);this.yard?.setSettings?.(s);
     this.detailLevel=s.quality==='low'?0:s.quality==='high'?2:1;this.visibleRoom=null;
     this.richDetails?.setSettings(s);
     this.atmosphere?.setSettings(s);
@@ -9860,18 +11005,22 @@ export class World {
     this.glow.intensity = s.reducedFlashes ? 0.15 : 0.28;
     if (s.fxaa && !this.fxaa) this.fxaa = new B.FxaaPostProcess("optional FXAA", 1, this.camera);
     if (!s.fxaa && this.fxaa) { this.fxaa.dispose(this.camera); this.fxaa = null; }
-    this.scene.fogDensity = 0.019;
+    this.scene.fogDensity = 0.014;
   }
   async warmup(report = () => {}, options = {}) {
     const savedPosition=this.camera.position.clone(), savedRotation=this.camera.rotation.clone();
+    const priorVisibility=this.visibilityPosition||savedPosition;
+    const savedVisibility={x:priorVisibility.x,z:priorVisibility.z};
     const workerEnabled=this.worker.isEnabled(), hand=this.visuals.hand.isEnabled(), action=this.visuals.actionHand.isEnabled();
-    const cockpit=this.stage.cockpit.isEnabled();this.stage.cockpit.setEnabled(true);this.atmosphere.prepare(true);this.surfaces?.prepare(true);this.equipment?.prepare(true);
+    const cockpit=this.stage.cockpit.isEnabled();this.stage.cockpit.setEnabled(true);this.atmosphere.prepare(true);this.surfaces?.prepare(true);this.equipment?.prepare(true);this.yard?.prepare(true);this.sky?.prepare(true);
     this.worker.setEnabled(true); this.visuals.hand.setEnabled(true); this.visuals.actionHand.setEnabled(true);
-    const views=[[10,98,Math.PI],[-23,18,Math.PI],[-23,45,0],[-23,76,-Math.PI/2],[24,39,Math.PI/2],[24,98,Math.PI/2],[0,7,Math.PI]];
+    const views=[[10,98,Math.PI],[-23,18,Math.PI],[-23,45,0],[-23,76,-Math.PI/2],[24,39,Math.PI/2],[24,98,Math.PI/2],[0,7,Math.PI],[0,-18,Math.PI],[23,-42,0],[-8,-79,Math.PI]];
     const started=performance.now();
     try {
       for (let i=0;i<views.length;i++) {
         const [x,z,yaw]=views[i]; this.camera.position.set(x,1.68,z); this.camera.rotation.set(0,yaw,0);
+        // Sector culling follows each preparation view, just as it does in play.
+        this.updateRoomVisibility({x,z},1);
         this.updateLights({x,z},0,false,0,true);
         this.flash.intensity=950; this.spill.intensity=90;
         report("Preparing lighting · room "+(i+1)+" / "+views.length, .67+.25*i/views.length);
@@ -9893,16 +11042,18 @@ export class World {
       // for the first time just as the final chase reaches the car.
       this.stage.setVehicleLighting(true);
       this.camera.position.copyFrom(B.Vector3.TransformCoordinates(this.stage.driverEye,this.stage.car.computeWorldMatrix(true)));
-      this.camera.rotation.set(0,this.stage.car.rotation.y,0);this.stage.driving=true;
+      this.camera.rotation.set(0,this.stage.car.rotation.y,0);this.updateRoomVisibility(this.camera.position,1);this.stage.driving=true;
       this.flash.intensity=520;this.spill.intensity=360;
       await waitForReady(()=>{this.scene.render();return this.scene.isReady(true);},{label:'Escape headlights',...options});
       this.stage.driving=false;this.stage.setVehicleLighting(false);
       this.preparation={ready:true,rooms:views.length,milliseconds:Math.round(performance.now()-started)};
     } finally {
       this.stage.driving=false;this.stage.setVehicleLighting(false);
-      this.stage.cockpit.setEnabled(cockpit);this.atmosphere.prepare(false);this.surfaces?.prepare(false);this.equipment?.prepare(false);
+      this.stage.cockpit.setEnabled(cockpit);this.atmosphere.prepare(false);this.surfaces?.prepare(false);this.equipment?.prepare(false);this.yard?.prepare(false);
+      this.sky?.prepare(false);
       this.worker.setEnabled(workerEnabled); this.visuals.hand.setEnabled(hand); this.visuals.actionHand.setEnabled(action);
       this.camera.position.copyFrom(savedPosition); this.camera.rotation.copyFrom(savedRotation);
+      this.updateRoomVisibility(savedVisibility,1);
       this.visuals.setFlash(false); this.flash.intensity=0; this.spill.intensity=0;
       this.scene.resetLastAnimationTimeFrame();
     }
@@ -9938,12 +11089,23 @@ export class World {
     this.waypoint.position.set(x, 0.055, z);
     this.waypoint.scaling.setAll(1 + Math.sin(time * 3) * 0.07);
   }
+  requestGuide(task,player,seconds){
+    this.waypoint.setEnabled(false);this.guideSeconds=seconds;
+    if(seconds>0&&task)this.guideRoute.request(task,this.interactives,player.pos);
+    else {this.guideRoute.reset();this.guideArrow.setEnabled(false);this.guideObject.setEnabled(false);}
+  }
+  tickGuide(player,dt){
+    const g=this.guideSeconds>0?this.guideRoute.tick(player.pos,dt):null;
+    this.guideArrow.setEnabled(g?.kind==='route');this.guideObject.setEnabled(g?.kind==='object');
+    if(g){const m=g.kind==='route'?this.guideArrow:this.guideObject;m.position.set(g.point.x,g.point.y,g.point.z);m.rotation.y=g.kind==='route'?g.yaw:player.yaw;}
+    return g;
+  }
   menuCamera(time) {
     this.camera.position.set(3.1 + Math.sin(time * 0.07) * 0.65, 1.55, 80.7);
     this.camera.setTarget(new B.Vector3(12, 1.45, 71));
     this.updateLights(this.camera.position, time, false);
   }
-  /** Merge static meshes by material and 25m sector. This reduces draw calls while
+  /** Merge static meshes by material and 16/25m sector. This reduces draw calls while
    * preserving useful frustum-culling bounds. Dynamic gates and the actor stay
    * separate. Collision rectangles are independent and therefore unchanged. */
   optimizeStatic() { for (const _ of this.optimizationSteps()) {} }
@@ -9969,14 +11131,16 @@ export class World {
     for (const m of [...this.scene.meshes]) {
       if (!m.geometry || !m.material || isDynamic(m)) continue;
       m.computeWorldMatrix(true);
+      // Vertex-color foliage and soft water edges have different attribute
+      // layouts. Merging incompatible layouts can throw during preparation.
       const key =
-        m.material.uniqueId + ":" + roomAt(m.getAbsolutePosition()) + ":" + Math.floor(m.getAbsolutePosition().z / 25) + ":" + !!m.metadata?.lvCaster + ':' + (m.metadata?.detailQuality||0);
+        m.material.uniqueId + ":" + roomAt(m.getAbsolutePosition()) + ":" + Math.floor(m.getAbsolutePosition().z / (m.getAbsolutePosition().z<25?16:25)) + ":" + !!m.metadata?.lvCaster + ':' + (m.metadata?.detailQuality||0)+':'+!!m.metadata?.backdrop+':'+m.getVerticesDataKinds().sort().join(',')+':'+!!m.hasVertexAlpha;
       if (!groups.has(key)) groups.set(key, []);
       groups.get(key).push(m);
     }
     this.roomBatches=[];
     for (const meshes of groups.values()) {
-      const zone=roomAt(meshes[0].getAbsolutePosition()),detailQuality=meshes[0].metadata?.detailQuality||0;
+      const zone=roomAt(meshes[0].getAbsolutePosition()),detailQuality=meshes[0].metadata?.detailQuality||0,backdrop=!!meshes[0].metadata?.backdrop,vertexAlpha=!!meshes[0].hasVertexAlpha;
       let batch=meshes[0];
       if (meshes.length > 1) {
         const merged = B.Mesh.MergeMeshes(
@@ -9992,11 +11156,13 @@ export class World {
           merged.name = "static sector · "+zone;
           merged.metadata={lvCaster:!!meshes[0].metadata?.lvCaster,detailQuality};
           merged.isPickable = false;
+          merged.hasVertexAlpha = vertexAlpha;
           merged.receiveShadows = true;
           merged.freezeWorldMatrix();
         }
       } else meshes[0].freezeWorldMatrix();
-      this.roomBatches.push({mesh:batch,zone,detailQuality,enabled:true});
+      batch.computeWorldMatrix(true);const b=batch.getBoundingInfo().boundingBox;
+      this.roomBatches.push({mesh:batch,zone,detailQuality,backdrop,bounds:{minX:b.minimumWorld.x,maxX:b.maximumWorld.x,minZ:b.minimumWorld.z,maxZ:b.maximumWorld.z},enabled:true});
       yield;
     }
     this.shadow.getShadowMap().renderList = [];
@@ -10015,28 +11181,469 @@ export class World {
       this.shadow.addShadowCaster(m);
     this.shadowCasterCount=this.shadow.getShadowMap().renderList.length;
     this.scene.skipPointerMovePicking = true;
+    indexSpatial(this.rects);
   }
   /** Conservative room culling, sampled at 4 Hz. Keep the main garage and
    * adjacent west rooms visible through every doorway; ordinary Babylon frustum
    * culling remains active inside each material/room/sector batch. */
   updateRoomVisibility(pos,dt){
     this.visibilityTimer=(this.visibilityTimer||0)-dt;if(this.visibilityTimer>0)return;this.visibilityTimer=.25;
-    const room=roomAt(pos);if(room===this.visibleRoom)return;this.visibleRoom=room;
-    const west=["security","storage","workshop"],index=west.indexOf(room);
+    this.visibilityPosition||={x:0,z:0};this.visibilityPosition.x=pos.x;this.visibilityPosition.z=pos.z;
+    const room=roomAt(pos);this.visibleRoom=room;
     for(const batch of this.roomBatches||[]){
-      const visible=batch.detailQuality<=(this.detailLevel??0)&&(room==="garage"||batch.zone==="garage"||batch.zone===room||(index>=0&&Math.abs(west.indexOf(batch.zone)-index)===1&&west.includes(batch.zone)));
+      const visible=sectorVisible(batch,pos,room,!!this.yard?.state?.flags.includes('gate'),this.detailLevel??0);
       if(visible!==batch.enabled){batch.mesh.setEnabled(visible);batch.enabled=visible;}
     }
   }
   renderBudgetReport(){
     const rooms={};
     for(const b of this.roomBatches||[]){const room=rooms[b.zone]||={batches:0,triangles:0,shadowBatches:0};room.batches++;room.triangles+=(b.mesh.getTotalIndices?.()||0)/3;if(b.mesh.metadata?.lvCaster)room.shadowBatches++;}
-    return {rooms,limits:{garage:{batches:300,triangles:150000},serviceRoom:{batches:120,triangles:50000},fixtureLightSlots:4,enemyPathNodesPerSlice:128,audioVoices:24},dynamicRoots:this.visuals.dynamicRoots.size,shadowCasters:this.shadowCasterCount||0};
+    return {rooms,enabledStaticBatches:this.roomBatches?.filter(b=>b.enabled).length,spatial:spatialReport(this.rects),limits:{garage:{batches:300,triangles:150000},serviceRoom:{batches:120,triangles:50000},fixtureLightSlots:4,enemyPathNodesPerSlice:128,audioVoices:24},dynamicRoots:this.visuals.dynamicRoots.size,shadowCasters:this.shadowCasterCount||0};
   }
   dispose() {
     this.scene.dispose();
   }
 }
+```
+
+## dist/js/yard.js
+
+```javascript
+import { YARD, REFILLS } from './campaign.js?v=1.19.0';
+import { roomAt } from './guidance.js?v=1.19.0';
+import { groundModel } from './placement.js?v=1.19.0';
+import { loadInBatches, consumeSteps } from './preparation.js?v=1.19.0';
+const B=globalThis.BABYLON;
+const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
+export function exposedToRain(p){return p.z<0&&!(p.x>16.4&&p.z<=-36&&p.z>=-52.2)&&!(p.x>=21&&p.x<=29&&p.z<=-14&&p.z>=-30)&&!(p.x>=-21.5&&p.x<=-16.5&&p.z<=-14.5&&p.z>=-35.5);}
+export function weatherBudget(s){
+  const level=s.weatherEffects||'full';if(level==='off')return {rain:0,steam:0};
+  return {rain:level==='reduced'?(s.quality==='low'?10:14):s.quality==='low'?18:s.quality==='high'?48:32,steam:level==='reduced'||s.quality==='low'?4:12};
+}
+/** Authored exterior chapter. Large silhouettes, contact details and sound
+ * sources are grouped deliberately; the central route stays wide enough for
+ * the car. All meshes/effects exist before the loading screen is dismissed. */
+export class ServiceYard {
+  constructor(w,{defer=false}={}){
+    this.w=w;this.v=w.visuals;this.rain=[];this.steam=[];this.props=[];this.refillRoots={};
+    for(const [id,c] of [['yardAsphalt','#283330'],['yardRust','#654c3c'],['yardMoss','#374a35'],['yardPaper','#9c9478'],['yardWall','#68716a'],['yardWet','#253b3e']])w.material(id,c,.96);
+    const mist=w.material('yardMist','#71817d',1);mist.alpha=.075;mist.backFaceCulling=false;
+    if(!defer)for(const _ of this.buildSteps()){}
+  }
+  *buildSteps(){for(const build of ['buildEnvelope','buildGatehouse','buildUtility','buildLoadingDock','buildDetails','buildDressing','buildEffects']){this[build]();yield;}}
+  async buildAsync(){await consumeSteps(this.buildSteps());}
+  box(...a){return this.w.box(...a);}
+  /** A mounted sign always has a solid backing at the same transform. */
+  sign(text,x,y,z,width=2,yaw=0){
+    const backing=this.box('yard sign backing '+text,x,y,z,width+.13,.51,.10,'teal');backing.rotation.y=yaw;
+    const wallMounted=/ROAD WORKS|^(?:03 )?GATEHOUSE$|SECONDARY|BARRIER BRAKE|^LOADING|LAST DEPARTURE|^1 LOADING/.test(text);
+    if(!wallMounted)for(const side of [-1,1]){
+      const offset=side*width*.35;
+      this.box('grounded wayfinding post',x+Math.cos(yaw)*offset,y/2,z-Math.sin(yaw)*offset,.055,y,.055,'steel',true);
+    }
+    return this.w.sign(text,x-Math.sin(yaw)*.058,y,z-Math.cos(yaw)*.058,width,.38,yaw,'#e0c89a','#253c39');
+  }
+  fence(x,z,length,axis='z'){
+    const along=axis==='x';
+    this.fenceSegments??=[];this.fencePosts??=new Map();this.fenceSegments.push({x,z,length,axis});
+    this.box('yard fence collision',x,1.25,z,along?length:.08,2.5,along?.08:length,'dark',true).dispose();
+    this.w.rects.at(-1).seeThrough=true;
+    for(let i=0;i<=Math.ceil(length/2.5);i++){
+      const a=-length/2+i*length/Math.ceil(length/2.5);
+      const px=x+(along?a:0),pz=z+(along?0:a),key=px.toFixed(3)+':'+pz.toFixed(3);
+      if(!this.fencePosts.has(key)){
+        const post=this.box('fence post',px,1.35,pz,.08,2.7,.08,'steel');
+        const foot=this.box('weathered fence footing',px,.07,pz,.28,.14,.28,'concrete');
+        this.fencePosts.set(key,{post,foot});
+      }
+    }
+    for(const y of [.25,1.35,2.45])this.box('fence rail',x,y,z,along?length:.035,.035,along?.035:length,'steel');
+    // Low-poly open mesh: enough wire silhouette without a transparent texture.
+    for(let i=.25;i<length;i+=1.1){
+      const a=i-length/2;
+      this.box('vertical fence wire',x+(along?a:0),1.35,z+(along?0:a),.028,2.2,.028,'steel');
+    }
+  }
+  buildEnvelope(){
+    // Meet the garage at Z=-1. The previous slabs overlapped at Y=0 across
+    // the apron, producing flickering textures and dark wire-like edges.
+    this.box('service yard ground',0,-.16,-51,60,.32,100,'yardAsphalt');
+    this.fence(-29.7,-29,58);this.fence(29.7,-29,58);
+    // Exact shared corners and a 12m entrance, matched by two 6m booms.
+    this.fence(-17.85,-58,23.7,'x');this.fence(17.85,-58,23.7,'x');
+    this.fence(-15,-79,42);this.fence(15,-79,42);
+    this.box('street boundary',0,2,-101,30,4,.4,'dark',true);
+    // A fixed container creates a broad open detour on the short driving road.
+    this.box('service road shipping container',6,1.45,-72,11,2.9,8,'teal',true);
+    for(let i=0;i<13;i++)this.box('container corrugation',.65+i*.89,1.45,-67.97,.07,2.78,.05,'steel');
+    this.sign('ROAD WORKS — OPEN LANE →',4,2.25,-67.89,4,Math.PI);
+    this.sign('01 BARRIER CONTROL',-10,2.55,-49.55,2.8,Math.PI);
+    this.sign('01 BARRIER CONTROL  ↑',-5.6,2.35,-19,3.0,Math.PI);
+    this.sign('02 UTILITY SELECTOR  ←',4.2,2.35,-23,3.1,Math.PI);
+    this.sign('03 GATEHOUSE  ←',4,2.6,-39,2.8,Math.PI);
+    this.sign('B2 / BAY 042  ↑',-3,2.55,-11,2.5,0);
+    for(const [x,z] of [[-11,-49],[20,-36],[-19,-30],[26,-22],[-10,-75],[0,-93]]){
+      this.box('yard lamp post',x,2,z,.12,4,.12,'steel');
+      this.box('yard lamp hood',x,3.96,z,.7,.14,.48,'dark');
+      this.box('yard amber diffuser',x,3.86,z,.5,.04,.3,'warm');
+      this.w.lights.push({x,y:3.65,z,base:.85,color:B.Color3.FromHexString('#e4c191'),range:7,emergency:true});
+    }
+    this.barrierArms=[];
+    for(const side of [-1,1]){
+      const pivot=this.v.root('street barrier pivot '+side);pivot.position.set(side*6,1.15,-58);
+      this.v.box('striped street barrier arm',pivot,-side*3,0,0,5.95,.22,.16,'yardPaper');
+      for(let n=0;n<6;n++)this.v.box('barrier red marking',pivot,-side*(.5+n),0,.085,.4,.23,.015,'red');
+      this.box('street barrier motor plinth',side*6,.12,-58,.65,.24,.8,'concrete');
+      this.box('street barrier motor housing',side*6,.73,-58,.42,1.2,.48,'yardRust');
+      this.barrierArms.push({pivot,side});
+    }
+    this.barrier=this.barrierArms[0].pivot;
+    this.barrierRect={x:0,z:-58,y:1.1,h:2.2,w:12,d:.35,dynamic:true,enabled:true,name:'street barrier'};this.w.rects.push(this.barrierRect);
+    this.box('barrier cabinet support',-10,.62,-49.6,.15,1.24,.15,'steel');
+    this.box('barrier interlock cabinet',-10,1.3,-49.6,.8,.8,.34,'teal',true);
+    this.box('amber BARRIER CONTROL front panel',-10,1.3,-49.418,.68,.65,.02,'yellow');
+    this.box('barrier control handle',-9.76,1.25,-49.36,.04,.25,.05,'steel');
+    this.box('barrier control status lamp',-10.22,1.24,-49.395,.055,.055,.012,'warm');
+    this.w.sign('BARRIER CONTROL',-10,1.51,-49.39,.63,.12,Math.PI,'#e9dfba','#263735');
+    this.w.sign('INSPECT PANEL',-10,1.08,-49.39,.56,.12,Math.PI,'#e9dfba','#263735');
+    this.w.interactive('yard','Inspect BARRIER CONTROL',YARD.inspect.x,YARD.inspect.y,YARD.inspect.z,{radius:.44,approach:YARD.inspect.approach});
+    // Cargo dolly moves along a cable; visual and collision move together.
+    this.dolly=this.v.root('cargo dolly obstruction');this.dolly.position.set(0,0,-53);
+    this.v.box('dolly steel bed',this.dolly,0,.28,0,9,.2,2.5,'steel');
+    this.v.box('dolly strapped load',this.dolly,0,.95,0,7.6,1.15,2.1,'yardRust');
+    for(const x of [-3.7,3.7])for(const z of [-1,1])this.v.cylinder('dolly wheel',this.dolly,x,.21,z,.4,.18,'rubber',8).rotation.z=Math.PI/2;
+    for(const x of [-2.5,0,2.5])this.v.box('load tie down',this.dolly,x,1.55,0,.07,.04,2.2,'yellow');
+    this.dollyRect={x:0,z:-53,y:.8,h:1.6,w:9,d:2.6,dynamic:true,enabled:true,name:'yard cargo dolly'};this.w.rects.push(this.dollyRect);
+    // This divider gives the hunter a real opening to run around after a strike.
+    this.fence(-12,-32,14);this.fence(-10,-51.5,6,'x');this.fenceImpact=this.v.root('loose fence sheet');this.fenceImpact.position.set(-10,1.9,-51.43);
+    this.v.box('loose warning panel',this.fenceImpact,0,0,0,1.5,.9,.05,'yardRust');
+  }
+  buildGatehouse(){
+    const box=(...a)=>this.box(...a);
+    box('gatehouse floor',23,-.02,-44,13,.08,17,'floor');
+    box('gatehouse north wall',23,1.7,-52,13,3.4,.24,'yardWall',true);
+    box('gatehouse east wall',29.4,1.7,-44,.24,3.4,16,'yardWall',true);
+    // Front door x=20; secondary west opening z=-44. Both have usable clearance.
+    box('gatehouse south left',17.75,1.7,-36,2.5,3.4,.24,'yardWall',true);
+    box('gatehouse south right',25.25,1.7,-36,8.5,3.4,.24,'yardWall',true);
+    box('gatehouse door lintel',20,3.15,-36,2,.5,.24,'yardWall');
+    box('gatehouse west north',16.5,1.7,-48.6,.24,3.4,6.8,'yardWall',true);
+    box('gatehouse west south',16.5,1.7,-39.4,.24,3.4,6.8,'yardWall',true);
+    box('gatehouse side door lintel',16.5,2.95,-44,.24,.9,2.4,'yardWall');
+    box('gatehouse roof',23,3.5,-44,14,.2,18,'dark');
+    this.sign('03 GATEHOUSE',20,2.82,-35.85,1.9,Math.PI);
+    this.sign('SECONDARY EXIT',16.68,2.8,-44,1.6,-Math.PI/2);
+    this.weakDoor=this.v.root('gatehouse damaged side door');this.weakDoor.position.set(16.5,0,-45.2);
+    this.v.box('damaged door panel',this.weakDoor,0,1.25,1.2,.08,2.5,2.4,'teal');
+    this.v.box('door handle',this.weakDoor,.08,1.2,2.05,.08,.22,.06,'steel');
+    this.doorRect={x:16.5,z:-44,y:1.25,h:2.5,w:.2,d:2.4,dynamic:true,enabled:true,name:'gatehouse weak door'};this.w.rects.push(this.doorRect);
+    this.box('gatehouse crank backing',16.74,1.2,-45.9,.24,1.1,1.2,'steel',true);
+    this.crank=this.v.root('gatehouse brake release crank');this.crank.position.set(16.94,1.1,-45.9);
+    const wheel=B.MeshBuilder.CreateTorus('yellow release wheel',{diameter:.64,thickness:.065,tessellation:12},this.w.scene);wheel.parent=this.crank;wheel.rotation.z=Math.PI/2;wheel.material=this.w.materials.yellow;
+    this.v.box('release wheel spoke',this.crank,0,0,0,.07,.06,.6,'yellow');
+    this.sign('BARRIER BRAKE',16.68,2.15,-45.9,1.5,-Math.PI/2);
+    this.w.interactive('barrier','Turn BARRIER BRAKE',YARD.release.x,YARD.release.y,YARD.release.z,{radius:.45,approach:YARD.release.approach});
+    this.w.interactive('yard-log','Read gatehouse handover',22.7,.92,-44.8,{radius:.25});
+    this.w.lights.push({x:23,y:2.95,z:-44,base:1.1,color:B.Color3.FromHexString('#b0c9b5'),range:6,emergency:true});
+    box('gatehouse ceiling fixture',23,3.15,-44,1.4,.1,.3,'cool');
+    // Original architectural dressing remains even if optional GLBs fail.
+    box('gatehouse rear desk',23,.79,-45.2,3.6,.12,1.4,'yardWall',true);
+    for(const x of [21.6,24.4])box('desk pedestal',x,.39,-45.2,.55,.78,1.1,'teal');
+    for(let i=0;i<6;i++)box('stacked parking shift sheets',22.7,.864+i*.008,-44.9,.34,.008,.43,'yardPaper').rotation.y=.03*i;
+    box('old gatehouse monitor',23.8,1.13,-45.4,.6,.48,.5,'dark');
+    box('monitor dull screen',23.8,1.15,-45.13,.48,.32,.015,'dashboardGlow');
+    this.sign('042 / LAST DEPARTURE',23,2.05,-51.83,2.5,Math.PI);
+  }
+  buildUtility(){
+    this.box('utility awning',25,3.4,-22,8,.16,16,'steel');
+    for(const z of [-29.5,-14.5])this.box('awning upright',21.2,1.7,z,.16,3.4,.16,'yardRust',true);
+    this.box('utility switch cabinet',26.1,1.25,-22,.8,2.2,1.4,'teal',true);
+    this.selector=this.v.root('dry circuit selector');this.selector.position.set(25.67,1.35,-22);
+    this.v.box('selector handle',this.selector,0,0,0,.1,.45,.08,'yellow');
+    this.sign('1 LOADING OFF / 2 GATEHOUSE ON',25.65,1.79,-22,1.22,Math.PI/2);
+    this.w.sign('UTILITY SELECTOR',25.66,2.1,-22,1.05,.2,Math.PI/2,'#e0c89a','#253c39');
+    this.w.interactive('isolate','Use UTILITY SELECTOR',YARD.isolate.x,YARD.isolate.y,YARD.isolate.z,{radius:.4,approach:YARD.isolate.approach});
+    this.box('utility generator concrete base',26,.15,-27,3,.3,2.4,'concrete',true);
+    this.box('utility generator enclosure',26,1.2,-27,2.6,1.8,2,'yardRust',true);
+    for(let i=0;i<8;i++)this.box('generator cooling slot',24.68,1.0+i*.1,-27,.03,.03,1.55,'black');
+    this.box('leaking pipe',27,1.4,-18,.14,2.8,.14,'steel');
+  }
+  buildLoadingDock(){
+    this.box('loading bay structure',-24,2,-25,11,4,21,'yardWall',true);
+    this.box('loading awning',-19,3.8,-25,5,.15,21,'yardRust');
+    for(const [bay,z] of [-31,-23,-17].entries()){
+      this.box('closed loading shutter',-18.43,1.6,z,.12,2.8,4.5,'steel');
+      for(let i=0;i<11;i++)this.box('loading shutter rib',-18.35,.38+i*.23,z,.05,.035,4.5,'dark');
+      this.sign('LOADING '+String(bay+1).padStart(2,'0'),-18.3,3.18,z,2,-Math.PI/2);
+    }
+    this.box('yard winch pedestal',-18,.5,-34,.9,1,.8,'steel',true);
+    this.winch=this.v.root('cargo winch');this.winch.position.set(-18,1.05,-34);
+    this.v.cylinder('winch drum',this.winch,0,0,0,.4,.65,'yardRust',10).rotation.z=Math.PI/2;
+    this.sign('04 DOCK WINCH',-16.8,2,-35.8,2.6,Math.PI);
+    this.w.interactive('route','Use DOCK WINCH',YARD.route.x,YARD.route.y,YARD.route.z,{radius:.38,approach:YARD.route.approach});
+    // The tow rope is inside a flush steel channel. Nothing sweeps diagonally
+    // across a walking route, through a fence or through the parked service van.
+    // The take-up pulley is west of the complete 0 -> -20m dolly travel.
+    this.box('covered tow channel',-12.5,.025,-53,25,.05,.18,'dark');
+    this.box('tow channel seam',-12.5,.052,-53,25,.004,.025,'black');
+    this.box('enclosed take-up pulley',-25,.18,-53,.45,.36,.48,'yardRust');
+    this.box('winch supported protective shroud',-18,.92,-34,.8,.38,.7,'yardRust');
+    this.box('loading dock bolt table',-16.8,.9,-23,1.1,.12,.75,'steel',true);
+    for(const x of [-17.2,-16.4])this.box('bolt table legs',x,.45,-23,.06,.9,.6,'steel');
+    // Refills are explicit finite trays, not an infinite interaction exploit.
+    for(const refill of REFILLS){
+      this.box(refill.label,refill.x,refill.y-.0175,refill.z,.36,.025,.26,'steel');
+      const bolts=this.v.root(refill.label+' contents');bolts.position.set(refill.x,refill.y+.0075,refill.z);this.refillRoots[refill.id]=bolts;
+      for(let i=0;i<3;i++)this.v.box('spare steel bolt',bolts,-.09+i*.09,0,0,.025,.025,.17,'steel');
+      this.w.interactive(refill.id,'Take spare bolts',refill.x,refill.y,refill.z,{radius:.25});
+    }
+  }
+  buildDetails(){
+    // Twenty grounded detail clusters. Borders collect rubbish; walking lanes
+    // collect drainage and wheel marks, never random waist-high obstacles.
+    for(let i=0;i<20;i++){
+      const x=i%2?-28.6:28.6,z=-5-Math.floor(i/2)*5.2;
+      for(let j=0;j<3;j++)this.box('yard moss clump',x+(j-1)*.16,.045,z+j*.17,.33,.08,.45,'yardMoss');
+      for(let j=0;j<2;j++)this.box('wet discarded ticket',x-(i%2?-.7:.7),.015+j*.003,z+j*.24,.16,.009,.22,'yardPaper').rotation.y=i*.8+j;
+    }
+    for(const z of [-12,-31,-48,-61,-86]){
+      for(let i=0;i<8;i++)this.box('storm drain slit',-3.4+i*.14,.012,z,.065,.015,.65,'black');
+      for(const side of [-1,1])this.box('wet tyre trace',side*1.2,.011,z+3,.21,.009,4,'yardWet');
+    }
+    for(const [x,z,w,d] of [[8,-20,5,8],[-6,-43,7,5],[0,-55,9,3],[-9,-78,5,6]]){
+      const puddle=B.MeshBuilder.CreateDisc('yard shallow rainwater',{radius:1,tessellation:20},this.w.scene);puddle.rotation.x=Math.PI/2;puddle.position.set(x,.009,z);puddle.scaling.set(w/2,d/2,1);puddle.material=this.w.materials.yardWet;puddle.isPickable=false;
+      this.w.extraWater ||= [];this.w.extraWater.push({x,z,rx:w/2,rz:d/2,depth:.025});
+    }
+    // Parked maintenance vans sit on their wheel contact plane with aligned proxies.
+    for(const [x,z,yaw] of [[10,-16,0],[-22,-43,Math.PI],[23,-9,Math.PI/2]])this.props.push({name:'van',x,z,yaw});
+    this.box('torn insulation bundle',-21,.38,-39,2.4,.76,1.4,'canvas',true);
+    this.box('discarded steel cabinet',9,.65,-38,2.8,1.3,1.5,'steel',true);
+    for(let i=0;i<5;i++)this.box('cabinet loose paper',8.8+i*.19,.018,-36.8+i*.13,.22,.01,.31,'yardPaper').rotation.y=i*.3;
+    // Irregular, textured damp patches are mounted by Landscape after loading.
+  }
+  async load(){
+    for(const p of this.props){
+      const root=this.w.placeModel(p.name,p.x,p.z,p.yaw,1.5),b=root.metadata?.placement;
+      if(b)this.w.rects.push({...b,name:'yard service van',enabled:true});
+      this.w.placements.record('yard-van:'+p.x,root);
+    }
+    // Optional original pack is imported in a bounded pair, then merged with
+    // static geometry. Explicit anchors remain independent of model origins.
+    await this.loadPropPack();
+  }
+  buildDressing(){
+    const w=this.w;
+    w.material('yardPavers','#414a43',1);w.material('citySilhouette','#172328',1);w.material('cityWindow','#655d3d',1,'#48432b');
+    // The dry pedestrian strip is a quiet alternative to wet open crossings.
+    // Its geometry is decorative; it adds no curbs or ankle-catching collisions.
+    for(let i=0;i<29;i++)this.box('dry pedestrian paver',-10.6,.019,-11-i*1.25,1.35,.025,1.08,'yardPavers');
+    for(const x of [-6,6])this.box('exit apron worn lane edge',x,.014,-8,.09,.013,10,'yellow');
+    this.box('garage apron drain channel',0,.012,-3.5,10,.025,.38,'dark');
+    for(let i=0;i<30;i++)this.box('drain grate',-4.8+i*.33,.03,-3.5,.16,.025,.38,'steel');
+    // Roof edges, gutters and cables make the architecture read as maintained
+    // infrastructure that has deteriorated, rather than isolated boxes.
+    for(const [x,z,length] of [[-16.55,-25,21],[21,-22,16],[29.55,-44,17]]){
+      this.box('supported gutter',x,3.48,z,.13,.15,length,'yardRust');
+      this.box('gutter downpipe',x,1.7,z-length/2+.25,.1,3.4,.1,'yardRust');
+      this.box('damp runoff patch',x,.017,z-length/2+.15,.5,.018,1.3,'yardWet');
+    }
+    // Small stories at the desk: these are scenery, clearly different from
+    // the labelled bolt tray and readable handover document.
+    this.box('gatehouse radio body',24.1,1.03,-45.1,.45,.32,.22,'teal');
+    for(let i=0;i<5;i++)this.box('radio speaker slat',23.98+i*.045,1.02,-44.981,.018,.15,.009,'dark');
+    this.box('radio aerial',24.22,1.48,-45.14,.015,.65,.015,'steel');
+    this.box('shift mug',23.2,.95,-44.8,.13,.16,.13,'paper');
+    this.box('mug dark opening',23.2,1.034,-44.8,.09,.008,.09,'dark');
+    for(let i=0;i<7;i++)this.box('abandoned shift file',21.55+i*.045,.91,-45.25,.032,.12,.23,i%2?'canvas':'yardPaper');
+    for(let i=0;i<18;i++){
+      const x=i%2?28.9:-28.9,z=-6-Math.floor(i/2)*5.5;
+      this.box('edge concrete fragment',x,.045,z,.18+(i%3)*.1,.09,.25,'concrete').rotation.y=i*.7;
+    }
+    // Buildings sit beyond physical boundary fences. Their simple silhouettes
+    // stay on Low; windows are emissive geometry, not additional real lights.
+    for(const side of [-1,1])for(let i=0;i<5;i++){
+      const x=side*(49+(i%2)*5),z=-7-i*20,h=9+(i*7%13),width=12+(i%2)*4;
+      const building=this.box('distant industrial building',x,h/2-.1,z,width,h,15,'citySilhouette');building.metadata={lvCaster:false,backdrop:true};
+      const roof=this.box('distant rooftop plant',x,h+.8,z,4,1.8,5,'citySilhouette');roof.metadata={lvCaster:false,backdrop:true};
+      for(let row=0;row<2;row++)for(let col=0;col<4;col++)if((i+col+row)%3===0){
+        const pane=this.box('distant occupied window',x-side*(width/2+.015),4+row*3,z-5+col*2.5,.03,.75,1.2,'cityWindow');pane.metadata={lvCaster:false,backdrop:true};
+      }
+    }
+    this.motionRoots=[];
+    for(const [x,z] of [[-16.6,-17.7],[21.2,-28.5]]){
+      const root=this.v.root('nearby hanging chain');root.position.set(x,3.38,z);
+      for(let i=0;i<7;i++){const link=B.MeshBuilder.CreateTorus('chain link',{diameter:.1,thickness:.022,tessellation:6},w.scene);link.parent=root;link.position.y=-.08-i*.09;link.rotation.x=Math.PI/2;link.rotation.y=i%2?Math.PI/2:0;link.material=w.materials.steel;link.isPickable=false;}
+      this.motionRoots.push(root);
+    }
+    this.looseTarp=this.v.root('loose sheet on discarded cabinet');this.looseTarp.position.set(9,1.32,-38);
+    this.v.box('supported canvas corner',this.looseTarp,0,0,0,2,.035,1.2,'canvas');this.motionRoots.push(this.looseTarp);
+  }
+  async loadPropPack(){
+    const names=['dock-cluster','dumpster-refuse','cable-reel','drain-weeds','road-barrier','gatehouse-desk','coat-noticeboard','utility-transformer','fence-panel','drum-store'];
+    const newer=['loading-trolley','bollard-chain','freight-tarp','wall-services','gatehouse-chair','calendar-coat'];names.push(...newer);
+    const cache={};
+    await loadInBatches(names,async id=>{
+      const file=(newer.includes(id)?'v116':'v115')+'-yard-'+id;
+      try{cache[id]=await B.SceneLoader.LoadAssetContainerAsync('assets/models/',file+'.glb',this.w.scene);}
+      catch{this.w.failedAssets??=[];this.w.failedAssets.push(file);}
+    },2);
+    const palette=new Map();
+    for(const c of Object.values(cache))for(const m of c.meshes){
+      const source=m.material;if(!source)continue;
+      const share=mat=>{if(!mat)return mat;if(palette.has(mat.name))return palette.get(mat.name);mat.maxSimultaneousLights=7;palette.set(mat.name,mat);return mat;};
+      if(source.subMaterials)source.subMaterials=source.subMaterials.map(share);else m.material=share(source);
+    }
+    // Preserve navigation silhouettes on Low. Only tiny paper/weeds are reduced.
+    const layout=[
+      ['dock-cluster',-16.8,-18,0],['dock-cluster',-16.8,-28,.15],['dock-cluster',-24,-38,.1],
+      ['dumpster-refuse',-26,-9,Math.PI/2],['dumpster-refuse',27,-55,Math.PI],
+      ['cable-reel',-16.5,-26,.2],['cable-reel',24,-18,0],['cable-reel',-20,-48,0],
+      ['drum-store',-16.5,-20,0],['drum-store',-28,-40.5,0],['drum-store',27,-12,0],
+      ['utility-transformer',26,-30,0],['gatehouse-desk',26.5,-38.4,Math.PI],
+      ['coat-noticeboard',23,-51.86,0,1.05],['coat-noticeboard',29.23,-40.2,-Math.PI/2,1.05],
+      ['road-barrier',12,-64,0],['road-barrier',-13,-68,Math.PI/2],['road-barrier',12,-86,0],
+      ['drain-weeds',-27,-13,0],['drain-weeds',27,-48,0],['drain-weeds',-3,-60,0],['drain-weeds',-11,-81,0],
+      ['fence-panel',-25,-56,0],['fence-panel',25,-56,0],
+      // Garage corners get supporting clutter too, away from interaction approaches.
+      ['dock-cluster',-28,95,0],['drum-store',28,60,0],['cable-reel',-28,59,0],
+      ['drain-weeds',29,81,0],['drain-weeds',-29,92,0],['dumpster-refuse',27,76,Math.PI/2],
+      ['loading-trolley',-14.5,-12,0],['loading-trolley',-17,-31,Math.PI/2],['loading-trolley',24,-16,Math.PI],
+      ['bollard-chain',-8,-7,0],['bollard-chain',9,-7,0],['bollard-chain',22,-55,0],['bollard-chain',11,-62,0],
+      ['freight-tarp',-7.8,-23,0],['freight-tarp',8,-32,0],['freight-tarp',-7.8,-39,0],['freight-tarp',12.5,-47,0],['freight-tarp',-25,-48,Math.PI/2],
+      ['wall-services',-18.26,-25,Math.PI/2,.12],['wall-services',29.24,-48,-Math.PI/2,.12],
+      ['gatehouse-chair',24.5,-43.7,Math.PI],['gatehouse-chair',27.2,-40.5,-.35],
+      ['calendar-coat',25.5,-51.86,0,1.05],
+      ['dock-cluster',-27,-53,.1],['cable-reel',-14.8,-43,.1],['drum-store',27,-5,0],
+      ['drain-weeds',-18.6,-8,0],['drain-weeds',14,-43,0],['drain-weeds',-27.5,-33,0],
+      ['road-barrier',13,-94,0],['road-barrier',-13,-92,0],
+    ];
+    let serial=0;
+    for(const [id,x,z,yaw,y=0] of layout){
+      const c=cache[id];if(!c)continue;
+      const root=new B.TransformNode('yard prop '+id+' '+serial,this.w.scene);
+      const inst=c.instantiateModelsToScene(n=>'yard '+n,false,{doNotInstantiate:true});
+      for(const n of inst.rootNodes)n.parent=root;
+      root.position.set(x,y,z);root.rotation.y=yaw;
+      const wall=['coat-noticeboard','wall-services','calendar-coat'].includes(id),decoration=id==='drain-weeds';
+      for(const m of root.getChildMeshes()){m.isPickable=false;m.receiveShadows=true;m.metadata={lvCaster:!decoration&&!wall,detailQuality:0};}
+      groundModel(root,x,z,y);const b=root.metadata?.placement;
+      if(wall&&b){
+        // Floor centering must not embed a wall prop halfway into its wall.
+        // Mount the imported rear anchor to the actual supporting wall face.
+        const anchor=root.getDescendants().find(n=>n.name.endsWith('__rear_mount'));
+        if(anchor){anchor.computeWorldMatrix(true);const at=anchor.getAbsolutePosition();const dx=x-at.x,dz=z-at.z;root.position.x+=dx;root.position.z+=dz;b.x+=dx;b.z+=dz;root.computeWorldMatrix(true);}
+      }
+      if(b&&!wall&&!decoration)this.w.rects.push({...b,name:'yard prop '+id,seeThrough:['fence-panel','bollard-chain','gatehouse-chair'].includes(id),surface:['bollard-chain','loading-trolley'].includes(id)?'metal':undefined,enabled:true});
+      this.w.placements.record('yard-prop:'+serial++,root,{support:wall?'gatehouse wall':'floor',supportY:y});
+    }
+    this.assetPlacements=serial;
+  }
+  buildEffects(){
+    for(let i=0;i<48;i++){
+      const m=this.box('pooled exterior rain',0,0,0,.012,.35,.012,'cool');m.isVisible=false;this.v.dynamicRoots.add(m);this.rain.push(m);
+    }
+    for(let i=0;i<12;i++){
+      const m=B.MeshBuilder.CreateSphere('pooled pipe steam',{diameter:1,segments:3},this.w.scene);m.material=this.w.materials.yardMist;m.isPickable=false;m.setEnabled(false);this.v.dynamicRoots.add(m);this.steam.push(m);
+    }
+  }
+  prepare(on){
+    for(const m of this.rain){m.isVisible=on;if(on)m.position.set(0,2,-18);}
+    for(const m of this.steam){m.setEnabled(on);if(on)m.position.set(27,1.7,-18);}
+  }
+  setSettings(s){this.settings=s;}
+  setBarrier(open){
+    // Paired booms rise towards their own motor housings. Max height < 7.3m.
+    for(const {pivot,side} of this.barrierArms)pivot.rotation.z=-side*open*Math.PI/2;
+  }
+  sync(state,immediate=true){
+    this.state=state;
+    for(const [id,root] of Object.entries(this.refillRoots))root.setEnabled(!state.refills?.includes(id));
+    const clear=state.flags.includes('route'),released=state.flags.includes('barrier');
+    if(immediate){this.setBarrier(released?1:0);this.dolly.position.x=clear?-20:0;this.weakDoor.rotation.y=released?1.55:0;this.fenceImpact.rotation.z=0;this.beat=null;}
+    this.barrierRect.enabled=!released;this.dollyRect.x=this.dolly.position.x;if(immediate){this.doorRect.enabled=!released;this.hunterBreach=null;}
+    this.selector.rotation.x=state.flags.includes('isolate')?Math.PI/2:0;
+  }
+  action(id,t){
+    if(id==='barrier'){this.crank.rotation.x=t*Math.PI*8;this.setBarrier(smooth((t-.35)/.65));}
+    if(id==='route'){this.winch.rotation.x=t*Math.PI*12;this.dolly.position.x=-20*smooth(t);this.dollyRect.x=this.dolly.position.x;}
+  }
+  impact(id){this.beat={id,time:0};}
+  hunterDoor(dt,threat){
+    // A real door interaction, based only on evidence the AI has earned.
+    // The ordinary south doorway remains an alternate route on every difficulty.
+    if(!this.doorRect.enabled||threat.rules.id==='easy'){threat.cancelDoorApproach();return null;}
+    if(this.hunterBreach){
+      this.hunterBreach.time+=dt;
+      if(this.hunterBreach.time>=.65&&!this.hunterBreach.hit){this.hunterBreach.hit=true;this.impact('gatehouseBreach');return 'contact';}
+      if(this.hunterBreach.time>=2){this.doorRect.enabled=false;threat.releaseStage(this.hunterBreach.evidence,1.4);this.hunterBreach=null;}
+      return null;
+    }
+    const e=threat.lastKnown;if(!e||roomAt(e)!=='gatehouse'||!['search','investigate','chase'].includes(threat.mode)||threat.seesPlayer)return null;
+    const approach={x:15.5,z:-44},distance=Math.hypot(threat.pos.x-approach.x,threat.pos.z-approach.z);
+    if(threat.pos.x>16.5||distance>7)return null;
+    if(!threat.approachDoor(approach,e))return null;
+    if(distance<.4){this.hunterBreach={time:0,hit:false,evidence:{...e}};threat.stageRoute([{...threat.pos}],'DoorPush');threat.yaw=Math.PI/2;}
+    return null;
+  }
+  tick(dt,time,player,settings){
+    const outside=player.pos.z<0&&roomAt(player.pos)!=='gatehouse',budget=weatherBudget(settings),count=budget.rain;
+    this.effectCounts??={rain:0,steam:0};this.effectCounts.rain=0;this.effectCounts.steam=0;
+    for(let i=0;i<this.rain.length;i++){
+      const x=((i*7.13)%18)-9,z=((i*3.91)%18)-9,y=4.8-((time*8+i*.29)%4.7);
+      const m=this.rain[i];m.position.set(player.pos.x+x,y,player.pos.z+z);
+      const visible=outside&&i<count&&exposedToRain(m.position);m.isVisible=visible;if(!visible)continue;
+      this.effectCounts.rain++;m.rotation.z=.11;
+    }
+    for(let i=0;i<this.steam.length;i++){
+      const m=this.steam[i],enabled=outside&&Math.hypot(player.pos.x-27,player.pos.z+18)<22&&i<budget.steam;m.setEnabled(enabled);if(!enabled)continue;
+      this.effectCounts.steam++;
+      const phase=(time*.35+i/12)%1;m.position.set(27-phase*.8,1.3+phase*1.7,-18+Math.sin(i)*.2);m.scaling.setAll(.18+phase*.55);m.visibility=(1-phase)*.38;
+    }
+    for(let i=0;i<(this.motionRoots?.length||0);i++){
+      const root=this.motionRoots[i],near=Math.hypot(player.pos.x-root.position.x,player.pos.z-root.position.z)<28;
+      root.rotation.z=near&&settings.sceneryMotion!==false&&!settings.reducedMotion?Math.sin(time*.7+i)*.025:0;
+    }
+    if(this.beat){
+      this.beat.time+=dt;const t=this.beat.time;
+      if(this.beat.id==='yardFence')this.fenceImpact.rotation.z=Math.sin(t*39)*.18*Math.exp(-t*3.5);
+      if(this.beat.id==='gatehouseBreach'){this.weakDoor.rotation.y=smooth(t/.22)*.55+Math.sin(t*30)*.045*Math.exp(-t*3);if(t>1)this.weakDoor.rotation.y=.55+smooth((t-1)/.7);}
+      if(t>1.8){if(this.beat.id==='gatehouseBreach'){this.doorRect.enabled=false;this.weakDoor.rotation.y=1.55;}this.beat=null;}
+    }
+  }
+}
+```
+
+## tools/build-fabric-v118.py
+
+```python
+"""Rebuild the bundled fabric pair from supplied originals (no network needed).
+
+Requires Pillow only for editing assets; the game needs no Python packages.
+Original MD5s match Poly Haven's supplied files metadata. Runtime files are
+deliberately small: two 512px RGB JPEGs, shared across all eligible materials.
+"""
+from pathlib import Path
+import hashlib
+import json
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parent.parent
+SOURCE = ROOT / 'source-assets/surfaces-v118'
+records = json.loads((SOURCE / 'manifest-fragment.json').read_text())
+for row in records:
+    original = SOURCE / 'originals' / row['download_url'].rsplit('/', 1)[-1]
+    assert hashlib.md5(original.read_bytes()).hexdigest() == row['source_md5']
+    target = ROOT / 'dist/assets' / row['file']
+    Image.open(original).convert('RGB').resize((512, 512), Image.Resampling.LANCZOS).save(target, quality=88, optimize=True)
+    row['bytes'] = target.stat().st_size
+    row['sha256'] = hashlib.sha256(target.read_bytes()).hexdigest()
+(SOURCE / 'manifest-fragment.json').write_text(json.dumps(records, indent=2) + '\n')
+manifest_path = ROOT / 'dist/assets/assets-manifest.json'
+manifest = json.loads(manifest_path.read_text())
+replaced = {row['file'] for row in records}
+manifest['assets'] = [row for row in manifest['assets'] if row['file'] not in replaced] + records
+manifest_path.write_text(json.dumps(manifest, indent=2) + '\n')
+print('Rebuilt fabric maps and updated their manifest hashes.')
 ```
 
 ## tools/build-guide.py
@@ -10114,6 +11721,10 @@ def render(source):
             output.append(f'<h{level} id="{anchor}">{inline(text)}</h{level}>')
             if level == 2:
                 toc.append(f'<a href="#{anchor}">{inline(text)}</a>')
+                if text == "5. Scenery, sky and lighting":
+                    output.append('<figure><img src="../source-assets/scenery-v119/Meridian_Scenery_v119_Contact_Sheet.jpg" alt="Ten original low-poly models, shown as actual Blender studio renders"><figcaption>The supplied source models, not an in-game screenshot. Runtime shared textures and night lighting are applied separately.</figcaption></figure>')
+                if text == "5. Materials, decay and outdoor scenery":
+                    output.append('<figure><img src="../source-assets/surfaces-v117/Surface_Contact_Sheet.jpg" alt="Repeated previews of the six supplied surface textures"><figcaption>Actual 2×2 tiled maps supplied in this release. This is a material reference, not an in-game screenshot.</figcaption></figure>')
                 if text == "Creature encounters and animation":
                     output.append('<figure><img src="Attendant_Contact_Poses.png" alt="Nine rendered poses of the Attendant showing stalking, peeking, planted door contact, crouched search and run transition"><figcaption>Actual Blender pose renders. Browser playback remains to be playtested.</figcaption></figure>')
                 if text == "More detailed rooms and properly supported props":
@@ -10137,7 +11748,7 @@ def render(source):
     return "\n".join(output), "\n".join(toc)
 
 
-body, toc = render((ROOT / "docs/UPDATE_1_14.md").read_text(encoding="utf-8"))
+body, toc = render((ROOT / "docs/UPDATE_1_19.md").read_text(encoding="utf-8"))
 style = """
 *{box-sizing:border-box}body{margin:0;background:#eff0e8;color:#203631;font:16px/1.8 system-ui,sans-serif}
 header{background:#132b2b;color:#e4e7d3;padding:60px max(24px,calc((100vw - 960px)/2))}
@@ -10152,7 +11763,7 @@ footer{padding:25px 0;border-top:1px solid #bdc8b9;margin-top:50px;font-size:14p
 @media(max-width:650px){nav{grid-template-columns:1fr}header h1{font-size:42px}main{padding:25px 18px 60px}h1{font-size:32px}h2{font-size:26px}}
 @media print{body{background:white;font-size:11pt}header,nav{display:none}main{padding:0}h2{break-before:page}pre{white-space:pre-wrap}figure{max-height:240mm}img{max-height:220mm;object-fit:contain}a{color:inherit}}
 """
-page = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Last Vehicle 1.14 — Build & Play Guide</title><style>{style}</style></head><body><header><small>A GINGRSNAPS PROJECT</small><h1>One last way out.</h1><p>Your complete guide to playing, understanding and editing Last Vehicle 1.14.</p></header><main><nav aria-label="Guide contents">{toc}</nav><article>{body}<footer>Further reading: <a href="BUILD_AND_EDIT_GUIDE.md">Beginner build guide</a> · <a href="Full_Code.md">Complete commented source</a> · <a href="VERIFICATION.md">Verification report</a></footer></article></main></body></html>'
+page = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Last Vehicle 1.19 — Build & Play Guide</title><style>{style}</style></head><body><header><small>A GINGRSNAPS PROJECT</small><h1>One last way out.</h1><p>Your complete guide to playing, understanding and editing Last Vehicle 1.19.</p></header><main><nav aria-label="Guide contents">{toc}</nav><article>{body}<footer>Further reading: <a href="BUILD_AND_EDIT_GUIDE.md">Beginner build guide</a> · <a href="Full_Code.md">Complete commented source</a> · <a href="VERIFICATION.md">Verification report</a></footer></article></main></body></html>'
 (ROOT / "docs/LastVehicle_Guide.html").write_text(page, encoding="utf-8")
 print("Updated docs/LastVehicle_Guide.html")
 ```
@@ -10244,7 +11855,7 @@ sources = [ROOT / "dist/index.html", ROOT / "dist/style.css"]
 for folder, pattern in [("dist/js", "*.js"), ("tools", "*"), ("tests", "*.js")]:
     sources.extend(sorted(p for p in (ROOT / folder).glob(pattern) if p.is_file()))
 sources.extend(ROOT / name for name in ["START_GAME.py", "START_WINDOWS.bat", "START_MAC_LINUX.sh", "package.json"])
-parts = ["# Last Vehicle 1.14 — complete commented source\n\nEdit the actual files. This is a reading copy of the runtime, launchers, packaging tools and tests. Vendor libraries, models, music and sound recordings are supplied separately with their notices. Read UPDATE_1_14.md and BUILD_AND_EDIT_GUIDE.md for the walkthrough.\n"]
+parts = ["# Last Vehicle 1.19 — complete commented source\n\nEdit the actual files. This is a reading copy of the runtime, launchers, packaging tools and tests. Vendor libraries, models, music and sound recordings are supplied separately with their notices. Read UPDATE_1_19.md and BUILD_AND_EDIT_GUIDE.md for the walkthrough.\n"]
 languages = {".js": "javascript", ".mjs": "javascript", ".py": "python", ".html": "html", ".css": "css", ".json": "json", ".bat": "bat", ".sh": "sh"}
 for path in sources:
     parts.append(f"\n## {path.relative_to(ROOT).as_posix()}\n\n```{languages.get(path.suffix, '')}\n{path.read_text(encoding='utf-8').rstrip()}\n```\n")
@@ -10273,7 +11884,7 @@ for name, selected, base in [
         count = len(archive.namelist())
     temporary.replace(target)
     reports.append({"file": name, "bytes": target.stat().st_size, "files": count, "sha256": hashlib.sha256(target.read_bytes()).hexdigest()})
-(output / "v114-package-verification.json").write_text(json.dumps(reports, indent=2) + "\n", encoding="utf-8")
+(output / "v119-package-verification.json").write_text(json.dumps(reports, indent=2) + "\n", encoding="utf-8")
 print(json.dumps(reports, indent=2))
 ```
 
@@ -10413,7 +12024,10 @@ test("Prediction follows observed direction and expires without reading hidden c
   p.hiding={id:"unseen"};p.pos={x:50,z:50};t.tick(.1,p);
   assert.deepEqual(t.lastKnown,evidence);assert.deepEqual(t.destination,evidence,"first approach the last observed corner");
   const predicted=t.prediction();assert.ok(predicted.x>evidence.x&&predicted.x<10);
-  t.pos={...evidence};t.tick(.1,p);assert.equal(t.mode,'listen',"listen at the last corner before a cover search");
+  t.pos={...evidence};t.tick(.1,p);assert.equal(t.mode,'chase',"briefly continue along observed movement");
+  const probe={...t.cornerProbe};assert.ok(probe.x>evidence.x&&probe.x<10);
+  p.pos={x:-70,z:-70};t.tick(.1,p);assert.deepEqual(t.cornerProbe,probe,"the probe never follows hidden coordinates");
+  t.pos={...probe};t.tick(.1,p);assert.equal(t.mode,'listen',"listen after the bounded probe before a cover search");
   t.evidenceAge=t.rules.predictTime+.1;assert.deepEqual(t.prediction(),evidence);
 });
 test("A recently cleared locker is skipped, but becomes eligible after memory expires",()=>{
@@ -11962,6 +13576,728 @@ test('Thirty simulated minutes keep scene-mix automation and voice counts bounde
 });
 ```
 
+## tests/release115.test.js
+
+```javascript
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { newGame,FLAG_IDS,validateSave,validateSettings,SaveStore,safeCheckpoint } from '../dist/js/state.js';
+import { Threat } from '../dist/js/threat.js';
+import { VehicleController,carBlocked } from '../dist/js/vehicle.js';
+import { blocked,findPath,sightClear,lineClear } from '../dist/js/navigation.js';
+import { TASKS } from '../dist/js/tasks.js';
+import { availability,roomAt } from '../dist/js/guidance.js';
+import { selectInteraction } from '../dist/js/interaction.js';
+import { renderMap } from '../dist/js/map.js';
+import { REFILLS,YARD } from '../dist/js/campaign.js';
+
+test('v2 saves preserve completed endings, resume unfinished yard progression and retain a backup',()=>{
+ const old=['car','battery','key','fuse','repair','power','terminal','gate','escaped'];
+ for(let i=0;i<=old.length;i++){
+  const raw={...newGame(),version:2,flags:old.slice(0,i)};
+  assert.deepEqual(validateSave(raw).flags,i===old.length?FLAG_IDS:old.slice(0,i));
+ }
+ const text=JSON.stringify({...newGame(),version:2,flags:old.slice(0,8)}),data=new Map([['lastvehicle.save',text]]);
+ const store=new SaveStore({getItem:k=>data.get(k),setItem:(k,v)=>data.set(k,v)});
+ store.writeGame(store.readGame());assert.equal(data.get('lastvehicle.save.v2.backup'),text);
+ assert.equal(validateSave({...newGame(),version:2,flags:['escaped']}).flags.length,0,'malformed completion cannot become a win');
+});
+test('Attack grace allows real hearing; unheard and fresh-chase bolts never consume habituation',()=>{
+ const t=new Threat([]);t.mode='patrol';t.grace=10;t.pos={x:0,z:0};
+ assert.equal(t.hearBolt({x:0,z:5}),true);assert.equal(t.mode,'investigate');assert.equal(t.boltHabits[0].uses,1);assert.equal(t.grace,10);
+ t.clock+=3;assert.equal(t.hearBolt({x:25,z:100}),false);assert.equal(t.boltHabits.length,1);
+ t.mode='chase';t.memory=6;t.clock+=3;assert.equal(t.hearBolt({x:0,z:4}),false);assert.equal(t.boltHabits[0].uses,1);
+});
+test('Stable horizon defaults on; finite spare trays persist without refill duplication',()=>{
+ assert.equal(validateSettings().stableHorizon,true);assert.equal(validateSettings({stableHorizon:false}).stableHorizon,false);
+ const s=validateSave({...newGame(),bolts:1,refills:['refill-yard','refill-yard','infinite']});
+ assert.deepEqual(s.refills,['refill-yard']);assert.equal(availability('refill-yard',s).available,false);
+ assert.equal(availability('refill-workshop',s).available,true);s.bolts=3;assert.equal(availability('refill-workshop',s).available,false);
+});
+test('Vehicle inputs are frame-rate stable, brake to reverse and never tunnel through walls',()=>{
+ const ends=[];
+ for(const fps of [30,60,144]){
+  const car=new VehicleController([]);car.reset({x:0,z:0,yaw:0});
+  for(let n=0;n<fps*4;n++)car.tick(1/fps,{throttle:1});ends.push(car.z);
+  for(let n=0;n<fps*3;n++)car.tick(1/fps,{throttle:-1});assert.ok(car.speed<0);
+  assert.equal(car.exitPoint(),null);for(let n=0;n<fps*2;n++)car.tick(1/fps,{});assert.ok(car.exitPoint().x<car.x);
+ }
+ assert.ok(Math.max(...ends)-Math.min(...ends)<.15);
+ const wall={x:0,z:10,w:10,d:.2,y:1,h:2},car=new VehicleController([wall]);car.reset({x:0,z:0,yaw:0});
+ for(let i=0;i<150;i++)car.tick(.075,{throttle:1});assert.ok(car.z<7.7);assert.equal(carBlocked(car,[wall]),false);
+});
+test('Wire fences block traversal while transmitting sight and the exterior journal has matching destinations',()=>{
+ const r=[{x:0,z:0,w:10,d:.1,y:1,h:2,seeThrough:true}],a={x:0,y:1,z:-2},b={x:0,y:1,z:2};
+ assert.equal(lineClear(a,b,r),false);assert.equal(sightClear(a,b,r),true);
+ const svg=renderMap({x:0,z:-20},TASKS.find(t=>t.id==='isolate').destination,[],[]);
+ assert.match(svg,/SELECTOR/);assert.match(svg,/GATEHOUSE/);assert.match(svg,/Garage floor plan/);
+});
+
+// Real geometry and pure simulation, explicitly not a hardware-rendered playtest.
+globalThis.OffscreenCanvas=class{constructor(w,h){this.width=w;this.height=h;}getContext(){return {fillRect(){},fillText(){},clearRect(){},measureText(){return {width:30};},canvas:this};}};
+await import('../dist/vendor/babylon.js');await import('../dist/vendor/babylonjs.loaders.min.js');
+const {World}=await import('../dist/js/world.js');
+const {Game}=await import('../dist/js/game.js');
+const B=globalThis.BABYLON,engine=new B.NullEngine(),world=new World(engine),loader=B.SceneLoader.LoadAssetContainerAsync;
+B.SceneLoader.LoadAssetContainerAsync=async(base,file,scene)=>B.LoadAssetContainerAsync(new Uint8Array(fs.readFileSync(new URL('../dist/'+base+file,import.meta.url))),scene,{pluginExtension:'.glb',pluginOptions:{gltf:{skipMaterials:true}}});
+try{await world.loadAssets();}finally{B.SceneLoader.LoadAssetContainerAsync=loader;}
+const complete={...newGame(),flags:FLAG_IDS.slice(0,-1)};
+
+test('New chapters have reachable controls, grounded actual assets, clear checkpoints and supported signs',()=>{
+ assert.equal(world.failedAssets?.length||0,0);assert.equal(world.yard.assetPlacements,55);
+ assert.deepEqual(world.placements.report().unresolved,[]);
+ const approaches={yard:{x:-10,z:-47.5},isolate:{x:23.8,z:-22},barrier:{x:18.5,z:-45.7},route:{x:-16.5,z:-33.7}};
+ let from={x:-6,z:8};
+ for(const id of ['yard','isolate','barrier','route']){
+  const s={...newGame(),flags:FLAG_IDS.slice(0,FLAG_IDS.indexOf(id))};world.sync(s);
+  const p=approaches[id],item=world.interactives.find(i=>i.id===id),eye=new B.Vector3(p.x,1.68,p.z),forward=item.pos.subtract(eye).normalize();
+  assert.equal(blocked(p.x,p.z,world.rects,.3),false,id+' approach');
+  assert.ok(findPath(from,p,world.rects).length,id+' route');
+  const hint=selectInteraction(world.interactives,eye,forward,world.rects,x=>availability(x,s));
+  assert.equal(hint?.item.id,id);assert.equal(hint.usable,true,id+' usable');from=p;
+ }
+ for(let n=0;n<FLAG_IDS.length;n++){const s={...newGame(),flags:FLAG_IDS.slice(0,n)};world.sync(s);assert.equal(blocked(safeCheckpoint(s).x,safeCheckpoint(s).z,world.rects,.3),false,'checkpoint '+n);}
+ for(const record of world.placements.report().records.filter(p=>String(p.id).startsWith('yard-prop:')))assert.ok(Math.abs(record.bottom-record.supportY)<1e-5);
+ for(const refill of REFILLS){const p={x:refill.x,z:refill.z+.9};assert.equal(blocked(p.x,p.z,world.rects,.29),false,refill.id);}
+});
+
+test('Manual driving completes a continuous route with actual car/yard colliders and no automatic travel',()=>{
+ world.sync(complete);world.stage.carRect.enabled=false;
+ const car=world.stage.vehicle;car.reset();
+ for(let i=0;i<300;i++)car.tick(1/60,{});assert.equal(car.x,13);assert.equal(car.z,78);
+ const waypoints=[{x:6,z:78},{x:1,z:73},{x:0,z:64},{x:0,z:10},{x:0,z:-39},{x:0,z:-55},{x:-5,z:-64},{x:-9,z:-73},{x:-9,z:-83},{x:0,z:-96}];
+ let index=0,collisions=0;
+ for(let i=0;i<60*150;i++){
+  const target=waypoints[index];if(Math.hypot(car.x-target.x,car.z-target.z)<3.3&&index<waypoints.length-1)index++;
+  const p=waypoints[index],angle=Math.atan2(Math.sin(Math.atan2(p.x-car.x,p.z-car.z)-car.yaw),Math.cos(Math.atan2(p.x-car.x,p.z-car.z)-car.yaw));
+  car.tick(1/60,{throttle:1,steer:Math.max(-1,Math.min(1,angle*1.6))});
+  if(car.blocked)collisions++;if(car.z<-94)break;
+ }
+ assert.ok(car.z<-94,JSON.stringify({x:car.x,z:car.z,yaw:car.yaw,index,collisions}));
+ assert.equal(collisions,0);assert.ok(car.distance>170);
+});
+
+test('New weather, impacts and body-aware door opening reuse prepared meshes',()=>{
+ world.sync(complete);const before=world.scene.meshes.length;
+ for(let i=0;i<300;i++){world.yard.tick(1/60,i/60,{pos:{x:23,z:-18}},{quality:'high'});if(i===10)world.yard.impact('yardFence');}
+ assert.equal(world.scene.meshes.length,before);assert.equal(world.yard.rain.length,48);assert.equal(world.yard.steam.length,12);
+ world.yard.doorRect.enabled=true;
+ const t=new Threat(world.rects,'hard');t.mode='investigate';t.pos={x:15.5,z:-44};t.lastKnown={x:23,z:-44};
+ let hits=0;for(let i=0;i<150;i++)if(world.yard.hunterDoor(1/60,t)==='contact')hits++;
+ assert.equal(hits,1);assert.equal(world.yard.doorRect.enabled,false);assert.equal(t.mode,'investigate');
+});
+
+test('Security and new control-linked scare surfaces sit in the natural interaction view',()=>{
+ world.sync(complete);world.setSettings(validateSettings());world.yard.doorRect.enabled=true;
+ for(const [id,p,target] of [['key',{x:-23.4,z:19.3},{...world.atmosphere.securityPosition,z:16.58}],['yard',{x:-10,z:-47.5},YARD.fence],['barrier',{x:18.5,z:-45.7},{x:16.62,y:1.4,z:-44.7}]]){
+  const item=world.interactives.find(i=>i.id===id),dx=item.pos.x-p.x,dz=item.pos.z-p.z;
+  const player={pos:p,height:1.68,yaw:Math.atan2(dx,dz),pitch:Math.atan2(1.68-item.pos.y,Math.hypot(dx,dz))};
+  const g={player,world,engine:{getRenderWidth:()=>1280,getRenderHeight:()=>720}};
+  assert.equal(Game.prototype.visualReadable.call(g,target,.3,24),true,id+' readable without a forced camera turn');
+ }
+});
+```
+
+## tests/release116.test.js
+
+```javascript
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { indexSpatial, spatialReport, firstNearby } from '../dist/js/spatial.js?v=1.19.0';
+import { blocked, lineClear, sightClear, moveCircle } from '../dist/js/navigation.js?v=1.19.0';
+import { GuideRoute } from '../dist/js/wayfinding.js?v=1.19.0';
+import { currentTask } from '../dist/js/tasks.js?v=1.19.0';
+import { newGame, FLAG_IDS, validateSettings } from '../dist/js/state.js?v=1.19.0';
+import { availability } from '../dist/js/guidance.js?v=1.19.0';
+import { selectInteraction } from '../dist/js/interaction.js?v=1.19.0';
+import { AreaTimings } from '../dist/js/performance.js?v=1.19.0';
+import { Threat } from '../dist/js/threat.js?v=1.19.0';
+import { YARD } from '../dist/js/campaign.js?v=1.19.0';
+
+test('Spatial queries match linear exact tests, including moving gates and visibility heights',()=>{
+ const rects=Array.from({length:180},(_,i)=>({x:(i%12)*5-28,z:Math.floor(i/12)*6-60,w:1+(i%3),d:.4+(i%4),y:1,h:2,enabled:i%17!==0,seeThrough:i%7===0,name:'fixed '+i}));
+ const moving={x:2,z:2,w:3,d:.2,y:1,h:2,dynamic:true,enabled:true};rects.push(moving);const linear=rects.slice();indexSpatial(rects);
+ for(let i=0;i<500;i++){
+  const a={x:Math.sin(i*1.23)*29,z:Math.cos(i*.73)*58,y:.8+(i%3)*.6},b={x:a.x+Math.sin(i)*7,z:a.z+Math.cos(i)*8,y:1.6};
+  assert.equal(blocked(a.x,a.z,rects,.3),blocked(a.x,a.z,linear,.3));
+  assert.equal(lineClear(a,b,rects,.2),lineClear(a,b,linear,.2));
+  assert.equal(sightClear(a,b,rects),sightClear(a,b,linear));
+ }
+ moving.x=18;moving.z=-33;moving.enabled=false;
+ assert.equal(lineClear({x:18,z:-38},{x:18,z:-30},rects),lineClear({x:18,z:-38},{x:18,z:-30},linear));
+ const report=spatialReport(rects);assert.ok(report.candidates<report.linearEquivalent*.2,JSON.stringify(report));
+ // Bucket traversal differs from authoring order; swept bolt contact must not.
+ const overlapping=[{x:1,z:1,w:2,d:2,dynamic:true},{x:1,z:1,w:2,d:2}];indexSpatial(overlapping);
+ assert.strictEqual(firstNearby(overlapping,0,0,2,2,()=>true),overlapping[0]);
+ overlapping[0].enabled=false;
+ assert.strictEqual(firstNearby(overlapping,0,0,2,2,b=>b.enabled!==false),overlapping[1]);
+});
+test('Weather, sky and scenery preferences survive validation; area timings separate CPU/GPU evidence',()=>{
+ const s=validateSettings({weatherEffects:'off',skyBrightness:9,sceneryMotion:false});
+ assert.equal(s.weatherEffects,'off');assert.equal(s.skyBrightness,1.2);assert.equal(s.sceneryMotion,false);
+ assert.equal(validateSettings({weatherEffects:'bad'}).weatherEffects,'reduced');
+ const stats=new AreaTimings();for(let i=0;i<100;i++)stats.sample('yard',i===99?130:16,6,null);
+ stats.sample('gatehouse',20,8,12);const r=stats.report();assert.equal(r.yard.p95BucketMs,16);assert.equal(r.yard.over100,1);assert.equal(r.yard.gpuMs,null);assert.equal(r.gatehouse.gpuMs,12);
+ stats.reset();assert.deepEqual(stats.report(),{});
+});
+
+globalThis.OffscreenCanvas=class{constructor(w,h){this.width=w;this.height=h;}getContext(){return {fillRect(){},fillText(){},clearRect(){},measureText(){return {width:30};},canvas:this};}};
+await import('../dist/vendor/babylon.js');await import('../dist/vendor/babylonjs.loaders.min.js');
+const {World}=await import('../dist/js/world.js?v=1.19.0');
+const {exposedToRain,weatherBudget}=await import('../dist/js/yard.js?v=1.19.0');
+const B=globalThis.BABYLON,engine=new B.NullEngine(),world=new World(engine),loader=B.SceneLoader.LoadAssetContainerAsync;
+B.SceneLoader.LoadAssetContainerAsync=async(base,file,scene)=>B.LoadAssetContainerAsync(new Uint8Array(fs.readFileSync(new URL('../dist/'+base+file,import.meta.url))),scene,{pluginExtension:'.glb',pluginOptions:{gltf:{skipMaterials:true}}});
+try{await world.loadAssets();}finally{B.SceneLoader.LoadAssetContainerAsync=loader;}
+const report={scope:'Actual geometry and NullEngine simulation. Materials skipped; not a rendered GPU or human playtest.',version:'1.19.0'};
+
+test('Every exterior objective can be found by following guidance from multiple actual approaches',()=>{
+ const starts={yard:[{x:0,z:8},{x:22,z:-40},{x:0,z:-42}],isolate:[{x:-10,z:-47.5},{x:24,z:-33}],barrier:[{x:0,z:-30},{x:27,z:-48}],route:[{x:20,z:-35},{x:0,z:-50}]};
+ report.guidance=[];
+ for(const [id,entries] of Object.entries(starts))for(const start of entries){
+  const state={...newGame(),flags:FLAG_IDS.slice(0,FLAG_IDS.indexOf(id))};world.sync(state,true);
+  const guide=new GuideRoute(world.rects),p={...start},task=currentTask(state);guide.request(task,world.interactives,p);let reached=false,frames=0;
+  assert.equal(blocked(p.x,p.z,world.rects,.3),false,'test starts on a usable floor '+id);
+  for(;frames<3600;frames++){
+   const g=guide.tick(p,1/30);if(!g)continue;
+   if(g.kind==='object'){
+    const item=world.interactives.find(i=>i.id===id),eye=new B.Vector3(p.x,1.68,p.z),forward=new B.Vector3(g.point.x,g.point.y,g.point.z).subtract(eye).normalize();
+    const hint=selectInteraction(world.interactives,eye,forward,world.rects,x=>availability(x,state));
+    assert.equal(hint?.item.id,id);assert.equal(hint.usable,true,'guidance ends at a usable view');reached=true;break;
+   }
+   assert.equal(lineClear(p,g.point,world.rects,.3),true,'arrow must not lead through a blocker');
+   const dx=g.point.x-p.x,dz=g.point.z-p.z,length=Math.hypot(dx,dz),step=Math.min(length,2.95/30);
+   if(length)moveCircle(p,dx/length*step,dz/length*step,world.rects,.3);
+  }
+  assert.ok(reached,JSON.stringify({id,start,p,goal:guide.goal,path:guide.route?.path?.length,progress:guide.progress,nearby:guide.route?.path?.slice(guide.progress,guide.progress+4),marker:guide.result,blocking:world.rects.filter(r=>r.enabled!==false&&Math.abs(r.x-p.x)<r.w/2+.6&&Math.abs(r.z-p.z)<r.d/2+.6)}));report.guidance.push({id,start,arrival:p,frames});
+ }
+});
+test('Shared outdoor anchors, labels, supported imported props and the marked dry route remain consistent',()=>{
+ assert.equal(world.failedAssets?.length||0,0);assert.equal(world.yard.assetPlacements,55);assert.deepEqual(world.placements.report().unresolved,[]);
+ const records=world.placements.report().records.filter(p=>String(p.id).startsWith('yard-prop:'));
+ for(const p of records)assert.ok(Math.abs(p.bottom-p.supportY)<.00001,p.label);
+ for(const c of [YARD.inspect,YARD.isolate,YARD.release,YARD.route]){
+  const s={...newGame(),flags:FLAG_IDS.slice(0,FLAG_IDS.indexOf(c.id))},task=currentTask(s),item=world.interactives.find(i=>i.id===c.id);
+  assert.equal(task.destination.x,item.pos.x);assert.equal(task.destination.z,item.pos.z);assert.strictEqual(task.destination.approach,c.approach);
+ }
+ world.sync({...newGame(),flags:FLAG_IDS.slice(0,-1)},true);
+ assert.equal(lineClear({x:-10.6,z:-11},{x:-10.6,z:-46},world.rects,.3),true,'dry pedestrian strip');
+ const hunter=new Threat(world.rects,'hard');assert.ok(hunter.coverPoints().some(p=>p.z<-20),'outdoor cover cannot be dropped by the old garage-first cache cap');
+ report.placements=world.placements.report();
+});
+test('Sky remains an independent three-mesh unlit background; weather honors shelter and user settings',()=>{
+ assert.equal(world.sky.meshes.length,3);const lights=world.scene.lights.length,hemi=world.hemi.intensity,count=world.scene.meshes.length;
+ for(const m of world.sky.meshes){assert.equal(m.isPickable,false);assert.equal(m.infiniteDistance,true);assert.equal(m.applyFog,false);assert.equal(m.receiveShadows,false);}
+ world.sky.setSettings({...validateSettings(),skyBrightness:.4});world.sky.tick(3,{z:-20});assert.equal(world.sky.visible,true);assert.equal(world.hemi.intensity,hemi);assert.equal(world.scene.lights.length,lights);
+ world.sky.tick(4,{z:70});assert.equal(world.sky.visible,false);
+ assert.equal(exposedToRain({x:25,z:-22}),false);assert.equal(exposedToRain({x:23,z:-44}),false);assert.equal(exposedToRain({x:0,z:-20}),true);
+ assert.deepEqual(weatherBudget({weatherEffects:'off'}),{rain:0,steam:0});
+ for(let i=0;i<120;i++)world.yard.tick(1/60,i/60,{pos:{x:26,z:-18}},{weatherEffects:'off',sceneryMotion:false});
+ assert.deepEqual(world.yard.effectCounts,{rain:0,steam:0});assert.equal(world.scene.meshes.length,count);
+});
+test('Outdoor floor props do not intersect other authored bodies or hide a locker entrance',()=>{
+ const collisions=[];
+ for(const p of world.placements.report().records.filter(p=>String(p.id).startsWith('yard-prop:')&&p.z<0&&!/coat|calendar|wall-services|drain-weeds/.test(p.label))){
+  for(const r of world.rects){
+   if(r.enabled===false||Math.abs(p.x-r.x)<.001&&Math.abs(p.z-r.z)<.001)continue;
+   if((p.w+r.w)/2-Math.abs(p.x-r.x)>.025&&(p.d+r.d)/2-Math.abs(p.z-r.z)>.025)collisions.push({prop:p.label,body:r.name});
+  }
+ }
+ assert.deepEqual(collisions,[]);report.floorPropOverlaps=collisions;
+});
+test('Sector culling excludes deep garage geometry outdoors while preserving the entrance and skyline',()=>{
+ world.optimizeStatic();world.setSettings(validateSettings());world.sync({...newGame(),flags:FLAG_IDS.slice(0,-1)},true);
+ report.visibility=[];
+ for(const [name,p] of [['garage',{x:0,z:60}],['yard',{x:0,z:-30}],['gatehouse',{x:23,z:-44}],['road',{x:-9,z:-80}]]){
+  world.updateRoomVisibility(p,1);const enabled=world.roomBatches.filter(b=>b.enabled);
+  if(p.z<0){assert.ok(enabled.some(b=>b.backdrop));assert.ok(world.roomBatches.some(b=>b.zone==='garage'&&b.bounds.minZ>32&&!b.enabled));assert.ok(enabled.some(b=>b.zone==='garage'&&b.bounds.minZ<=3));}
+  else assert.equal(enabled.some(b=>['yard','gatehouse','road'].includes(b.zone)),false);
+  report.visibility.push({area:name,total:world.roomBatches.length,enabled:enabled.length,enabledTriangles:enabled.reduce((n,b)=>n+(b.mesh.getTotalIndices?.()||0)/3,0)});
+ }
+ report.spatial=world.renderBudgetReport().spatial;
+ world.updateRoomVisibility({x:0,z:-30},1);world.sync({...newGame(),flags:FLAG_IDS.slice(0,-1)},false);
+ assert.equal(world.visibleRoom,'yard','progress must keep the player\'s current sector');
+ assert.ok(world.roomBatches.some(b=>b.backdrop&&b.enabled));
+ if(process.env.LV116_REPORT)fs.writeFileSync(process.env.LV116_REPORT,JSON.stringify(report,null,2)+'\n');
+});
+```
+
+## tests/release117.test.js
+
+```javascript
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { Threat } from '../dist/js/threat.js?v=1.19.0';
+import { AudioMixer } from '../dist/js/audio.js?v=1.19.0';
+import { wireAudio } from './audio-fixture.js';
+import { newGame, FLAG_IDS, validateSettings } from '../dist/js/state.js?v=1.19.0';
+import { blocked, lineClear } from '../dist/js/navigation.js?v=1.19.0';
+import { RouteFollower } from '../dist/js/locomotion.js?v=1.19.0';
+
+// Geometry and logic tests use the shipped engine. No claim of GPU rendering,
+// JPEG decode, audible playback or measured game FPS is made by this fixture.
+globalThis.OffscreenCanvas=class {constructor(w,h){this.width=w;this.height=h;}getContext(){return {fillRect(){},fillText(){},clearRect(){},measureText(){return {width:30};},canvas:this};}};
+await import('../dist/vendor/babylon.js');await import('../dist/vendor/babylonjs.loaders.min.js');
+const B=globalThis.BABYLON;
+const {stepBolt,boltHitTime}=await import('../dist/js/distractions.js?v=1.19.0');
+const {World}=await import('../dist/js/world.js?v=1.19.0');
+const {Game}=await import('../dist/js/game.js?v=1.19.0');
+const {SurfaceLibrary,projectSurfaceUV,surfaceRecipe}=await import('../dist/js/surface-library.js?v=1.19.0');
+const hidden={pos:{x:80,z:100},hiding:{id:'unseen'},height:1.68};
+
+test('Swept bolts hit an enemy once at 30/60/144 FPS, respect height and stop at the nearest wall',()=>{
+ const target={x:0,y:1.3,z:2,w:.68,h:2.1,d:.68};
+ for(const fps of [30,60,144])for(const shield of [false,true]){
+  const body={x:0,y:1.4,z:0,vx:0,vy:.1,vz:8,active:true,contacted:false};
+  const walls=shield?[{x:0,y:1.5,z:.9,w:3,h:3,d:.1,surface:'metal'}]:[];let hits=0;
+  for(let i=0;i<fps;i++)hits+=Number(stepBolt(body,1/fps,walls,target));
+  assert.equal(hits,1);assert.equal(body.impact.surface,shield?'metal':'enemy');
+  assert.ok(Number.isFinite(body.impact.x+body.impact.y+body.impact.z));
+ }
+ const from={x:0,y:4,z:0},to={x:0,y:4,z:4};assert.equal(boltHitTime(from,to,target),Infinity);
+ assert.equal(boltHitTime({x:0,y:1,z:0},{x:0,y:1,z:4},{...target,enabled:false}),Infinity);
+ const b={x:0,y:1,z:0,vx:0,vy:0,vz:8,active:true,contacted:false};
+ stepBolt(b,.012,[{x:0,y:1,z:.09,w:2,h:2,d:.01,surface:'glass'},{x:0,y:1,z:.05,w:2,h:2,d:.01,surface:'metal'}]);
+ assert.equal(b.impact.surface,'metal','physical order, not rectangle authoring order');
+});
+
+test('Direct bolts interrupt windup, cannot be cancelled by hiding, and resist rapid repeat stun on every difficulty',()=>{
+ const durations=[];
+ for(const difficulty of ['easy','medium','hard']){
+  const t=new Threat([],difficulty),p={pos:{x:0,z:1},height:1.68,flashlight:true};t.pos={x:0,z:0};t.beginAttack(p);
+  assert.equal(t.receiveBolt({x:0,y:1.3,z:0,incoming:{x:0,z:-8}}),'staggered');durations.push(t.stunTime);
+  const initial=t.stunTime;t.observeHide({id:'locker',entry:{x:1,z:0}},true);assert.equal(t.mode,'stunned');
+  assert.equal(t.lure({x:1,z:0}),false);assert.equal(t.pursueIfSeen(p),false);
+  assert.equal(t.receiveBolt({x:0,z:0}),'resisted');assert.equal(t.stunTime,initial);
+  const position={...t.pos};while(t.mode==='stunned'){
+   const r=t.tick(.01,p);assert.equal(r.caught,false);assert.equal(r.animation,'Recover');assert.deepEqual(t.pos,position);
+  }
+  assert.equal(t.mode,'listen');assert.equal(t.receiveBolt({x:0,z:0}),'resisted');
+  t.clock=t.stunResistUntil+.1;assert.equal(t.receiveBolt({x:0,z:0}),'staggered');
+  t.reset();assert.equal(t.lastBoltEvent,null);assert.equal(t.stunTime,0);
+ }
+ assert.ok(durations[0]>durations[1]&&durations[1]>durations[2]);
+});
+
+test('A lost-sight clatter holds the investigation against old sight evidence; visible chase ignores distraction',()=>{
+ const t=new Threat([],'hard');t.mode='chase';t.pos={x:0,z:0};t.clock=3;t.memory=t.rules.memory;
+ t.lastKnown={x:0,z:10};t.lastSeen={...t.lastKnown,time:1};t.evidenceAge=2;t.seesPlayer=false;
+ t.evidence.observe('sight',t.lastKnown,1,{confidence:1,source:'player-sight'});
+ assert.equal(t.hearBolt({x:5,z:5,surface:'metal'}),true);assert.equal(t.mode,'investigate');
+ for(let i=0;i<8;i++){t.tick(.1,hidden);assert.deepEqual(t.destination,{x:5,z:5});}
+ assert.equal(t.diagnostics().bolts.heard,1);
+ t.mode='chase';t.seesPlayer=true;t.lastSeen.time=t.clock;t.memory=t.rules.memory;
+ assert.equal(t.hearBolt({x:-4,z:2,surface:'metal'}),false);assert.equal(t.diagnostics().bolts.ignored,1);
+});
+
+test('Impact audio has priority within the 24-voice cap and production hit handling reaches the real AI/mixer',()=>{
+ const names=['tool-handling','lv115-bolt-metal','lv115-bolt-water','lv115-bolt-glass','lv114-bolt-impact','creature-recover','lv113-cloth-shift'];
+ const audio=wireAudio(new AudioMixer(),true,names);
+ for(let i=0;i<24;i++)audio.play('tool-handling');
+ const threat=new Threat([]);threat.mode='patrol';threat.pos={x:0,z:0};let saves=0;const captions=[];
+ const g={audio,threat,player:{pos:{x:0,z:3}},ui:{subtitle:t=>captions.push(t)},queueAutosave:()=>saves++};
+ assert.equal(Game.prototype.boltImpact.call(g,{x:0,y:1.4,z:0,surface:'enemy',incoming:{x:0,z:-8}}),'staggered');
+ const impact=[...audio.voices].find(v=>v.name==='lv115-bolt-metal');assert.ok(impact);assert.equal(impact.priority,2);
+ for(let i=0;i<50;i++)audio.play('tool-handling');
+ assert.equal(audio.voices.size,24);assert.ok(audio.voices.has(impact));assert.ok(captions[0].includes('staggers'));assert.equal(saves,1);
+ for(const name of names)assert.ok(fs.existsSync(new URL('../dist/assets/audio/'+name+'.ogg',import.meta.url)),name);
+ audio.stop();assert.equal(audio.voices.size,0);
+});
+
+const engine=new B.NullEngine(),world=new World(engine),loader=B.SceneLoader.LoadAssetContainerAsync;
+B.SceneLoader.LoadAssetContainerAsync=async(base,file,scene)=>B.LoadAssetContainerAsync(new Uint8Array(fs.readFileSync(new URL('../dist/'+base+file,import.meta.url))),scene,{pluginExtension:'.glb',pluginOptions:{gltf:{skipMaterials:true}}});
+try{await world.loadAssets();}finally{B.SceneLoader.LoadAssetContainerAsync=loader;}
+const report={version:'1.19.0',scope:'Actual GLB geometry and simulated logic. Imported materials skipped; injected texture objects. No GPU, audible or full human playthrough approval.'};
+
+test('Physical UV projection respects dimensions and mirrored scaling; shared color/roughness maps preserve unrelated palettes',async()=>{
+ const scene=new B.Scene(engine),mat=new B.PBRMaterial('concrete',scene),box=B.MeshBuilder.CreateBox('test slab',{width:10,height:1,depth:4},scene);box.material=mat;box.scaling.x=-2;
+ projectSurfaceUV(box,m=>surfaceRecipe(m.name));const normals=box.getVerticesData(B.VertexBuffer.NormalKind),uv=box.getVerticesData(B.VertexBuffer.UVKind),u=[];
+ for(let i=0;i<normals.length/3;i++)if(normals[i*3+1]>.9)u.push(uv[i*2]);
+ assert.ok(Math.abs(Math.max(...u)-Math.min(...u)-20/1.23)<.0001);
+ const protectedMat=new B.PBRMaterial('Kenney colormap',world.scene),original=new B.Texture(null,world.scene);protectedMat.albedoTexture=original;
+ const files=[];await world.surfaceLibrary.load(async file=>{assert.ok(fs.existsSync(new URL('../dist/assets/textures/'+file,import.meta.url)));files.push(file);return new B.Texture(null,world.scene);});
+ assert.equal(files.length,14);assert.equal(world.surfaceLibrary.report.maps,14);assert.ok(world.surfaceLibrary.report.meshes>100);
+ assert.strictEqual(protectedMat.albedoTexture,original);assert.strictEqual(world.materials.floor.albedoTexture,world.surfaceLibrary.maps.concrete.albedo);
+ assert.equal(world.materials.floor.albedoTexture.gammaSpace,true);assert.equal(world.materials.floor.metallicTexture.gammaSpace,false);
+ assert.equal(world.materials.floor.useMetallnessFromMetallicTextureBlue,false);
+ report.surfaces=world.surfaceLibrary.report;scene.dispose();protectedMat.dispose();original.dispose();
+});
+
+test('Scenery is grounded outside the route; floors meet, and the obsolete crossing cable and roof wires are removed',()=>{
+ assert.equal(world.failedAssets?.length||0,0);assert.equal(world.landscape.records.filter(r=>r.type==='shrub').length,24);assert.equal(world.landscape.records.filter(r=>r.type==='tree').length,8);
+ for(const r of world.landscape.records){assert.equal(r.baseY,0);assert.ok(Math.abs(r.x)>17);}
+ const yard=world.scene.getMeshByName('service yard ground');yard.computeWorldMatrix(true);assert.ok(Math.abs(yard.getBoundingInfo().boundingBox.maximumWorld.z+1)<.0001);
+ assert.equal(world.scene.getMeshByName('outside floor'),null);
+ assert.equal(world.scene.meshes.some(m=>/supported utility conduit|roof-mounted conduit hanger|steel tow cable/.test(m.name)),false);
+ const channel=world.scene.getMeshByName('covered tow channel');assert.ok(channel);channel.computeWorldMatrix(true);
+ assert.ok(channel.getBoundingInfo().boundingBox.maximumWorld.y<.06);
+ for(const t of [0,.25,.5,.75,1]){
+  world.yard.action('route',t);assert.equal(world.yard.dollyRect.x,world.yard.dolly.position.x);
+  assert.equal(world.yard.dolly.position.z,-53);
+ }
+ world.sync({...newGame(),flags:FLAG_IDS.slice(0,-1)},true);
+ assert.equal(lineClear({x:-10.6,z:-11},{x:-10.6,z:-46},world.rects,.3),true);
+ assert.deepEqual(world.placements.report().unresolved,[]);report.scenery=world.landscape.records;
+});
+
+test('The hunter physically traverses the exterior control route with the gatehouse side door both open and closed',()=>{
+ report.routes=[];
+ for(const closed of [true,false]){
+  world.sync({...newGame(),flags:FLAG_IDS.slice(0,-1)},true);world.yard.doorRect.enabled=closed;
+  const p={x:-10.6,z:-10},goals=[{x:24,z:-30},{x:23,z:-44},{x:-16,z:-34}],m=new RouteFollower(world.rects);let yaw=0,clock=0;
+  for(const goal of goals){let frames=0;m.invalidate();
+   for(;frames<3000&&Math.hypot(p.x-goal.x,p.z-goal.z)>.35;frames++){
+    const before={...p},r=m.step(p,yaw,goal,3.5,1/30,clock,'chase');yaw=r.yaw;clock+=1/30;
+    assert.ok(Math.hypot(p.x-before.x,p.z-before.z)<=3.5/30+.001,'no teleport recovery');assert.equal(blocked(p.x,p.z,world.rects,.32),false);
+   }
+   assert.ok(frames<3000,JSON.stringify({closed,goal,p,failures:m.failures}));report.routes.push({closed,goal,frames,recoveries:m.recoveries});
+  }
+ }
+});
+
+test('Textured foliage/water batches construct without incompatible layouts, retain alpha, and cull by sector',()=>{
+ world.optimizeStatic();world.setSettings(validateSettings());world.sync({...newGame(),flags:FLAG_IDS.slice(0,-1)},true);
+ const water=world.roomBatches.filter(b=>b.mesh.material===world.materials.puddle&&b.mesh.isVerticesDataPresent(B.VertexBuffer.ColorKind));assert.ok(water.length);assert.ok(water.every(b=>b.mesh.hasVertexAlpha));
+ const count=world.scene.meshes.length;for(let i=0;i<120;i++)world.yard.tick(1/60,i/60,{pos:{x:0,z:-30}},{weatherEffects:'off',sceneryMotion:false});assert.equal(world.scene.meshes.length,count);
+ report.visibility=[];
+ for(const [area,pos] of [['garage',{x:0,z:65}],['yard',{x:0,z:-30}],['road',{x:0,z:-85}]]){
+  world.updateRoomVisibility(pos,1);const enabled=world.roomBatches.filter(b=>b.enabled);
+  if(area==='garage')assert.ok(enabled.every(b=>!b.backdrop));else assert.ok(enabled.some(b=>b.backdrop));
+  report.visibility.push({area,enabledBatches:enabled.length,triangles:enabled.reduce((n,b)=>n+(b.mesh.getTotalIndices?.()||0)/3,0)});
+ }
+ report.budget=world.renderBudgetReport();
+ if(process.env.LV117_REPORT)fs.writeFileSync(process.env.LV117_REPORT,JSON.stringify(report,null,2)+'\n');
+});
+```
+
+## tests/release118.test.js
+
+```javascript
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {Threat} from '../dist/js/threat.js?v=1.19.0';
+import {EncounterDirector} from '../dist/js/encounters.js?v=1.19.0';
+import {CreatureScenes} from '../dist/js/creature-scenes.js?v=1.19.0';
+import {signTextureSize} from '../dist/js/sign-sizing.js?v=1.19.0';
+import {newGame,FLAG_IDS} from '../dist/js/state.js?v=1.19.0';
+
+globalThis.OffscreenCanvas=class{constructor(w,h){this.width=w;this.height=h;}getContext(){return {fillRect(){},fillText(){},clearRect(){},measureText(){return {width:30};},canvas:this};}};
+await import('../dist/vendor/babylon.js');await import('../dist/vendor/babylonjs.loaders.min.js');
+const B=globalThis.BABYLON;
+const {requestTexture,loadSurfaceTexture}=await import('../dist/js/texture-loader.js?v=1.19.0');
+const {World}=await import('../dist/js/world.js?v=1.19.0');
+const {Game}=await import('../dist/js/game.js?v=1.19.0');
+const {projectSurfaceUV,surfaceRecipe,SurfaceLibrary}=await import('../dist/js/surface-library.js?v=1.19.0');
+const hidden={pos:{x:90,z:100},hiding:{id:'far-away'}};
+const report={version:'1.19.0',scope:'Shipped GLB geometry and non-image materials, injected texture handles, simulated logic. No GPU rendering, JPEG decode or audible approval.'};
+
+test('GPU allocation exceptions dispose the real Babylon texture instead of leaking a scene blocker',async()=>{
+ const engine=new B.NullEngine(),scene=new B.Scene(engine),original=engine.createTexture;
+ engine.createTexture=()=>{throw new Error('injected GPU allocation failure');};
+ try{for(let i=0;i<3;i++){
+  const result=await requestTexture(scene,'bad.jpg');assert.equal(result.texture,null);assert.match(result.error,/GPU allocation/);
+  assert.equal(scene.textures.length,0,'no orphaned blocking BaseTexture');
+ }}finally{engine.createTexture=original;engine.dispose();}
+});
+
+test('Synchronous callbacks, timeout, duplicate/late completion and bounded retry settle and clean once',async()=>{
+ let handle;
+ class Texture {
+  constructor(url,scene,mipmap,invert,sampling,onLoad,onError){handle=this;this.error=onError;this.disposals=0;this.internal=null;}
+  updateURL(url,buffer,onLoad){this.load=onLoad;if(url==='sync'){this.error('allocation rejected');this.internal={allocated:true};throw new Error('secondary error');}}
+  dispose(){this.disposals++;this.internal=null;}
+ }
+ const result=await requestTexture({},'sync',{Texture});assert.equal(result.texture,null);assert.match(result.error,/allocation rejected/);assert.equal(handle.disposals,1);assert.equal(handle.internal,null);
+ const late=requestTexture({},'late',{Texture,timeoutMs:4});const pending=handle;assert.equal((await late).texture,null);
+ pending.load();pending.error('late');await Promise.resolve();assert.equal(pending.disposals,1);
+ const world={scene:{}},good={isTexture:true};let calls=0;
+ assert.equal(await loadSurfaceTexture(world,'retry.jpg',{request:async()=>({texture:++calls===2?good:null,error:calls===1?'transient':null})}),good);
+ assert.equal(world.assetHealth.textures['retry.jpg'].attempts,2);assert.equal(world.assetHealth.textures['retry.jpg'].state,'ready');
+ world.textureDeadline=performance.now()-1;
+ assert.equal(await loadSurfaceTexture(world,'expired.jpg',{request:async()=>{throw Error('must not start');}}),null);
+ assert.equal(world.assetHealth.textures['expired.jpg'].attempts,0);assert.deepEqual(world.failedAssets,['textures/expired.jpg']);
+});
+
+test('Fresh noise cancels a stale peek/search plan and holds the audible destination',()=>{
+ for(const difficulty of ['easy','medium','hard']){
+  const t=new Threat([],difficulty);t.mode='search';t.pos={x:0,z:30};t.lastKnown={x:1,z:30};
+  t.searchAction={time:0,duration:.25,clip:'PeekLeft',lookAt:{x:1,z:30}};t.searchPlan=[{id:'old-cover',x:-5,z:30}];
+  t.evidence.observe('sight',{x:-5,z:30},0,{confidence:1});
+  assert.equal(t.hear({x:5,z:30},30),true);assert.equal(t.searchAction,null);assert.deepEqual(t.searchPlan,[]);
+  for(let i=0;i<6;i++){t.tick(.1,hidden);assert.deepEqual(t.destination,{x:5,z:30});}
+ }
+ const lost=new Threat([],'hard');lost.mode='chase';lost.memory=1;lost.pos={x:0,z:30};lost.loops.commit={goal:{x:-5,z:30},until:20};
+ assert.equal(lost.hear({x:5,z:30},30),true);lost.tick(.1,hidden);assert.deepEqual(lost.destination,{x:5,z:30});assert.equal(lost.mode,'investigate');
+ const t=new Threat([],'hard');t.mode='patrol';t.pos={x:0,z:30};
+ t.observeHide({id:'witnessed',entry:{x:2,z:30}},true);
+ assert.equal(t.hear({x:-3,z:30},10),false);assert.equal(t.mode,'inspect');assert.equal(t.witness,'witnessed');
+});
+
+test('Direct bolt stun survives encounter selection, creature staging and yard impacts',()=>{
+ const t=new Threat([]);t.mode='patrol';t.pos={x:16.62,z:-44.7};t.receiveBolt({x:16.62,z:-44.7});const duration=t.stunTime;
+ const state=newGame(),director=new EncounterDirector(state);director.request('powerSurge');
+ assert.equal(director.next({mode:t.mode}),null);assert.equal(t.stageRoute([{x:0,z:0}],'Strike'),false);assert.equal(t.mode,'stunned');
+ const game={threat:t,state,director,player:{pos:{x:23,z:39}},world:{},audio:{}};
+ assert.equal(new CreatureScenes(game).tick(.1),false);assert.equal(t.stunTime,duration);
+ let impacts=0;Object.assign(game,{yardEncounter:{id:'gatehouseBreach',time:1},visualReadable:()=>true,recordEncounter:()=>{},world:{yard:{impact(){impacts++;}}},audio:{prepareBeat(){},play(){}},ui:{subtitle(){}}});
+ Game.prototype.tickYardEncounters.call(game,.1);assert.equal(impacts,1);assert.equal(t.mode,'stunned');assert.equal(t.stunTime,duration);
+ t.tick(.1,hidden);assert.ok(t.stunTime<duration);assert.equal(t.mode,'stunned');
+});
+
+test('Door approach yields to fresh sight and a direct hit, and expires instead of looping forever',()=>{
+ const make=()=>{const t=new Threat([],'hard');t.mode='chase';t.pos={x:0,z:0};t.lastKnown={x:10,z:0};t.memory=9;t.yaw=0;assert.equal(t.approachDoor({x:5,z:0},t.lastKnown),true);return t;};
+ const seen=make();seen.tick(.1,{pos:{x:0,z:4},height:1.68,flashlight:true});assert.equal(seen.doorApproach,null);assert.deepEqual(seen.lastKnown,{x:0,z:4});
+ const locker=make();locker.observeHide({id:'observed',entry:{x:1,z:1}},true);assert.equal(locker.doorApproach,null);assert.equal(locker.mode,'inspect');
+ const hit=make();hit.receiveBolt({x:0,z:0});assert.equal(hit.doorApproach,null);assert.equal(hit.mode,'stunned');
+ const stale=make();stale.clock=9;stale.tick(.1,hidden);assert.equal(stale.doorApproach,null);assert.equal(stale.approachDoor({x:5,z:0},stale.lastKnown),false);
+});
+
+test('Oversized sign allocations keep aspect and respect device caps',()=>{
+ for(const [w,h,cap] of [[12,.15,4096],[2,20,4096],[8,.3,256],[3,.8,1024]]){
+  const s=signTextureSize(w,h,cap);assert.ok(s.width<=Math.min(2048,cap)&&s.height<=Math.min(1024,cap));
+  assert.ok(Math.abs(s.height-s.width*h/w)<=1);
+ }
+ assert.throws(()=>signTextureSize(NaN,1));
+});
+
+const engine=new B.NullEngine(),world=new World(engine),loader=B.SceneLoader.LoadAssetContainerAsync;
+const skipped=[];
+// Keep actual imported material identities. Only embedded-image models need
+// skipMaterials, because this fixture has no browser image decoder.
+B.SceneLoader.LoadAssetContainerAsync=async(base,file,scene)=>{
+ const bytes=fs.readFileSync(new URL('../dist/'+base+file,import.meta.url));
+ const gltf=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());
+ const skip=!!gltf.images?.length;if(skip)skipped.push(file);
+ return B.LoadAssetContainerAsync(new Uint8Array(bytes),scene,{pluginExtension:'.glb',pluginOptions:{gltf:{skipMaterials:skip}}});
+};
+try{await world.loadAssets();}finally{B.SceneLoader.LoadAssetContainerAsync=loader;}
+
+test('Real prop materials receive UVs and textures, including the previously blank freight tarp',async()=>{
+ for(const name of ['decayMoss','decayMold','decayRust','decayPeel']){world.materials[name].albedoTexture=new B.Texture(null,world.scene);world.materials[name].metallicTexture=new B.Texture(null,world.scene);}
+ const clothMeshes=world.scene.meshes.filter(m=>m.material?.name==='Yard115_cloth');
+ const protectedMat=new B.PBRMaterial('steel',world.scene),atlas=new B.Texture(null,world.scene);protectedMat.albedoTexture=atlas;
+ await world.surfaceLibrary.load(async file=>{assert.ok(fs.existsSync(new URL('../dist/assets/textures/'+file,import.meta.url)));return new B.Texture(null,world.scene);});
+ const roles=['Yard115_dark','Yard115_ochre','Yard115_cloth','Yard115_dust','Yard115_rubber','carpet','canvas','carPaint','torchBody','seatFabric'];
+ for(const name of roles){const matches=world.scene.materials.filter(m=>m.name===name);assert.ok(matches.length,name);assert.ok(matches.every(m=>m.albedoTexture),name);}
+ const tarp=world.scene.meshes.filter(m=>/freight.tarp/i.test(m.name));assert.ok(tarp.length,'loaded tarp');
+ let projected=0;for(const mesh of clothMeshes){if(mesh.geometry){assert.ok(mesh.isVerticesDataPresent(B.VertexBuffer.UVKind));assert.ok(mesh.getVerticesData(B.VertexBuffer.UVKind).every(Number.isFinite));projected++;}}
+ assert.ok(projected>=10);assert.strictEqual(protectedMat.albedoTexture,atlas);
+ assert.ok(world.surfaceLibrary.report.materials>79);assert.ok(world.surfaceLibrary.report.meshes>1946);
+ assert.deepEqual(world.surfaceLibrary.report.invalidGeometry,[]);
+ const added=world.scene.meshes.filter(m=>m.name.startsWith('scenery '));
+ assert.ok(added.length>100);
+ for(const m of added){const mat=m.material;if(mat&&surfaceRecipe(mat.name))assert.ok(mat.albedoTexture,'new prop textured: '+m.name);}
+ report.surfaces=world.surfaceLibrary.report;report.imageMaterialModelsSkipped=skipped;
+});
+
+test('Palette reuse combines identical render states and preserves culling differences',async()=>{
+ const scene=new B.Scene(engine),meshes=[];
+ for(let i=0;i<3;i++){
+  const mat=new B.PBRMaterial('Yard115_steel'+(i?'.00'+i:''),scene);mat.metallic=.7;
+  if(i===2)mat.backFaceCulling=false;
+  const mesh=B.MeshBuilder.CreateBox('palette '+i,{},scene);mesh.material=mat;meshes.push(mesh);
+ }
+ const lib=new SurfaceLibrary({scene,materials:{}});await lib.load(async()=>new B.Texture(null,scene));
+ assert.strictEqual(meshes[0].material,meshes[1].material);
+ assert.notStrictEqual(meshes[0].material,meshes[2].material);assert.equal(meshes[2].material.backFaceCulling,false);
+ assert.equal(lib.report.reusedMaterials,1);scene.dispose();
+});
+
+test('Required images fail loading explicitly; invalid geometry cannot write non-finite UVs',async()=>{
+ const scene=new B.Scene(engine),mat=new B.PBRMaterial('concrete',scene),box=B.MeshBuilder.CreateBox('bad transform',{},scene);box.material=mat;box.scaling.x=0;
+ const issues=[];assert.equal(projectSurfaceUV(box,m=>surfaceRecipe(m.name),(name,reason)=>issues.push(reason)),0);assert.match(issues[0],/singular/);
+ box.scaling.x=1;const normals=box.getVerticesData(B.VertexBuffer.NormalKind);normals[0]=NaN;box.setVerticesData(B.VertexBuffer.NormalKind,normals);
+ assert.equal(projectSurfaceUV(box,m=>surfaceRecipe(m.name),(name,reason)=>issues.push(reason)),0);assert.match(issues[1],/non-finite/);
+ const lib=new SurfaceLibrary({scene,materials:{}});await assert.rejects(lib.load(async()=>null),/Required surface textures/);assert.ok(lib.report.missingMaterials.includes('fabric'));scene.dispose();
+});
+
+test('Gatehouse door approach survives real chase ticks and reaches a physical breach',()=>{
+ world.sync({...newGame(),flags:FLAG_IDS.slice(0,-1)},true);const yard=world.yard;yard.doorRect.enabled=true;
+ const t=new Threat(world.rects,'hard');t.mode='chase';t.pos={x:10,z:-44};t.lastKnown={x:23,z:-44};t.clock=2;t.memory=9;t.senseClock=1;t.seesPlayer=false;
+ let contact=0,frames=0;
+ for(;frames<500&&yard.doorRect.enabled;frames++){
+  if(yard.hunterDoor(1/30,t)==='contact'){contact++;assert.ok(Math.hypot(t.pos.x-15.5,t.pos.z+44)<.4);}
+  t.tick(1/30,hidden);
+  if(frames===0)assert.deepEqual(t.destination,{x:15.5,z:-44},'unreachable evidence must not overwrite the approach');
+ }
+ assert.equal(yard.doorRect.enabled,false);assert.equal(contact,1);assert.equal(t.doorApproach,null);report.breach={frames,contact,position:t.pos};
+ yard.doorRect.enabled=true;const interrupted=new Threat(world.rects,'hard');interrupted.mode='investigate';interrupted.pos={x:10,z:-44};interrupted.lastKnown={x:23,z:-44};
+ yard.hunterDoor(.1,interrupted);assert.ok(interrupted.doorApproach);yard.doorRect.enabled=false;yard.hunterDoor(.1,interrupted);assert.equal(interrupted.doorApproach,null);
+});
+
+test('Loading preparation follows room visibility and restores it even when rendering fails',async()=>{
+ world.optimizeStatic();world.updateRoomVisibility({x:0,z:65},1);const initial={...world.visibilityPosition};
+ const render=world.scene.render,isReady=world.scene.isReady,seen=[];world.scene.isReady=()=>true;
+ world.scene.render=()=>{seen.push({z:world.camera.position.z,room:world.visibleRoom,external:world.roomBatches.some(b=>b.enabled&&b.backdrop)});};
+ try{
+  await world.warmup();assert.ok(seen.some(v=>v.z===-18&&v.external));assert.ok(seen.some(v=>v.z===-79&&v.external));assert.deepEqual(world.visibilityPosition,initial);
+  delete world.visibilityPosition;world.camera.position.set(3,1.68,65);
+  world.scene.render=()=>{throw Error('injected render failure');};await assert.rejects(world.warmup(),/injected render/);assert.deepEqual(world.visibilityPosition,{x:3,z:65});
+ }finally{world.scene.render=render;world.scene.isReady=isReady;}
+ report.warmup=seen;report.budget=world.renderBudgetReport();
+ if(process.env.LV118_REPORT)fs.writeFileSync(process.env.LV118_REPORT,JSON.stringify(report,null,2)+'\n');
+ engine.dispose();
+});
+```
+
+## tests/release119.test.js
+
+```javascript
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {Threat} from '../dist/js/threat.js?v=1.19.0';
+import {PATROL_STOPS,PatrolPlanner} from '../dist/js/patrol.js?v=1.19.0';
+import {renderMap} from '../dist/js/map.js?v=1.19.0';
+import {RouteFollower} from '../dist/js/locomotion.js?v=1.19.0';
+import {blocked,lineClear,reachableGoal,prepareNavigation} from '../dist/js/navigation.js?v=1.19.0';
+import {newGame,FLAG_IDS,validateSettings} from '../dist/js/state.js?v=1.19.0';
+import {ambientPower,fixturePower} from '../dist/js/lighting.js?v=1.19.0';
+
+globalThis.OffscreenCanvas=class{constructor(w,h){this.width=w;this.height=h;}getContext(){return {fillRect(){},fillText(){},clearRect(){},measureText(){return {width:30};},canvas:this};}};
+await import('../dist/vendor/babylon.js');await import('../dist/vendor/babylonjs.loaders.min.js');
+const {World}=await import('../dist/js/world.js?v=1.19.0');
+const B=globalThis.BABYLON,engine=new B.NullEngine(),world=new World(engine),loader=B.SceneLoader.LoadAssetContainerAsync;
+B.SceneLoader.LoadAssetContainerAsync=async(base,file,scene)=>B.LoadAssetContainerAsync(new Uint8Array(fs.readFileSync(new URL('../dist/'+base+file,import.meta.url))),scene,{pluginExtension:'.glb',pluginOptions:{gltf:{skipMaterials:true}}});
+try{await world.loadAssets();}finally{B.SceneLoader.LoadAssetContainerAsync=loader;}
+const report={version:'1.19.0',scope:'Actual GLBs/colliders and simulated logic. Materials skipped here; no GPU/rendered-gameplay or audible-performance approval.',patrol:[],placement:{}};
+const hidden={pos:{x:1000,z:1000},hiding:{id:'far-away'}};
+const yardState={...newGame(),flags:FLAG_IDS.slice(0,FLAG_IDS.indexOf('yard'))};
+world.sync(yardState,true);prepareNavigation(world.rects);
+
+test('Patrol records arrivals, cools down failures, respects closed sections and validates all authored destinations',()=>{
+ for(const p of PATROL_STOPS){assert.equal(blocked(p.x,p.z,world.rects,.34),false,p.name);assert.ok(reachableGoal({x:0,z:63},p,world.rects),p.name);}
+ const planner=new PatrolPlanner([]);const selected=planner.choose({x:0,z:63},10,1,{});
+ assert.equal(planner.visits.size,0);assert.equal(planner.arrive({x:0,z:63},11),false);
+ assert.ok(selected.z>=0);assert.equal(planner.arrive(selected,12),true);assert.equal(planner.visits.get(selected.id),12);
+ planner.choose({x:0,z:63},15,50,{});const failed=planner.target;planner.fail(15);
+ assert.equal(planner.failed.get(failed.id),35);assert.notEqual(planner.choose({x:0,z:63},16,20,{}).id,failed.id);
+});
+
+test('Patrol reaches outside and returns regularly on all difficulties without crossing colliders or reading hidden position',()=>{
+ world.sync(yardState,true);
+ for(const difficulty of ['easy','medium','hard'])for(const seed of [1,10000]){
+  const t=new Threat(world.rects,difficulty);t.prepareRoutes();t.mode='patrol';t.setPatrolChapter(yardState);t.patrolSeed=seed;
+  let first=null,outside=0,absence=0,maxAbsence=0;const visits=new Set();
+  for(let i=0;i<30*600;i++){
+   t.tick(1/30,hidden);
+   if(t.pos.z<0){first??=t.clock;outside+=1/30;absence=0;}else{absence+=1/30;if(first)maxAbsence=Math.max(maxAbsence,absence);}
+   if(i%30===0)assert.equal(blocked(t.pos.x,t.pos.z,world.rects,.34),false,difficulty+' body clearance');
+   for(const a of t.patrol.arrivals)visits.add(a.id);
+  }
+  assert.ok(first<55,difficulty+' initial yard arrival '+first);assert.ok(maxAbsence<85,difficulty+' exterior absence '+maxAbsence);
+  for(const p of PATROL_STOPS.filter(p=>p.z<0))assert.ok(visits.has(p.id),difficulty+' actual arrival '+p.name);
+  assert.equal(t.mover.recoveries,0);assert.equal(t.lastKnown,null,'patrol has no secret player coordinates');
+  report.patrol.push({difficulty,seed,firstExteriorSeconds:first,maxExteriorAbsenceSeconds:maxAbsence,outsideSeconds:outside,uniqueArrivals:visits.size,recoveries:t.mover.recoveries,planning:t.mover.planningReport()});
+ }
+});
+
+test('Interior and return patrols physically enter workshop and pump and sweep both garage aisles',()=>{
+ for(const chapter of ['interior','return']){
+  const t=new Threat(world.rects,'medium');t.prepareRoutes();t.mode='patrol';t.outsideUnlocked=chapter==='return';t.patrol.setChapter(chapter);t.patrolSeed=1;
+  const visits=new Set();
+  for(let i=0;i<30*900;i++){t.tick(1/30,hidden);for(const a of t.patrol.arrivals)visits.add(a.id);if(chapter==='interior')assert.ok(t.pos.z>=0);}
+  for(const name of ['workshop room','pump room','west car aisle','east car aisle'])assert.ok(visits.has(PATROL_STOPS.find(p=>p.name===name).id),chapter+' '+name);
+  assert.equal(t.mover.recoveries,0);report.patrol.push({chapter,seconds:900,uniqueArrivals:visits.size,recoveries:t.mover.recoveries});
+ }
+});
+
+test('A near-but-not-cleared pillar corner is traversed at 30, 60 and 144 Hz instead of replanning forever',()=>{
+ for(const fps of [30,60,144]){
+  const m=new RouteFollower(world.rects),p={x:-5.022641258601918,z:55.954893360149505},target={x:23,z:98};let yaw=-5.8223172005179515;
+  assert.equal(lineClear(p,{x:-5,z:56.625},world.rects,.34),false,'known regression corner');
+  for(let i=0;i<fps*50&&Math.hypot(p.x-target.x,p.z-target.z)>.15;i++){
+   yaw=m.step(p,yaw,target,2.05,1/fps,i/fps,'patrol').yaw;
+   assert.equal(blocked(p.x,p.z,world.rects,.34),false);
+  }
+  assert.ok(Math.hypot(p.x-target.x,p.z-target.z)<.15,JSON.stringify({fps,p,target}));assert.equal(m.recoveries,0);assert.ok(m.planCount<5);
+ }
+});
+
+test('Ninety new placements are grounded, wall vents face the room, and large props avoid controls and other bodies',()=>{
+ assert.equal(world.scenery.records.length,90);assert.equal(world.failedAssets?.length||0,0);
+ const overlaps=[];
+ for(const p of world.scenery.records){
+  assert.ok(Math.abs(p.bottom-(p.wall?p.root.metadata.supportY:0))<1e-5,p.id+' supported');
+  if(p.wall){
+   const rear=p.root.getDescendants().find(n=>n.name.endsWith('__rear_mount')),front=p.root.getDescendants().find(n=>n.name.endsWith('__front_center'));
+   rear.computeWorldMatrix(true);front.computeWorldMatrix(true);const a=rear.getAbsolutePosition(),b=front.getAbsolutePosition();
+   assert.ok(p.x<0?b.x>a.x:b.x<a.x,'vent must project out of supporting wall');continue;
+  }
+  if(p.backdrop||p.small)continue;
+  for(const r of world.rects){
+   if(r.enabled===false||Math.abs(p.x-r.x)<.001&&Math.abs(p.z-r.z)<.001)continue;
+   if((p.w+r.w)/2-Math.abs(p.x-r.x)>.025&&(p.d+r.d)/2-Math.abs(p.z-r.z)>.025)overlaps.push([p.root.name,r.name]);
+  }
+ }
+ for(const spot of world.stage.spots)assert.equal(blocked(spot.entry.x,spot.entry.z,world.rects,.3),false,spot.id+' shelter approach');
+ assert.deepEqual(overlaps,[]);report.placement.newProps=world.scenery.records.length;report.placement.largeBodyOverlaps=overlaps;
+});
+
+test('Signs face usable approaches, side-door header has architecture, and fence posts meet actual corners',()=>{
+ const signs=world.placements.report().records.filter(r=>r.width);
+ const loading=signs.filter(s=>/^LOADING \d+$/.test(s.label));assert.equal(loading.length,3);
+ for(const s of loading){assert.ok(s.normal.x>.9);assert.ok(s.x>-18.32,'print outside shutter ribs');}
+ assert.ok(world.scene.getMeshByName('gatehouse side door lintel'));
+ for(const label of ['SECONDARY EXIT','BARRIER BRAKE']){
+  const backing=world.scene.getMeshByName('yard sign backing '+label);backing.computeWorldMatrix(true);
+  const b=backing.getBoundingInfo().boundingBox;assert.ok(b.minimumWorld.x>=16.62&&b.minimumWorld.x<16.65,label+' within 3cm of real wall');
+ }
+ assert.ok(signs.some(s=>s.label==='02 UTILITY SELECTOR  ←'));assert.ok(signs.some(s=>s.label==='03 GATEHOUSE  ←'));
+ const f=world.yard.fenceSegments;for(const side of [-1,1]){
+  const edge=f.find(r=>Math.abs(r.x-side*29.7)<.001);assert.equal(edge.z-edge.length/2,-58);assert.equal(edge.z+edge.length/2,0);
+  const back=f.find(r=>r.axis==='x'&&r.z===-58&&Math.sign(r.x)===side);assert.ok(Math.abs(Math.abs(back.x)+back.length/2-29.7)<1e-8);
+ }
+ for(const {post,foot} of world.yard.fencePosts.values()){assert.equal(post.position.x,foot.position.x);assert.equal(post.position.z,foot.position.z);}
+ report.placement.fencePosts=world.yard.fencePosts.size;
+});
+
+test('Paired booms and dolly have a clear full sweep; no loose cable or overhead wire survives',()=>{
+ assert.equal(world.yard.barrierArms.length,2);assert.equal(world.yard.barrierRect.w,12);
+ for(const t of [0,.25,.5,.75,1]){
+  world.yard.action('barrier',t);world.yard.action('route',t);
+  for(const {pivot} of world.yard.barrierArms)for(const m of pivot.getChildMeshes()){
+   m.computeWorldMatrix(true);const b=m.getBoundingInfo().boundingBox;assert.ok(b.maximumWorld.y<7.3&&b.minimumWorld.y>.9);
+  }
+  const d=world.yard.dollyRect;
+  for(const r of world.rects){if(r===d||r.enabled===false)continue;assert.ok((d.w+r.w)/2-Math.abs(d.x-r.x)<=.025||(d.d+r.d)/2-Math.abs(d.z-r.z)<=.025,'dolly swept overlap '+r.name);}
+ }
+ assert.equal(world.scene.meshes.some(m=>/steel tow cable|supported utility conduit|roof-mounted conduit hanger/.test(m.name)),false);
+ world.sync(yardState,true);
+});
+
+test('North-up journal maps agree with the actual camera rather than mirroring left and right',()=>{
+ world.camera.rotation.set(0,Math.PI,0);world.camera.getViewMatrix(true);
+ const right=world.camera.getDirection(B.Axis.X);
+ assert.ok(right.x<-.99);
+ const yard=renderMap({x:10,z:-20,yaw:Math.PI},null,[],[]);
+ const match=yard.match(/transform="translate\(([-\d.]+) ([-\d.]+)\) rotate\(([-\d.]+)\)"/);
+ assert.ok(match);assert.ok(Number(match[1])<186,'positive X belongs on the left of a north-up view');assert.equal(Number(match[3]),180);
+ const garage=renderMap({x:10,z:30},null,[],[]);
+ const marker=garage.match(/<circle cx="([-\d.]+)" cy="[-\d.]+" r="8"/);
+ assert.ok(marker);assert.ok(Number(marker[1])<217);
+ assert.doesNotMatch(yard,/KEEP LEFT|passes LEFT/);
+});
+
+test('Darker light pools retain independent sky and torch; sky has a dense deterministic star field without runtime allocation',()=>{
+ assert.ok(ambientPower('restored')<=.012&&ambientPower('outage')<=.004);
+ assert.ok(fixturePower({x:0,z:-20,emergency:true},'restored')<.5);
+ assert.ok(world.lights.filter(l=>l.z>0&&!l.emergency).every(l=>l.base<=2.8));
+ assert.ok(world.sky.starCount>=630);assert.equal(world.sky.meshes.length,3);
+ assert.ok(world.sky.starRecords.every(p=>p.y>0&&Number.isFinite(p.x)&&p.radius>=.065));
+ const lights=world.scene.lights.length,meshes=world.scene.meshes.length,hemi=world.hemi.intensity;
+ world.sky.setSettings({...validateSettings(),skyBrightness:1.2});
+ for(let i=0;i<1000;i++){world.sky.tick(i/30,{z:-30});world.yard.tick(1/30,i/30,{pos:{x:26,z:-18}},{quality:'low',weatherEffects:'reduced',reducedMotion:true});}
+ assert.equal(world.scene.lights.length,lights);assert.equal(world.scene.meshes.length,meshes);assert.equal(world.hemi.intensity,hemi);
+ world.optimizeStatic();world.setSettings(validateSettings());world.updateRoomVisibility({x:0,z:-30},1);
+ report.scene=world.renderBudgetReport();report.skyStars=world.sky.starCount;
+ if(process.env.LV119_REPORT)fs.writeFileSync(process.env.LV119_REPORT,JSON.stringify(report,null,2)+'\n');
+});
+```
+
 ## tests/startup.test.js
 
 ```javascript
@@ -12083,14 +14419,21 @@ test("Real startup, rejected capture, moving frames, note reading, checkpoint co
   g.interact("gate"); frames(150);
   g.player.pos={x:0,z:0}; frames(1);
   assert.equal(has(g.state,"escaped"),false,"walking through the gate is not the ending");
+  g.interact('yard');frames(55);g.interact('isolate');nodes.get('loading-off').onclick();nodes.get('gatehouse-on').onclick();
+  g.interact('barrier');frames(175);g.interact('route');frames(200);
+  assert.equal(has(g.state,'route'),true);
   g.player.pos={x:13.67,z:74.9};g.player.updateCamera();
   g.world.camera.setTarget(g.world.interactives.find(i=>i.id==="car").pos);g.world.camera.getViewMatrix(true);
   g.action("interact");assert.equal(g.player.vehicle,true);
   frames(120);const driveTime=g.world.stage.driveTime;
   g.pause();frames(30);assert.equal(g.world.stage.driveTime,driveTime,"escape pauses safely");
-  g.resume("drag");frames(800);
+  g.resume("drag");frames(180);assert.equal(g.world.stage.car.position.x,13,'no automatic movement without input');
+  g.player.keys.add(g.settings.bindings.forward);frames(60);assert.ok(g.world.stage.car.position.x<13);g.player.clear();
+  // Full collision-safe route is covered using the real controller in release115.
+  // Here exercise the production ending transition at the physical finish line.
+  g.world.stage.vehicle.reset({x:0,z:-95,yaw:Math.PI});frames(100);
   assert.equal(has(g.state,"escaped"),true);assert.equal(g.ui.overlay,"ending");
-  assert.ok(g.world.stage.car.position.z<-14);
+  assert.ok(g.world.stage.car.position.z<-94);
   g.engine.dispose();
 });
 
@@ -12163,7 +14506,7 @@ test("Journal task, hints, evidence and map use real handlers and persist withou
   assert.equal(g.state.journal.hints.car,3);assert.equal(g.store.readGame().journal.hints.car,3);
   g.ui.journal("notes");nodes.get("panel").querySelectorAll("[data-note]")[0].onclick();
   assert.deepEqual(g.state.journal.readNotes,["notice"]);nodes.get("put-down").onclick();assert.equal(g.ui.journalTab,"notes");
-  g.ui.journal("map");nodes.get("journal-marker").fire("click");assert.equal(g.guidance.markerSeconds,20);
+  g.ui.journal("map");nodes.get("journal-marker").fire("click");assert.equal(g.guidance.markerSeconds,60);
   assert.deepEqual(g.state.flags,flags);g.ui.hide();g.engine.dispose();
 });
 
@@ -12196,13 +14539,10 @@ test("Production story encounters pause, commit once, restore, and show the atta
   const frames=n=>{for(let i=0;i<n;i++){g.lastTime=performance.now()-16.7;g.nextRender=0;g.frame();}};
   const pose=(x,z,yaw=0,pitch=0)=>{g.player.pos={x,z};g.player.yaw=g.player.targetYaw=yaw;g.player.pitch=g.player.targetPitch=pitch;g.player.updateCamera();};
   g.state.flags=["car","battery"];g.world.sync(g.state);
-  pose(-23.4,19.3,Math.PI,.49);g.action("interact");frames(35);
-  assert.equal(has(g.state,"key"),true);
-  assert.equal(g.world.atmosphere.securityActive,false,"looking down at the key defers the visual impact");
-  pose(-23.4,19.3,Math.PI,0);frames(185);
-  assert.equal(g.world.atmosphere.securityActive,true);
+  pose(-23.4,19.3,Math.PI,.23);g.action("interact");frames(35);
+  assert.equal(has(g.state,"key"),true);assert.equal(g.world.atmosphere.securityActive,true,'key starts the reveal without a three-second recovery');
   const before=g.world.atmosphere.securityPhase;g.pause();frames(30);assert.equal(g.world.atmosphere.securityPhase,before);
-  g.resume("drag");frames(200);assert.ok(g.state.scares.includes("securityBreach"));assert.equal(g.threat.mode,"investigate");
+  g.resume("drag");frames(50);assert.ok(g.state.scares.includes("securityBreach"));assert.equal(g.state.scares.filter(id=>id==='securityBreach').length,1);
   pose(-25.2,76,-Math.PI/2,.13);g.director.quiet=0;g.action("interact");frames(100);
   assert.equal(has(g.state,"fuse"),true);
   // The creature must physically arrive at the entrance before the impact.
@@ -12263,6 +14603,72 @@ test('Expanded settings search, comfort preset, recap and controller-disconnect 
   g.save(false);g.toMenu();assert.match(nodes.get('continue-summary').innerHTML,/Inspect your car/);
  }finally{Object.defineProperty(globalThis,'navigator',{configurable:true,value:originalNavigator});g.engine.dispose();}
 });
+
+
+test('Preparation faults export their stage and missing assets; context restoration cannot resume an interrupted boot',()=>{
+ const g=new Game();g.engine=new BABYLON.NullEngine();g.loadingProgress('Preparing surfaces',.43);
+ g.world={failedAssets:['textures/missing.jpg'],assetHealth:{textures:{'missing.jpg':{state:'failed',attempts:2}}},surfaceLibrary:{report:{missingMaterials:['concrete']}}};
+ g.loadingFailed(new Error('Required surface textures could not load: concrete'));
+ assert.equal(g.loadingReady,false);assert.equal(g.bootInterrupted,true);assert.equal(g.renderFault,true);assert.match(nodes.get('load-label').textContent,/concrete/);
+ const saved=JSON.parse(g.store.get('lastCrash'));assert.equal(saved.stage,'Preparing surfaces');assert.deepEqual(saved.failedAssets,['textures/missing.jpg']);
+ let downloads=0;g.ui.downloadDiagnostics=()=>downloads++;nodes.get('load-report').onclick();assert.equal(downloads,1);
+ const report=g.ui.diagnostics();assert.equal(report.assetHealth.textures['missing.jpg'].state,'failed');assert.deepEqual(report.surfaceCoverage.missingMaterials,['concrete']);
+ g.bindGraphicsRecovery();g.engine.onContextRestoredObservable.notifyObservers(g.engine);
+ assert.equal(g.contextLost,false);assert.throws(()=>g.loadingProgress('Ready',1),/interrupted/);assert.equal(g.loadingReady,false);
+ g.engine.dispose();
+});
+
+test('Exterior chapter follows the visible guide and completes through real E actions and puzzle buttons on all difficulties',async()=>{
+ // Same production DOM/Game/Player facade as startup, now with every shipped
+ // static GLB. Following the marker must work; tests must not aim at an invisible
+ // item coordinate or call interact(id) to bypass the actual reach test.
+ await import('../dist/vendor/babylonjs.loaders.min.js');
+ const {GuideRoute}=await import('../dist/js/wayfinding.js?v=1.19.0');
+ const {currentTask}=await import('../dist/js/tasks.js?v=1.19.0');
+ const {newGame,FLAG_IDS}=await import('../dist/js/state.js?v=1.19.0');
+ const {Guidance}=await import('../dist/js/guidance.js?v=1.19.0');
+ const {moveCircle,lineClear}=await import('../dist/js/navigation.js?v=1.19.0');
+ const g=new Game();g.engine=new BABYLON.NullEngine();g.world=new World(g.engine);
+ const loader=BABYLON.SceneLoader.LoadAssetContainerAsync;
+ BABYLON.SceneLoader.LoadAssetContainerAsync=async(base,file,scene)=>BABYLON.LoadAssetContainerAsync(new Uint8Array(fs.readFileSync(new URL('../dist/'+base+file,import.meta.url))),scene,{pluginExtension:'.glb',pluginOptions:{gltf:{skipMaterials:true}}});
+ try{await g.world.loadAssets();}finally{BABYLON.SceneLoader.LoadAssetContainerAsync=loader;}
+ g.threat=new Threat(g.world.rects);g.player=new Player(g.world,g.canvas,g.settings,a=>g.action(a));g.settings.mouseMode='drag';
+ g.audio={play(){},setPaused(){},resume(){}};g.scare=()=>{};
+ try{for(const difficulty of ['easy','medium','hard']){
+  g.state={...newGame(),difficulty,flags:FLAG_IDS.slice(0,FLAG_IDS.indexOf('yard'))};g.guidance=new Guidance(g.state);
+  g.world.sync(g.state,true);g.pendingAction=null;g.started=g.playing=g.player.active=true;g.runToken++;
+  g.player.pos={x:0,z:8};g.player.clear();
+  for(const id of ['yard','isolate','barrier','route']){
+   assert.equal(currentTask(g.state).id,id);
+   const guide=new GuideRoute(g.world.rects);guide.request(currentTask(g.state),g.world.interactives,g.player.pos);
+   let marker=null;
+   for(let i=0;i<3600;i++){
+    const m=guide.tick(g.player.pos,1/30);if(!m)continue;
+    if(m.kind==='object'){marker=m;break;}
+    assert.ok(lineClear(g.player.pos,m.point,g.world.rects,.3));
+    const dx=m.point.x-g.player.pos.x,dz=m.point.z-g.player.pos.z,d=Math.hypot(dx,dz),step=Math.min(d,2.95/30);
+    if(d)moveCircle(g.player.pos,dx/d*step,dz/d*step,g.world.rects,.3);
+   }
+   assert.ok(marker,id+' visible object marker');
+   const dx=marker.point.x-g.player.pos.x,dz=marker.point.z-g.player.pos.z;
+   g.player.yaw=g.player.targetYaw=Math.atan2(dx,dz);g.player.pitch=g.player.targetPitch=Math.atan2(g.player.height-marker.point.y,Math.hypot(dx,dz));
+   g.player.updateCamera();g.player.focus.reset();
+   assert.equal(g.player.interactionHint(x=>g.getAvailability(x))?.item.id,id);
+   g.action('interact');
+   if(id==='isolate'){
+    assert.equal(g.ui.overlay,'yard-power');
+    nodes.get('gatehouse-on').onclick();assert.equal(has(g.state,'isolate'),false,'wrong sequence is recoverable');
+    nodes.get('loading-off').onclick();nodes.get('gatehouse-on').onclick();
+   }else{
+    assert.equal(g.pendingAction?.id,id);
+    for(let i=0;i<120&&g.pendingAction;i++)g.world.visuals.animator.tick(1/30);
+   }
+   assert.equal(has(g.state,id),true,difficulty+' '+id+' completes');
+  }
+  assert.equal(g.world.yard.barrierRect.enabled,false);assert.equal(g.world.yard.dollyRect.x,-20);
+  assert.equal(currentTask(g.state).id,'escaped');assert.equal(g.threat.patrol.chapter,'return');
+ }}finally{g.engine.dispose();}
+});
 ```
 
 ## tests/state.test.js
@@ -12298,19 +14704,19 @@ test("Safe checkpoints retain repair progress without storing transient pursuit 
   assert.deepEqual(restored.flags,s.flags);assert.equal(restored.flags.includes("trapped"),false);
   assert.deepEqual(restored.checkpoint,{x:-6,z:8,yaw:0});
 });
-test("Every legacy checkpoint migrates to reachable v2 progress; original local save is backed up", () => {
+test("Every legacy checkpoint migrates to reachable v3 progress; original local save is backed up", () => {
   const legacy=["car","key","fuse","power","terminal","release","valve","alarm","trapped","gate","escaped"];
-  const counts=[0,1,3,5,6,7,7,7,7,7,8,9];
+  const counts=[0,1,3,5,6,7,7,7,7,7,8,FLAG_IDS.length];
   for(let n=0;n<=legacy.length;n++){
     const raw={...newGame("hard"),version:1,flags:legacy.slice(0,n)};
     const migrated=validateSave(raw);
-    assert.equal(migrated.version,2);assert.equal(migrated.difficulty,"hard");
+    assert.equal(migrated.version,3);assert.equal(migrated.difficulty,"hard");
     assert.deepEqual(migrated.flags,FLAG_IDS.slice(0,counts[n]));
   }
   const original=JSON.stringify({...newGame(),version:1,flags:["car","key","fuse"]});
   const data=new Map([["lastvehicle.save",original]]);
   const store=new SaveStore({getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v)});
-  const migrated=store.readGame();assert.equal(migrated.version,2);
+  const migrated=store.readGame();assert.equal(migrated.version,3);
   assert.equal(data.get("lastvehicle.save.v1.backup"),original);
   store.writeGame(migrated);store.readGame();assert.equal(data.get("lastvehicle.save.v1.backup"),original);
 });
@@ -12626,7 +15032,7 @@ test("Every interactive can be aimed at from a reachable approach point", () => 
     "car-passenger": [13.67,81.2],
     battery: [9.6,75.6],
     repair: [9.1,78],
-    key: [-23.4, 20.1],
+    key: [-23.4, 19.3],
     log: [-24.5, 20.1],
     terminal: [-25, 15.7],
     release: [-28, 25.6],
@@ -12974,7 +15380,7 @@ test("Successful readiness visits all rooms and leaves hand models hidden (GPU r
   world.visuals.hand.setEnabled(false);world.visuals.actionHand.setEnabled(false);
   const stages=[];
   try {await world.warmup((label,p)=>stages.push([label,p]));} finally {world.scene.isReady=ready;}
-  assert.equal(world.preparation.rooms,7);assert.equal(world.preparation.ready,true);
+  assert.equal(world.preparation.rooms,10);assert.equal(world.preparation.ready,true);
   assert.equal(world.visuals.hand.isEnabled(),false); assert.equal(world.visuals.actionHand.isEnabled(),false);
   assert.ok(stages.every(([,p])=>p<1),"Only Game may report Ready after preparation completes");
 });
@@ -13110,7 +15516,7 @@ test("Security's real actor alcove and both routes around the wired window remai
 });
 test("Security and surge transforms survive batching, pause cleanly and fire one saved-impact cue",()=>{
   world.sync(newGame());const a=world.atmosphere,v=world.visuals;let impacts=0,done=0;
-  a.playSecurity(()=>impacts++,()=>done++);v.tick(.9,0,null,true);assert.equal(impacts,0);
+  a.playSecurity(()=>impacts++,()=>done++);v.tick(.1,0,null,true);assert.equal(impacts,0);
   assert.ok(a.securityShutter.position.y>1.78);const y=a.securityShutter.position.y;
   v.tick(1,0,null,false);assert.equal(a.securityShutter.position.y,y);
   v.tick(1,0,null,true);assert.equal(impacts,1);assert.equal(a.windowDamage.isEnabled(),true);
@@ -13120,12 +15526,12 @@ test("Security and surge transforms survive batching, pause cleanly and fire one
   world.sync({...newGame(),scares:["securityBreach","powerSurge"]});assert.equal(a.windowDamage.isEnabled(),true);assert.equal(a.emergencyMode,true);
   world.sync(newGame());assert.equal(a.windowDamage.isEnabled(),false);assert.equal(a.emergencyMode,false);
 });
-test("Conservative room culling keeps garage and adjacent door views, and restores batches on reset",()=>{
+test("Conservative room culling keeps adjacent door views and preserves the current sector on reset",()=>{
   world.updateRoomVisibility({x:-24,z:18},1);
-  for(const b of world.roomBatches)assert.equal(b.enabled,["garage","security","storage"].includes(b.zone));
-  world.updateRoomVisibility({x:0,z:40},1);assert.ok(world.roomBatches.every(b=>b.enabled));
+  for(const b of world.roomBatches)assert.equal(b.enabled,!b.backdrop&&["garage","security","storage"].includes(b.zone));
+  world.updateRoomVisibility({x:0,z:40},1);assert.ok(world.roomBatches.every(b=>b.enabled===(!b.backdrop&&!['yard','gatehouse','road'].includes(b.zone))));
   world.updateRoomVisibility({x:24,z:39},1);assert.ok(world.roomBatches.some(b=>!b.enabled));
-  world.sync(newGame());assert.ok(world.roomBatches.every(b=>b.enabled));
+  world.sync(newGame());for(const b of world.roomBatches)assert.equal(b.enabled,!b.backdrop&&["garage","electrical"].includes(b.zone));
 });
 
 test("Delivered cars and props are grounded after actual glTF transforms, and the full car route stays clear",async()=>{
@@ -13143,13 +15549,13 @@ test("Delivered cars and props are grounded after actual glTF transforms, and th
   assert.equal(w.richDetails.instances.length,12);
   const key=w.visuals.key,grip=w.visuals.keyGrip;
   assert.ok(grip,'imported maintenance key has its real ring-grip anchor');
-  assert.ok(Math.abs(key.metadata.placement.bottom-.925)<.0001,'key rests on the measured desk top');
+  assert.ok(Math.abs(key.metadata.placement.bottom-1.225)<.0001,'key rests on the raised tray support');
   assert.ok(key.metadata.placement.w>.4&&key.metadata.placement.w<.43);
   assert.equal(w.visuals.dynamicRoots.has(key),true);
   for(const fps of [30,60,144]){
     w.sync(newGame());w.visuals.action('key',.45,()=>{});
     for(let t=0;t<.45;t+=1/fps){w.visuals.animator.tick(1/fps);assert.equal(key.scaling.x,1);}
-    w.sync(newGame());assert.ok(Math.abs(key.position.y-.925)<.0001);
+    w.sync(newGame());assert.ok(Math.abs(key.position.y-1.225)<.0001);
   }
   assert.equal(w.decay.paint.length,4);
   for(const mark of w.decay.paint){assert.ok(Math.abs(Math.abs(mark.plane.position.x)-29.75)<.005);assert.equal(mark.plane.isPickable,false);}
@@ -13475,7 +15881,7 @@ fi
 ```json
 {
   "name": "last-vehicle",
-  "version": "1.14.0",
+  "version": "1.19.0",
   "private": true,
   "type": "module",
   "description": "A GingrSnaps Project \u2014 low-poly browser horror built with Babylon.js",

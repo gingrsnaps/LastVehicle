@@ -1,5 +1,8 @@
-import { CATEGORIES } from './preferences.js?v=1.14.0';
+import { CATEGORIES } from './preferences.js?v=1.19.0';
 export const SETTING_HELP={
+ weatherEffects:'Controls rain and steam density. Puddles, cover and important landmarks remain on every setting.',
+ skyBrightness:'Changes the background sky only; does not brighten the yard or change enemy detection.',
+ sceneryMotion:'Slow clouds and nearby chain/sign movement. Reduced motion also suppresses it.',
  objectiveMode:'Always shows a compact task; On request shows it for eight seconds with Tab; Journal only keeps the screen clear.',
  hintReminders:'After a quiet minute without progress, offers the journal without revealing a solution.',
  easyAdrenaline:'Easy only: one small stamina reserve when a visible chase begins. At least 35 seconds between assists.',
@@ -14,6 +17,8 @@ export const SETTING_HELP={
  scale:'Changes 3D pixel density. Interface text remains at the browser resolution.',
  resolution:'A render-height ceiling, not an operating-system screen-size change.',
  adaptive:'Reduces render resolution only after sustained measured GPU pressure.',
+ stableHorizon:'Enabled by default. Removes impact roll while keeping free mouse-look and separately adjustable hand sway.',
+ throwGuide:'Hold the keyboard throw key to preview its arc; release to throw. Controller RB throws directly.',
  cameraShake:'Short impact motion only. Zero keeps the view steady.',
  scareScreenEffects:'Brief edge darkening at impacts; never a full-screen image.',
  loudEffects:'Reduces abrupt sound peaks without changing enemy difficulty.',

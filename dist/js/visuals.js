@@ -1,7 +1,7 @@
-import { AttentionOverlay } from "./attention.js?v=1.14.0";
-import { yieldTask } from "./preparation.js?v=1.14.0";
-import { FootfallTracker } from "./presentation.js?v=1.14.0";
-import { Animator, ease } from "./animation.js?v=1.14.0";
+import { AttentionOverlay } from "./attention.js?v=1.19.0";
+import { yieldTask } from "./preparation.js?v=1.19.0";
+import { FootfallTracker } from "./presentation.js?v=1.19.0";
+import { Animator, ease } from "./animation.js?v=1.19.0";
 const B = globalThis.BABYLON;
 
 /** Dynamic presentation stays separate from static batching. Everything in
@@ -254,7 +254,7 @@ export class Visuals {
         10,
       );
     this.key = this.scene.getMeshByName("key on desk");
-    if (this.key) this.dynamicRoots.add(this.key);
+    if (this.key){this.dynamicRoots.add(this.key);this.keyHome=this.key.position.clone();}
     // Keep the authored collider, but give the locker a real open compartment.
     this.scene.getMeshByName("security locker")?.dispose();
     w.box("locker back", -28, 1.15, 22.65, 1.4, 2.3, 0.08, "teal");
@@ -534,7 +534,7 @@ export class Visuals {
     this.key=this.root('maintenance key on Security desk');
     const instance=container.instantiateModelsToScene(n=>'quest '+n,false,{doNotInstantiate:true});
     for(const n of instance.rootNodes)n.parent=this.key;
-    this.key.position.set(-23.4,.925,18);this.keyHome=this.key.position.clone();
+    this.key.position.set(-23.4,1.225,17.55);this.keyHome=this.key.position.clone();
     this.keyGrip=this.key.getDescendants().find(n=>n.name.endsWith('__grip'));
     let lo=new B.Vector3(Infinity,Infinity,Infinity),hi=new B.Vector3(-Infinity,-Infinity,-Infinity);
     for(const mesh of this.key.getChildMeshes()){
@@ -543,8 +543,8 @@ export class Visuals {
       if(!mesh.getTotalVertices())continue;mesh.computeWorldMatrix(true);
       const b=mesh.getBoundingInfo().boundingBox;lo=B.Vector3.Minimize(lo,b.minimumWorld);hi=B.Vector3.Maximize(hi,b.maximumWorld);
     }
-    this.key.metadata={supportY:.925,placement:{x:(lo.x+hi.x)/2,y:(lo.y+hi.y)/2,z:(lo.z+hi.z)/2,w:hi.x-lo.x,h:hi.y-lo.y,d:hi.z-lo.z,bottom:lo.y}};
-    this.w.placements.record('quest:maintenance-key',this.key,{support:'Security desk',supportY:.925});
+    this.key.metadata={supportY:1.225,placement:{x:(lo.x+hi.x)/2,y:(lo.y+hi.y)/2,z:(lo.z+hi.z)/2,w:hi.x-lo.x,h:hi.y-lo.y,d:hi.z-lo.z,bottom:lo.y}};
+    this.w.placements.record('quest:maintenance-key',this.key,{support:'raised key tray on Security desk',supportY:1.225});
   }
   actorFootstep() {
     const group = this.clips[this.actorClip];
@@ -600,7 +600,7 @@ export class Visuals {
       duration,
       (t) => {
         this.actionPhase = t;
-        this.w.stage?.action(id,t);
+        this.w.stage?.action(id,t);this.w.yard?.action(id,t);
         if (id === "fuse") {
           this.cabinetDoor.rotation.y = phase(t, 0.06, 0.68) * 1.48;
           const grab = phase(t, 0.58, 1);

@@ -70,6 +70,10 @@ def render(source):
             output.append(f'<h{level} id="{anchor}">{inline(text)}</h{level}>')
             if level == 2:
                 toc.append(f'<a href="#{anchor}">{inline(text)}</a>')
+                if text == "5. Scenery, sky and lighting":
+                    output.append('<figure><img src="../source-assets/scenery-v119/Meridian_Scenery_v119_Contact_Sheet.jpg" alt="Ten original low-poly models, shown as actual Blender studio renders"><figcaption>The supplied source models, not an in-game screenshot. Runtime shared textures and night lighting are applied separately.</figcaption></figure>')
+                if text == "5. Materials, decay and outdoor scenery":
+                    output.append('<figure><img src="../source-assets/surfaces-v117/Surface_Contact_Sheet.jpg" alt="Repeated previews of the six supplied surface textures"><figcaption>Actual 2×2 tiled maps supplied in this release. This is a material reference, not an in-game screenshot.</figcaption></figure>')
                 if text == "Creature encounters and animation":
                     output.append('<figure><img src="Attendant_Contact_Poses.png" alt="Nine rendered poses of the Attendant showing stalking, peeking, planted door contact, crouched search and run transition"><figcaption>Actual Blender pose renders. Browser playback remains to be playtested.</figcaption></figure>')
                 if text == "More detailed rooms and properly supported props":
@@ -93,7 +97,7 @@ def render(source):
     return "\n".join(output), "\n".join(toc)
 
 
-body, toc = render((ROOT / "docs/UPDATE_1_14.md").read_text(encoding="utf-8"))
+body, toc = render((ROOT / "docs/UPDATE_1_19.md").read_text(encoding="utf-8"))
 style = """
 *{box-sizing:border-box}body{margin:0;background:#eff0e8;color:#203631;font:16px/1.8 system-ui,sans-serif}
 header{background:#132b2b;color:#e4e7d3;padding:60px max(24px,calc((100vw - 960px)/2))}
@@ -108,6 +112,6 @@ footer{padding:25px 0;border-top:1px solid #bdc8b9;margin-top:50px;font-size:14p
 @media(max-width:650px){nav{grid-template-columns:1fr}header h1{font-size:42px}main{padding:25px 18px 60px}h1{font-size:32px}h2{font-size:26px}}
 @media print{body{background:white;font-size:11pt}header,nav{display:none}main{padding:0}h2{break-before:page}pre{white-space:pre-wrap}figure{max-height:240mm}img{max-height:220mm;object-fit:contain}a{color:inherit}}
 """
-page = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Last Vehicle 1.14 — Build & Play Guide</title><style>{style}</style></head><body><header><small>A GINGRSNAPS PROJECT</small><h1>One last way out.</h1><p>Your complete guide to playing, understanding and editing Last Vehicle 1.14.</p></header><main><nav aria-label="Guide contents">{toc}</nav><article>{body}<footer>Further reading: <a href="BUILD_AND_EDIT_GUIDE.md">Beginner build guide</a> · <a href="Full_Code.md">Complete commented source</a> · <a href="VERIFICATION.md">Verification report</a></footer></article></main></body></html>'
+page = f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Last Vehicle 1.19 — Build & Play Guide</title><style>{style}</style></head><body><header><small>A GINGRSNAPS PROJECT</small><h1>One last way out.</h1><p>Your complete guide to playing, understanding and editing Last Vehicle 1.19.</p></header><main><nav aria-label="Guide contents">{toc}</nav><article>{body}<footer>Further reading: <a href="BUILD_AND_EDIT_GUIDE.md">Beginner build guide</a> · <a href="Full_Code.md">Complete commented source</a> · <a href="VERIFICATION.md">Verification report</a></footer></article></main></body></html>'
 (ROOT / "docs/LastVehicle_Guide.html").write_text(page, encoding="utf-8")
 print("Updated docs/LastVehicle_Guide.html")

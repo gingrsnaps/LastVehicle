@@ -82,6 +82,26 @@ export class HitchRecorder {
   report() { return {sectionMaximaMs:{...this.maxima},recentEvents:[...this.events]}; }
 }
 
+/** Area histograms supplement the rolling FPS counter. All bins are allocated
+ * before play; samples do not allocate or sort frame arrays. P95 is rounded to
+ * a millisecond and the last bucket means 127 ms or longer. */
+export class AreaTimings {
+  constructor(){this.names=['garage','security','storage','workshop','electrical','pump','yard','gatehouse','road'];this.rows=Object.fromEntries(this.names.map(n=>[n,{bins:new Uint32Array(128)}]));this.reset();}
+  reset(){for(const r of Object.values(this.rows)){r.bins.fill(0);Object.assign(r,{frames:0,total:0,cpu:0,gpu:0,gpuSamples:0,over50:0,over100:0,worst:0});}}
+  sample(area,ms,cpu,gpu){
+    const r=this.rows[area];if(!r||!Number.isFinite(ms)||ms<=0)return;
+    r.frames++;r.total+=ms;r.cpu+=Number.isFinite(cpu)?cpu:0;r.worst=Math.max(r.worst,ms);
+    r.bins[Math.min(127,Math.floor(ms))]++;if(ms>=50)r.over50++;if(ms>=100)r.over100++;
+    if(Number.isFinite(gpu)&&gpu>0){r.gpu+=gpu;r.gpuSamples++;}
+  }
+  report(){
+    return Object.fromEntries(this.names.filter(n=>this.rows[n].frames).map(n=>{
+      const r=this.rows[n];let count=0,p95=0;for(;p95<127;p95++){count+=r.bins[p95];if(count>=Math.ceil(r.frames*.95))break;}
+      return [n,{frames:r.frames,seconds:r.total/1000,averageMs:r.total/r.frames,p95BucketMs:p95,worstMs:r.worst,over50:r.over50,over100:r.over100,cpuSubmissionMs:r.cpu/r.frames,gpuMs:r.gpuSamples?r.gpu/r.gpuSamples:null}];
+    }));
+  }
+}
+
 /** Optional guided sample: only real gameplay counts. Recommendations are a
  * graphics draft, never an automatic quality change or a hardware guarantee. */
 export class PerformanceSetup {

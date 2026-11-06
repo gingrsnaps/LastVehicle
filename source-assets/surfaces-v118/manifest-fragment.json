@@ -1,0 +1,32 @@
+[
+  {
+    "file": "textures/v118-fabric-albedo.jpg",
+    "title": "Book Pattern",
+    "author": "Rob Tuytel",
+    "license": "CC0-1.0",
+    "license_url": "https://polyhaven.com/license",
+    "source_md5": "4f9551b538201ee44ba2f4d5c9492110",
+    "source_sha256": "30661c007bd43e5fda5c11a8edb49e0949e19b1b55fdbe3baf7139fb3a0f8a70",
+    "bytes": 83092,
+    "sha256": "1eb13850dd00ebbf3a2315ed97436b0ca5d748d39efeb43a37a7cc817fa7e96c",
+    "processing": "Resized from 1024 to 512 px; JPEG quality 88",
+    "retrieved": "2026-11-05",
+    "source_page": "https://polyhaven.com/a/book_pattern",
+    "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/book_pattern/book_pattern_col1_1k.jpg"
+  },
+  {
+    "file": "textures/v118-fabric-roughness.jpg",
+    "title": "Book Pattern",
+    "author": "Rob Tuytel",
+    "license": "CC0-1.0",
+    "license_url": "https://polyhaven.com/license",
+    "source_md5": "e73a3decc3fc793db0dbe9671fa434f3",
+    "source_sha256": "f6e0fa087ba7003ad5c3884e360303e71688d0bbb3d5e01f085bfffa976bee3a",
+    "bytes": 127996,
+    "sha256": "4cbedcf2959afe07fb005c837cda3cbb579a1b0122b404388ed97c7ba71d8719",
+    "processing": "Resized from 1024 to 512 px; JPEG quality 88",
+    "retrieved": "2026-11-05",
+    "source_page": "https://polyhaven.com/a/book_pattern",
+    "download_url": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/book_pattern/book_pattern_rough_1k.jpg"
+  }
+]

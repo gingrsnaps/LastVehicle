@@ -136,3 +136,27 @@ Eight new `lv113-*` Ogg layers (262,780 bytes): two original arrangements of a t
 The modeled maintenance key, its ring and tag, and four wall-paint SVGs are original CC0 assets. Runtime notices are in `licenses/Key-Art-v114.txt`. The complete source package includes the editable Blender model, procedural generators, actual exported-geometry validation and Blender contact sheet under `source-assets/key-art-v114/`.
 
 Six `lv114-*.ogg` additions provide distant city ambience, entrance rain, thunder, bolt contact, electrical cutoff and quiet player exertion. They combine original DSP with edits of already supplied CC0 recordings; no microphone recording or runtime download is required. Keep `licenses/Audio-v114.txt`, `Audio-v114-provenance.json`, and `Audio-v114-source-lock.json` with distributions. Those records retain the exact source authors, URLs and input hashes. These additions do not replace the existing music, creature voices or licensed effects.
+
+
+## Version 1.15 additions
+
+Meridian Service Yard: ten original low-poly CC0 prop types, editable Blender source and measured attachment anchors. See `licenses/Yard-v115.txt` and `source-assets/yard-v115/`. Twelve new sound cues combine documented existing CC0 inputs with original DSP; see `licenses/Audio-v115.txt`, its provenance/source-lock JSON files and `source-assets/audio-v115/`. The asset manifest records each runtime file hash. These art/audio dedications do not change the separate game-code or GingrSnaps branding terms.
+
+## Version 1.16 additions
+
+Meridian Yard Details: six original low-poly CC0 prop types (loading trolley, bollard chain, tarp-covered freight, wall services, gatehouse chair, calendar/coat), supplied with editable Blender source, commented generator and measured mounting anchors. See `licenses/Yard-v116.txt`, the asset manifest and `source-assets/yard-v116/` in the complete project. The procedural night sky and additional native level geometry are part of the original game source; they introduce no external texture or audio dependencies. This release retains the existing 76 bundled Ogg files. These model dedications do not change game-code or GingrSnaps branding terms.
+
+## Version 1.17 supplemental surface textures
+
+Six Poly Haven CC0 materials are supplied as 512×512 color/roughness pairs. Asphalt 01 — Dario Barresi and Charlotte Baglioni; Rough Concrete — Dimitrios Savva; Brick Wall 001 — Rob Tuytel and Dimitrios Savva; Weathered Brown Planks — Dimitrios Savva and Rico Cilliers; Painted Metal Shutter — Dario Barresi, Rico Cilliers and Charlotte Baglioni; Forest Leaves 02 — Rob Tuytel.
+
+See `licenses/Surfaces-v117.txt` for official source links and the CC0 license. Exact runtime/source hashes and processing are in the asset manifest. The complete source includes original maps and conversion tools under `source-assets/surfaces-v117/`. Native vegetation and level dressing are part of the game source, not a separate CC0 model pack. Existing 76 audio files are retained; this release changes how bolt impacts are delivered, not their source licenses.
+
+## 1.18 woven surface
+
+Book Pattern — Rob Tuytel / Poly Haven, CC0. The bundled 512px albedo and roughness maps cover tarps, cloth and seats. See `licenses/Surfaces-v118.txt` and the asset manifest for original URLs, processing and hashes.
+
+
+## 1.19 original scenery
+
+Ten original CC0 models add pallets, a dented bin, a damaged road barrier, tyre stack, hand truck, wall vent, timber bundle, drain reeds, rubble and a background maintenance shed. Combined prototype files: 314,888 bytes and 4,136 triangles. See `licenses/Scenery-v119.txt` and `assets-manifest.json`. The full source project includes the commented generator, editable Blender file, anchors, hashes and actual studio renders in `source-assets/scenery-v119/`. The 90 runtime placements reuse existing weathered surface maps. The star field is original fixed geometry, with no downloaded sky image. No new music or sound recordings were added in this release.

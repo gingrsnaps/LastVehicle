@@ -1,0 +1,13 @@
+MERIDIAN SCENERY KIT — LAST VEHICLE 1.19
+Original model geometry, palette and generator created for A GingrSnaps Project.
+
+To the extent possible under law, the contributors dedicate the original art
+and generator in this pack to the public domain under CC0 1.0 Universal.
+You may use, modify and redistribute these assets, including commercially.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The kit was authored using numeric primitive geometry. It uses no external
+models, textures, image-generation outputs or recordings. Babylon.js and Blender
+are separate tools and retain their own licenses. The game code and GingrSnaps
+branding retain the project's separate terms; this dedication covers the art
+pack and its generator only.

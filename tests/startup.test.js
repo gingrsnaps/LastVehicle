@@ -116,14 +116,21 @@ test("Real startup, rejected capture, moving frames, note reading, checkpoint co
   g.interact("gate"); frames(150);
   g.player.pos={x:0,z:0}; frames(1);
   assert.equal(has(g.state,"escaped"),false,"walking through the gate is not the ending");
+  g.interact('yard');frames(55);g.interact('isolate');nodes.get('loading-off').onclick();nodes.get('gatehouse-on').onclick();
+  g.interact('barrier');frames(175);g.interact('route');frames(200);
+  assert.equal(has(g.state,'route'),true);
   g.player.pos={x:13.67,z:74.9};g.player.updateCamera();
   g.world.camera.setTarget(g.world.interactives.find(i=>i.id==="car").pos);g.world.camera.getViewMatrix(true);
   g.action("interact");assert.equal(g.player.vehicle,true);
   frames(120);const driveTime=g.world.stage.driveTime;
   g.pause();frames(30);assert.equal(g.world.stage.driveTime,driveTime,"escape pauses safely");
-  g.resume("drag");frames(800);
+  g.resume("drag");frames(180);assert.equal(g.world.stage.car.position.x,13,'no automatic movement without input');
+  g.player.keys.add(g.settings.bindings.forward);frames(60);assert.ok(g.world.stage.car.position.x<13);g.player.clear();
+  // Full collision-safe route is covered using the real controller in release115.
+  // Here exercise the production ending transition at the physical finish line.
+  g.world.stage.vehicle.reset({x:0,z:-95,yaw:Math.PI});frames(100);
   assert.equal(has(g.state,"escaped"),true);assert.equal(g.ui.overlay,"ending");
-  assert.ok(g.world.stage.car.position.z<-14);
+  assert.ok(g.world.stage.car.position.z<-94);
   g.engine.dispose();
 });
 
@@ -196,7 +203,7 @@ test("Journal task, hints, evidence and map use real handlers and persist withou
   assert.equal(g.state.journal.hints.car,3);assert.equal(g.store.readGame().journal.hints.car,3);
   g.ui.journal("notes");nodes.get("panel").querySelectorAll("[data-note]")[0].onclick();
   assert.deepEqual(g.state.journal.readNotes,["notice"]);nodes.get("put-down").onclick();assert.equal(g.ui.journalTab,"notes");
-  g.ui.journal("map");nodes.get("journal-marker").fire("click");assert.equal(g.guidance.markerSeconds,20);
+  g.ui.journal("map");nodes.get("journal-marker").fire("click");assert.equal(g.guidance.markerSeconds,60);
   assert.deepEqual(g.state.flags,flags);g.ui.hide();g.engine.dispose();
 });
 
@@ -229,13 +236,10 @@ test("Production story encounters pause, commit once, restore, and show the atta
   const frames=n=>{for(let i=0;i<n;i++){g.lastTime=performance.now()-16.7;g.nextRender=0;g.frame();}};
   const pose=(x,z,yaw=0,pitch=0)=>{g.player.pos={x,z};g.player.yaw=g.player.targetYaw=yaw;g.player.pitch=g.player.targetPitch=pitch;g.player.updateCamera();};
   g.state.flags=["car","battery"];g.world.sync(g.state);
-  pose(-23.4,19.3,Math.PI,.49);g.action("interact");frames(35);
-  assert.equal(has(g.state,"key"),true);
-  assert.equal(g.world.atmosphere.securityActive,false,"looking down at the key defers the visual impact");
-  pose(-23.4,19.3,Math.PI,0);frames(185);
-  assert.equal(g.world.atmosphere.securityActive,true);
+  pose(-23.4,19.3,Math.PI,.23);g.action("interact");frames(35);
+  assert.equal(has(g.state,"key"),true);assert.equal(g.world.atmosphere.securityActive,true,'key starts the reveal without a three-second recovery');
   const before=g.world.atmosphere.securityPhase;g.pause();frames(30);assert.equal(g.world.atmosphere.securityPhase,before);
-  g.resume("drag");frames(200);assert.ok(g.state.scares.includes("securityBreach"));assert.equal(g.threat.mode,"investigate");
+  g.resume("drag");frames(50);assert.ok(g.state.scares.includes("securityBreach"));assert.equal(g.state.scares.filter(id=>id==='securityBreach').length,1);
   pose(-25.2,76,-Math.PI/2,.13);g.director.quiet=0;g.action("interact");frames(100);
   assert.equal(has(g.state,"fuse"),true);
   // The creature must physically arrive at the entrance before the impact.
@@ -295,4 +299,70 @@ test('Expanded settings search, comfort preset, recap and controller-disconnect 
   assert.equal(g.playing,true);assert.equal(g.player.captureMode,'controller','pad A never attempts browser mouse permission');
   g.save(false);g.toMenu();assert.match(nodes.get('continue-summary').innerHTML,/Inspect your car/);
  }finally{Object.defineProperty(globalThis,'navigator',{configurable:true,value:originalNavigator});g.engine.dispose();}
+});
+
+
+test('Preparation faults export their stage and missing assets; context restoration cannot resume an interrupted boot',()=>{
+ const g=new Game();g.engine=new BABYLON.NullEngine();g.loadingProgress('Preparing surfaces',.43);
+ g.world={failedAssets:['textures/missing.jpg'],assetHealth:{textures:{'missing.jpg':{state:'failed',attempts:2}}},surfaceLibrary:{report:{missingMaterials:['concrete']}}};
+ g.loadingFailed(new Error('Required surface textures could not load: concrete'));
+ assert.equal(g.loadingReady,false);assert.equal(g.bootInterrupted,true);assert.equal(g.renderFault,true);assert.match(nodes.get('load-label').textContent,/concrete/);
+ const saved=JSON.parse(g.store.get('lastCrash'));assert.equal(saved.stage,'Preparing surfaces');assert.deepEqual(saved.failedAssets,['textures/missing.jpg']);
+ let downloads=0;g.ui.downloadDiagnostics=()=>downloads++;nodes.get('load-report').onclick();assert.equal(downloads,1);
+ const report=g.ui.diagnostics();assert.equal(report.assetHealth.textures['missing.jpg'].state,'failed');assert.deepEqual(report.surfaceCoverage.missingMaterials,['concrete']);
+ g.bindGraphicsRecovery();g.engine.onContextRestoredObservable.notifyObservers(g.engine);
+ assert.equal(g.contextLost,false);assert.throws(()=>g.loadingProgress('Ready',1),/interrupted/);assert.equal(g.loadingReady,false);
+ g.engine.dispose();
+});
+
+test('Exterior chapter follows the visible guide and completes through real E actions and puzzle buttons on all difficulties',async()=>{
+ // Same production DOM/Game/Player facade as startup, now with every shipped
+ // static GLB. Following the marker must work; tests must not aim at an invisible
+ // item coordinate or call interact(id) to bypass the actual reach test.
+ await import('../dist/vendor/babylonjs.loaders.min.js');
+ const {GuideRoute}=await import('../dist/js/wayfinding.js?v=1.19.0');
+ const {currentTask}=await import('../dist/js/tasks.js?v=1.19.0');
+ const {newGame,FLAG_IDS}=await import('../dist/js/state.js?v=1.19.0');
+ const {Guidance}=await import('../dist/js/guidance.js?v=1.19.0');
+ const {moveCircle,lineClear}=await import('../dist/js/navigation.js?v=1.19.0');
+ const g=new Game();g.engine=new BABYLON.NullEngine();g.world=new World(g.engine);
+ const loader=BABYLON.SceneLoader.LoadAssetContainerAsync;
+ BABYLON.SceneLoader.LoadAssetContainerAsync=async(base,file,scene)=>BABYLON.LoadAssetContainerAsync(new Uint8Array(fs.readFileSync(new URL('../dist/'+base+file,import.meta.url))),scene,{pluginExtension:'.glb',pluginOptions:{gltf:{skipMaterials:true}}});
+ try{await g.world.loadAssets();}finally{BABYLON.SceneLoader.LoadAssetContainerAsync=loader;}
+ g.threat=new Threat(g.world.rects);g.player=new Player(g.world,g.canvas,g.settings,a=>g.action(a));g.settings.mouseMode='drag';
+ g.audio={play(){},setPaused(){},resume(){}};g.scare=()=>{};
+ try{for(const difficulty of ['easy','medium','hard']){
+  g.state={...newGame(),difficulty,flags:FLAG_IDS.slice(0,FLAG_IDS.indexOf('yard'))};g.guidance=new Guidance(g.state);
+  g.world.sync(g.state,true);g.pendingAction=null;g.started=g.playing=g.player.active=true;g.runToken++;
+  g.player.pos={x:0,z:8};g.player.clear();
+  for(const id of ['yard','isolate','barrier','route']){
+   assert.equal(currentTask(g.state).id,id);
+   const guide=new GuideRoute(g.world.rects);guide.request(currentTask(g.state),g.world.interactives,g.player.pos);
+   let marker=null;
+   for(let i=0;i<3600;i++){
+    const m=guide.tick(g.player.pos,1/30);if(!m)continue;
+    if(m.kind==='object'){marker=m;break;}
+    assert.ok(lineClear(g.player.pos,m.point,g.world.rects,.3));
+    const dx=m.point.x-g.player.pos.x,dz=m.point.z-g.player.pos.z,d=Math.hypot(dx,dz),step=Math.min(d,2.95/30);
+    if(d)moveCircle(g.player.pos,dx/d*step,dz/d*step,g.world.rects,.3);
+   }
+   assert.ok(marker,id+' visible object marker');
+   const dx=marker.point.x-g.player.pos.x,dz=marker.point.z-g.player.pos.z;
+   g.player.yaw=g.player.targetYaw=Math.atan2(dx,dz);g.player.pitch=g.player.targetPitch=Math.atan2(g.player.height-marker.point.y,Math.hypot(dx,dz));
+   g.player.updateCamera();g.player.focus.reset();
+   assert.equal(g.player.interactionHint(x=>g.getAvailability(x))?.item.id,id);
+   g.action('interact');
+   if(id==='isolate'){
+    assert.equal(g.ui.overlay,'yard-power');
+    nodes.get('gatehouse-on').onclick();assert.equal(has(g.state,'isolate'),false,'wrong sequence is recoverable');
+    nodes.get('loading-off').onclick();nodes.get('gatehouse-on').onclick();
+   }else{
+    assert.equal(g.pendingAction?.id,id);
+    for(let i=0;i<120&&g.pendingAction;i++)g.world.visuals.animator.tick(1/30);
+   }
+   assert.equal(has(g.state,id),true,difficulty+' '+id+' completes');
+  }
+  assert.equal(g.world.yard.barrierRect.enabled,false);assert.equal(g.world.yard.dollyRect.x,-20);
+  assert.equal(currentTask(g.state).id,'escaped');assert.equal(g.threat.patrol.chapter,'return');
+ }}finally{g.engine.dispose();}
 });

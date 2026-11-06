@@ -1,0 +1,18 @@
+MERIDIAN SERVICE YARD — LAST VEHICLE 1.15
+Original geometry, materials, documentation, and generator code prepared for
+A GingrSnaps Project, 2026-11-03.
+
+CC0 1.0 Universal (CC0-1.0)
+To the extent legally possible, the authors waive copyright and related rights
+in this asset pack under the CC0 1.0 Universal public-domain dedication.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The geometry and muted industrial palette are authored numerically in
+source-assets/yard-v115/build_props.py. Primitive construction helpers derive
+from this project's existing CC0 Meridian Garage Details generator. There are
+no downloaded meshes, textures, fonts, brand marks, music, or recordings in
+this pack. Blender is a build tool and is not included in runtime files.
+
+The ten v115-yard-*.glb files may be used, modified, redistributed, and sold
+as part of this game or another project. Attribution is appreciated but not
+required. No trademark rights are granted. Materials are provided as-is.

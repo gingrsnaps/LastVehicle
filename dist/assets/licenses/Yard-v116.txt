@@ -1,0 +1,20 @@
+MERIDIAN YARD DETAILS — LAST VEHICLE 1.16
+Original geometry, materials, documentation and generator code prepared for
+A GingrSnaps Project, 2026-11-04.
+
+CC0 1.0 Universal (CC0-1.0)
+To the extent legally possible, the authors waive copyright and related rights
+in this asset pack under the CC0 1.0 Universal public-domain dedication.
+https://creativecommons.org/publicdomain/zero/1.0/
+
+All six prop designs and their meshes are original numeric geometry authored
+in source-assets/yard-v116/build_props.py. Primitive construction and the
+shared Yard115 material names and PBR palette derive from the project's
+existing CC0 Meridian Service Yard v115 generator. There are no downloaded
+meshes, textures, fonts, trademarks, audio recordings or other third-party
+asset inputs. Blender is a build tool and is not included in runtime files.
+
+The six v116-yard-*.glb models and source files may be used, modified,
+redistributed and sold as part of this game or another project. Attribution
+is appreciated but not required. No trademark rights are granted. These
+materials are provided as-is, without warranty.

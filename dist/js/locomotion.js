@@ -1,5 +1,5 @@
-import { AGENT_RADIUS, blocked, lineClear, moveCircle, routeSteps, createPathWorkspace } from './navigation.js?v=1.14.0';
-import { dampAngle } from './animation.js?v=1.14.0';
+import { AGENT_RADIUS, blocked, lineClear, moveCircle, routeSteps, createPathWorkspace } from './navigation.js?v=1.19.0';
+import { dampAngle } from './animation.js?v=1.19.0';
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
 const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
 
@@ -14,10 +14,12 @@ export class RouteFollower {
     this.avoid=new Map();this.lastNode=null;this.recovery=null;this.recoveries=0;
     this.lastSpeed=0;this.brake=0;this.lastTurn=0;this.routeFailed=false;this.turnAction=null;
     this.job=null;this.commitUntil=0;this.planCount=0;this.planSlices=0;this.maxPlanMs=0;
+    this.watchAnchor=null;this.watchAt=0;this.lastStepAt=-Infinity;
   }
   invalidate(){this.nextPlan=0;this.planned=null;this.path=[];this.goal=null;this.job=null;this.commitUntil=0;}
   planningReport(){return {plans:this.planCount,slices:this.planSlices,maxSliceMs:+this.maxPlanMs.toFixed(2),pending:!!this.job};}
   recover(pos,yaw,clock){
+    this.watchAnchor={...pos};this.watchAt=clock;
     const next=this.path[0];
     if(this.lastNode!==null&&next?.navIndex!==undefined)this.avoid.set(`${this.lastNode}:${next.navIndex}`,clock+7);
     // Back off first; if the back is blocked try a diagonal/side step. Recovery
@@ -32,6 +34,12 @@ export class RouteFollower {
   step(pos,yaw,evidence,speed,dt,clock,mode='search'){
     const before={...pos};let pose=null,phase=null,failed=false;
     if(!evidence||dt<=0)return {yaw,speed:0,pose,phase,failed};
+    // This watchdog survives successful replans. Previously each fresh path
+    // could reset the progress timer, leaving a stationary hunter planning the
+    // same obstructed first step forever. Pauses between intents are excluded.
+    if(!this.watchAnchor||clock-this.lastStepAt>.3||distance(pos,this.watchAnchor)>.15){this.watchAnchor={...pos};this.watchAt=clock;}
+    this.lastStepAt=clock;
+    if(!this.recovery&&clock-this.watchAt>3&&distance(pos,evidence)>.5)this.recover(pos,yaw,clock);
     for(const [key,until] of this.avoid)if(clock>=until)this.avoid.delete(key);
     if(this.recovery){
       const r=this.recovery;r.time+=dt;const blend=smooth((r.time/.9-.12)/.6);
@@ -62,7 +70,14 @@ export class RouteFollower {
     // A moving visible target can be followed directly between scheduled plans.
     const direct=!blocked(evidence.x,evidence.z,this.rects,AGENT_RADIUS)&&lineClear(pos,evidence,this.rects,AGENT_RADIUS);
     if(direct){this.goal={...evidence};this.routeFailed=false;}
-    while(this.path.length&&distance(pos,this.path[0])<.075){this.lastNode=this.path.shift().navIndex??null;this.windowTime=this.progress=0;}
+    // Being near a grid corner does not mean the body has cleared its pillar.
+    // Retain that last few centimetres unless the next swept segment is clear.
+    while(this.path.length&&distance(pos,this.path[0])<.075&&(!this.path[1]||lineClear(pos,this.path[1],this.rects,AGENT_RADIUS))){this.lastNode=this.path.shift().navIndex??null;this.windowTime=this.progress=0;}
+    // Blend a nearby corner only after the entire body has a clear shortcut.
+    // This removes stop/turn/accelerate beats without cutting through walls.
+    while(this.path.length>1&&distance(pos,this.path[0])<.65&&lineClear(pos,this.path[1],this.rects,AGENT_RADIUS)){
+      this.lastNode=this.path.shift().navIndex??null;this.windowTime=this.progress=0;
+    }
     const next=direct?evidence:this.path[0]||this.goal;
     if(!next||(!direct&&!lineClear(pos,next,this.rects,AGENT_RADIUS))){
       if(!this.job)this.windowTime+=dt;
@@ -70,7 +85,7 @@ export class RouteFollower {
       return {yaw,speed:0,pose:'Listen',phase:null,failed};
     }
     const d=distance(pos,next);
-    if(d<.06){
+    if(d<(direct||this.path.length<=1?.06:.001)){
       if(this.lastSpeed>1.5)this.brake=.8;
       this.brake=Math.max(0,this.brake-dt);this.lastSpeed=0;
       return {yaw,speed:0,pose:this.brake?'Brake':null,phase:this.brake?1-this.brake/.8:null,failed};

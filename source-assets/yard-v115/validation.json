@@ -1,0 +1,641 @@
+{
+  "passed": true,
+  "engine": "Babylon.js 9.33.1 NullEngine",
+  "browser_visual_qa": false,
+  "external_dependencies": 0,
+  "assets": 10,
+  "total_triangles": 5867,
+  "total_bytes": 359156,
+  "results": [
+    {
+      "id": "dock-cluster",
+      "sha256": "fe8cdee8e71e9e3fb09cddc3ec6eb6ed724000c7487630e141831ca80e711f9f",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 464,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.7200000286102295,
+            0,
+            -0.6000000238418579
+          ],
+          "bounds_max": [
+            0.8309405446052551,
+            1.1464999914169312,
+            0.7252365946769714
+          ],
+          "anchors": {
+            "crate_top": [
+              0,
+              1.1460000276565552,
+              0
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 464,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.8309405446052551,
+            0,
+            -0.6000000238418579
+          ],
+          "bounds_max": [
+            0.7200000286102295,
+            1.1464999914169312,
+            0.7252365946769714
+          ],
+          "anchors": {
+            "crate_top": [
+              0,
+              1.1460000276565552,
+              0
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "dumpster-refuse",
+      "sha256": "db18e152fe63778a1d75caff7bc53b6a08f642757e3b2a7fa44d5e935972c84e",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 448,
+          "meshes": 8,
+          "materials": 8,
+          "bounds_min": [
+            -1.2513946294784546,
+            0,
+            -0.5400000214576721
+          ],
+          "bounds_max": [
+            0.9750000238418579,
+            1.6334999799728394,
+            0.5400000214576721
+          ],
+          "anchors": {
+            "lid_contact": [
+              0,
+              1.350000023841858,
+              -0.23999999463558197
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 448,
+          "meshes": 8,
+          "materials": 8,
+          "bounds_min": [
+            -0.9750000238418579,
+            0,
+            -0.5400000214576721
+          ],
+          "bounds_max": [
+            1.2513946294784546,
+            1.6334999799728394,
+            0.5400000214576721
+          ],
+          "anchors": {
+            "lid_contact": [
+              0,
+              1.350000023841858,
+              -0.23999999463558197
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cable-reel",
+      "sha256": "21771482cd8d71ad2f99f8490659aa4181f2085dd67732585c5e67d8d1114c07",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 1156,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.3840000033378601,
+            0,
+            -0.38999998569488525
+          ],
+          "bounds_max": [
+            1.065000057220459,
+            0.7799999713897705,
+            0.6215586066246033
+          ],
+          "anchors": {
+            "toolcase_lid": [
+              0.7799999713897705,
+              0.3400000035762787,
+              0.10000000149011612
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 1156,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -1.065000057220459,
+            0,
+            -0.38999998569488525
+          ],
+          "bounds_max": [
+            0.3840000033378601,
+            0.7799999713897705,
+            0.6215586066246033
+          ],
+          "anchors": {
+            "toolcase_lid": [
+              -0.7799999713897705,
+              0.3400000035762787,
+              0.10000000149011612
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "drain-weeds",
+      "sha256": "63d365aaf0549e708666921b56d9425e506e9686a701a3cc8486b8277e7f4c6b",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 539,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.5566312074661255,
+            0,
+            -0.3199999928474426
+          ],
+          "bounds_max": [
+            0.5400000214576721,
+            0.2320994883775711,
+            0.5565739870071411
+          ],
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 539,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.5400000214576721,
+            0,
+            -0.3199999928474426
+          ],
+          "bounds_max": [
+            0.5566312074661255,
+            0.2320994883775711,
+            0.5565739870071411
+          ],
+          "anchors": {
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "road-barrier",
+      "sha256": "b8ca01cf474c3acde8edb65310ea6740346cbfde4b4b0d8515b608f967771888",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 384,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -1.2000000476837158,
+            0,
+            -0.3149999976158142
+          ],
+          "bounds_max": [
+            1.2000000476837158,
+            1.0236228704452515,
+            0.3149999976158142
+          ],
+          "anchors": {
+            "top": [
+              0,
+              0.9200000166893005,
+              0
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 384,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -1.2000000476837158,
+            0,
+            -0.3149999976158142
+          ],
+          "bounds_max": [
+            1.2000000476837158,
+            1.0236228704452515,
+            0.3149999976158142
+          ],
+          "anchors": {
+            "top": [
+              0,
+              0.9200000166893005,
+              0
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "gatehouse-desk",
+      "sha256": "66466fb79e42f360ee16600057cc1c1015f428abf56a4691d8eb1370644ff22a",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 612,
+          "meshes": 8,
+          "materials": 8,
+          "bounds_min": [
+            -0.8399999737739563,
+            0,
+            -0.3799999952316284
+          ],
+          "bounds_max": [
+            0.8399999737739563,
+            1.570759892463684,
+            0.38600000739097595
+          ],
+          "anchors": {
+            "work_surface": [
+              0,
+              0.8309999704360962,
+              0
+            ],
+            "radio": [
+              -0.4000000059604645,
+              0.9800000190734863,
+              0.03999999910593033
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 612,
+          "meshes": 8,
+          "materials": 8,
+          "bounds_min": [
+            -0.8399999737739563,
+            0,
+            -0.3799999952316284
+          ],
+          "bounds_max": [
+            0.8399999737739563,
+            1.570759892463684,
+            0.38600000739097595
+          ],
+          "anchors": {
+            "work_surface": [
+              0,
+              0.8309999704360962,
+              0
+            ],
+            "radio": [
+              0.4000000059604645,
+              0.9800000190734863,
+              0.03999999910593033
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "coat-noticeboard",
+      "sha256": "5097643d9e9da4a8c1e77c2c1c7ff865bfc6c2e9393723e8e4876a8d1bbaf519",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 336,
+          "meshes": 7,
+          "materials": 7,
+          "bounds_min": [
+            -0.5706936717033386,
+            0,
+            0
+          ],
+          "bounds_max": [
+            0.550000011920929,
+            1.3799999952316284,
+            0.19899998605251312
+          ],
+          "anchors": {
+            "paper": [
+              0.27000001072883606,
+              0.8999999761581421,
+              0.07400000095367432
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ],
+            "rear_mount": [
+              0,
+              0.6899999976158142,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 336,
+          "meshes": 7,
+          "materials": 7,
+          "bounds_min": [
+            -0.550000011920929,
+            0,
+            0
+          ],
+          "bounds_max": [
+            0.5706936717033386,
+            1.3799999952316284,
+            0.19899998605251312
+          ],
+          "anchors": {
+            "paper": [
+              -0.27000001072883606,
+              0.8999999761581421,
+              0.07400000095367432
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ],
+            "rear_mount": [
+              0,
+              0.6899999976158142,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "utility-transformer",
+      "sha256": "edd38843365c6666212a4dcd1a6b570605bc1d1630ed749435766f4bc410b2f3",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 680,
+          "meshes": 9,
+          "materials": 9,
+          "bounds_min": [
+            -0.8143083453178406,
+            0,
+            -0.5249999761581421
+          ],
+          "bounds_max": [
+            0.75,
+            2.129999876022339,
+            0.5249999761581421
+          ],
+          "anchors": {
+            "control": [
+              0,
+              0.949999988079071,
+              0.44999998807907104
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 680,
+          "meshes": 9,
+          "materials": 9,
+          "bounds_min": [
+            -0.75,
+            0,
+            -0.5249999761581421
+          ],
+          "bounds_max": [
+            0.8143083453178406,
+            2.129999876022339,
+            0.5249999761581421
+          ],
+          "anchors": {
+            "control": [
+              0,
+              0.949999988079071,
+              0.44999998807907104
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fence-panel",
+      "sha256": "4d6a540dbb8a68ec5d1e966ae814e6be0ed2c230d4bdc3d1b2e76cb1276ea7c9",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 608,
+          "meshes": 3,
+          "materials": 3,
+          "bounds_min": [
+            -1.5499999523162842,
+            0,
+            -0.11999999731779099
+          ],
+          "bounds_max": [
+            1.5499999523162842,
+            2.2300000190734863,
+            0.11999999731779099
+          ],
+          "anchors": {
+            "strike": [
+              0,
+              1.350000023841858,
+              -0.07000000029802322
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 608,
+          "meshes": 3,
+          "materials": 3,
+          "bounds_min": [
+            -1.5499999523162842,
+            0,
+            -0.11999999731779099
+          ],
+          "bounds_max": [
+            1.5499999523162842,
+            2.2300000190734863,
+            0.11999999731779099
+          ],
+          "anchors": {
+            "strike": [
+              0,
+              1.350000023841858,
+              -0.07000000029802322
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "drum-store",
+      "sha256": "f898f34916dfb21bb9f631db8b0c1b996fb3d03f19365a58208dff3f25a31099",
+      "results": [
+        {
+          "rightHanded": true,
+          "triangles": 640,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.75,
+            0,
+            -0.5600000023841858
+          ],
+          "bounds_max": [
+            0.75,
+            1.1785000562667847,
+            0.9445682168006897
+          ],
+          "anchors": {
+            "drum_top": [
+              -0.3799999952316284,
+              1.1799999475479126,
+              -0.20000000298023224
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        {
+          "rightHanded": false,
+          "triangles": 640,
+          "meshes": 6,
+          "materials": 6,
+          "bounds_min": [
+            -0.75,
+            0,
+            -0.5600000023841858
+          ],
+          "bounds_max": [
+            0.75,
+            1.1785000562667847,
+            0.9445682168006897
+          ],
+          "anchors": {
+            "drum_top": [
+              0.3799999952316284,
+              1.1799999475479126,
+              -0.20000000298023224
+            ],
+            "support_bottom": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

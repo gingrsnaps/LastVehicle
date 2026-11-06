@@ -13,7 +13,7 @@
     />
     <title>Last Vehicle — A GingrSnaps Project</title>
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="style.css?v=1.14.0" />
+    <link rel="stylesheet" href="style.css?v=1.19.0" />
   </head>
   <body>
     <canvas id="game" aria-label="Last Vehicle game view" tabindex="0"></canvas>
@@ -24,7 +24,7 @@
       <p class="eyebrow">A GingrSnaps Project</p>
       <div class="load-track"><i id="load-fill"></i></div>
       <p id="load-label" role="status">Opening Meridian…</p><span id="load-percent">0%</span>
-      <div id="load-actions" class="hidden button-row"><button id="load-retry" class="btn">Retry loading</button><button id="load-simple" class="btn accent">Retry with simpler graphics</button></div>
+      <div id="load-actions" class="hidden button-row"><button id="load-retry" class="btn">Retry loading</button><button id="load-simple" class="btn accent">Retry with simpler graphics</button><button id="load-report" class="btn">Download diagnostic report</button></div>
     </div>
     <div id="intro" class="hidden" aria-hidden="true">
       <div id="intro-content" class="intro-content">
@@ -67,7 +67,7 @@
       </div>
       <footer>
         <span>HEADPHONES RECOMMENDED</span
-        ><span>EXPLORATION <b>·</b> SURVIVAL</span><span>v1.13 · CANDIDATE</span>
+        ><span>EXPLORATION <b>·</b> SURVIVAL</span><span>v1.19 · CANDIDATE</span>
       </footer>
     </main>
     <div id="hud" class="hidden">
@@ -80,6 +80,7 @@
         <button id="pause-button" aria-label="Pause game">Ⅱ</button>
       </div>
       <div id="tutorial" class="hidden"></div>
+      <div id="direction-hint" class="hidden" role="status"></div>
       <button id="journal-button" class="journal-indicator"><kbd id="journal-key">J</kbd> Journal <i id="journal-dot" class="unread-dot hidden"></i></button>
       <div id="hint-card" class="hidden" role="status"></div>
       <div id="note-preview" class="hidden" role="status"></div>
@@ -133,6 +134,6 @@
     >
     <script src="vendor/babylon.js"></script>
     <script src="vendor/babylonjs.loaders.min.js"></script>
-    <script type="module" src="js/main.js?v=1.14.0"></script>
+    <script type="module" src="js/main.js?v=1.19.0"></script>
   </body>
 </html>
